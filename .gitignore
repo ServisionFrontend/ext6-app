@@ -27,7 +27,7 @@ build/Release
 # Users Environment Variables
 .lock-wscript
 
-build
+/build
 /bootstrap.css
 /bootstrap.js
 /bootstrap.json
