@@ -44,7 +44,7 @@ Ext.define('Ext6App.view.main.Main', {
 			reference: 'navigationTreeList',
 			itemId: 'navigationTreeList',
 			ui: 'navigation',
-			store: Ext.create('Ext6App.store.NavigationTree'), //'NavigationTree',
+			store: Ext.create('Ext6App.store.NavigationTree'),
 			width: 250,
 			expanderFirst: false,
 			expanderOnly: false,
