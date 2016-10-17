@@ -1,4 +1,4 @@
-Ext.define('App.view.main.Main', {
+Ext.define('App.view.main.Viewport', {
 	extend: 'Ext.container.Viewport',
 
 	requires: [
@@ -47,10 +47,7 @@ Ext.define('App.view.main.Main', {
 			store: Ext.create('App.store.NavigationTree'),
 			width: 250,
 			expanderFirst: false,
-			expanderOnly: false,
-			listeners: {
-				selectionchange: 'onNavigationTreeSelectionChange'
-			}
+			expanderOnly: false
 		}, {
 			xtype: 'container',
 			flex: 1,
@@ -60,7 +57,17 @@ Ext.define('App.view.main.Main', {
 			layout: {
 				type: 'card',
 				anchor: '100%'
-			}
+			},
+			padding: 8,
+			items: [{
+				xtype: 'tabpanel',
+				id: "tabs",
+				items: [{
+					title: '首页',
+					layout: 'fit',
+					closeAction: "destroy"
+				}]
+			}]
 		}]
 	}]
 });
