@@ -62,17 +62,11 @@ Ext.define('Ext.grid.plugin.RowEditing', {
     editStyle: 'row',
 
     /**
-     * @cfg {Boolean} [autoCancel=true]
+     * @cfg {Boolean} autoCancel
      * `true` to automatically cancel any pending changes when the row editor begins editing a new row.
      * `false` to force the user to explicitly cancel the pending changes.
      */
     autoCancel: true,
-
-    /**
-     * @cfg {Boolean} [removeUnmodified=false]
-     * If configured as `true`, then canceling an edit on a newly inserted
-     * record which has not been modified will delete that record from the store.
-     */
 
     /**
      * @cfg {Number} clicksToMoveEditor
@@ -184,24 +178,6 @@ Ext.define('Ext.grid.plugin.RowEditing', {
     },
 
     /**
-     * @method
-     * Called by TableView#suspendActionableMode to suspend actionable processing while
-     * the view is being changed.
-     * @protected
-     */
-    suspend: Ext.emptyFn,
-
-    /**
-     * @method
-     * Called by TableView#resumeActionableMode to resume actionable processing after
-     * the view has been changed.
-     * @param {Ext.grid.CellContext} position The position at which to resume actionable processing.
-     * @return {Boolean} `true` if this Actionable has successfully resumed.
-     * @protected
-     */
-    resume: Ext.emptyFn,
-
-    /**
      * @private
      * The {@link Ext.grid.RowEditor RowEditor} hooks up a KeyNav to call this method to complete the edit.
      */
@@ -299,7 +275,6 @@ Ext.define('Ext.grid.plugin.RowEditing', {
             bLen     = btns.length,
             cfg      = {
                 autoCancel: me.autoCancel,
-                removeUnmodified: me.removeUnmodified,
                 errorSummary: me.errorSummary,
                 fields: headerCt.getGridColumns(),
                 hidden: true,

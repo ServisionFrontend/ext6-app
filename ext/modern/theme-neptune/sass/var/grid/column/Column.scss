@@ -1,9 +1,4 @@
 /**
- * @class Ext.grid.column.Column
- */
-
-
-/**
  * @var {color}
  * Grid column text color
  */
@@ -25,7 +20,7 @@ $grid-column-sorted-background-color: dynamic(mix(#fff, $base-light-color, 80%))
  * @var {color}
  * Grid column background-color
  */
-$grid-column-border-color: dynamic(null $neutral-medium-dark-color $neutral-medium-dark-color null);
+$grid-column-border-color: dynamic($neutral-medium-dark-color);
 
 /**
  * @var {string/number}
@@ -41,7 +36,7 @@ $grid-column-font-size: dynamic(1rem);
 
 /**
  * @var {number}
- * Grid column font-size in the {@link Global_CSS#$enable-big big} sizing scheme
+ * Grid column font-size in the {@link Ext.Component#$enable-big big} sizing scheme
  */
 $grid-column-font-size-big: dynamic($grid-column-font-size);
 
@@ -53,7 +48,7 @@ $grid-column-line-height: dynamic(1.25em);
 
 /**
  * @var {number}
- * Grid column line-height in the {@link Global_CSS#$enable-big big} sizing scheme
+ * Grid column line-height in the {@link Ext.Component#$enable-big big} sizing scheme
  */
 $grid-column-line-height-big: dynamic(1.2em);
 
@@ -71,7 +66,7 @@ $grid-column-padding: dynamic(.3em .6em);
 
 /**
  * @var {number/list}
- * Grid column padding in the {@link Global_CSS#$enable-big big} sizing scheme
+ * Grid column padding in the {@link Ext.Component#$enable-big big} sizing scheme
  */
 $grid-column-padding-big: dynamic(.46em .6em);
 
@@ -104,7 +99,3 @@ $grid-column-sort-asc-icon: dynamic($fa-var-long-arrow-up $grid-column-sort-icon
  * Sort descending icon
  */
 $grid-column-sort-desc-icon: dynamic($fa-var-long-arrow-down $grid-column-sort-icon-font-size $font-icon-font-family);
-
-$grid-column-border-width: dynamic(null 1px 1px null);
-
-$grid-column-border-style: dynamic(null solid solid null)

@@ -48,8 +48,12 @@ Ext.define('Ext.field.Search', {
          */
         component: {
 	        type: 'search'
-	    }
-    },
+	    },
 
-    classCls: Ext.baseCSSPrefix + 'searchfield'
+        /**
+         * @cfg
+         * @inheritdoc
+         */
+	    ui: 'search'
+    }
 });

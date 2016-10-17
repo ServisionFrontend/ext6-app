@@ -57,7 +57,7 @@
 Ext.define('Ext.grid.filters.filter.Date', {
     extend: 'Ext.grid.filters.filter.TriFilter',
     alias: 'grid.filter.date',
-    uses: ['Ext.picker.Date', 'Ext.menu.DatePicker'],
+    uses: ['Ext.picker.Date', 'Ext.menu.Menu'],
 
     type: 'date',
 
@@ -163,11 +163,11 @@ Ext.define('Ext.grid.filters.filter.Date', {
             if (key !== '-') {
                 cfg = {
                     menu: {
-                        xtype: 'datemenu',
-                        hideOnClick: false,
-                        pickerCfg: Ext.apply({
-                            itemId: key
-                        }, pickerCfg)
+                        items: [
+                            Ext.apply({
+                                itemId: key
+                            }, pickerCfg)
+                        ]
                     }
                 };
 

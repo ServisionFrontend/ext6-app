@@ -1,4 +1,4 @@
-// @tag class
+    // @tag class
 /**
  * @class Ext.Inventory
  * @private
@@ -11,12 +11,11 @@ Ext.Inventory = function () {
 
     me.names = [];
     me.paths = {};
-    
+
     me.alternateToName = {};
     me.aliasToName = {};
     me.nameToAliases = {};
     me.nameToAlternates = {};
-    me.nameToPrefix = {};
 };
 
 Ext.Inventory.prototype = {
@@ -27,15 +26,15 @@ Ext.Inventory.prototype = {
     dotRe: /\./g,
     wildcardRe: /\*/g,
 
-    addAlias: function (className, alias, update) {
-        return this.addMapping(className, alias, this.aliasToName, this.nameToAliases, update);
+    addAlias: function (className, alias) {
+        return this.addMapping(className, alias, this.aliasToName, this.nameToAliases);
     },
 
     addAlternate: function (className, alternate) {
         return this.addMapping(className, alternate, this.alternateToName, this.nameToAlternates);
     },
 
-    addMapping: function (className, alternate, toName, nameTo, update) {
+    addMapping: function (className, alternate, toName, nameTo) {
         var name = className.$className || className,
             mappings = name,
             array = this._array1,
@@ -56,7 +55,6 @@ Ext.Inventory.prototype = {
 
             length = aliases.length;
             nameMapping = nameTo[cls] || (nameTo[cls] = []);
-            
             for (i = 0; i < length; ++i) {
                 if (!(a = aliases[i])) {
                     continue;
@@ -64,7 +62,7 @@ Ext.Inventory.prototype = {
 
                 if (toName[a] !== cls) {
                     //<debug>
-                    if (!update && toName[a]) {
+                    if (toName[a]) {
                         Ext.log.warn("Overriding existing mapping: '" + a + "' From '" +
                             toName[a] + "' to '" + cls + "'. Is this intentional?");
                     }
@@ -198,14 +196,11 @@ Ext.Inventory.prototype = {
 
         if (className in paths) {
             ret = paths[className];
-        }
-        else {
-            prefix = me.nameToPrefix[className] || (me.nameToPrefix[className] = me.getPrefix(className));
-            
+        } else {
+            prefix = me.getPrefix(className);
             if (prefix) {
                 className = className.substring(prefix.length + 1);
                 ret = paths[prefix];
-                
                 if (ret) {
                     ret += '/';
                 }
@@ -221,36 +216,17 @@ Ext.Inventory.prototype = {
         if (className in this.paths) {
             return className;
         }
-        else if (className in this.nameToPrefix) {
-            return this.nameToPrefix[className];
-        }
 
         var prefixes = this.getPrefixes(),
-            length = className.length,
-            items, currChar, currSubstr, prefix, j, jlen;
-        
+            i = prefixes.length,
+            length, prefix;
+
         // Walk the prefixes backwards so we consider the longest ones first.
-        // Prefixes are kept in a sparse array grouped by length so we don't have to
-        // iterate over all of them, just the ones we need.
-        while (length-- > 0) {
-            items = prefixes[length];
-            
-            if (items) {
-                currChar = className.charAt(length);
-                
-                if (currChar !== '.') {
-                    continue;
-                }
-                
-                currSubstr = className.substring(0, length);
-                
-                for (j = 0, jlen = items.length; j < jlen; j++) {
-                    prefix = items[j];
-                    
-                    if (prefix === className.substring(0, length)) {
-                        return prefix;
-                    }
-                }
+        while (i-- > 0) {
+            length = (prefix = prefixes[i]).length;
+            if (length < className.length && className.charAt(length) === '.'
+                                          && prefix === className.substring(0, length)) {
+                return prefix;
             }
         }
 
@@ -259,21 +235,11 @@ Ext.Inventory.prototype = {
 
     getPrefixes: function () {
         var me = this,
-            prefixes = me.prefixes,
-            names, name, nameLength, items, i, len;
+            prefixes = me.prefixes;
 
         if (!prefixes) {
-            names = me.names.slice(0);
-            me.prefixes = prefixes = [];
-            
-            for (i = 0, len = names.length; i < len; i++) {
-                name = names[i];
-                nameLength = name.length;
-                
-                items = prefixes[nameLength] || (prefixes[nameLength] = []);
-                
-                items.push(name);
-            }
+            me.prefixes = prefixes = me.names.slice(0);
+            prefixes.sort(me._compareNames);
         }
 
         return prefixes;
@@ -291,7 +257,6 @@ Ext.Inventory.prototype = {
 
         delete nameToAliases[name];
         delete nameToAlternates[name];
-        delete me.nameToPrefix[name];
 
         if (aliases) {
             for (i = aliases.length; i--;) {
@@ -412,8 +377,15 @@ Ext.Inventory.prototype = {
         me.names.push(name);
 
         me.prefixes = null;
-        me.nameToPrefix = {};
 
         return me;
-    })
+    }),
+
+    _compareNames: function (lhs, rhs) {
+        var cmp = lhs.length - rhs.length;
+        if (!cmp) {
+            cmp = (lhs < rhs) ? -1 : 1;
+        }
+        return cmp;
+    }
 };

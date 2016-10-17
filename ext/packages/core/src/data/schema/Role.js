@@ -105,8 +105,6 @@ Ext.define('Ext.data.schema.Role', {
     },
 
     /**
-     * @method
-     *
      * Check whether a record belongs to any stores when it is added to the session.
      * 
      * @param {Ext.data.Session} session The session
@@ -129,8 +127,6 @@ Ext.define('Ext.data.schema.Role', {
         }
     },
 
-    $roleFilterId: '$associationRoleFilter',
-
     createAssociationStore: function (session, from, records, isComplete) {
         var me = this,
             association = me.association,
@@ -139,8 +135,6 @@ Ext.define('Ext.data.schema.Role', {
             storeConfig = me.storeConfig,
             id = from.getId(),
             config = {
-                // Always want immediate load
-                asynchronousLoad: false,
                 model: me.cls,
                 role: me,
                 session: session,
@@ -154,16 +148,14 @@ Ext.define('Ext.data.schema.Role', {
         if (isMany) {
             // For many-to-many associations each role has a field
             config.filters = [{
-                id: me.$roleFilterId,
-                property: me.inverse.field, // @TODO filterProperty
-                value: id,
+                property  : me.inverse.field, // @TODO filterProperty
+                value     : id,
                 exactMatch: true
             }];
         } else if (foreignKeyName) {
             config.filters = [{
-                id: me.$roleFilterId,
-                property: foreignKeyName, // @TODO filterProperty
-                value: id,
+                property  : foreignKeyName, // @TODO filterProperty
+                value     : id,
                 exactMatch: true
             }];
             config.foreignKeyName = foreignKeyName;
@@ -188,15 +180,15 @@ Ext.define('Ext.data.schema.Role', {
 
         if (records) {
             store.loadData(records);
+            store.complete = !!isComplete;
         }
-        store.complete = !!isComplete;
 
         return store;
     },
 
     onStoreCreate: Ext.emptyFn,
 
-    getAssociatedStore: function (inverseRecord, options, scope, records, allowInfer) {
+    getAssociatedStore: function (inverseRecord, options, scope, records, isComplete) {
         // Consider the Comment entity with a ticketId to a Ticket entity. The Comment
         // is on the left (the FK holder's side) so we are implementing the guts of
         // the comments() method to load the Store of Comment entities. This trek
@@ -205,52 +197,30 @@ Ext.define('Ext.data.schema.Role', {
         var me = this,
             storeName = me.getStoreName(),
             store = inverseRecord[storeName],
-            session = inverseRecord.session,
             load = options && options.reload,
             source = inverseRecord.$source,
-            isComplete = false,
-            phantom = false,
-            hadSourceStore, args, i, len, raw, 
-            rec, sourceStore, hadRecords;
+            session = inverseRecord.session,
+            args, i, len, raw, rec, sourceStore;
 
         if (!store) {
-            if (session) {
-                // We want to check whether we can automatically get the store contents from the parent session.
-                // For this to occur, we need to have a parent in the session, and the store needs to be created
-                // and loaded with the initial dataset.
-                if (source) {
-                    phantom = source.phantom;
-                }
-                
-                if (!records && source) {
-                    sourceStore = source[storeName];
-                    if (sourceStore && !sourceStore.isLoading()) {
-                        records = [];
-                        raw = sourceStore.getData().items;
+            // We want to check whether we can automatically get the store contents from the parent session.
+            // For this to occur, we need to have a parent in the session, and the store needs to be created
+            // and loaded with the initial dataset.
+            if (!records && source) {
+                source = source[storeName];
+                if (source && !source.isLoading()) {
+                    sourceStore = source;
+                    records = [];
+                    raw = source.getData().items;
 
-                        for (i = 0, len = raw.length; i < len; ++i) {
-                            rec = raw[i];
-                            records.push(session.getRecord(rec.self, rec.id));
-                        }
-                        isComplete = !!sourceStore.complete;
-                        hadSourceStore = true;
+                    for (i = 0, len = raw.length; i < len; ++i) {
+                        rec = raw[i];
+                        records.push(session.getRecord(rec.self, rec.id));
                     }
+                    isComplete = true;
                 }
-                if (!hadSourceStore) {
-                    // We'll only hit here if we didn't have a usable source
-                    hadRecords = !!records;
-                    records = me.findRecords(session, inverseRecord, records, allowInfer);
-                    if (!hadRecords && (!records || !records.length)) {
-                        records = null;
-                    }
-                    isComplete = phantom || hadRecords;
-                }
-            } else {
-                // As long as we had the collection exist, we're complete, even if it's empty.
-                isComplete = !!records;
             }
-            // If the inverse is a phantom, we can't be loading any data so we're complete
-            store = me.createAssociationStore(session, inverseRecord, records, isComplete || inverseRecord.phantom);
+            store = me.createAssociationStore(session, inverseRecord, records, isComplete);
             store.$source = sourceStore;
 
             if (!records && (me.autoLoad || options)) {
@@ -311,8 +281,6 @@ Ext.define('Ext.data.schema.Role', {
     },
 
     onDrop: Ext.emptyFn,
-
-    onIdChanged: Ext.emptyFn,
 
     getReaderRoot: function() {
         var me = this;
@@ -520,7 +488,6 @@ Ext.define('Ext.data.schema.Role', {
                     leftRecord.set(foreignKey, rightRecord.getId());
                 }
                 delete leftRecord[oldInstanceName];
-                leftRecord.onAssociatedRecordSet(rightRecord, me);
 
                 if (inverseSetter) {
                     // Because the rightRecord has a reference back to the leftRecord

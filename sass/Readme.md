@@ -15,19 +15,19 @@ This folder contains misc. support code for Sass builds (global functions, etc.)
 
 This folder contains Sass files defining CSS rules corresponding to classes
 included in the application's JavaScript code build. By default, files in this 
-folder are mapped to the application's root namespace, 'Ext6App'. This is set in
+folder are mapped to the application's root namespace, 'App'. This is set in
 `"app.json"`:
 
     "sass": {
-        "namespace": "Ext6App"
+        "namespace": "App"
     }
 
 ### ./sass/var
 
 This folder contains Sass files defining Sass variables corresponding to classes
 included in the application's JavaScript code build. By default, files in this 
-folder are mapped to the application's root namespace, 'Ext6App' in the same way
-as `"Ext6App/sass/src"`.
+folder are mapped to the application's root namespace, 'App' in the same way
+as `"App/sass/src"`.
 
 ## Slicing
 

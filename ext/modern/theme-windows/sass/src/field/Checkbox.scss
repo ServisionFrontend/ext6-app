@@ -2,8 +2,8 @@
  * @class Ext.field.Checkbox
  */
 
-.x-checkboxfield .x-input-mask,
-.x-radiofield .x-input-mask {
+.x-field-checkbox .x-field-mask,
+.x-field-radio .x-field-mask {
     @include absolute-position;
 
     &:before {
@@ -18,12 +18,12 @@
     }
 }
 
-.x-checkbox,
-.x-radio {
+.x-input-checkbox,
+.x-input-radio {
     visibility: hidden;
 }
 
-.x-checkbox:checked ~ .x-input-mask:after {
+.x-input-checkbox:checked ~ .x-field-mask:after {
     position: absolute;
     top: 0;
     right: 0;
@@ -38,19 +38,19 @@
 }
 
 .x-item-disabled {
-    &.x-checkboxfield .x-input-mask,
-    &.x-radiofield .x-input-mask {
+    &.x-field-checkbox .x-field-mask,
+    &.x-field-radio .x-field-mask {
         &:before {
             background-color: $field-disabled-background-color;
             border-color: $field-disabled-border-color;
         }
     }
 
-    .x-checkbox:checked ~ .x-input-mask:after {
+    .x-input-checkbox:checked ~ .x-field-mask:after {
         color: $field-disabled-color;
     }
 
-    .x-radio:checked ~ .x-input-mask:after {
+    .x-input-radio:checked ~ .x-field-mask:after {
         background-color: $field-disabled-color;
     }
 }

@@ -39,7 +39,6 @@
 Ext.define('Ext.Img', {
     extend: 'Ext.Component',
     xtype: ['image', 'img'],
-    alternateClassName: 'Ext.Image',
 
     /**
      * @event tap
@@ -64,8 +63,7 @@ Ext.define('Ext.Img', {
 
     config: {
         /**
-         * @cfg {String} src The source of this image. See {@link Ext#resolveResource} for
-         * details on locating application resources.
+         * @cfg {String} src The source of this image
          * @accessor
          */
         src: null,
@@ -161,10 +159,6 @@ Ext.define('Ext.Img', {
 
     onAfterRender: function() {
         this.updateSrc(this.getSrc());
-    },
-
-    applySrc: function (src) {
-        return src && Ext.resolveResource(src);
     },
 
     /**

@@ -101,8 +101,6 @@ Ext.define('Ext.app.bind.RootStub', {
             }
             //</debug>
 
-            // Setting the value.
-            // Ensure the Stub exists for the name, and set its value.
             if ((v = value[key]) !== undefined) {
                 if (!(stub = children[key])) {
                     stub = new Ext.app.bind.Stub(owner, key, me);
@@ -116,19 +114,15 @@ Ext.define('Ext.app.bind.RootStub', {
                 }
 
                 stub.set(v);
-            } 
-            // Clearing the value. Delete the data item
-            // Invalidate the Stub if it exists.
-            else if (data.hasOwnProperty(key)) {
+            } else if (data.hasOwnProperty(key)) {
                 delete data[key];
 
                 stub = children[key];
-                if (stub) {
-                    if (!stub.isLinkStub && parentVM) {
-                        stub = me.createRootChild(key);
-                    }
-                    stub.invalidate(true);
+                if (stub && !stub.isLinkStub && parentVM) {
+                    stub = me.createRootChild(key);
                 }
+
+                stub.invalidate(true);
             }
         }
     },

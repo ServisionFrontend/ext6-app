@@ -22,19 +22,18 @@ Ext.define('Ext.event.publisher.ElementPaint', {
     },
 
     subscribe: function(element) {
-        var me = this,
-            id = element.id,
-            subscribers = me.subscribers;
+        var id = element.id,
+            subscribers = this.subscribers;
 
         if (subscribers[id]) {
             ++subscribers[id];
         } else {
             subscribers[id] = 1;
 
-            me.monitors[id] = new Ext.util.PaintMonitor({
+            this.monitors[id] = new Ext.util.PaintMonitor({
                 element: element,
-                callback: me.onElementPainted,
-                scope: me,
+                callback: this.onElementPainted,
+                scope: this,
                 args: [element]
             });
         }

@@ -97,6 +97,12 @@ Ext.define('Ext.field.Checkbox', {
 
     config: {
         /**
+         * @cfg
+         * @inheritdoc
+         */
+        ui: 'checkbox',
+
+        /**
          * @cfg {String} value The string value to submit if the item is in a checked state.
          * @accessor
          */
@@ -119,7 +125,10 @@ Ext.define('Ext.field.Checkbox', {
          * @inheritdoc
          */
         component: {
-            xtype: 'checkboxinput'
+            xtype: 'input',
+            type: 'checkbox',
+            useMask: true,
+            cls: Ext.baseCSSPrefix + 'input-checkbox'
         }
 
         /**
@@ -127,9 +136,6 @@ Ext.define('Ext.field.Checkbox', {
          * @private
          */
     },
-
-    classCls: Ext.baseCSSPrefix + 'checkboxfield',
-    checkedCls: Ext.baseCSSPrefix + 'checkboxfield-checked',
 
     /**
      * @private
@@ -156,7 +162,7 @@ Ext.define('Ext.field.Checkbox', {
         // Important to publish the value here, since we
         // may be relying on checked. This differs from other
         // fields because the initial value may not come from
-        // the viewModel if it defaults to false.
+        // the viewModel if it detaults to false.
         me.publishState('checked', me.getChecked());
     },
 
@@ -212,8 +218,6 @@ Ext.define('Ext.field.Checkbox', {
             eventName;
 
         me.getComponent().setChecked(checked);
-
-        me.toggleCls(me.checkedCls, checked);
 
         // only call onChange (which fires events) if the component has been initialized
         if (me.initialized) {
@@ -272,7 +276,11 @@ Ext.define('Ext.field.Checkbox', {
             component = me.up('formpanel') || me.up('fieldset'),
             name = me.getName(),
             replaceLeft = me.qsaLeftRe,
-            replaceRight = me.qsaRightRe;
+            replaceRight = me.qsaRightRe,
+            //handle baseCls with multiple class values
+            baseCls = me.getBaseCls().split(' ').join('.'),
+            components = [],
+            elements, element, i, ln;
 
         if (!component) {
             // <debug>
@@ -284,7 +292,17 @@ Ext.define('Ext.field.Checkbox', {
         // This is to handle ComponentQuery's lack of handling [name=foo[bar]] properly
         name = name.replace(replaceLeft, '\\[');
         name = name.replace(replaceRight, '\\]');
-        return component.query('checkboxfield[name=' + name + ']');
+
+        elements = Ext.query('[name=' + name + ']', component.element.dom);
+        ln = elements.length;
+        for (i = 0; i < ln; i++) {
+            element = elements[i];
+            element = Ext.fly(element).up('.' + baseCls);
+            if (element && element.id) {
+                components.push(Ext.getCmp(element.id));
+            }
+        }
+        return components;
     },
 
     /**

@@ -119,7 +119,7 @@ Ext.define('Ext.data.BufferedStore', {
         /**
          * @inheritdoc
          */
-        trackRemoved: false
+        trackRemoved: false     
     },
 
     /**
@@ -148,11 +148,6 @@ Ext.define('Ext.data.BufferedStore', {
             proxy.setEnablePaging(true);
         }
         return proxy;
-    },
-
-    applyAutoSort: function() {
-        // Return undefined so that applier does not run.
-        // BufferedStore/PageMap cannot sort.
     },
 
     createFiltersCollection: function() {
@@ -187,7 +182,14 @@ Ext.define('Ext.data.BufferedStore', {
     //</debug>
 
     updateGroupField: function(field) {
-        this.group(field);
+        var me = this;
+        if (me.isInitializing) {
+            me.blockLoad();
+        }
+        me.group(field);
+        if (me.isInitializing) {
+            me.unblockLoad();
+        }
     },
 
     getGrouper: function() {
@@ -244,15 +246,13 @@ Ext.define('Ext.data.BufferedStore', {
         }            
     },
 
-    flushLoad: function() {
-        var me = this,
-            options = me.pendingLoadOptions;
-
-        // If it gets called programatically, the listener will need cancelling
-        me.clearLoadTask();
-        if (!options) {
+    load: function(options) {
+        var me = this;
+        
+        if (me.loading) {
             return;
         }
+        options = options || {};
 
         // Buffered stores, a load operation means kick off a clean load from page 1
         me.getData().clear();
@@ -263,9 +263,7 @@ Ext.define('Ext.data.BufferedStore', {
         // If we're prefetching, the arguments on the callback for getting the range is different
         // So we indicate that we need to fire a special "load" style callback
         options.loadCallback = options.callback;
-
-        // options might be chained, with callback on a prototype; delete won't clear it.
-        options.callback = null;
+        delete options.callback;
         return me.loadToPrefetch(options);
     },
 
@@ -296,11 +294,10 @@ Ext.define('Ext.data.BufferedStore', {
                 endIdx = newCount - 1;
                 startIdx = Math.max(endIdx - oldRequestSize, 0);
             }
-            if (me.rangeCached(startIdx, endIdx, false)) {
-                me.loadCount = (me.loadCount || 0) + 1;
+            if (me.rangeCached(startIdx, Math.min(endIdx, me.totalCount))) {
                 me.loading = false;
                 data.un('pageadd', waitForReload);
-                records = data.getRange(startIdx, endIdx);
+                records = data.getRange(startIdx, endIdx + 1);
                 me.fireEvent('load', me, records, true);
                 me.fireEvent('refresh', me);
             }
@@ -331,14 +328,6 @@ Ext.define('Ext.data.BufferedStore', {
         // Calculate a page range which encompasses the Store's loaded range plus both buffer zones
         startIdx = Math.max(startIdx - bufferZone, 0);
         endIdx = Math.min(endIdx + bufferZone, lastTotal);
-
-        // We must wait for a slightly wider range to be cached.
-        // This is to allow grouping features to peek at the two surrounding records
-        // when rendering a *range* of records to see whether the start of the range
-        // really is a group start and the end of the range really is a group end.
-        startIdx = startIdx === 0 ? 0 : startIdx - 1;
-        endIdx = endIdx === lastTotal ? endIdx : endIdx + 1;
-
         startPage = me.getPageFromRecordIndex(startIdx);
         endPage = me.getPageFromRecordIndex(endIdx);
 
@@ -386,9 +375,7 @@ Ext.define('Ext.data.BufferedStore', {
         options.start = (page - 1) * me.getPageSize();
         options.limit = me.getViewSize() || me.getDefaultViewSize();
         options.loadCallback = options.callback;
-
-        // options might be chained, with callback on a prototype; delete won't clear it.
-        options.callback = null;
+        delete options.callback;
         return me.loadToPrefetch(options);
     },
 
@@ -403,6 +390,7 @@ Ext.define('Ext.data.BufferedStore', {
 
     /**
      * @private
+     * @override
      * A BufferedStore always reports that it contains the full dataset.
      * The number of records that happen to be cached at any one time is never useful.
      */
@@ -428,25 +416,19 @@ Ext.define('Ext.data.BufferedStore', {
         // Sanity check end point to be within dataset range
         end = (end >= me.totalCount) ? maxIndex : end;
 
-        // If this is being called in the default manner, to fetch data 
-        // for rendering, then we must wait for a slightly wider range to be cached.
+        // We must wait for a slightly wider range to be cached.
         // This is to allow grouping features to peek at the two surrounding records
         // when rendering a *range* of records to see whether the start of the range
         // really is a group start and the end of the range really is a group end.
-        if (options.forRender !== false) {
-            requiredStart = start === 0 ? 0 : start - 1;
-            requiredEnd = end === maxIndex ? end : end + 1;
-        } else {
-            requiredStart = start;
-            requiredEnd = end;
-        }
+        requiredStart = start === 0 ? 0 : start - 1;
+        requiredEnd = end === maxIndex ? end : end + 1;
 
         // Keep track of range we are being asked for so we can track direction of movement through the dataset
         me.lastRequestStart = start;
         me.lastRequestEnd = end;
 
         // If data request can be satisfied from the page cache
-        if (me.rangeCached(start, end, options.forRender)) {
+        if (me.rangeCached(requiredStart, requiredEnd)) {
             me.onRangeAvailable(options);
             result = data.getRange(start, end + 1);
         }
@@ -460,7 +442,7 @@ Ext.define('Ext.data.BufferedStore', {
 
             // Add a pageadd listener, and as soon as the requested range is loaded, call onRangeAvailable to call the callback.
             pageAddHandler = function(pageMap, page, records) {
-                if (page >= requiredStartPage && page <= requiredEndPage && me.rangeCached(start, end)) {
+                if (page >= requiredStartPage && page <= requiredEndPage && me.rangeCached(requiredStart, requiredEnd)) {
                     // Private event used by the LoadMask class to unmask when the range required for rendering has been loaded into the cache
                     me.fireEvent('cachefilled', me, start, end);
                     data.un('pageadd', pageAddHandler);
@@ -522,11 +504,6 @@ Ext.define('Ext.data.BufferedStore', {
         return this.data.getByInternalId(internalId);
     },
 
-    // Inherit docs
-    contains: function(record) {
-        return this.indexOf(record) > -1;
-    },
-
     /**
      * Get the index of the record within the store.
      *
@@ -558,19 +535,24 @@ Ext.define('Ext.data.BufferedStore', {
         if (grouper && typeof grouper === 'string') {
             oldGrouper = me.grouper;
 
-            if (oldGrouper && direction !== undefined) {
-                oldGrouper.setDirection(direction);
-            } else {
-                me.grouper = new Ext.util.Grouper({
-                    property : grouper,
-                    direction: direction || 'ASC',
-                    root: 'data'
-                });
-            }
+                if (!oldGrouper) {
+                    me.grouper = new Ext.util.Grouper({
+                        property : grouper,
+                        direction: direction || 'ASC',
+                        root: 'data'
+                    });
+                } else if (direction === undefined) {
+                    oldGrouper.toggle();
+                } else {
+                    oldGrouper.setDirection(direction);
+                }
         } else {
             me.grouper = grouper ? me.getSorters().decodeSorter(grouper, 'Ext.util.Grouper') : null;
         }
 
+        if (me.isLoadBlocked()) {
+            return;
+        }
         me.getData().clear();
         me.loadPage(1, {
             callback: function() {
@@ -632,7 +614,6 @@ Ext.define('Ext.data.BufferedStore', {
                 }
             },
             fireEventsFn = function () {
-                me.loadCount = (me.loadCount || 0) + 1;
                 me.fireEvent('datachanged', me);
                 me.fireEvent('refresh', me);
                 me.fireEvent('load', me, records, true);
@@ -956,24 +937,9 @@ Ext.define('Ext.data.BufferedStore', {
      * @private
      * @param {Number} start The start index
      * @param {Number} end The end index in the range
-     * @param {Boolean} [forRender] (private) Passed by the BufferedRenderer to
-     * indicate that it's going to need extra rows to peek at to determine
-     * group start/end status for the rendered block.
      */
-    rangeCached: function(start, end, forRender) {
-        var requiredStart = start,
-            requiredEnd = end;
-
-        // If this is for getting data to render, we must wait for a slightly wider range to be cached.
-        // This is to allow grouping features to peek at the two surrounding records
-        // when rendering a *range* of records to see whether the start of the range
-        // really is a group start and the end of the range really is a group end.
-        if (forRender !== false) {
-            requiredStart = start === 0 ? 0 : start - 1,
-            requiredEnd = end === this.totalCount - 1 ? end : end + 1;
-        }
-
-        return this.getData().hasRange(requiredStart, requiredEnd);
+    rangeCached: function(start, end) {
+        return this.getData().hasRange(start, end);
     },
 
     /**
@@ -1121,7 +1087,6 @@ Ext.define('Ext.data.BufferedStore', {
 
         // Only load or sort if there are sorters
         if (sorters.length) {
-            me.fireEvent('beforesort', me, sorters);
             me.clearAndLoad({
                 callback: function() {
                     me.fireEvent('sort', me, sorters);
@@ -1133,21 +1098,20 @@ Ext.define('Ext.data.BufferedStore', {
         }
     },
 
-    clearAndLoad: function(options) {
-        var me = this;
-        
-        me.clearing = true;
-        me.getData().clear();
-        me.clearing = false;
-        
-        me.loadPage(1, options);
+    clearAndLoad: function (options) {
+        if (this.isLoadBlocked()) {
+            return;
+        }
+
+        this.getData().clear();
+        this.loadPage(1, options);
     },
 
     privates: {
         isLast: function(record) {
             return this.indexOf(record) === this.getTotalCount() - 1;
         },
-
+        
         isMoving: function () {
             return false;
         }

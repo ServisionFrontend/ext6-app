@@ -52,17 +52,13 @@
      * @cfg {Boolean} hideOnClick
      * False to continue showing the menu after a date is selected.
      */
-    hideOnClick: true,
+    hideOnClick : true,
 
     /**
      * @cfg {String} pickerId
      * An id to assign to the underlying date picker.
      */
-    pickerId: null,
-    
-    /**
-     * @cfg {Object} [pickerCfg] Date picker configuration. This config
-     * takes priority over {@link #pickerId}.
+    pickerId : null,
 
     /**
      * @cfg {Number} maxHeight
@@ -73,51 +69,30 @@
      * @property {Ext.picker.Date} picker
      * The {@link Ext.picker.Date} instance for this DateMenu
      */
-    
-    // DatePicker menu is a special case; Date picker does all key handling
-    // except the Esc key which is also handled unlike the ordinary menu
-    enableFocusableContainer: false,
 
-    initComponent: function() {
+    initComponent : function(){
         var me = this,
-            cfg, pickerConfig;
-            
-        if (me.pickerCfg) {
-            pickerConfig = Ext.apply({
-                cls: Ext.baseCSSPrefix + 'menu-date-item',
-                margin: 0,
-                border: false,
-                id: me.pickerId,
-                xtype: 'datepicker'
-            }, me.pickerCfg);
-        }
-        else {
-            // Need to keep this insanity for backwards compat :(
             cfg = Ext.apply({}, me.initialConfig);
             
-            // Ensure we clear any listeners so they aren't duplicated
-            delete cfg.listeners;
+        // Ensure we clear any listeners so they aren't duplicated
+        delete cfg.listeners;
             
-            pickerConfig = Ext.applyIf({
-                cls: Ext.baseCSSPrefix + 'menu-date-item',
-                margin: 0,
-                border: false,
-                id: me.pickerId,
-                xtype: 'datepicker'
-            }, cfg);
-        }
-        
         Ext.apply(me, {
             showSeparator: false,
             plain: true,
             bodyPadding: 0, // remove the body padding from the datepicker menu item so it looks like 3.3
-            items: [pickerConfig]
+            items: Ext.applyIf({
+                cls: Ext.baseCSSPrefix + 'menu-date-item',
+                margin: 0,
+                border: false,
+                id: me.pickerId,
+                xtype: 'datepicker'
+            }, cfg)
         });
 
-        me.callParent();
+        me.callParent(arguments);
 
         me.picker = me.down('datepicker');
-        
         /**
          * @event select
          * @inheritdoc Ext.picker.Date#select
@@ -128,19 +103,8 @@
             me.on('select', me.hidePickerOnSelect, me);
         }
     },
-    
-    onEscapeKey: function(e) {
-        // Unlike the other menus, DatePicker menu should not close completely on Esc key.
-        // This is because ordinary menu items will allow using Left arrow key to return
-        // to the parent menu; however in the Date picker left arrow is used to navigate
-        // in the calendar. So we use Esc key to return to the parent menu instead.
-        if (this.floating && this.ownerCmp && this.ownerCmp.focus) {
-            this.ownerCmp.focus();
-        }
-    },
 
     hidePickerOnSelect: function() {
         Ext.menu.Manager.hideAll();
     }
  });
- 

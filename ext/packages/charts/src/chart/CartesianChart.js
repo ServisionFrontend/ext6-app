@@ -124,9 +124,6 @@ Ext.define('Ext.chart.CartesianChart', {
         }
         me.suspendThicknessChanged();
 
-        // 'chart' surface rect is the size of the chart's inner element
-        // (see chart.getChartBox), i.e. the portion of the chart minus
-        // the legend area (whether DOM or sprite based).
         var chartRect = me.getSurface('chart').getRect(),
             width = chartRect[2],
             height = chartRect[3],
@@ -136,8 +133,6 @@ Ext.define('Ext.chart.CartesianChart', {
             insetPadding = me.getInsetPadding(),
             innerPadding = me.getInnerPadding(),
             surface, gridSurface,
-            // shrinkBox represents padding added on each side by
-            // innerPadding & insetPadding configs and the legend.
             shrinkBox = Ext.apply({}, insetPadding),
             mainRect, innerWidth, innerHeight,
             elements, floating, floatingValue, matrix, i, ln,
@@ -147,9 +142,6 @@ Ext.define('Ext.chart.CartesianChart', {
         if (width <= 0 || height <= 0) {
             return;
         }
-
-        shrinkBox.left += chartRect[0];
-        shrinkBox.top += chartRect[1];
 
         for (i = 0; i < axes.length; i++) {
             axis = axes[i];
@@ -260,11 +252,11 @@ Ext.define('Ext.chart.CartesianChart', {
             axesCount = (axes && axes.length) || 0,
             axis, axisSurface, axisRect,
             floating, value, alongAxis, matrix,
-            chartRect = me.getChartRect(),
+            size = me.innerElement.getSize(),
             inset = me.getInsetPadding(),
             inner = me.getInnerPadding(),
-            width = chartRect[2] - inset.left - inset.right,
-            height = chartRect[3] - inset.top - inset.bottom,
+            width = size.width - inset.left - inset.right,
+            height = size.height - inset.top - inset.bottom,
             isHorizontal, i;
 
         for (i = 0; i < axesCount; i++) {

@@ -22,9 +22,8 @@
     z-index: 1;
 }
 
-.x-anchor, .x-anchor:after {
-    position: absolute;
-    height: 0;
-    width: 0;
-    content: "";
+.x-panel.x-floating > .x-dock.x-sized,
+.x-msgbox > .x-dock.x-sized,
+.x-form.x-floating > .x-dock.x-sized {
+    margin: 6px;
 }

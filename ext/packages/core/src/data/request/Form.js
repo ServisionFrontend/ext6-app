@@ -207,8 +207,7 @@ Ext.define('Ext.data.request.Form', {
             me.result = response = me.createException();
             response.responseXML = null;
             response.responseText = '{success:false,message:"' + Ext.String.trim(response.statusText) + '"}';
-           
-            response.request = me;
+            
             callback = options.failure;
             success = false;
         }
@@ -219,8 +218,7 @@ Ext.define('Ext.data.request.Form', {
                 // bogus response object
                 me.result = response = {
                     responseText: '',
-                    responseXML: null,
-                    request: me
+                    responseXML: null
                 };
                 
                 // Opera will fire an extraneous load event on about:blank

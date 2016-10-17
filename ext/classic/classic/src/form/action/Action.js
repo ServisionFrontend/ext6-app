@@ -67,7 +67,7 @@ Ext.define('Ext.form.action.Action', {
      * @cfg {Ext.form.action.Action} success.action The Action class. The {@link #result} property of this object may
      * be examined to perform custom post-processing.
      * 
-     * @controllable
+     * @declarativeHandler
      */
 
     /**
@@ -79,7 +79,7 @@ Ext.define('Ext.form.action.Action', {
      * occurred, the failure type will be in {@link #failureType}. The {@link #result} 
      * property of this object may be examined to perform custom post-processing.
      * 
-     * @controllable
+     * @declarativeHandler
      */
 
     /**
@@ -130,17 +130,17 @@ Ext.define('Ext.form.action.Action', {
      *                     waitMsg: 'Submitting your data...',
      *                     success: function(form, action){
      *                         // server responded with success = true
-     *                         var result = action.result;
+     *                         var result = action.{@link #result};
      *                     },
      *                     failure: function(form, action){
      *                         if (action.{@link #failureType} === Ext.form.action.Action.CONNECT_FAILURE) {
      *                             Ext.Msg.alert('Error',
-     *                                 'Status:'+action.response.status+': '+
-     *                                 action.response.statusText);
+     *                                 'Status:'+action.{@link #response}.status+': '+
+     *                                 action.{@link #response}.statusText);
      *                         }
      *                         if (action.failureType === Ext.form.action.Action.SERVER_INVALID){
      *                             // server responded with success = false
-     *                             Ext.Msg.alert('Invalid', action.result.errormsg);
+     *                             Ext.Msg.alert('Invalid', action.{@link #result}.errormsg);
      *                         }
      *                     }
      *                 });

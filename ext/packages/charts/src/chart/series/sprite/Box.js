@@ -138,7 +138,6 @@ Ext.define('Ext.chart.series.sprite.Box', {
             colorSpread = attr.colorSpread,
             hsv = color.getHSV(),
             bbox = {},
-            roundX, roundY,
             temp;
 
         if (!attr.showStroke) {
@@ -226,7 +225,7 @@ Ext.define('Ext.chart.series.sprite.Box', {
             ctx.lineTo(center - halfWidth + depth, bottom + depth);
             ctx.lineTo(center + halfWidth + depth, bottom + depth);
             ctx.lineTo(center + halfWidth, bottom);
-            ctx.closePath();
+            ctx.lineTo(center - halfWidth, bottom);
 
             bbox.x = center - halfWidth;
             bbox.y = top;
@@ -246,7 +245,7 @@ Ext.define('Ext.chart.series.sprite.Box', {
             ctx.lineTo(center - halfWidth + depth, top + depth);
             ctx.lineTo(center - halfWidth + depth, bottom + depth);
             ctx.lineTo(center - halfWidth, bottom);
-            ctx.closePath();
+            ctx.lineTo(center - halfWidth, top);
 
             bbox.x = center + halfWidth;
             bbox.y = bottom;
@@ -260,13 +259,12 @@ Ext.define('Ext.chart.series.sprite.Box', {
 
         // Top side.
 
-        roundY = surface.roundPixel(top);
         ctx.beginPath();
-        ctx.moveTo(center - halfWidth, roundY);
+        ctx.moveTo(center - halfWidth, top);
         ctx.lineTo(center - halfWidth + depth, top + depth);
         ctx.lineTo(center + halfWidth + depth, top + depth);
-        ctx.lineTo(center + halfWidth, roundY);
-        ctx.closePath();
+        ctx.lineTo(center + halfWidth, top);
+        ctx.lineTo(center - halfWidth, top);
 
         bbox.x = center - halfWidth;
         bbox.y = top;
@@ -279,13 +277,12 @@ Ext.define('Ext.chart.series.sprite.Box', {
 
         // Right side.
 
-        roundX = surface.roundPixel(center + halfWidth);
         ctx.beginPath();
-        ctx.moveTo(roundX, surface.roundPixel(top));
+        ctx.moveTo(center + halfWidth, top);
         ctx.lineTo(center + halfWidth + depth, top + depth);
         ctx.lineTo(center + halfWidth + depth, bottom + depth);
-        ctx.lineTo(roundX, bottom);
-        ctx.closePath();
+        ctx.lineTo(center + halfWidth, bottom);
+        ctx.lineTo(center + halfWidth, top);
 
         bbox.x = center + halfWidth;
         bbox.y = bottom;
@@ -298,14 +295,12 @@ Ext.define('Ext.chart.series.sprite.Box', {
 
         // Front side.
 
-        roundX = surface.roundPixel(center + halfWidth);
-        roundY = surface.roundPixel(top);
         ctx.beginPath();
         ctx.moveTo(center - halfWidth, bottom);
-        ctx.lineTo(center - halfWidth, roundY);
-        ctx.lineTo(roundX, roundY);
-        ctx.lineTo(roundX, bottom);
-        ctx.closePath();
+        ctx.lineTo(center - halfWidth, top);
+        ctx.lineTo(center + halfWidth, top);
+        ctx.lineTo(center + halfWidth, bottom);
+        ctx.lineTo(center - halfWidth, bottom);
 
         bbox.x = center - halfWidth;
         bbox.y = bottom;

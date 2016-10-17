@@ -69,28 +69,31 @@ Ext.define('Ext.rtl.dom.Element', {
         var doc = document,
             round = Math.round,
             dom = this.dom,
-            body = doc.body,
             x = 0,
             y = 0,
-            bodyRect, rect;
+            box, scroll;
 
-        if(dom !== doc && dom !== body){
+        if(dom !== doc && dom !== doc.body){
             // IE (including IE10) throws an error when getBoundingClientRect
             // is called on an element not attached to dom
             try {
-                bodyRect = body.getBoundingClientRect();
-                rect = dom.getBoundingClientRect();
+                box = dom.getBoundingClientRect();
+            } catch (ex) {
+                box = { left: 0, top: 0 };
+            }
 
-                x = rect.left - bodyRect.left;
-                y = rect.top - bodyRect.top;
-
-                if (Ext.rootInheritedState.rtl) {
-                    x = body.scrollWidth - rect.width - x;
-                }
-            } catch (ex) {}
+            doc = Ext.fly(doc, '_internal');
+            if (Ext.rootInheritedState.rtl) {
+                scroll = doc.rtlGetScroll();
+                x = Ext.Element.getViewportWidth() - box.right + scroll.left;
+            } else {
+                scroll = doc.getScroll();
+                x = box.left + scroll.left;
+            }
+            x = round(x);
+            y = round(box.top + scroll.top);
         }
-
-        return [round(x), round(y)];
+        return [x, y];
     },
 
     rtlGetLocalX: function() {

@@ -21,7 +21,6 @@ var TemplateClass = function(){},
 // @require Ext.lang.Date
 
     /**
-     * @method
      * Returns a new object with the given object as the prototype chain. This method is
      * designed to mimic the ECMA standard `Object.create` method and is assigned to that
      * function when it is available.
@@ -109,7 +108,7 @@ var TemplateClass = function(){},
      * @param {String} name
      * @param {Object/Array} value
      * @param {Boolean} [recursive=false] True to traverse object recursively
-     * @return {Object[]}
+     * @return {Array}
      */
     toQueryObjects: function(name, value, recursive) {
         var self = ExtObject.toQueryObjects,
@@ -672,7 +671,6 @@ var TemplateClass = function(){},
     },
     
     /**
-     * @method
      * Shallow compares the contents of 2 objects using strict equality. Objects are
      * considered equal if they both have the same set of properties and the
      * value for those properties equals the other in the corresponding object.

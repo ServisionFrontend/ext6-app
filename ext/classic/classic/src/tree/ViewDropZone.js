@@ -161,6 +161,11 @@ Ext.define('Ext.tree.ViewDropZone', {
             indicator.setWidth(Ext.fly(node).getWidth());
             indicatorY = Ext.fly(node).getY() - Ext.fly(view.el).getY() - 1;
 
+            // If view is scrolled using CSS translate, account for then when positioning the indicator
+            if (view.touchScroll === 2) {
+                indicatorY += view.getScrollY();
+            }
+
             /*
              * In the code below we show the proxy again. The reason for doing this is showing the indicator will
              * call toFront, causing it to get a new z-index which can sometimes push the proxy behind it. We always 
@@ -295,7 +300,7 @@ Ext.define('Ext.tree.ViewDropZone', {
 
             // If configured to sort on drop, do it according to the TreeStore's comparator
             if (me.sortOnDrop) {
-                targetNode.sort(targetNode.getTreeStore().getSorters().sortFn);
+                targetNode.sort(targetNode.getOwnerTree().store.getSorters().sortFn);
             }
             
             Ext.resumeLayouts(true);

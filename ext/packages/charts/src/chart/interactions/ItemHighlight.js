@@ -44,11 +44,6 @@ Ext.define('Ext.chart.interactions.ItemHighlight', {
             return true;
         }
 
-        if (isMousePointer && me.stickyHighlightItem) {
-            me.stickyHighlightItem = null;
-            me.highlight(null);
-        }
-
         if (me.isDragging) {
             if (tipItem && isMousePointer) {
                 tipItem.series.hideTooltip(tipItem);
@@ -69,7 +64,7 @@ Ext.define('Ext.chart.interactions.ItemHighlight', {
                 }
                 if (item && (tooltip = item.series.getTooltip())) {
                     if (tooltip.trackMouse || !tipItem) {
-                        item.series.showTooltip(item, e);
+                        item.series.showTooltip(item, e.getXY());
                     }
                     me.tipItem = item;
                 }
@@ -86,7 +81,7 @@ Ext.define('Ext.chart.interactions.ItemHighlight', {
     },
 
     showTooltip: function (e, item) {
-        item.series.showTooltip(item, e);
+        item.series.showTooltip(item, e.getXY());
         this.tipItem = item;
     },
 

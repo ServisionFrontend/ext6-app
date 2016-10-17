@@ -1,24 +1,24 @@
-.x-input .x-clear-icon, .x-input .x-reveal-icon {
+.x-field-input .x-clear-icon, .x-field-input .x-reveal-icon {
     width: 10px;
     height: 10px;
     right: 0;
     background-color: #ccc;
 }
 
-.x-field-label {
+.x-form-label {
     span {
         font-weight: bold;
     }
 }
 
 .x-field-clearable {
-    .x-input {
+    .x-field-input {
         padding-right: 10px;
     }
 }
 
 .x-field-revealable {
-    .x-input {
+    .x-field-input {
         padding-right: 10px;
     }
 }

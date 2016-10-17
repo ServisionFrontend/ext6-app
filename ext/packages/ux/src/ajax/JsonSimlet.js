@@ -27,9 +27,5 @@ Ext.define('Ext.ux.ajax.JsonSimlet', {
 
         ret.responseText = Ext.encode(response);
         return ret;
-    },
-
-    doPost : function(ctx) {
-        return this.doGet(ctx);
     }
 });

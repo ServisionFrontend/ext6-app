@@ -23,6 +23,10 @@ Ext.define('Ext.overrides.Widget', {
         renderTo: null
     },
 
+    cachedConfig: {
+        baseCls: Ext.baseCSSPrefix + 'widget'
+    },
+
     constructor: function(config) {
         var me = this,
             renderTo;

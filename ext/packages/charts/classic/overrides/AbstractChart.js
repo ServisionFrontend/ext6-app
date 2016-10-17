@@ -6,10 +6,8 @@ Ext.define('Ext.chart.overrides.AbstractChart', {
 
     updateLegend: function (legend, oldLegend) {
         var dock;
-
         this.callParent([legend, oldLegend]);
-
-        if (legend && legend.isDomLegend) {
+        if (legend) {
             dock = legend.docked;
             this.addDocked({
                 dock: dock,

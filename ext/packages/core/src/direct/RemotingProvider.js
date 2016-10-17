@@ -9,7 +9,7 @@
  * 
  * To accomplish this the server-side needs to describe what classes and methods
  * are available on the client-side. This configuration will typically be
- * outputted by the server-side Ext Direct stack when the API description is built.
+ * outputted by the server-side Ext.Direct stack when the API description is built.
  */
 Ext.define('Ext.direct.RemotingProvider', {
     extend: 'Ext.direct.JsonProvider', 
@@ -33,11 +33,10 @@ Ext.define('Ext.direct.RemotingProvider', {
      *
      *      // each property within the 'actions' object represents a server side Class
      *      actions: {
-     *          // array of methods in each server side Class to be stubbed out on client
-     *          TestAction: [{
+     *          TestAction: [   // array of methods within each server side Class to be   
+     *          {               // stubbed out on client
      *              name: 'doEcho',   // stub method will be TestAction.doEcho
-     *              len:  1,
-     *              batched: false    // always send requests immediately for this method
+     *              len:  1            
      *          }, {
      *              name: 'multiply', // name of method
      *              len:  2           // The number of parameters that will be used to create an
@@ -200,17 +199,6 @@ Ext.define('Ext.direct.RemotingProvider', {
      * `timeout` parameter in `options` object for that method call.
      */
     enableBuffer: 10,
-    
-    /**
-     * @cfg {Number} bufferLimit The maximum number of requests to batch together.
-     * By default, an unlimited number of requests will be batched. This option will
-     * allow to wait only for a certain number of Direct method calls before
-     * dispatching a request to the server, even if {@link #enableBuffer} timeout
-     * has not yet expired.
-     * 
-     * Note that this option does nothing if {@link #enableBuffer} is set to `false`.
-     */
-    bufferLimit: Number.MAX_VALUE,
     
     /**
      * @cfg {Number} [maxRetries=1]
@@ -488,7 +476,6 @@ Ext.define('Ext.direct.RemotingProvider', {
                     });
 
                     me.fireEvent('data', me, event);
-                    me.fireEvent('exception', me, event);
 
                     if (transaction && me.fireEvent('beforecallback', me, event, transaction) !== false) {
                         me.runCallback(transaction, event, false);
@@ -559,7 +546,7 @@ Ext.define('Ext.direct.RemotingProvider', {
             timeout: me.timeout
         };
 
-        // Explicitly specified timeout for Ext Direct call overrides defaults
+        // Explicitly specified timeout for Ext.Direct call overrides defaults
         if (transaction.timeout) {
             request.timeout = transaction.timeout;
         }
@@ -597,7 +584,6 @@ Ext.define('Ext.direct.RemotingProvider', {
      */
     queueTransaction: function(transaction) {
         var me = this,
-            callBuffer = me.callBuffer,
             enableBuffer = me.enableBuffer;
         
         if (transaction.form) {
@@ -605,15 +591,14 @@ Ext.define('Ext.direct.RemotingProvider', {
             return;
         }
 
-        if (enableBuffer === false || transaction.disableBatching ||
-            typeof transaction.timeout !== 'undefined') {
+        if (enableBuffer === false || typeof transaction.timeout !== 'undefined') {
             me.sendRequest(transaction);
             return;
         }
         
-        callBuffer.push(transaction);
+        me.callBuffer.push(transaction);
 
-        if (enableBuffer && callBuffer.length < me.bufferLimit) {
+        if (enableBuffer) {
             if (!me.callTask) {
                 me.callTask = new Ext.util.DelayedTask(me.combineAndSend, me);
             }
@@ -665,7 +650,7 @@ Ext.define('Ext.direct.RemotingProvider', {
         //<debug>
         if (cb && !Ext.isFunction(cb)) {
             Ext.raise("Callback argument is not a function " +
-                            "for Ext Direct method " +
+                            "for Ext.Direct method " +
                             action + "." + method.name);
         }
         //</debug>
@@ -684,8 +669,7 @@ Ext.define('Ext.direct.RemotingProvider', {
             metadata: data.metadata,
             callbackOptions: options,
             callback: cb,
-            isForm: isForm,
-            disableBatching: method.disableBatching
+            isForm: isForm
         });
         
         if (options && options.timeout != null) {
@@ -783,11 +767,6 @@ Ext.define('Ext.direct.RemotingProvider', {
     },
     
     inheritableStatics: {
-        /**
-         * @private
-         * @static
-         * @inheritable
-         */
         checkConfig: function(config) {
             // RemotingProvider needs service URI,
             // type and array of Actions

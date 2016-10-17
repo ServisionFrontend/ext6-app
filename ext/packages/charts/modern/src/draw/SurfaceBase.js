@@ -1,12 +1,7 @@
-/**
- * @private
- * @class Ext.draw.SurfaceBase
- */
 Ext.define('Ext.draw.SurfaceBase', {
-    extend: 'Ext.Widget',
+    extend: 'Ext.Component',
 
     getOwnerBody: function() {
         return this.getRefOwner().bodyElement;
     }
-
 });

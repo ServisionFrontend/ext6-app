@@ -111,9 +111,9 @@ Ext.define('Ext.plugin.Viewport', {
                         el.id = me.id;
                     }
 
-                    // In addition, stamp on the data-componentid so lookups using Component's
+                    // In addition, let's stamp on the componentIdAttribute so lookups using Component's
                     // fromElement will work.
-                    el.setAttribute('data-componentid', me.id);
+                    el.setAttribute(Ext.Component.componentIdAttribute, me.id);
                     
                     if (!me.ariaStaticRoles[me.ariaRole]) {
                         el.setAttribute('role', me.ariaRole);
@@ -151,26 +151,9 @@ Ext.define('Ext.plugin.Viewport', {
                 },
 
                 onRender: function() {
-                    var me = this,
-                        overflowEl = me.getOverflowEl(),
-                        body = Ext.getBody();
+                    var me = this;
 
                     me.callParent(arguments);
-
-                    // The global scroller is our scroller.
-                    // We must provide a non-scrolling one if we are not configured to scroll,
-                    // otherwise the deferred ready listener in Scroller will create
-                    // one with scroll: true
-                    Ext.setViewportScroller(me.getScrollable() || {
-                        x: false,
-                        y: false,
-                        element: body
-                    });
-
-                    // If we are not scrolling the body, the body has to be overflow:hidden
-                    if (me.getOverflowEl() !== body) {
-                        body.setStyle('overflow', 'hidden');
-                    }
 
                     // Important to start life as the proper size (to avoid extra layouts)
                     // But after render so that the size is not stamped into the body,
@@ -180,6 +163,17 @@ Ext.define('Ext.plugin.Viewport', {
                     me.height = me.initialViewportHeight;
                     
                     me.initialViewportWidth = me.initialViewportHeight = null;
+
+                    // prevent touchmove from panning the viewport in mobile safari
+                    if (Ext.supports.TouchEvents) {
+                        me.mon(Ext.getDoc(), {
+                            touchmove: function(e) {
+                                e.preventDefault();
+                            },
+                            translate: false,
+                            delegated: false
+                        });
+                    }
                 },
 
                 initInheritedState: function (inheritedState, inheritedStateInner) {
@@ -227,12 +221,7 @@ Ext.define('Ext.plugin.Viewport', {
                 privates: {
                     // override here to prevent an extraneous warning
                     applyTargetCls: function (targetCls) {
-                        var el = this.el;
-                         if (el === this.getTargetEl()) {
-                              this.el.addCls(targetCls);
-                         } else {
-                             this.callParent([targetCls]);
-                         }
+                        this.el.addCls(targetCls);
                     },
                     
                     // Override here to prevent tabIndex set/reset on the body
@@ -252,6 +241,10 @@ Ext.define('Ext.plugin.Viewport', {
                         if (el) {
                             el.restoreTabbableState(/* skipSelf = */ true);
                         }
+                    },
+
+                    getOverflowEl: function() {
+                        return Ext.get(document.documentElement);
                     }
                 }
             });

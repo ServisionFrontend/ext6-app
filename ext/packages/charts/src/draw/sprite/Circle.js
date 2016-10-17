@@ -66,7 +66,6 @@ Ext.define('Ext.draw.sprite.Circle', {
             cx = attr.cx,
             cy = attr.cy,
             r = attr.r;
-
         plain.x = cx - r;
         plain.y = cy - r;
         plain.width = r + r;
@@ -81,14 +80,13 @@ Ext.define('Ext.draw.sprite.Circle', {
             matrix = attr.matrix,
             scaleX = matrix.getScaleX(),
             scaleY = matrix.getScaleY(),
-            rx, ry;
-
-        rx = scaleX * r;
-        ry = scaleY * r;
-        transform.x = matrix.x(cx, cy) - rx;
-        transform.y = matrix.y(cx, cy) - ry;
-        transform.width = rx + rx;
-        transform.height = ry + ry;
+            w, h;
+        w = scaleX * r;
+        h = scaleY * r;
+        transform.x = matrix.x(cx, cy) - w;
+        transform.y = matrix.y(cx, cy) - h;
+        transform.width = w + w;
+        transform.height = h + h;
     },
 
     updatePath: function (path, attr) {

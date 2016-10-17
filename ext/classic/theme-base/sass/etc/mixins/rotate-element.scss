@@ -41,9 +41,10 @@
         .#{$prefix}ie8 & {
             @if not is-null($background-color) {
                 background-color: $background-color;
-                -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=#{$ie-rotation}),progid:DXImageTransform.Microsoft.Chroma(color=#{$background-color})";
+                filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=#{$ie-rotation}),
+                        progid:DXImageTransform.Microsoft.Chroma(color=#{$background-color});
             } @else {
-                -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=#{$ie-rotation})";
+                filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=#{$ie-rotation});
             }
         }
     }

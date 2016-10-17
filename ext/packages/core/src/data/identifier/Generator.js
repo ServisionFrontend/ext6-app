@@ -165,13 +165,14 @@ Ext.define('Ext.data.identifier.Generator', {
      */
     constructor: function (config) {
         var me = this,
-            id;
+            cache, id;
 
         me.initConfig(config);
 
         id = me.getId();
         if (id) {
-            Ext.data.identifier.Generator.all[id] = me;
+            cache = (config && config.cache) || Ext.data.identifier.Generator.all;
+            cache[id] = me;
         }
     },
 
@@ -223,7 +224,7 @@ function () {
      */
     Factory.dataIdentifier = function (config) {
         var id = Ext.isString(config) ? config : (config && config.id),
-            existing = id && Generator.all[id];
+            existing = id && ((config && config.cache) || Generator.all)[id];
 
         return existing || factory(config);
     };

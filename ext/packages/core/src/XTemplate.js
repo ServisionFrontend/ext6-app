@@ -336,11 +336,11 @@ Ext.define('Ext.XTemplate', {
      */
     strict: false,
 
-    apply: function(values, parent, xindex, xcount) {
-        return this.applyOut(values, [], parent, xindex, xcount).join('');
+    apply: function(values, parent) {
+        return this.applyOut(values, [], parent).join('');
     },
 
-    applyOut: function(values, out, parent, xindex, xcount) {
+    applyOut: function(values, out, parent) {
         var me = this,
             compiler;
 
@@ -354,16 +354,11 @@ Ext.define('Ext.XTemplate', {
             me.fn = compiler.compile(me.html);
         }
 
-        // xindex is 1-based, so 0 is impossible
-        xindex = xindex || 1;
-        // likewise, this tpl exists in the parent, so xcount==0 is not possible
-        xcount = xcount || 1;
-
         if (me.strict) {
-            me.fn(out, values, parent || me.emptyObj, xindex, xcount);
+            me.fn(out, values, parent || me.emptyObj, 1, 1);
         } else {
             try {
-                me.fn(out, values, parent || me.emptyObj, xindex, xcount);
+                me.fn(out, values, parent || me.emptyObj, 1, 1);
             } catch (e) {
                 //<debug>
                 Ext.log.warn('XTemplate evaluation exception: ' + e.message);

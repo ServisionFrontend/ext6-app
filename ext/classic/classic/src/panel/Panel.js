@@ -97,8 +97,8 @@
  * horizontally to full width. Child items may either be configured with a numeric height, or with a `flex` value to
  * distribute available space proportionately.
  *
- * This Panel itself may be a child item of, for example, a {@link Ext.tab.Panel} which 
- * will size its child items to fit within its content area.
+ * This Panel itself may be a child item of, for exaple, a {@link Ext.tab.Panel} which will size its child items to fit
+ * within its content area.
  *
  * Using these techniques, as long as the **layout** is chosen and configured correctly, an application may have any
  * level of nested containment, all dynamically sized according to configuration, the user's preference and available
@@ -114,6 +114,7 @@ Ext.define('Ext.panel.Panel', {
         'Ext.util.MixedCollection',
         'Ext.toolbar.Toolbar',
         'Ext.fx.Anim',
+        'Ext.util.KeyMap',
         'Ext.panel.DD',
         'Ext.XTemplate',
         'Ext.layout.component.Dock',
@@ -125,7 +126,7 @@ Ext.define('Ext.panel.Panel', {
     },
 
     childEls: [
-        'bodyWrap', 'body'
+        'body'
     ],
 
     renderTpl: [
@@ -136,31 +137,21 @@ Ext.define('Ext.panel.Panel', {
                     '{headingText}',
             '</div>',
         '</tpl>',
-        '<tpl if="hasTabGuard">{% this.renderTabGuard(out, values, \'before\'); %}</tpl>',
-        '<div id="{id}-bodyWrap" data-ref="bodyWrap" class="{baseCls}-bodyWrap"',
-            '<tpl if="bodyWrapAriaAttributes">',
-                '<tpl foreach="bodyWrapAriaAttributes"> {$}="{.}"</tpl>',
+        // If this Panel is framed, the framing template renders the docked items round the frame
+        '{% this.renderDockedItems(out,values,0); %}',
+        '<div id="{id}-body" data-ref="body" class="{baseCls}-body<tpl if="bodyCls"> {bodyCls}</tpl>',
+            ' {baseCls}-body-{ui}<tpl if="uiCls">',
+                '<tpl for="uiCls"> {parent.baseCls}-body-{parent.ui}-{.}</tpl>',
+            '</tpl>{childElCls}"',
+            '<tpl if="bodyAriaAttributes">',
+                '<tpl foreach="bodyAriaAttributes"> {$}="{.}"</tpl>',
             '<tpl else>',
                 ' role="presentation"',
             '</tpl>',
-            '>',
-            // If this Panel is framed, the framing template renders the docked items round the frame
-            '{% this.renderDockedItems(out,values,0); %}',
-            '<div id="{id}-body" data-ref="body" class="{baseCls}-body<tpl if="bodyCls"> {bodyCls}</tpl>',
-                ' {baseCls}-body-{ui}<tpl if="uiCls">',
-                    '<tpl for="uiCls"> {parent.baseCls}-body-{parent.ui}-{.}</tpl>',
-                '</tpl>{childElCls}"',
-                '<tpl if="bodyAriaAttributes">',
-                    '<tpl foreach="bodyAriaAttributes"> {$}="{.}"</tpl>',
-                '<tpl else>',
-                    ' role="presentation"',
-                '</tpl>',
-                '<tpl if="bodyStyle"> style="{bodyStyle}"</tpl>>',
-                '{%this.renderContainer(out,values);%}',
-            '</div>',
-            '{% this.renderDockedItems(out,values,1); %}',
+            '<tpl if="bodyStyle"> style="{bodyStyle}"</tpl>>',
+            '{%this.renderContainer(out,values);%}',
         '</div>',
-        '<tpl if="hasTabGuard">{% this.renderTabGuard(out, values, \'after\'); %}</tpl>'
+        '{% this.renderDockedItems(out,values,1); %}'
     ],
 
     // <editor-fold desc="Config">
@@ -178,66 +169,71 @@ Ext.define('Ext.panel.Panel', {
 
     beforeRenderConfig: {
         /**
-         * @cfg glyph
-         * @inheritdoc Ext.panel.Header#cfg-glyph
-         * @accessor
+         * @cfg {Number/String} glyph
+         * @inheritdoc Ext.panel.Header#glyph
          */
         glyph: null,
 
         /**
-         * @cfg {'top'/'bottom'/'left'/'right'} [headerPosition='top']
+         * @cfg {String} [headerPosition='top']
          * Specify as `'top'`, `'bottom'`, `'left'` or `'right'`.
-         * @accessor
          */
         headerPosition: null,
 
         /**
-         * @cfg icon
-         * @inheritdoc Ext.panel.Header#cfg-icon
-         * @accessor
+         * @cfg {String} icon
+         * @inheritdoc Ext.panel.Header#icon
          */
         icon: null,
 
         /**
-         * @cfg iconAlign
-         * @inheritdoc Ext.panel.Header#cfg-iconAlign
-         * @accessor
+         * @cfg {'top'/'right'/'bottom'/'left'} [iconAlign='left']
+         * The side of the title to render the icon.
          */
         iconAlign: null,
 
         /**
-         * @cfg iconCls
-         * @inheritdoc Ext.panel.Header#cfg-iconCls
-         * @accessor
+         * @cfg {String} iconCls
+         * @inheritdoc Ext.panel.Header#iconCls
          */
         iconCls: null,
 
         /**
-         * @cfg {String/Object}
-         * @inheritdoc Ext.panel.Header#title
-         * @localdoc When a `title` is specified, the {@link Ext.panel.Header} will 
-         * automatically be created and displayed unless {@link #header} is set to `false`.
-         * @accessor
+         * @cfg {String}
+         * The title text to be used to display in the {@link Ext.panel.Header Panel Header}.
+         * Or a config object for a {@link Ext.panel.Title Panel Title}. When a `title` is
+         * specified the {@link Ext.panel.Header} will automatically be created and
+         * displayed unless {@link #header} is set to `false`.
          */
         title: null,
 
         /**
-         * @cfg titleAlign
-         * @inheritdoc Ext.panel.Header#cfg-titleAlign
-         * @accessor
+         * @cfg {String} [titleAlign='left']
+         * The alignment of the title text within the available space between the
+         * icon and the tools.
          */
         titleAlign: null,
 
         /**
-         * @cfg titleRotation
-         * @inheritdoc Ext.panel.Header#cfg-titleRotation
-         * @accessor
+         * @cfg {'default'/0/1/2} [titleRotation='default']
+         * The rotation of the header's title text.  Can be one of the following values:
+         *
+         * - `'default'` - use the default rotation, depending on the dock position of the header
+         * - `0` - no rotation
+         * - `1` - rotate 90deg clockwise
+         * - `2` - rotate 90deg counter-clockwise
+         *
+         * The default behavior of this config depends on the dock position of the header:
+         *
+         * - `'top'` or `'bottom'` - `0`
+         * - `'right'` - `1`
+         * - `'left'` - `1`
          */
         titleRotation: null
     },
 
     /**
-     * @cfg {Boolean/Number} animCollapse
+     * @cfg {Boolean} animCollapse
      * `true` to animate the transition when the panel is collapsed, `false` to skip the animation (defaults to `true`
      * if the {@link Ext.fx.Anim} class is available, otherwise `false`). May also be specified as the animation
      * duration in milliseconds.
@@ -290,8 +286,6 @@ Ext.define('Ext.panel.Panel', {
      * Leaving the value as `true` uses the selected theme's {@link Ext.panel.Panel#$panel-border-width}
      *
      * Defaults to `false` when using or extending Neptune.
-     * 
-     * **Note:** is ignored when {@link #frame} is set to **true**.
      */
     border: true,
 
@@ -329,11 +323,8 @@ Ext.define('Ext.panel.Panel', {
     
     //<locale>
     /**
-     * @cfg {String} closeToolText Text to be announced by screen readers when the 
-     * **close** {@link Ext.panel.Tool tool} is focused.  Will also be set as the close 
-     * tool's {@link Ext.panel.Tool#cfg-tooltip tooltip} text.
-     * 
-     * **Note:** Applicable when the panel is {@link #closable}: true
+     * @cfg {String} closeToolText Text to be announced by screen readers when Close tool
+     * is focused.
      */
     closeToolText: 'Close panel',
     //</locale>
@@ -402,20 +393,14 @@ Ext.define('Ext.panel.Panel', {
     
     //<locale>
     /**
-     * @cfg {String} collapseToolText Text to be announced by screen readers when 
-     * **collapse** {@link Ext.panel.Tool tool} is focused.  Will also be set as the 
-     * collapse tool's {@link Ext.panel.Tool#cfg-tooltip tooltip} text.
-     * 
-     * **Note:** Applicable when the panel is {@link #collapsible}: true
+     * @cfg {String} collapseToolText Text to be announced by screen readers when Collapse tool
+     * is focused.
      */
     collapseToolText: 'Collapse panel',
     
     /**
-     * @cfg {String} expandToolText Text to be announced by screen readers when 
-     * **expand** {@link Ext.panel.Tool tool} is focused.  Will also be set as the 
-     * expand tool's {@link Ext.panel.Tool#cfg-tooltip tooltip} text.
-     * 
-     * **Note:** Applicable when the panel is {@link #collapsible}: true
+     * @cfg {String} expandToolText Text to be announced by screen readers when Expand tool
+     * is focused.
      */
     expandToolText: 'Expand panel',
     //</locale>
@@ -521,9 +506,7 @@ Ext.define('Ext.panel.Panel', {
      *         xtype: 'toolbar',
      *         dock: 'bottom',
      *         ui: 'footer',
-     *         defaults: {
-     *             minWidth: 200
-     *         },
+     *         defaults: {minWidth: {@link #minButtonWidth}},
      *         items: [
      *             { xtype: 'component', flex: 1 },
      *             { xtype: 'button', text: 'Button 1' }
@@ -592,9 +575,7 @@ Ext.define('Ext.panel.Panel', {
      *         xtype: 'toolbar',
      *         dock: 'bottom',
      *         ui: 'footer',
-     *         defaults: {
-     *             minWidth: 200
-     *         },
+     *         defaults: {minWidth: {@link #minButtonWidth}},
      *         items: [
      *             { xtype: 'component', flex: 1 },
      *             { xtype: 'button', text: 'Button 1' }
@@ -629,8 +610,6 @@ Ext.define('Ext.panel.Panel', {
     /**
      * @cfg {Boolean} frame
      * True to apply a frame to the panel.
-     * 
-     * **Note:** `frame: true` overrides {@link #border border:false}
      */
     frame: false,
 
@@ -793,16 +772,6 @@ Ext.define('Ext.panel.Panel', {
      *     // Floating components begin life hidden
      *     win.child('[title=Floating Panel]').show();
      *
-     */
-
-    /**
-     * @cfg stateEvents
-     * @inheritdoc Ext.state.Stateful#cfg-stateEvents
-     * @localdoc By default the following stateEvents are added:
-     * 
-     *  - {@link #event-resize} - _(added by Ext.Component)_
-     *  - {@link #event-collapse}
-     *  - {@link #event-expand}
      */
 
     /**
@@ -1055,7 +1024,7 @@ Ext.define('Ext.panel.Panel', {
     /**
      * Adds a CSS class to the body element. If not rendered, the class will
      * be added when the panel is rendered.
-     * @param {String/String[]} cls The class to add
+     * @param {String} cls The class to add
      * @return {Ext.panel.Panel} this
      */
     addBodyCls: function(cls) {
@@ -1119,7 +1088,6 @@ Ext.define('Ext.panel.Panel', {
     },
 
     /**
-     * @method
      * @protected
      * @template
      * Template method to be implemented in subclasses to add their tools after the collapsible tool.
@@ -1168,6 +1136,7 @@ Ext.define('Ext.panel.Panel', {
      */
     afterCollapse: function(animated) {
         var me = this,
+            ariaDom = me.ariaEl.dom,
             ownerLayout = me.ownerLayout;
 
         me.isCollapsingOrExpanding = 0;
@@ -1183,6 +1152,16 @@ Ext.define('Ext.panel.Panel', {
             ownerLayout.afterCollapse(me, animated);
         }
         
+        if (ariaDom) {
+            ariaDom.setAttribute('aria-expanded', false);
+        }
+        
+        // In accordion layout, panel body has the role of tabpanel
+        // and needs to be updated accordingly when the panel is collapsed
+        if (me.isAccordionPanel) {
+            me.body.dom.setAttribute('aria-hidden', true);
+        }
+
         me.setHiddenDocked();
         me.fireEvent('collapse', me);
     },
@@ -1197,6 +1176,7 @@ Ext.define('Ext.panel.Panel', {
      */
     afterExpand: function(animated) {
         var me = this,
+            ariaDom = me.ariaEl.dom,
             ownerLayout = me.ownerLayout;
 
         me.isCollapsingOrExpanding = 0;
@@ -1211,6 +1191,16 @@ Ext.define('Ext.panel.Panel', {
         if (ownerLayout) {
             ownerLayout.afterExpand(me, animated);
         }
+        
+        if (ariaDom) {
+            ariaDom.setAttribute('aria-expanded', true);
+        }
+        
+        // In accordion layout, panel body has the role of tabpanel
+        // and needs to be updated accordingly when the panel is expanded
+        if (me.isAccordionPanel) {
+            me.body.dom.setAttribute('aria-hidden', false);
+        }
 
         me.fireEvent('expand', me);
         me.fireHierarchyEvent('expand');
@@ -1223,8 +1213,7 @@ Ext.define('Ext.panel.Panel', {
             me.placeholder,
             me.ghostPanel,
             me.dd,
-            me.accordionHeaderKeyNav,
-            me.accordionBodyKeyNav,
+            me.accordionKeyNav,
             me.defaultButtonKeyNav
         );
         
@@ -1234,17 +1223,12 @@ Ext.define('Ext.panel.Panel', {
     
     destroy: function() {
         this.callParent();
-        this.dockedItems = this.bodyContainer = null;
+        this.dockedItems = null;
     },
 
     beforeRender: function() {
         var me = this,
             wasCollapsed;
-
-        // Ensure the protoBody exists so that initOverflow gets right answer from getOverflowEl.
-        // If this Panel was applied to an existing element (such as being used as a Viewport)
-        // then it will not have been created.
-        me.getProtoBody();
 
         me.callParent();
 
@@ -1382,16 +1366,6 @@ Ext.define('Ext.panel.Panel', {
         if (me.resizer) {
             me.resizer.disable();
         }
-        
-        if (me.rendered) {
-            me.ariaEl.dom.setAttribute('aria-expanded', false);
-            
-            // In accordion layout, panel body has the role of tabpanel
-            // and needs to be updated accordingly when the panel is collapsed
-            if (me.isAccordionPanel) {
-                me.body.dom.setAttribute('aria-hidden', true);
-            }
-        }
     },
 
     beginDrag: function() {
@@ -1441,44 +1415,24 @@ Ext.define('Ext.panel.Panel', {
         if (me.resizer) {
             me.resizer.enable();
         }
-        
-        if (me.rendered) {
-            me.ariaEl.dom.setAttribute('aria-expanded', true);
-            
-            // In accordion layout, panel body has the role of tabpanel
-            // and needs to be updated accordingly when the panel is expanded
-            if (me.isAccordionPanel) {
-                me.body.dom.setAttribute('aria-hidden', false);
-            }
-        }
     },
 
     bridgeToolbars: function() {
         var me = this,
             docked = [],
             minButtonWidth = me.minButtonWidth,
-            fbar, fbarDefaults, fbarIsButtons;
+            fbar, fbarDefaults;
 
-        function initToolbar(toolbar, pos, useButtonAlign, disableFocusableContainer) {
+        function initToolbar (toolbar, pos, useButtonAlign) {
             if (Ext.isArray(toolbar)) {
                 toolbar = {
                     xtype: 'toolbar',
                     items: toolbar
                 };
-            } else if (!toolbar.isComponent) {
-                // Incoming toolbar config can be a property on the prototype
-                toolbar = Ext.apply({}, toolbar);
-            }
-            
-            if (!toolbar.xtype) {
+            } else if (!toolbar.xtype) {
                 toolbar.xtype = 'toolbar';
             }
-            
             toolbar.dock = pos;
-            
-            if (disableFocusableContainer) {
-                toolbar.enableFocusableContainer = false;
-            }
 
             // Legacy support for buttonAlign (only used by buttons/fbar)
             if (useButtonAlign) {
@@ -1503,11 +1457,10 @@ Ext.define('Ext.panel.Panel', {
         if (me.buttons) {
             me.fbar = me.buttons;
             me.buttons = null;
-            fbarIsButtons = true;
         }
 
         if (me.fbar) {
-            fbar = initToolbar(me.fbar, 'bottom', true, fbarIsButtons); // only we useButtonAlign
+            fbar = initToolbar(me.fbar, 'bottom', true); // only we useButtonAlign
             fbar.ui = 'footer';
 
             // Apply the minButtonWidth config to buttons in the toolbar
@@ -1590,7 +1543,7 @@ Ext.define('Ext.panel.Panel', {
      *
      * Defaults to {@link #collapseDirection}.
      *
-     * @param {Boolean/Number} [animate] True to animate the transition, else false
+     * @param {Boolean} [animate] True to animate the transition, else false
      * (defaults to the value of the {@link #animCollapse} panel config). May
      * also be specified as the animation duration in milliseconds.
      * @return {Ext.panel.Panel} this
@@ -1677,12 +1630,11 @@ Ext.define('Ext.panel.Panel', {
             // The ghost must not be draggable (the actual class instantiated my be draggable in its prototype)
             draggable: false,
 
-            // Tools are explicitly copied.
+            // Tools are explicitly copied. We do not want the overhead of a KeyMap for the ghost
             closable: false,
 
             focusable: false,
             floating: true,
-            alignOnScroll: false,
             shadow: false,
             frame: frame,
             shim: me.shim,
@@ -1726,12 +1678,7 @@ Ext.define('Ext.panel.Panel', {
                 ownerCt: (ownerCt && me.collapseMode === 'placeholder') ? ownerCt : me,
                 ownerLayout: me.componentLayout,
                 forceOrientation: true,
-                margin: me.margin,
-                // When placeholder is focused, focus the expander tool.
-                // TODO: When https://sencha.jira.com/browse/EXTJS-19718 is
-                // fixed, this should not be needed.
-                // placeholder is a FocusableContainer
-                defaultFocus: 'tool[isDefaultExpandTool]'
+                margin: me.margin
             }, defaults);
 
         // If we're in mini mode, set the placeholder size to only 1px since
@@ -1925,7 +1872,7 @@ Ext.define('Ext.panel.Panel', {
             floatCls = Ext.panel.Panel.floatCls,
             collapsed = me.collapsed,
             layoutOwner = me.ownerCt || me,
-            slideDirection, myBox;
+            slideDirection, onBodyMousedown, myBox;
 
         if (me.isSliding) {
             return;
@@ -1957,16 +1904,13 @@ Ext.define('Ext.panel.Panel', {
 
         me.slideOutTask = me.slideOutTask || new Ext.util.DelayedTask(me.slideOutFloatedPanel, me);
 
-        // Tap outside the floated element or placeholder slides it back.
+        // Tap outside the floated element slides it back.
         if (Ext.supports.Touch) {
-            me.bodyMousedownListener = Ext.on({
-                mousedown: function(event) {
-                    if (!(event.within(me.el) || event.within(placeholder.el))) {
-                        me.bodyMousedownListener.destroy();
-                        me.slideOutFloatedPanel();
-                    }
-                },
-                destroyable: true
+            Ext.on('mousedown', onBodyMousedown = function(event) {
+                if (!event.within(me.el)) {
+                    Ext.un('mousedown', onBodyMousedown);
+                    me.slideOutFloatedPanel();
+                }
             });
         }
         if (!me.placeholderListener) {
@@ -2059,15 +2003,13 @@ Ext.define('Ext.panel.Panel', {
 
     getAnimationProps: function() {
         var me = this,
+            animCollapse = me.animCollapse,
             props;
 
         props = me.callParent();
-        
-        if (typeof me.animCollapseDuration === 'number') {
-            props.duration = me.animCollapseDuration;
-        }
-        else if (typeof me.animCollapse === 'number') {
-            props.duration = me.animCollapse;
+
+        if (typeof animCollapse === 'number') {
+            props.duration = animCollapse;
         }
 
         return props;
@@ -2133,6 +2075,15 @@ Ext.define('Ext.panel.Panel', {
         return collapsedClasses;
     },
 
+    /**
+     * @private
+     */
+    getKeyMap: function() {
+        return this.keyMap || (this.keyMap = new Ext.util.KeyMap(Ext.apply({
+            target: this.el
+        }, this.keys)));
+    },
+
     getOppositeDirection: function(d) {
         var c = Ext.Component;
         switch (d) {
@@ -2160,13 +2111,7 @@ Ext.define('Ext.panel.Panel', {
                 listeners = {
                     click: {
                         // titleCollapse needs to take precedence over floatable
-                        fn: function(e, target) {
-                            // If the element click was specifically on the tool, that tool's handler
-                            // will process it and we must not: https://sencha.jira.com/browse/EXTJS-21045
-                            if (!placeholder.expandTool.el.dom.contains(arguments[1])) {
-                                me[(!titleCollapse && floatable) ? 'floatCollapsedPanel' : 'toggleCollapse']();
-                            }
-                        },
+                        fn: (!titleCollapse && floatable) ? me.floatCollapsedPanel : me.toggleCollapse,
                         element: 'el',
                         scope: me
                     }
@@ -2217,28 +2162,16 @@ Ext.define('Ext.panel.Panel', {
     getReExpander: function (direction) {
         var me = this,
             collapseDir = direction || me.collapseDirection,
-            reExpander = me.reExpander || me.findReExpander(collapseDir),
-            titleCollapse = me.titleCollapse,
-            listeners = null;
+            reExpander = me.reExpander || me.findReExpander(collapseDir);
 
         me.expandDirection = me.getOppositeDirection(collapseDir);
 
         if (!reExpander) {
-            if (titleCollapse) {
-                listeners = {
-                    click: {
-                        fn: me.toggleCollapse,
-                        element: 'el',
-                        scope: me
-                    }
-                };
-            }
         // We did not find a Header of the required orientation: create one.
             me.reExpander = reExpander = me.createReExpander(collapseDir, {
                 dock: collapseDir,
                 cls: Ext.baseCSSPrefix + 'docked ' + me.baseCls + '-' + me.ui + '-collapsed',
-                isCollapsedExpander: true,
-                listeners: listeners
+                isCollapsedExpander: true
             });
 
             me.dockedItems.insert(0, reExpander);
@@ -2356,19 +2289,11 @@ Ext.define('Ext.panel.Panel', {
             }
 
             ghostHeader.addCls(Ext.baseCSSPrefix + 'header-ghost');
-            ghostHeader.resumeLayouts(true);
+            ghostHeader.resumeLayouts();
         }
 
         ghostPanel.setPagePosition(box.x, box.y);
         ghostPanel.setSize(box.width, box.height);
-
-        // Do not disturb application state during drag
-        if (me.containsFocus) {
-            me.restoreFocusEl = Ext.Element.getActiveElement(true);
-            me.restoreFocusEl.suspendEvents();
-        } else {
-            me.restoreFocusEl = null;
-        }
         me.el.hide();
         return ghostPanel;
     },
@@ -2475,15 +2400,10 @@ Ext.define('Ext.panel.Panel', {
         me.initBorderProps();
         me.callParent();
         me.collapseDirection = me.collapseDirection || me.getHeaderPosition() || Ext.Component.DIRECTION_TOP;
-        
-        // Certain layouts will reset animCollapse to false but we'd like to preserve
-        // the duration to use with animations, if it was configured
-        if (typeof me.animCollapse === 'number') {
-            me.animCollapseDuration = me.animCollapse;
-        }
 
         // Used to track hidden content elements during collapsed state
         me.hiddenOnCollapse = new Ext.dom.CompositeElement();
+
     },
 
     initItems: function() {
@@ -2498,11 +2418,7 @@ Ext.define('Ext.panel.Panel', {
      */
     initRenderData: function() {
         var me = this,
-            bodyWrapRole = me.bodyWrapAriaRole,
-            bodyRole = me.bodyAriaRole,
-            data;
-        
-        data = me.callParent();
+            data = me.callParent();
 
         me.initBodyStyles();
         me.protoBody.writeTo(data);
@@ -2513,22 +2429,12 @@ Ext.define('Ext.panel.Panel', {
             me.addChildEl('headingEl');
         }
 
-        if (bodyWrapRole) {
-            data.bodyWrapAriaAttributes = {
-                role: bodyWrapRole
-            };
-            
-            if (!me.ariaStaticRoles[bodyWrapRole] && me.bodyWrapAriaRenderAttributes) {
-                Ext.apply(data.bodyWrapAriaAttributes, me.bodyWrapAriaRenderAttributes);
-            }
-        }
-
-        if (bodyRole) {
+        if (me.bodyAriaRole) {
             data.bodyAriaAttributes = {
-                role: bodyRole
+                role: me.bodyAriaRole
             };
             
-            if (!me.ariaStaticRoles[bodyRole] && me.bodyAriaRenderAttributes) {
+            if (!me.ariaStaticRoles[me.bodyAriaRole] && me.bodyAriaRenderAttributes) {
                 Ext.apply(data.bodyAriaAttributes, me.bodyAriaRenderAttributes);
             }
         }
@@ -2619,7 +2525,7 @@ Ext.define('Ext.panel.Panel', {
             // pointer interaction and presentational purposes.
             // This configuration will make sure the tool is working as it was
             // in Ext JS older than 6.0.
-            if (me.isAccordionPanel || me.disableCloseToolFocus) {
+            if (me.isAccordionPanel) {
                 toolCfg.focusable = false;
                 toolCfg.ariaRole = 'presentation';
             }
@@ -2667,38 +2573,28 @@ Ext.define('Ext.panel.Panel', {
             // on the panel header's title component.
             me.ariaEl = me.header.titleCmp.el;
             me.ariaEl.dom.setAttribute('aria-expanded', !me.collapsed);
-            me.ariaEl.dom.setAttribute('aria-controls', me.body.id);
             
             // Body element has the role="tabpanel"; when the panel is collapsed
             // or expanded we will update ARIA attributes on the body.
             me.body.dom.setAttribute('aria-labelledby', me.header.titleCmp.id);
             me.body.dom.setAttribute('aria-hidden', !!me.collapsed);
             
-            me.accordionHeaderKeyNav = new Ext.util.KeyNav({
+            me.accordionKeyNav = new Ext.util.KeyNav({
                 target: me.header.titleCmp.el,
                 scope: me,
                 
-                left: me.navigateAccordionHeader,
-                right: me.navigateAccordionHeader,
-                up: me.navigateAccordionHeader,
-                down: me.navigateAccordionHeader,
-                home: me.navigateAccordionHeader,
-                end: me.navigateAccordionHeader,
+                left: me.navigateAccordion,
+                right: me.navigateAccordion,
+                left: me.navigateAccordion,
+                up: me.navigateAccordion,
+                down: me.navigateAccordion,
+                home: me.navigateAccordion,
+                end: me.navigateAccordion,
                 space: me.toggleCollapse,
                 enter: me.toggleCollapse,
                 del: {
                     alt: true,
                     fn: me.maybeClose
-                }
-            });
-            
-            me.accordionBodyKeyNav = new Ext.util.KeyNav({
-                target: me.body,
-                scope: me,
-                
-                up: {
-                    ctrl: true,
-                    fn: me.navigateAccordionBody
                 }
             });
         }
@@ -2748,12 +2644,6 @@ Ext.define('Ext.panel.Panel', {
     },
 
     onMouseLeaveFloated: function(e) {
-        var toElement = e.getRelatedTarget();
-
-        // If the toElement is in the component tree, do not collapse
-        if (toElement && (this.owns(toElement) || this.placeholder.owns(toElement))) {
-            return;
-        }
         this.slideOutTask.delay(500);
     },
     
@@ -2799,10 +2689,6 @@ Ext.define('Ext.panel.Panel', {
             placeholder = me.getPlaceholder(collapseDir),
             slideInDirection;
 
-        if (Ext.Component.layoutSuspendCount || me.isLayoutSuspended()) {
-            animate = false;
-        }
-
         me.isCollapsingOrExpanding = 1;
 
         // Upcoming layout run will ignore this Component
@@ -2824,10 +2710,6 @@ Ext.define('Ext.panel.Panel', {
         }
 
         if (me.rendered) {
-            // The doPlaceholderCollapse callback must not make assumptions about where
-            // to restore focus to. We decide that here.
-            me.focusPlaceholderExpandTool = me.focusPlaceHolder = false;
-
             // We assume that if collapse was caused by keyboard action
             // on focused collapse tool, the logical focus transition
             // is to placeholder's expand tool. Note that it may not be
@@ -2836,10 +2718,6 @@ Ext.define('Ext.panel.Panel', {
             // to avoid sudden jumps.
             if (collapseTool && Ext.ComponentManager.getActiveComponent() === collapseTool) {
                 me.focusPlaceholderExpandTool = true;
-            }
-            // If the focus was otherwise owned by us, just focus the placeholder
-            else if (me.containsFocus) {
-                me.focusPlaceHolder = true;
             }
             
             // We MUST NOT hide using display because that resets all scroll information.
@@ -2897,8 +2775,7 @@ Ext.define('Ext.panel.Panel', {
     doPlaceholderCollapse: function() {
         var me = this,
             placeholder = me.placeholder,
-            expandTool = placeholder.expandTool,
-            dom;
+            expandTool = placeholder.expandTool;
     
         // See the comment in placeholderCollapse().
         if (me.focusPlaceholderExpandTool && expandTool) {
@@ -2906,10 +2783,10 @@ Ext.define('Ext.panel.Panel', {
         }
     
         // However when focus was *not* on the collapse tool,
-        // and we contained focus, we still need to try and
-        // focus the placeholder itself since it may have been
-        // configured with something focusable inside, and delegate focus handling.
-        else  if (me.focusPlaceHolder) {
+        // we still need to try and focus the placeholder itself
+        // since it may have been configured with something
+        // focusable inside, and delegate focus handling.
+        else {
             placeholder.focus();
         }
         
@@ -2920,15 +2797,11 @@ Ext.define('Ext.panel.Panel', {
         // Both panel *and* placeholder are collapsed,
         // but only panel is hidden. Calling setHiddenState()
         // above does not reset aria-hidden attribute.
-        if (placeholder.rendered) {
-            dom = placeholder.ariaEl.dom;
-            dom.setAttribute('aria-hidden', false);
-            dom.setAttribute('aria-expanded', false);
-        }
+        placeholder.ariaEl.dom.setAttribute('aria-hidden', false);
+        placeholder.ariaEl.dom.setAttribute('aria-expanded', false);
         
-        dom = me.ariaEl.dom;
-        dom.setAttribute('aria-hidden', true);
-        dom.setAttribute('aria-expanded', false);
+        me.ariaEl.dom.setAttribute('aria-hidden', true);
+        me.ariaEl.dom.setAttribute('aria-expanded', false);
     
         me.isCollapsingOrExpanding = 0;
         me.fireEvent('collapse', me);
@@ -3053,8 +2926,6 @@ Ext.define('Ext.panel.Panel', {
     },
     
     doPlaceholderExpand: function(nonAnimated) {
-        nonAnimated = nonAnimated === true;
-
         var me = this,
             placeholder = me.placeholder,
             collapseTool = me.collapseTool,
@@ -3126,7 +2997,7 @@ Ext.define('Ext.panel.Panel', {
 
     /**
      * Removes a CSS class from the body element.
-     * @param {String/String[]} cls The class to remove
+     * @param {String} cls The class to remove
      * @return {Ext.panel.Panel} this
      */
     removeBodyCls: function(cls) {
@@ -3153,8 +3024,10 @@ Ext.define('Ext.panel.Panel', {
     },
 
     restoreHiddenDocked: function(){
+        var toShow = this.hiddenOnCollapse;
         // Re-show Panel content which was hidden after collapse.
-        this.setDockedItemsVisibility(this.hiddenOnCollapse, true);
+        toShow.setStyle('visibility', '');
+        toShow.clear();
     },
 
     /**
@@ -3223,35 +3096,6 @@ Ext.define('Ext.panel.Panel', {
      */
     setCollapsed: function(collapsed) {
         this[collapsed ? 'collapse' : 'expand']();
-    },
-
-    /**
-     * Set visibility of docked items after the panel is collapsed or expanded
-     *
-     * @param {Ext.dom.CompositeElement} els
-     * @param {Boolean} show
-     *
-     * @private
-     */
-    setDockedItemsVisibility: function(els, show){
-        var me = this,
-            items = me.getDockedItems(),
-            len = items.length,
-            i = 0,
-            item, reExpander;
-
-        if (me.header !== false) {
-            reExpander = me.getReExpander();
-        }
-
-        for (; i < len; i++) {
-            item = items[i];
-            if (item && item !== reExpander && item.el) {
-                els.add(item.el);
-            }
-        }
-        els.setStyle('visibility', show ? '' : 'hidden');
-        els.clear();
     },
 
     setGlyph: function(glyph) {
@@ -3375,14 +3219,26 @@ Ext.define('Ext.panel.Panel', {
 
     setHiddenDocked: function(){
         // Hide Panel content except reExpander using visibility to prevent focusing of contained elements.
-        // Track what we hide to re-show on expand except for docked items
-        // Until the panel is expanded the docked items might have been removed
+        // Track what we hide to re-show on expand
         var me = this,
-            toHide = new Ext.dom.CompositeElement();
+            toHide = me.hiddenOnCollapse,
+            items = me.getDockedItems(),
+            len = items.length,
+            i = 0,
+            item, reExpander;
 
-        me.hiddenOnCollapse.add(me.body);
+        if (me.header !== false) {
+            reExpander = me.getReExpander();
+        }
+
         toHide.add(me.body);
-        me.setDockedItemsVisibility(toHide, false);
+        for (; i < len; i++) {
+            item = items[i];
+            if (item && item !== reExpander && item.el) {
+                toHide.add(item.el);
+            }
+        }
+        toHide.setStyle('visibility', 'hidden');
     },
 
     /**
@@ -3447,122 +3303,70 @@ Ext.define('Ext.panel.Panel', {
         }
     },
     
-    navigateAccordionHeader: function(e) {
+    navigateAccordion: function(e) {
         var me = this,
-            key, target;
+            wrapOver = me.accordionWrapOver,
+            siblingSel = '[isAccordionPanel]',
+            firstSiblingSel = siblingSel + ':first',
+            lastSiblingSel = siblingSel + ':last',
+            key, sibling;
         
         key = e.getKey();
         
         switch (key) {
             case e.UP:
             case e.LEFT:
-                target = me.findAccordionSibling('prev');
+                sibling = me.prev(siblingSel);
+                
+                if (!sibling && wrapOver) {
+                    sibling = me.ownerCt.child(lastSiblingSel);
+                }
+                
                 break;
             
             case e.DOWN:
             case e.RIGHT:
-                target = me.findAccordionSibling('next');
+                sibling = me.next(siblingSel);
+                
+                if (!sibling && wrapOver) {
+                    sibling = me.ownerCt.child(firstSiblingSel);
+                }
+                
                 break;
             
             case e.HOME:
-                target = me.findAccordionSibling('first');
+                sibling = me.ownerCt.child(firstSiblingSel);
                 break;
             
             case e.END:
-                target = me.findAccordionSibling('last');
+                sibling = me.ownerCt.child(lastSiblingSel);
                 break;
             
             // Before closing the panel we need to fall back to the previous one,
             // or to the next one if there is no previous one in the list.
             // Jumping to the first panel header does not seem logical.
             case e.DELETE:
-                target = me.findAccordionSibling('prev') || me.findAccordionSibling('next');
+                sibling = me.prev(siblingSel) || me.next(siblingSel);
                 
                 // We also need to prevent the panel from closing if it's the only one
                 // panel left in the accordion layout.
-                if (!target) {
+                if (!sibling) {
                     e.doNotClose = true;
                 }
                 
                 break;
         }
         
-        // We need to stop the event in to prevent scrolling the parent container.
-        e.stopEvent();
-        
-        if (target && target !== me) {
-            target.header.titleCmp.focus();
+        if (sibling && sibling !== me) {
+            sibling.header.titleCmp.focus();
         }
-    },
-    
-    navigateAccordionBody: function(e) {
-        var target;
-        
-        if (e.getKey() === e.UP) {
-            // Ctrl-Up within the panel body should focus the header element
-            target = this;
-        }
-        
-        // These events are very particular; if they bubbled up to the panel body
-        // it means they were not consumed at the origin components.
-        e.stopEvent();
-        
-        if (target) {
-            target.header.titleCmp.focus();
-        }
-    },
-    
-    findAccordionSibling: function(which, forceFind) {
-        var me = this,
-            siblingSel = '[isAccordionPanel]',
-            sibling;
-        
-        switch (which) {
-            case 'prev':
-                sibling = me.prev(siblingSel);
-                
-                if (!sibling) {
-                    if (me.accordionWrapOver) {
-                        sibling = me.ownerCt.child(siblingSel + ':last');
-                    }
-                    else if (forceFind) {
-                        sibling = me;
-                    }
-                }
-                
-                break;
-            
-            case 'next':
-                sibling = me.next(siblingSel);
-                
-                if (!sibling) {
-                    if (me.accordionWrapOver) {
-                        sibling = me.ownerCt.child(siblingSel + ':first');
-                    }
-                    else if (forceFind) {
-                        sibling = me;
-                    }
-                }
-                
-                break;
-            
-            case 'first':
-                sibling = me.ownerCt.child(siblingSel + ':first');
-                break;
-            
-            case 'last':
-                sibling = me.ownerCt.child(siblingSel + ':last');
-                break;
-        }
-        
-        return sibling;
     },
     
     fireDefaultButton: function(e) {
         var me = this,
             refHolder, btn;
         
-        refHolder = me.lookupReferenceHolder(/* skipThis = */ false) || me;
+        refHolder = me.lookupReferenceHolder() || me;
         btn = refHolder.lookupReference(me.defaultButton);
         
         // We call it defaultButton but it can really be any object
@@ -3600,7 +3404,7 @@ Ext.define('Ext.panel.Panel', {
         var me = this;
         
         if (me.closable) {
-            me.navigateAccordionHeader(e);
+            me.navigateAccordion(e);
             
             // Can't close the last panel in accordion
             if (!e.doNotClose) {
@@ -3627,7 +3431,7 @@ Ext.define('Ext.panel.Panel', {
         me.callParent([e]);
         
         if (me.isAccordionPanel && ariaDom) {
-            ariaDom.setAttribute('aria-selected', 'false');
+            ariaDom.removeAttribute('aria-selected');
         }
     },
 
@@ -3684,12 +3488,7 @@ Ext.define('Ext.panel.Panel', {
                     delete me.el.hideModeStyles;
                 }
             }
-
-            // If we contained focus when hidden, silently restore it now.
-            if (me.restoreFocusEl) {
-                me.restoreFocusEl.focus();
-                me.restoreFocusEl.resumeEvents();
-            } else if (focus) {
+            if (focus) {
                 me.focus(false, 10);
             }
         }
@@ -3719,7 +3518,6 @@ Ext.define('Ext.panel.Panel', {
         if (Ext.isObject(header) || (header !== false && (force || (title || hasIcon) ||
                 (tools && tools.length) || (me.collapsible && !me.titleCollapse)))) {
             if (header && header.isHeader) {
-                header.dockToEl = true;
                 header.show();
             }
             else {
@@ -3730,7 +3528,6 @@ Ext.define('Ext.panel.Panel', {
                     titleAlign: me.getTitleAlign(),
                     vertical: vertical,
                     dock: me.getHeaderPosition() || 'top',
-                    dockToEl: true,
                     titleRotation: me.getTitleRotation(),
                     textCls: me.headerTextCls,
                     iconCls: iconCls,
@@ -3793,8 +3590,10 @@ Ext.define('Ext.panel.Panel', {
                     }
                 }
                 
-                // If there is no title, just make sure no aria-label attribute was added
+                // If there is no title, just make sure no aria-label
+                // or aria-labelledby attributes were added 
                 else if (me.ariaRenderAttributes) {
+                    delete me.ariaRenderAttributes['aria-labelledby'];
                     delete me.ariaRenderAttributes['aria-label'];
                 }
             }
@@ -3804,30 +3603,25 @@ Ext.define('Ext.panel.Panel', {
                 header.hide();
             }
             
-            // Title may contain HTML markup
-            title = Ext.util.Format.stripTags(title);
-            
-            // aria-labelledby could have been set by the TabPanel.onAdd()
             if (ariaDom) {
-                if (!ariaDom.hasAttribute('aria-labelledby')) {
-                    if (title) {
-                        ariaDom.setAttribute('aria-label', title);
-                    }
-                    else {
-                        ariaDom.removeAttribute('aria-label');
-                    }
+                ariaDom.removeAttribute('aria-labelledby');
+            
+                if (title) {
+                    ariaDom.setAttribute('aria-label', title);
+                }
+                else {
+                    ariaDom.removeAttribute('aria-label');
                 }
             }
             else {
                 ariaAttr = me.ariaRenderAttributes || (me.ariaRenderAttributes = {});
-                
-                if (!ariaAttr['aria-labelledby']) {
-                    if (title) {
-                        ariaAttr['aria-label'] = title;
-                    }
-                    else {
-                        delete ariaAttr['aria-label'];
-                    }
+                delete ariaAttr['aria-labelledby'];
+            
+                if (title) {
+                    ariaAttr['aria-label'] = title;
+                }
+                else {
+                    delete ariaAttr['aria-label'];
                 }
             }
         }
@@ -3839,12 +3633,10 @@ Ext.define('Ext.panel.Panel', {
         }
         
         //<debug>
-        if (me.ariaRole === 'region' && !title) {
-            Ext.ariaWarn(me,
-                "Panel " + me.id + " is a region section of the application, " +
-                "but it does not have a title. Per WAI-ARIA, all regions " +
-                "should have a heading element that contains region's title."
-            );
+        if (Ext.enableAriaPanels && me.ariaRole === 'region' && !title) {
+            Ext.log.warn("Panel " + me.id + " is a region section of the application, " +
+                         "but it does not have a title. Per WAI-ARIA, all regions " +
+                         "should have a heading element that contains region's title.");
         }
         //</debug>
         
@@ -3958,8 +3750,8 @@ Ext.define('Ext.panel.Panel', {
             }
         },
 
-        initResizable: function(resizable) {
-            this.callParent([resizable]);
+        initResizable: function() {
+            this.callParent(arguments);
             if (this.collapsed) {
                 this.resizer.disable();
             }
@@ -3972,9 +3764,9 @@ Ext.define('Ext.panel.Panel', {
          */
         initSimpleDraggable: function() {
             var me = this,
-                dd = me.draggable;
+                ddConfig, dd;
 
-            if (!me.header && !dd.delegate) {
+            if (!me.header) {
                 me.updateHeader(true);
             }
 
@@ -3983,21 +3775,24 @@ Ext.define('Ext.panel.Panel', {
              * updateHeader (we were configured with header: false) then we'll just ignore the rest since the
              * header acts as the drag handle.
              */
-            if (me.header || dd.delegate) {
-                dd = Ext.apply({
+            if (me.header) {
+                ddConfig = Ext.applyIf({
                     el: me.el,
-                    delegate: me.header && me.header.el
-                }, dd);
+                    delegate: '#' + me.header.id
+                }, me.draggable);
 
                 // Add extra configs if Window is specified to be constrained
                 if (me.constrain || me.constrainHeader) {
-                    dd.constrain = me.constrain;
-                    dd.constrainDelegate = me.constrainHeader;
-                    dd.constrainTo = me.constrainTo || me.container;
+                    ddConfig.constrain = me.constrain;
+                    ddConfig.constrainDelegate = me.constrainHeader;
+                    ddConfig.constrainTo = me.constrainTo || me.container;
                 }
 
-                dd = me.dd = new Ext.util.ComponentDragger(me, dd);
+                dd = me.dd = new Ext.util.ComponentDragger(me, ddConfig);
                 me.relayEvents(dd, ['dragstart', 'drag', 'dragend']);
+                if (me.maximized) {
+                    dd.disable();
+                }
             }
         },
 
@@ -4017,7 +3812,6 @@ Ext.define('Ext.panel.Panel', {
             var me = this,
                 compEl = me.el,
                 collapseDirection,
-                focusTarget,
                 afterSlideOut = function() {
                     me.slideOutFloatedPanelEnd();
                     // this would be in slideOutFloatedPanelEnd except that the only other
@@ -4049,14 +3843,6 @@ Ext.define('Ext.panel.Panel', {
                     afteranimate: afterSlideOut
                 }
             });
-
-            // Focus the placeholder which should delegate into itself
-            if (this.containsFocus) {
-                focusTarget = this.findFocusTarget();
-                if (focusTarget) {
-                    focusTarget.focus();
-                }
-            }
         },
 
         /**
@@ -4066,21 +3852,17 @@ Ext.define('Ext.panel.Panel', {
         slideOutFloatedPanelBegin: function() {
             var me = this,
                 placeholderEl = me.placeholder.el,
-                el = me.el,
-                bodyMousedownListener = me.bodyMousedownListener;
+                el = me.el;
 
             me.collapsed = me.floatedFromCollapse;
             me.setHiddenState(true);
             me.floatedFromCollapse = null;
 
-            // Remove mouse leave/enter monitors, and the mousedown monitor
+            // Remove mouse leave/enter monitors
             placeholderEl.un('mouseleave', me.onMouseLeaveFloated, me);
             el.un('mouseleave', me.onMouseLeaveFloated, me);
             placeholderEl.un('mouseenter', me.onMouseEnterFloated, me);
             el.un('mouseenter', me.onMouseEnterFloated, me);
-            if (bodyMousedownListener) {
-                me.bodyMousedownListener = bodyMousedownListener.destroy()
-            }
         },
 
         /**

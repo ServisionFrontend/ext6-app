@@ -105,7 +105,7 @@ Ext.define('Ext.chart.PolarChart', {
                 });
             }
         }
-        return this.callParent([newAxes, oldAxes]);
+        return this.callParent(arguments);
     },
 
     performLayout: function () {
@@ -124,38 +124,26 @@ Ext.define('Ext.chart.PolarChart', {
             var chartRect = me.getSurface('chart').getRect(),
                 inset = me.getInsetPadding(),
                 inner = me.getInnerPadding(),
-                shrinkBox = Ext.apply({}, inset),
-                width = Math.max(1, chartRect[2] - chartRect[0] - inset.left - inset.right),
-                height = Math.max(1, chartRect[3] - chartRect[1] - inset.top - inset.bottom),
-                mainRect = [
-                    inset.left, inset.top,
-                    width + chartRect[0],
-                    height + chartRect[1]
-                ],
-                seriesList = me.getSeries(),
+                shrinkBox = Ext.apply({}, inset), side,
+                width = chartRect[2] - inset.left - inset.right,
+                height = chartRect[3] - inset.top - inset.bottom,
+                mainRect = [inset.left, inset.top, width, height],
+                seriesList = me.getSeries(), series,
                 innerWidth = width - inner * 2,
                 innerHeight = height - inner * 2,
-                center = [
-                    chartRect[0] + innerWidth * 0.5 + inner,
-                    chartRect[1] + innerHeight * 0.5 + inner
-                ],
+                center = [innerWidth * 0.5 + inner, innerHeight * 0.5 + inner],
                 radius = Math.min(innerWidth, innerHeight) * 0.5,
-                axes = me.getAxes(),
-                angularAxes = [], 
-                radialAxes = [],
+                axes = me.getAxes(), axis, thickness, halfLineWidth,
+                angularAxes = [], radialAxes = [],
                 seriesRadius = radius - inner,
-                grid = me.surfaceMap.grid,
                 i, ln, shrinkRadius, floating, floatingValue,
-                gaugeSeries, gaugeRadius, side, series,
-                axis, thickness, halfLineWidth;
+                gaugeSeries, gaugeRadius;
 
             me.setMainRect(mainRect);
 
             me.doSetSurfaceRect(me.getSurface(), mainRect);
-            if (grid) {
-                for (i = 0, ln = grid.length; i < ln; i++) {
-                    me.doSetSurfaceRect(grid[i], chartRect);
-                }
+            for (i = 0, ln = me.surfaceMap.grid && me.surfaceMap.grid.length; i < ln; i++) {
+                me.doSetSurfaceRect(me.surfaceMap.grid[i], chartRect);
             }
 
             for (i = 0, ln = axes.length; i < ln; i++) {
@@ -230,7 +218,13 @@ Ext.define('Ext.chart.PolarChart', {
                 me.setCenter(center);
             }
             me.redraw();
-        } finally {
+        } catch (e) { // catch is required in IE8 (try/finally not supported)
+            //<debug>
+            Ext.log.error(me.$className + ': Unhandled Exception: ', e.description || e.message);
+            //</debug>
+            throw e;
+        }
+        finally {
             me.animationSuspendCount--;
             if (applyThickness) {
                 me.resumeThicknessChanged();
@@ -297,7 +291,7 @@ Ext.define('Ext.chart.PolarChart', {
         }
 
         me.renderFrame();
-        me.callParent();
+        me.callParent(arguments);
     },
 
     renderFrame: function () {

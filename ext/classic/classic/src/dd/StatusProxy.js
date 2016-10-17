@@ -20,7 +20,6 @@ Ext.define('Ext.dd.StatusProxy', {
     ariaRole: 'presentation',
     
     skipLayout: true,
-    alignOnScroll: false,
 
     /**
      * Creates new StatusProxy.

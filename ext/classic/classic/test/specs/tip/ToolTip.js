@@ -1,13 +1,10 @@
-/* global Ext, jasmine, expect, spyOn, describe, xdescribe */
-
 describe("Ext.tip.ToolTip", function() {
 
     var tip,
-        target,
-        describeNotTouch = Ext.supports.TouchEvents ? xdescribe : describe;
+        target;
 
     function createTip(config) {
-        config = Ext.apply({target: target, width: 50, height: 50, html: 'X'}, config);
+        config = Ext.apply({}, config, {target: target, width: 50, height: 50, html: 'X'});
         tip = new Ext.tip.ToolTip(config);
         return tip;
     }
@@ -18,7 +15,7 @@ describe("Ext.tip.ToolTip", function() {
 
         target = Ext.getBody().insertHtml(
             'beforeEnd',
-            '<a href="#" id="tipTarget" style="position:absolute; left:100px; top:100px; width: 50px; height: 50px;background-color:red">x</a>',
+            '<a href="#" id="tipTarget" style="position:absolute; left:100px; top:100px; width: 50px; height: 50px;">x</a>',
             true
         );
                 
@@ -101,7 +98,7 @@ describe("Ext.tip.ToolTip", function() {
         });
     });
 
-    describeNotTouch("show/hide", function() {
+    describe("show/hide", function() {
         it("should show the tooltip after mousing over the target element", function() {
             runs(function() {
                 createTip({showDelay: 1});
@@ -175,7 +172,7 @@ describe("Ext.tip.ToolTip", function() {
         });
     });
 
-    describeNotTouch("mouseOffset", function() {
+    describe("mouseOffset", function() {
         it("should display the tooltip [15,18] from the mouse pointer by default", function() {
             runs(function() {
                 createTip({showDelay: 1});
@@ -198,7 +195,7 @@ describe("Ext.tip.ToolTip", function() {
                 return tip.isVisible();
             }, "ToolTip was never shown");
             runs(function() {
-                expect(tip.el).toBePositionedAt(target.getX() + 20, target.getY() + 30);
+                expect(tip.el).toBePositionedAt(target.getX() + 35, target.getY() + 48);
             });
         });
     });
@@ -211,7 +208,7 @@ describe("Ext.tip.ToolTip", function() {
         });  
     });
 
-    describeNotTouch("trackMouse", function() {
+    describe("trackMouse", function() {
         it("should move the tooltip along with the mouse if 'trackMouse' is true", function() {
             var x = target.getX(),
                 y = target.getY();
@@ -230,6 +227,59 @@ describe("Ext.tip.ToolTip", function() {
                 }
             });
         });
+
+        describe('caching coords', function () {
+            // See EXTJSIV-11292.
+            // NOTE: The first time that the target is moused over the tooltip's layer (it's el)
+            // won't have been created yet, so it's necessary to mouseover twice to test the API.
+            //
+            // When trackMouse = false, the XY coords will be cached by Tooltip.delayShow() and passed along
+            // as an argument to Tooltip.show().  This is why we're checking the arguments passed to it.
+            var x, y, n = 0;
+
+            beforeEach(function () {
+                x = target.getX();
+                y = target.getY();
+
+                runs(function() {
+                    // Since there are only two tests in this suite let's use the variable n to flip trackMouse.
+                    createTip({showDelay: 1, trackMouse: n ? true : false});
+                    spyOn(tip, 'show').andCallThrough();
+                    jasmine.fireMouseEvent(target, 'mouseover', x, y);
+                    n++;
+                });
+
+                waitsFor(function() {
+                    return tip.isVisible();
+                }, 'ToolTip was never shown');
+            });
+
+            it('should cache xy coords when trackMouse=false', function () {
+                runs(function () {
+                    expect(tip.show.mostRecentCall.args[0]).toBe(undefined);
+                });
+
+                waits(10);
+
+                runs(function () {
+                    jasmine.fireMouseEvent(target, 'mouseover', x, y);
+                    expect(tip.show.mostRecentCall.args[0]).toEqual([115, 118]);
+                });
+            });
+
+            it('should not cache xy coords when trackMouse=true', function () {
+                runs(function () {
+                    expect(tip.show.mostRecentCall.args[0]).toBeFalsy();
+                });
+
+                waits(10);
+
+                runs(function () {
+                    jasmine.fireMouseEvent(target, 'mouseover', x, y);
+                    expect(tip.show.mostRecentCall.args[0]).toBeFalsy();
+                });
+            });
+        });
     });
 
     describe("anchor", function() {
@@ -237,96 +287,64 @@ describe("Ext.tip.ToolTip", function() {
             createTip({anchor: 'top'});
             tip.show();
             var tgtXY = target.getXY();
-            expect(tip.el).toBePositionedAt(tgtXY[0], tgtXY[1] + target.getHeight() + tip.anchorSize.y);
+            expect(tip.el).toBePositionedAt(tgtXY[0], tgtXY[1] + target.getHeight() + 9);
         });
 
         it("should allow anchoring the right of the tooltip to the target", function() {
             createTip({anchor: 'right'});
             tip.show();
             var tgtXY = target.getXY();
-            expect(tip.el).toBePositionedAt(tgtXY[0] - tip.el.getWidth() - tip.anchorSize.y, tgtXY[1]);
+            expect(tip.el).toBePositionedAt(tgtXY[0] - tip.el.getWidth() - 13, tgtXY[1]);
         });
 
         it("should allow anchoring the bottom of the tooltip to the target", function() {
             createTip({anchor: 'bottom'});
             tip.show();
             var tgtXY = target.getXY();
-            expect(tip.el).toBePositionedAt(tgtXY[0], tgtXY[1] - tip.el.getHeight() - tip.anchorSize.y);
+            expect(tip.el).toBePositionedAt(tgtXY[0], tgtXY[1] - tip.el.getHeight() - 13);
         });
 
         it("should allow anchoring the left of the tooltip to the target", function() {
             createTip({anchor: 'left'});
             tip.show();
             var tgtXY = target.getXY();
-            expect(tip.el).toBePositionedAt(tgtXY[0] + target.getWidth() + tip.anchorSize.y, tgtXY[1]);
+            expect(tip.el).toBePositionedAt(tgtXY[0] + target.getWidth() + 9, tgtXY[1]);
         });
 
-        it("should flip from top to left if not enough space below the target", function() {
+        it("should flip from top to bottom if not enough space below the target", function() {
             target.setY(Ext.Element.getViewportHeight() - 75);
-            createTip({anchor: 'top'});
+            createTip({anchor: 'top', constrainPosition: true});
             tip.show();
             var tgtXY = target.getXY();
-            expect(tip.el).toBePositionedAt(tgtXY[0] - tip.el.getWidth() - tip.anchorSize.y, tgtXY[1]);
+            expect(tip.el).toBePositionedAt(tgtXY[0], tgtXY[1] - tip.el.getHeight() - 13);
         });
 
-        it("should flip from top to bottom if not enough space below the target and axisLock: true", function() {
-            target.setY(Ext.Element.getViewportHeight() - 75);
-            createTip({anchor: 'top', axisLock: true});
-            tip.show();
-            var tgtXY = target.getXY();
-            expect(tip.el).toBePositionedAt(tgtXY[0], tgtXY[1] - tip.el.getHeight() - tip.anchorSize.y);
-        });
-
-        it("should flip from bottom to left if not enough space above the target", function() {
+        it("should flip from bottom to top if not enough space above the target", function() {
             target.setY(25);
-            createTip({anchor: 'bottom'});
+            createTip({anchor: 'bottom', constrainPosition: true});
             tip.show();
             var tgtXY = target.getXY();
-            expect(tip.el).toBePositionedAt(tgtXY[0] - tip.el.getWidth() - tip.anchorSize.y, tgtXY[1]);
-        });
-
-        it("should flip from bottom to top if not enough space above the target and axisLock: true", function() {
-            target.setY(25);
-            createTip({anchor: 'bottom', axisLock: true});
-            tip.show();
-            var tgtXY = target.getXY();
-            expect(tip.el).toBePositionedAt(tgtXY[0], tgtXY[1] + target.getHeight() + tip.anchorSize.y);
+            expect(tip.el).toBePositionedAt(tgtXY[0], tgtXY[1] + target.getHeight() + 9);
         });
 
         it("should flip from right to left if not enough space to the left of the target", function() {
             target.setX(25);
-            createTip({anchor: 'right'});
+            createTip({anchor: 'right', constrainPosition: true});
             tip.show();
             var tgtXY = target.getXY();
-            expect(tip.el).toBePositionedAt(tgtXY[0], tgtXY[1] - tip.el.getHeight() - tip.anchorSize.y);
+            expect(tip.el).toBePositionedAt(tgtXY[0] + target.getWidth() + 9, tgtXY[1]);
         });
 
-        it("should flip from right to left if not enough space to the left of the target and axisLock: true", function() {
-            target.setX(25);
-            createTip({anchor: 'right', axisLock: true});
-            tip.show();
-            var tgtXY = target.getXY();
-            expect(tip.el).toBePositionedAt(tgtXY[0] + target.getWidth() + tip.anchorSize.y, tgtXY[1]);
-        });
-
-        it("should flip from left to right if not enough space to the right of the target and axisLock: true", function() {
+        it("should flip from left to right if not enough space to the right of the target", function() {
             target.setX(Ext.Element.getViewportWidth() - 75);
-            createTip({anchor: 'left', axisLock: true});
+            createTip({anchor: 'left', constrainPosition: true});
             tip.show();
             var tgtXY = target.getXY();
-            expect(tip.el).toBePositionedAt(tgtXY[0] - tip.el.getWidth() - tip.anchorSize.y, tgtXY[1]);
-        });
-
-        it("should flip from left to bottom if not enough space to the right of the target", function() {
-            target.setX(Ext.Element.getViewportWidth() - 75);
-            createTip({anchor: 'left'});
-            tip.show();
-            var tgtXY = target.getXY();
-            expect(tip.el).toBePositionedAt(tgtXY[0], tgtXY[1] - tip.el.getHeight() - tip.anchorSize.y);
+            expect(tip.el).toBePositionedAt(tgtXY[0] - tip.el.getWidth() - 13, tgtXY[1]);
         });
     });
 
-    describeNotTouch("anchorToTarget=false", function() {
+    describe("anchorToTarget=false", function() {
         it("should allow anchoring the top of the tooltip to the mouse pointer", function() {
             var xy = target.getXY();
             runs(function() {
@@ -337,7 +355,7 @@ describe("Ext.tip.ToolTip", function() {
                 return tip.isVisible();
             }, "ToolTip was never shown");
             runs(function() {
-                expect(tip.el).toBePositionedAt(xy[0] - 15, xy[1] + 18 + tip.anchorSize.y);
+                expect(tip.el).toBePositionedAt(xy[0] - 15, xy[1] + 30);
             });
         });
 
@@ -351,7 +369,7 @@ describe("Ext.tip.ToolTip", function() {
                 return tip.isVisible();
             }, "ToolTip was never shown");
             runs(function() {
-                expect(tip.el).toBePositionedAt(xy[0] - tip.el.getWidth() - 15 - tip.anchorSize.y, xy[1] - 18);
+                expect(tip.el).toBePositionedAt(xy[0] - tip.el.getWidth() - 15, xy[1] - 13);
             });
         });
 
@@ -365,7 +383,7 @@ describe("Ext.tip.ToolTip", function() {
                 return tip.isVisible();
             }, "ToolTip was never shown");
             runs(function() {
-                expect(tip.el).toBePositionedAt(xy[0] - 15, xy[1] - 18 - tip.anchorSize.y - tip.el.getHeight());
+                expect(tip.el).toBePositionedAt(xy[0] - 19, xy[1] - tip.el.getHeight() - 13);
             });
         });
         
@@ -379,12 +397,46 @@ describe("Ext.tip.ToolTip", function() {
                 return tip.isVisible();
             }, "ToolTip was never shown");
             runs(function() {
-                expect(tip.el).toBePositionedAt(xy[0] + 15 + tip.anchorSize.y, xy[1] - 18);
+                expect(tip.el).toBePositionedAt(xy[0] + 25, xy[1] - 13);
             });
         });
     });
 
-    describeNotTouch("delegate", function() {
+    describe("anchorOffset", function() {
+        it("should move the anchor arrow horizontally when anchor is top", function() {
+            createTip({anchor: 'top', anchorOffset: 25});
+            tip.show();
+            var tipXY = tip.el.getXY(),
+                anchorXY = tip.anchorEl.getXY();
+            expect(anchorXY[0]).toEqual(tipXY[0] + 15 + 25);
+        });
+
+        it("should move the anchor arrow horizontally when anchor is bottom", function() {
+            createTip({anchor: 'bottom', anchorOffset: 25});
+            tip.show();
+            var tipXY = tip.el.getXY(),
+                anchorXY = tip.anchorEl.getXY();
+            expect(anchorXY[0]).toEqual(tipXY[0] + 15 + 25);
+        });
+
+        it("should move the anchor arrow vertically when anchor is left", function() {
+            createTip({anchor: 'left', anchorOffset: 25});
+            tip.show();
+            var tipXY = tip.el.getXY(),
+                anchorXY = tip.anchorEl.getXY();
+            expect(anchorXY[1]).toEqual(tipXY[1] + 7 + 25);
+        });
+
+        it("should move the anchor arrow vertically when anchor is right", function() {
+            createTip({anchor: 'right', anchorOffset: 25});
+            tip.show();
+            var tipXY = tip.el.getXY(),
+                anchorXY = tip.anchorEl.getXY();
+            expect(anchorXY[1]).toEqual(tipXY[1] + 7 + 25);
+        });
+    });
+
+    describe("delegate", function() {
         var delegatedTarget;
 
         beforeEach(function() {
@@ -420,39 +472,8 @@ describe("Ext.tip.ToolTip", function() {
             createTip({delegate: '.hasTip'});
             jasmine.fireMouseEvent(delegatedTarget, 'mouseover', delegatedTarget.getX(), delegatedTarget.getY());
             tip.hide();
-            expect(tip.triggerElement).toBe(null);
+            expect(tip.triggerElement).not.toBeDefined();
         });
     });
 
-    describe("no target", function() {
-        function showTip(e) {
-            tip.pointerEvent = e;
-            tip.show();
-            expect(tip.getXY()).toEqual([100 + tip.mouseOffset[0], 100 + tip.mouseOffset[1]]);
-        }
-
-        afterEach(function() {
-            Ext.getBody().on({
-                touchstart: showTip,
-                mouseover: showTip
-            });
-        });
-
-        it("should show at the 'pointerEvent' position if there's no target", function() {
-            createTip({target: null, html: 'Shown by pointer event'});
-            if (Ext.supports.TouchEvents) {
-                Ext.getBody().on({
-                    touchstart: showTip,
-                    single: true
-                });
-                Ext.testHelper.touchStart(document.body, {x:100, y:100});
-            } else {
-                Ext.getBody().on({
-                    mouseover: showTip,
-                    single: true
-                });
-                jasmine.fireMouseEvent(document.body, 'mouseover', 100, 100);
-            }
-        });
-    });
 });

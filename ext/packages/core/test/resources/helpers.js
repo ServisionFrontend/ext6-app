@@ -114,89 +114,56 @@ Ext.testHelper = {
         return events;
     },
 
-    pointerEvents: {
-        start: 'pointerdown',
-        move: 'pointermove',
-        end: 'pointerup',
-        cancel: 'pointercancel'
-    },
-
-    msPointerEvents: {
-        start: 'MSPointerDown',
-        move: 'MSPointerMove',
-        end: 'MSPointerUp',
-        cancel: 'MSPointerCancel'
-    },
-
-    touchEvents: {
-        start: 'touchstart',
-        move: 'touchmove',
-        end: 'touchend',
-        cancel: 'touchcancel'
-    },
-
-    mouseEvents: {
-        start: 'mousedown',
-        move: 'mousemove',
-        end: 'mouseup'
-    },
+    events:  (Ext.supports.PointerEvents) ?
+        {
+            start: 'pointerdown',
+            move: 'pointermove',
+            end: 'pointerup',
+            cancel: 'pointercancel'
+        }
+        : (Ext.supports.MSPointerEvents) ?
+        {
+            start: 'MSPointerDown',
+            move: 'MSPointerMove',
+            end: 'MSPointerUp',
+            cancel: 'MSPointerCancel'
+        }
+        : (Ext.supports.TouchEvents) ?
+        {
+            start: 'touchstart',
+            move: 'touchmove',
+            end: 'touchend',
+            cancel: 'touchcancel'
+        }
+        :
+        {
+            start: 'mousedown',
+            move: 'mousemove',
+            end: 'mouseup'
+        },
 
     fireEvent: function(type, target, cfg) {
-        var scroll = Ext.getDoc().getScroll(),
-            pointerType, touch, id, touches, centre, activeTouches;
-
-        if (!cfg) {
-            cfg = {};
-        }
-
-        cfg.id = cfg.id || 1;
-
-        if (cfg.x == null || cfg.y == null) {
-            // Default to the middle of the target
-            centre = Ext.fly(target).getAnchorXY('c');
-
-            if (cfg.x == null) {
-                cfg.x = centre[0];
-            }
-
-            if (cfg.y == null) {
-                cfg.y = centre[1];
-            }
-        }
-
-        pointerType = cfg.pointerType || (document.createTouch ? 'touch' : 'mouse');
+        var eventType = this.events[type],
+            activeTouches = {},
+            touch, id, touches;
 
         if (Ext.supports.PointerEvents || Ext.supports.MSPointerEvents) {
             jasmine.firePointerEvent(
                 target,
-                (Ext.supports.PointerEvents ? this.pointerEvents[type] : this.msPointerEvents[type]),
+                eventType,
                 cfg.id,
-                (cfg.x || 0) - scroll.left,
-                (cfg.y || 0) - scroll.top,
-                cfg.button || 0,
-                false,
-                false,
-                false,
-                pointerType
+                cfg.x,
+                cfg.y,
+                cfg.button || 0
             );
-        } else if (pointerType === 'mouse') {
-            jasmine.fireMouseEvent(
-                target,
-                this.mouseEvents[type],
-                (cfg.x || 0) - scroll.left,
-                (cfg.y || 0) - scroll.top,
-                cfg.button ? cfg.button : 0
-            );
-        } else if (document.createTouch) {
-            activeTouches = this.activeTouches || (this.activeTouches = {});
-
+        } else if (Ext.supports.TouchEvents) {
             touch = activeTouches[cfg.id] = {
                 identifier: cfg.id,
                 pageX: cfg.x,
                 pageY: cfg.y
             };
 
-            if (type === 'end' || type === 'cancel') {
+            if (eventType === 'touchend' || eventType === 'touchcancel') {
                 delete activeTouches[cfg.id];
             }
 
@@ -208,18 +175,19 @@ Ext.testHelper = {
 
             jasmine.fireTouchEvent(
                 target,
-                this.touchEvents[type],
+                eventType,
                 touches,
                 [touch]
             );
         } else {
-            throw 'Cannot simulate event. pointerType: "' + pointerType + '" is not supported on this device.';
+            jasmine.fireMouseEvent(
+                target,
+                eventType,
+                cfg.x,
+                cfg.y,
+                cfg.button ? cfg.button : 0
+            );
         }
-    },
-
-    tap: function(target, cfg) {
-        this.fireEvent('start', target, cfg);
-        this.fireEvent('end', target, cfg);
     },
 
     touchStart: function(target, cfg) {
@@ -236,10 +204,5 @@ Ext.testHelper = {
 
     touchCancel: function(target, cfg) {
         this.fireEvent('cancel', target, cfg);
-    },
-
-    // jazzman automatically invokes this method after each spec
-    reset: function() {
-        this.activeTouches = null;
     }
 };

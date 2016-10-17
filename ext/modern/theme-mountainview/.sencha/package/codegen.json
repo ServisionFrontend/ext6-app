@@ -51,7 +51,7 @@
         "pkgName": "theme-mountainview",
         "pkgType": "theme",
         "senchadir": ".sencha",
-        "touchRelPath": "../../../${touch.dir}"
+        "touchRelPath": "../../../touch"
       }
     },
     "sass/etc/all.scss": {
@@ -62,7 +62,7 @@
         "pkgName": "theme-mountainview",
         "pkgType": "theme",
         "senchadir": ".sencha",
-        "touchRelPath": "../../../${touch.dir}"
+        "touchRelPath": "../../../touch"
       }
     },
     "sass/example/custom.js": {
@@ -73,7 +73,7 @@
         "pkgName": "theme-mountainview",
         "pkgType": "theme",
         "senchadir": ".sencha",
-        "touchRelPath": "../../../${touch.dir}"
+        "touchRelPath": "../../../touch"
       }
     },
     "sass/example/theme.html": {
@@ -84,7 +84,7 @@
         "pkgName": "theme-mountainview",
         "pkgType": "theme",
         "senchadir": ".sencha",
-        "touchRelPath": "../../../${touch.dir}"
+        "touchRelPath": "../../../touch"
       }
     },
     ".sencha/package/build.properties": {
@@ -95,7 +95,7 @@
         "pkgName": "theme-mountainview",
         "pkgType": "theme",
         "senchadir": ".sencha",
-        "touchRelPath": "../../../${touch.dir}"
+        "touchRelPath": "../../../touch"
       }
     },
     ".sencha/package/sencha.cfg": {
@@ -106,7 +106,7 @@
         "pkgName": "theme-mountainview",
         "pkgType": "theme",
         "senchadir": ".sencha",
-        "touchRelPath": "../../../${touch.dir}"
+        "touchRelPath": "../../../touch"
       }
     },
     ".sencha/package/testing.properties": {
@@ -117,7 +117,7 @@
         "pkgName": "theme-mountainview",
         "pkgType": "theme",
         "senchadir": ".sencha",
-        "touchRelPath": "../../../${touch.dir}"
+        "touchRelPath": "../../../touch"
       }
     },
     "sass/example/sass-page.html": {
@@ -139,7 +139,7 @@
         "pkgName": "theme-mountainview",
         "pkgType": "theme",
         "senchadir": ".sencha",
-        "touchRelPath": "../../../${touch.dir}"
+        "touchRelPath": "../../../touch"
       }
     }
   }

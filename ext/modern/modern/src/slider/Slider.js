@@ -248,7 +248,7 @@ Ext.define('Ext.slider.Slider', {
 
         me.refreshAllThumbConstraints();
 
-        e.claimGesture();
+        e.stopPropagation();
 
         if (me.getAllowThumbsOverlapping()) {
             me.setActiveThumb(thumb);

@@ -24,9 +24,8 @@ Ext.define('Ext.dataview.component.SimpleListItem', {
             html: ' '
         },
 
-        /**
-         * @private
-         * @cfg dataview
+        /*
+         * @private dataview
          */
         dataview: null,
 

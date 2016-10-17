@@ -4,8 +4,7 @@ Ext.define('Ext.overrides.event.publisher.Dom', {
 
 }, function (DomPublisher) {
     if (Ext.isIE9m) {
-        var docElement = document.documentElement,
-            docBody = document.body,
+        var docBody = document.body,
             prototype = DomPublisher.prototype,
             onDirectEvent, onDirectCaptureEvent;
 
@@ -57,50 +56,41 @@ Ext.define('Ext.overrides.event.publisher.Dom', {
                 handlers[dom.id] = boundFn;
                 // may be called with an SVG element here, which
                 // does not have the attachEvent method on IE 9 strict
-                if (dom.attachEvent) {
+                if(dom.attachEvent) {
                     dom.attachEvent('on' + eventName, boundFn);
                 } else {
-                    me.callParent([eventName, element, capture]);
+                    me.callParent(arguments);
                 }
             },
 
-            removeDirectListener: function(eventName, element, capture) {
+            removeDirectListener: function(eventName, element) {
                 var dom = element.dom;
 
                 if (dom.detachEvent) {
                     dom.detachEvent('on' + eventName,
                         this.directBoundListeners[eventName][dom.id]);
                 } else {
-                    this.callParent([eventName, element, capture]);
+                    this.callParent(arguments);
                 }
             },
 
-            doDelegatedEvent: function(e) {
+            doDelegatedEvent: function(e, invokeAfter) {
                 e.target = e.srcElement || window;
 
                 if (e.type === 'focusin') {
-                    // IE8 sometimes happen to focus <html> element instead of the body
-                    e.relatedTarget = e.fromElement === docBody || e.fromElement === docElement ? null : e.fromElement;
+                    e.relatedTarget = e.fromElement === docBody ? null : e.fromElement;
                 }
                 else if (e.type === 'focusout') {
-                    e.relatedTarget = e.toElement === docBody || e.toElement === docElement ? null : e.toElement;
+                    e.relatedTarget = e.toElement === docBody ? null : e.toElement;
                 }
 
-                return this.callParent([e]);
+                return this.callParent([e, invokeAfter]);
             }
         });
 
         // can't capture any events without addEventListener.  Have to have direct
         // listeners for every event that does not bubble.
         Ext.apply(prototype.directEvents, prototype.captureEvents);
-        
-        // These do not bubble in IE9m so have to attach direct listeners as well.
-        Ext.apply(prototype.directEvents, {
-            change: 1,
-            input: 1,
-            paste: 1
-        });
-        
         prototype.captureEvents = {};
     }
 });

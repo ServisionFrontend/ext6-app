@@ -822,36 +822,31 @@ Ext.Function = (function() {
      *
      * @param {Number} id The id returned by `{@link Ext#asap}`.
      */
-    Ext.asapCancel = hasImmediate ?
-        function(id) {
-            clearImmediate(id);
-        } : function(id) {
-            clearTimeout(id);
-        };
+    Ext.asapCancel = hasImmediate ? clearImmediate : clearTimeout;
 
     /**
-     * @method defer
+     * @method
      * @member Ext
      * @inheritdoc Ext.Function#defer
      */
     Ext.defer = ExtFunction.defer;
 
     /**
-     * @method interval
+     * @method
      * @member Ext
      * @inheritdoc Ext.Function#interval
      */
     Ext.interval = ExtFunction.interval;
 
     /**
-     * @method pass
+     * @method
      * @member Ext
      * @inheritdoc Ext.Function#pass
      */
     Ext.pass = ExtFunction.pass;
 
     /**
-     * @method bind
+     * @method
      * @member Ext
      * @inheritdoc Ext.Function#bind
      */

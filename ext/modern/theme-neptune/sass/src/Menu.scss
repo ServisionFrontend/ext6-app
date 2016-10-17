@@ -3,19 +3,19 @@
 	background-color: $sheet-background-color;
 
 	&.x-top {
-		@include border($menu-top-border-width, $menu-top-border-style, $menu-top-border-color);
+		border-bottom: 1px solid $sheet-border-color;
 	}
 
 	&.x-right {
-		@include border($menu-right-border-width, $menu-right-border-style, $menu-right-border-color);
+		border-left: 1px solid $sheet-border-color;
 	}
 
 	&.x-bottom {
-		@include border($menu-bottom-border-width, $menu-bottom-border-style, $menu-bottom-border-color);
+		border-top: 1px solid $sheet-border-color;
 	}
 
 	&.x-left {
-		@include border($menu-left-border-width, $menu-left-border-style, $menu-left-border-color);
+		border-right: 1px solid $sheet-border-color;
 	}
 
 	.x-button {

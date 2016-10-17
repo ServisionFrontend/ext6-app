@@ -36,8 +36,8 @@
  *
  * The code above produces a simple grid with three columns. We specified a Store which will
  * load JSON data inline. In most apps we would be placing the grid inside another container
- * and wouldn't need to provide the {@link #height}, {@link #width} and 
- * {@link #cfg-fullscreen} options but they are included here to for demonstration.
+ * and wouldn't need to provide the {@link #height}, {@link #width} and {@link #fullscreen}
+ * options but they are included here to for demonstration.
  *
  * The grid we created above will contain a header bar with a title ('Simpsons'), a row of
  * column headers directly underneath and finally the grid rows under the headers.
@@ -71,9 +71,6 @@
  * also made the Email column hidden by default (it can be shown again by using the
  * {@link Ext.grid.plugin.ViewOptions ViewOptions} plugin). See the
  * {@link Ext.grid.column.Column column class} for more details.
- *
- * A top-level column definition may contain a `columns` configuration. This means that the 
- * resulting header will be a group header, and will contain the child columns.
  *
  * ## Rows and Cells
  *
@@ -301,14 +298,6 @@ Ext.define('Ext.grid.Grid', {
         },
 
         /**
-         * @cfg {Boolean} hideHeaders
-         * `true` to hide the grid column headers.
-         *
-         * @since 6.0.1
-         */
-        hideHeaders: false,
-
-        /**
          * @cfg {Boolean} striped
          * @inherit
          */
@@ -383,35 +372,40 @@ Ext.define('Ext.grid.Grid', {
      * @param {String} direction The direction of the sort on this Column. Either 'asc' or 'desc'.
      */
 
-    getElementConfig: function() {
-        var config = this.callParent();
-        config.children.push({
-            reference: 'resizeMarker',
-            className: 'x-grid-resize-marker',
-            hidden: true
+    /**
+     * @private
+     */
+    createContainer: function() {
+        return Ext.factory({
+            xtype: 'container',
+            scrollable: {
+                scroller: {
+                    autoRefresh: false,
+                    direction: 'auto',
+                    directionLock: true
+                }
+            }
         });
-        return config;
     },
 
     initialize: function() {
         var me = this,
             titleBar = me.getTitleBar(),
-            headerContainer = me.getHeaderContainer(),
-            scrollable = me.getScrollable(),
-            container;
+            headerContainer = me.getHeaderContainer();
 
         me.callParent();
 
-        me.on('resize', 'onResize', me);
-
-        if (scrollable) {
-            headerContainer.getScrollable().addPartner(scrollable, 'x');
-        }
-        container = me.container;
         if (titleBar) {
-            container.add(me.getTitleBar());
+            me.container.add(me.getTitleBar());
         }
-        container.add(headerContainer);
+        me.container.doAdd(headerContainer);
+
+        me.scrollElement.addCls(Ext.baseCSSPrefix + 'grid-scrollelement');
+    },
+
+    onScroll: function(scroller, x, y) {
+        this.callParent([scroller, x, y]);
+        this.getHeaderContainer().scrollTo(x);
     },
 
     applyTitleBar: function(titleBar) {
@@ -424,11 +418,7 @@ Ext.define('Ext.grid.Grid', {
     updateTitle: function(title) {
         var titleBar = this.getTitleBar();
         if (titleBar) {
-            if (title) {
-                titleBar.setTitle(title);
-            } else {
-                titleBar.hide();
-            }
+            this.getTitleBar().setTitle(title);
         }
     },
 
@@ -466,109 +456,81 @@ Ext.define('Ext.grid.Grid', {
                 columnremove: 'onColumnRemove',
                 scope: me
             });
-            headerContainer.setGrid(me);
         }
-    },
-
-    updateHideHeaders: function(hideHeaders) {
-        var ct = this.getHeaderContainer(),
-            oldCtHeight = this.oldCtHeight || null;
- 
-        // Don't touch the height if we don't need to
-        if (!hideHeaders && ct.getHeight() !== 0) {
-            return;
-        }
-
-        // We rely on the headers to provide sizing, so we can't just hide
-        // the headerCt. Try and capture the old height if we had one.
-        if (hideHeaders) {
-            this.oldCtHeight = ct.getHeight();
-        }
-        ct.setHeight(hideHeaders ? 0 : oldCtHeight);
     },
 
     addColumn: function(column) {
-        return this.getHeaderContainer().add(column);
+        this.getHeaderContainer().add(column);
     },
 
     removeColumn: function(column) {
-        return this.getHeaderContainer().remove(column);
+        this.getHeaderContainer().remove(column);
     },
 
     insertColumn: function(index, column) {
-        return this.getHeaderContainer().insert(index, column);
+        this.getHeaderContainer().insert(index, column);
     },
 
     onColumnAdd: function(container, column) {
-        var me = this,
-            items, ln, columnIndex, i, row;
-
-        if (me.initialized && !me.destroying) {
-            items = this.listItems;
-            ln = items.length;
-            columnIndex = container.getColumns().indexOf(column);
+        if (this.isPainted()) {
+            var items = this.listItems,
+                ln = items.length,
+                columnIndex = container.getColumns().indexOf(column),
+                i, row;
 
             for (i = 0; i < ln; i++) {
                 row = items[i];
                 row.insertColumn(columnIndex, column);
             }
 
-            me.refreshScroller();
+            this.updateTotalColumnWidth();
 
-            me.fireEvent('columnadd', me, column, columnIndex);
+            this.fireEvent('columnadd', this, column, columnIndex);
         }
     },
 
     onColumnMove: function(container, column, group, fromIdx, toIdx) {
-        var me = this,
-            items, ln, i, row;
-
-        if (me.initialized && !me.destroying) {
-            items = me.listItems;
-            ln = items.length;
+        if (this.isPainted()) {
+            var items = this.listItems,
+                ln = items.length,
+                i, row;
 
             for (i = 0; i < ln; i++) {
                 row = items[i];
                 row.moveColumn(column, fromIdx, toIdx);
             }
 
-            me.fireEvent('columnmove', me, column, fromIdx, toIdx);
+            this.fireEvent('columnmove', this, column, fromIdx, toIdx);
         }
     },
 
     onColumnRemove: function(container, column) {
-        var me = this,
-            items, ln, i, row;
-
-        if (me.initialized && !me.destroying) {
-            if (column === me.sortedColumn) {
-                me.sortedColumn = null;
-            }
-
-            items = me.listItems;
-            ln = items.length;
+        if (this.isPainted()) {
+            var items = this.listItems,
+                ln = items.length,
+                i, row;
 
             for (i = 0; i < ln; i++) {
                 row = items[i];
                 row.removeColumn(column);
             }
 
-            me.refreshScroller();
+            this.updateTotalColumnWidth();
 
-            me.fireEvent('columnremove', me, column);
+            this.fireEvent('columnremove', this, column);
         }
     },
 
     updateColumns: function(columns) {
-        var header = this.getHeaderContainer();
-
-        if(header) {
-            header.removeAll(true, true);
-        }
-
         if (columns && columns.length) {
-            this.addColumn(columns);
-            this.refreshScroller();
+            var ln = columns.length,
+                i;
+
+            for (i = 0; i < ln; i++) {
+                this.addColumn(columns[i]);
+            }
+
+            this.updateTotalColumnWidth();
         }
     },
 
@@ -576,196 +538,95 @@ Ext.define('Ext.grid.Grid', {
         return this.getHeaderContainer().getColumns();
     },
 
-    onColumnResize: function(container, column, width, oldWidth) {
-        var me = this,
-            items = me.listItems,
+    onColumnResize: function(container, column, width) {
+        var items = this.listItems,
             ln = items.length,
             i, row;
 
-        if (!me.destroying) {
-            for (i = 0; i < ln; i++) {
-                row = items[i];
-                row.setColumnWidth(column, width);
-            }
-            if (me.initialized) {
-                me.refreshScroller();
-                // Will be null on the first time
-                if (oldWidth !== null && !column.getHidden()) {
-                    me.fireEvent('columnresize', me, column, width);
-                }
-            }
+        for (i = 0; i < ln; i++) {
+            row = items[i];
+            row.setColumnWidth(column, width);
         }
+        this.updateTotalColumnWidth();
+
+        this.fireEvent('columnresize', column, width);
     },
 
     onColumnShow: function(container, column) {
-        var me = this,
-            items, ln, i, row, w;
+        var items = this.listItems,
+            ln = items.length,
+            i, row;
 
-        if (me.initialized && !me.destroying) {
-            items = me.listItems;
-            ln = items.length;
-
-            me.refreshScroller();
-            if (!column.getFlex()) {
-                w = column.getWidth();
-            }
-            for (i = 0; i < ln; i++) {
-                row = items[i];
-                row.showColumn(column);
-                // If we have a fixed width column, we won't get a resize event
-                // from the resize listener, so force the cell width
-                if (w !== undefined) {
-                    row.setColumnWidth(column, w);
-                }
-            }
-
-            me.fireEvent('columnshow', me, column);
+        this.updateTotalColumnWidth();
+        for (i = 0; i < ln; i++) {
+            row = items[i];
+            row.showColumn(column);
         }
+
+        this.fireEvent('columnshow', this, column);
     },
 
     onColumnHide: function(container, column) {
-        var me = this,
-            items, ln, i, row;
+        var items = this.listItems,
+            ln = items.length,
+            i, row;
 
-        if (me.initialized && !me.destroying) {
-            items = me.listItems;
-            ln = items.length;
-
-            me.refreshScroller();
-            for (i = 0; i < ln; i++) {
-                row = items[i];
-                row.hideColumn(column);
-            }
-
-            me.fireEvent('columnhide', me, column);
+        for (i = 0; i < ln; i++) {
+            row = items[i];
+            row.hideColumn(column);
         }
+        this.updateTotalColumnWidth();
+
+        this.fireEvent('columnhide', this, column);
     },
 
     onColumnSort: function(container, column, direction) {
-        var me = this,
-            sorted = me.sortedColumn;
-
-        if (sorted && sorted !== column) {
-            sorted.setSortDirection(null);
+        if (this.sortedColumn && this.sortedColumn !== column) {
+            this.sortedColumn.setSortDirection(null);
         }
-        me.sortedColumn = column;
+        this.sortedColumn = column;
 
-        me.getStore().sort(column.getDataIndex(), direction);
+        this.getStore().sort(column.getDataIndex(), direction);
 
-        me.fireEvent('columnsort', me, column, direction);
-    },
-
-    onResize: function() {
-        this.refreshScroller();
+        this.fireEvent('columnsort', this, column, direction);
     },
 
     getTotalColumnWidth: function() {
-        return this.getColumnsWidth(this.getColumns());
-    },
-
-    getColumnsWidth: function(columns) {
-        var width = 0,
+        var me = this,
+            columns = me.getColumns(),
             ln = columns.length,
-            i, column;
+            totalWidth = 0,
+            i, column, parent;
+
 
         for (i = 0; i < ln; i++) {
             column = columns[i];
+            parent = column.getParent();
 
-            if (column.isHeaderGroup && !column.isHidden()) {
-                width += this.getColumnsWidth(column.getColumns());
-            } else if (!column.isHeaderGroup && !column.isHidden()) {
-                width += column.element.getWidth(false, true);
+            if (!column.isHidden() && (!parent.isHeaderGroup || !parent.isHidden())) {
+                totalWidth += column.getWidth();
             }
         }
-        return width;
+
+        return totalWidth;
     },
 
-    getVisibleColumns: function() {
-        var columns = this.getColumns,
-            len = columns.length, i, column,
-            result = [];
-
-        for (i = 0; i < len; i++) {
-            column = columns[i];
-            if (!column.isHeaderGroup && !column.isHidden()) {
-                result.push(column);
-            }
-        }
-        return result;
-    },
-
-    refreshScroller: function(skipOnRefresh) {
+    updateTotalColumnWidth: function() {
         var me = this,
             scroller = me.getScrollable(),
-            headerContainer = me.getHeaderContainer(),
-            headerScroller = headerContainer.getScrollable(),
-            totalWidth = me.getTotalColumnWidth(),
-            scrollbarSize;
+            totalWidth = this.getTotalColumnWidth();
 
-        if (totalWidth && !isNaN(totalWidth)) {
-            if (scroller) {
-                scroller.setSize({
-                    x: totalWidth,
-                    y: me.getInfinite() ? me.getItemMap().getTotalHeight() : null
-                });
+        me.scrollElement.setWidth(totalWidth);
 
-                scrollbarSize = me.getVerticalScrollbarSize();
-
-                if (scrollbarSize) {
-                    totalWidth -= scrollbarSize;
-
-                    scroller.setSize({
-                        x: totalWidth
-                    });
-                }
-            }
-
-            if (headerScroller) {
-                scrollbarSize = scrollbarSize || me.getVerticalScrollbarSize();
-
-                headerScroller.setSize({
-                    x: totalWidth + scrollbarSize,
-                    y: null
-                });
-            }
-
-            headerContainer.setScrollbarSpacer(scrollbarSize || 0);
-        }
-
-        me.afterRefreshScroller(scroller, skipOnRefresh);
-    },
-
-    getVerticalScrollbarSize: function() {
-        var scroller = this.getScrollable();
-
-        return (scroller && scroller.getMaxUserPosition().y) && (Ext.getScrollbarSize().width || 0);
+        scroller.setSize({
+            x: totalWidth,
+            y: scroller.getSize().y
+        });
     },
 
     createItem: function(config) {
         config.grid = this;
 
         return this.callParent([config]);
-    },
-
-    destroy: function() {
-        var me = this;
-
-        me.sortedColumn = null;
-        me.destroying = true;
-        me.callParent();
-        me.destroying = false;
-    },
-
-    privates: {
-        getCellFromEvent: function(e) {
-            var selector = Ext.grid.cell.Base.prototype.cellSelector,
-                target = e.getTarget(selector, this.element),
-                ret;
-
-            if (target) {
-                ret = Ext.getCmp(target.id);
-            }
-            return ret || null;
-        }
     }
 });

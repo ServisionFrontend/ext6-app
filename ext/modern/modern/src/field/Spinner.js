@@ -52,6 +52,12 @@ Ext.define('Ext.field.Spinner', {
 
     config: {
         /**
+         * @cfg
+         * @inheritdoc
+         */
+        cls: Ext.baseCSSPrefix + 'spinner',
+
+        /**
          * @cfg {Number} [minValue=-infinity] The minimum allowed value.
          * @accessor
          */
@@ -116,9 +122,6 @@ Ext.define('Ext.field.Spinner', {
             disabled: true
         },
 
-        /**
-         * @cfg {Number}
-         */
         value: undefined
     },
 
@@ -131,9 +134,6 @@ Ext.define('Ext.field.Spinner', {
         }
     },
 
-    classCls: Ext.baseCSSPrefix + 'spinnerfield',
-    groupedButtonsCls: Ext.baseCSSPrefix + 'field-grouped-buttons',
-
     syncEmptyCls: Ext.emptyFn,
 
     /**
@@ -141,7 +141,7 @@ Ext.define('Ext.field.Spinner', {
      */
     updateComponent: function(newComponent) {
         var me = this,
-            cls = me.classCls;
+            cls = me.getCls();
 
         me.callParent(arguments);
 
@@ -161,20 +161,20 @@ Ext.define('Ext.field.Spinner', {
 
     updateGroupButtons: function(newGroupButtons, oldGroupButtons) {
         var me = this,
-            inputElement = me.getComponent().element,
-            cls = me.groupedButtonsCls;
+            innerElement = me.innerElement,
+            cls = me.getBaseCls() + '-grouped-buttons';
 
         me.getComponent();
 
         if (newGroupButtons != oldGroupButtons) {
             if (newGroupButtons) {
                 me.addCls(cls);
-                inputElement.appendChild(me.spinDownButton);
-                inputElement.appendChild(me.spinUpButton);
+                innerElement.appendChild(me.spinDownButton);
+                innerElement.appendChild(me.spinUpButton);
             } else {
                 me.removeCls(cls);
-                inputElement.insertFirst(me.spinDownButton);
-                inputElement.appendChild(me.spinUpButton);
+                innerElement.insertFirst(me.spinDownButton);
+                innerElement.appendChild(me.spinUpButton);
             }
         }
     },

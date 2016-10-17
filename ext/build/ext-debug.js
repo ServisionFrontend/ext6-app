@@ -1,19 +1,22 @@
 /*
-This file is part of Ext JS 6.2.0.589
+This file is part of Ext JS 6.0.0.640
 
-Copyright (c) 2011-2016 Sencha Inc
+Copyright (c) 2011-2015 Sencha Inc
 
 Contact:  http://www.sencha.com/contact
 
-Pre-release code in the Ext repository is intended for development purposes only and will
-not always be stable. 
+GNU General Public License Usage
+This file may be used under the terms of the GNU General Public License version 3.0 as
+published by the Free Software Foundation and appearing in the file LICENSE included in the
+packaging of this file.
 
-Use of pre-release code is permitted with your application at your own risk under standard
-Ext license terms. Public redistribution is prohibited.
+Please review the following information to ensure the GNU General Public License version 3.0
+requirements will be met: http://www.gnu.org/copyleft/gpl.html.
 
-For early licensing, please contact us at licensing@sencha.com
+If you are unsure which license is appropriate for your use, please contact the sales department
+at http://www.sencha.com/contact.
 
-Version: 6.2.0.589 Build date: 2016-06-13 20:29:55 (a685b5b1cc9b9202059835dae21c4f60d10a4fdf)
+Version: 6.0.0.640 Build date: 2015-06-28 12:48:37 (134671ed5b6bf074e014e83502b615cd2e26a515)
 
 */
 
@@ -38,12 +41,9 @@ var Ext = Ext || {};
     "Ext.Evented": "../packages/core/src/Evented.js",
     "Ext.Factory": "../packages/core/src/mixin/Factoryable.js",
     "Ext.GlobalEvents": "../packages/core/src/GlobalEvents.js",
-    "Ext.Glyph": "../packages/core/src/Glyph.js",
     "Ext.JSON": "../packages/core/src/JSON.js",
     "Ext.Mixin": "../packages/core/src/class/Mixin.js",
     "Ext.Msg": "../classic/classic/src/window/MessageBox.js",
-    "Ext.Progress": "../packages/core/src/Progress.js",
-    "Ext.ProgressBase": "../packages/core/src/ProgressBase.js",
     "Ext.Promise": "../packages/core/src/Promise.js",
     "Ext.String.format": "../packages/core/src/Template.js",
     "Ext.TaskQueue": "../packages/core/src/TaskQueue.js",
@@ -56,7 +56,6 @@ var Ext = Ext || {};
     "Ext.dom": "../packages/core/src/dom",
     "Ext.dom.ButtonElement": "../classic/classic/src/dom/ButtonElement.js",
     "Ext.dom.Layer": "../classic/classic/src/dom/Layer.js",
-    "Ext.drag": "../packages/core/src/drag",
     "Ext.event": "../packages/core/src/event",
     "Ext.event.publisher.MouseEnterLeave": "../classic/classic/src/event/publisher/MouseEnterLeave.js",
     "Ext.fx.Animation": "../packages/core/src/fx/Animation.js",
@@ -68,7 +67,6 @@ var Ext = Ext || {};
     "Ext.fx.runner": "../packages/core/src/fx/runner",
     "Ext.list": "../packages/core/src/list",
     "Ext.mixin": "../packages/core/src/mixin",
-    "Ext.parse": "../packages/core/src/parse",
     "Ext.perf": "../packages/core/src/perf",
     "Ext.plugin.Abstract": "../packages/core/src/plugin/Abstract.js",
     "Ext.plugin.LazyItems": "../packages/core/src/plugin/LazyItems.js",
@@ -76,6 +74,7 @@ var Ext = Ext || {};
     "Ext.scroll": "../packages/core/src/scroll",
     "Ext.util": "../packages/core/src/util",
     "Ext.util.Animate": "../classic/classic/src/util/Animate.js",
+    "Ext.util.CSS": "../classic/classic/src/util/CSS.js",
     "Ext.util.ClickRepeater": "../classic/classic/src/util/ClickRepeater.js",
     "Ext.util.ComponentDragger": "../classic/classic/src/util/ComponentDragger.js",
     "Ext.util.Cookies": "../classic/classic/src/util/Cookies.js",
@@ -105,7 +104,7 @@ var Ext = Ext || {};
       "path": "../packages/core/src/util/DelayedTask.js",
       "requires": [],
       "uses": [
-        76
+        77
       ],
       "idx": 1
     },
@@ -114,9 +113,7 @@ var Ext = Ext || {};
       "requires": [
         1
       ],
-      "uses": [
-        23
-      ],
+      "uses": [],
       "idx": 2
     },
     {
@@ -133,7 +130,7 @@ var Ext = Ext || {};
         3
       ],
       "uses": [
-        51
+        52
       ],
       "idx": 4
     },
@@ -221,7 +218,7 @@ var Ext = Ext || {};
       "path": "../packages/core/src/data/flash/BinaryXhr.js",
       "requires": [],
       "uses": [
-        76
+        77
       ],
       "idx": 14
     },
@@ -232,7 +229,7 @@ var Ext = Ext || {};
         14
       ],
       "uses": [
-        76
+        77
       ],
       "idx": 15
     },
@@ -255,7 +252,7 @@ var Ext = Ext || {};
       ],
       "uses": [
         12,
-        49
+        50
       ],
       "idx": 17
     },
@@ -277,8 +274,7 @@ var Ext = Ext || {};
       "path": "../packages/core/src/ComponentManager.js",
       "requires": [],
       "uses": [
-        23,
-        49
+        50
       ],
       "idx": 20
     },
@@ -304,7 +300,7 @@ var Ext = Ext || {};
         22
       ],
       "uses": [
-        86
+        80
       ],
       "idx": 23
     },
@@ -321,7 +317,7 @@ var Ext = Ext || {};
       "requires": [],
       "uses": [
         33,
-        49
+        50
       ],
       "idx": 25
     },
@@ -329,7 +325,7 @@ var Ext = Ext || {};
       "path": "../packages/core/src/dom/UnderlayPool.js",
       "requires": [],
       "uses": [
-        49
+        50
       ],
       "idx": 26
     },
@@ -410,7 +406,7 @@ var Ext = Ext || {};
         35
       ],
       "uses": [
-        76
+        77
       ],
       "idx": 36
     },
@@ -423,19 +419,19 @@ var Ext = Ext || {};
       ],
       "uses": [
         35,
-        49,
-        254,
+        50,
+        257,
+        258,
+        259,
+        260,
+        261,
+        262,
+        263,
+        264,
         265,
         266,
         267,
-        268,
-        269,
-        270,
-        271,
-        272,
-        273,
-        274,
-        275
+        268
       ],
       "idx": 37
     },
@@ -445,7 +441,7 @@ var Ext = Ext || {};
         0
       ],
       "uses": [
-        49
+        50
       ],
       "idx": 38
     },
@@ -467,17 +463,15 @@ var Ext = Ext || {};
       "idx": 40
     },
     {
-      "path": "../packages/core/src/util/sizemonitor/Scroll.js",
+      "path": "../packages/core/src/util/sizemonitor/Default.js",
       "requires": [
         40
       ],
-      "uses": [
-        39
-      ],
+      "uses": [],
       "idx": 41
     },
     {
-      "path": "../packages/core/src/util/sizemonitor/OverflowChange.js",
+      "path": "../packages/core/src/util/sizemonitor/Scroll.js",
       "requires": [
         40
       ],
@@ -487,43 +481,46 @@ var Ext = Ext || {};
       "idx": 42
     },
     {
+      "path": "../packages/core/src/util/sizemonitor/OverflowChange.js",
+      "requires": [
+        40
+      ],
+      "uses": [
+        39
+      ],
+      "idx": 43
+    },
+    {
       "path": "../packages/core/src/util/SizeMonitor.js",
       "requires": [
         41,
-        42
+        42,
+        43
       ],
       "uses": [],
-      "idx": 43
+      "idx": 44
     },
     {
       "path": "../packages/core/src/event/publisher/ElementSize.js",
       "requires": [
         31,
-        43
+        44
       ],
       "uses": [
         39
       ],
-      "idx": 44
+      "idx": 45
     },
     {
       "path": "../packages/core/src/util/paintmonitor/Abstract.js",
       "requires": [],
       "uses": [
-        49
+        50
       ],
-      "idx": 45
-    },
-    {
-      "path": "../packages/core/src/util/paintmonitor/CssAnimation.js",
-      "requires": [
-        45
-      ],
-      "uses": [],
       "idx": 46
     },
     {
-      "path": "../packages/core/src/util/PaintMonitor.js",
+      "path": "../packages/core/src/util/paintmonitor/CssAnimation.js",
       "requires": [
         46
       ],
@@ -531,14 +528,22 @@ var Ext = Ext || {};
       "idx": 47
     },
     {
-      "path": "../packages/core/src/event/publisher/ElementPaint.js",
+      "path": "../packages/core/src/util/PaintMonitor.js",
       "requires": [
-        31,
-        39,
         47
       ],
       "uses": [],
       "idx": 48
+    },
+    {
+      "path": "../packages/core/src/event/publisher/ElementPaint.js",
+      "requires": [
+        31,
+        39,
+        48
+      ],
+      "uses": [],
+      "idx": 49
     },
     {
       "path": "../packages/core/src/dom/Element.js",
@@ -550,30 +555,29 @@ var Ext = Ext || {};
         30,
         36,
         37,
-        44,
-        48
+        45,
+        49
       ],
       "uses": [
         31,
         33,
-        74,
         75,
         76,
-        86,
-        93,
-        226,
-        255,
-        276,
-        286,
-        288
+        77,
+        80,
+        91,
+        229,
+        269,
+        279,
+        281
       ],
-      "idx": 49
+      "idx": 50
     },
     {
       "path": "../packages/core/src/util/Filter.js",
       "requires": [],
       "uses": [],
-      "idx": 50
+      "idx": 51
     },
     {
       "path": "../packages/core/src/util/Observable.js",
@@ -581,66 +585,58 @@ var Ext = Ext || {};
         4
       ],
       "uses": [],
-      "idx": 51
+      "idx": 52
     },
     {
       "path": "../packages/core/src/util/AbstractMixedCollection.js",
       "requires": [
-        50,
-        51
+        51,
+        52
       ],
       "uses": [],
-      "idx": 52
+      "idx": 53
     },
     {
       "path": "../packages/core/src/util/Sorter.js",
       "requires": [],
       "uses": [],
-      "idx": 53
+      "idx": 54
     },
     {
       "path": "../packages/core/src/util/Sortable.js",
       "requires": [
-        53
+        54
       ],
       "uses": [
-        55
+        56
       ],
-      "idx": 54
+      "idx": 55
     },
     {
       "path": "../packages/core/src/util/MixedCollection.js",
       "requires": [
-        52,
-        54
+        53,
+        55
       ],
       "uses": [],
-      "idx": 55
+      "idx": 56
     },
     {
       "path": "../packages/core/src/util/TaskRunner.js",
       "requires": [],
       "uses": [
-        76
+        77
       ],
-      "idx": 56
+      "idx": 57
     },
     {
       "path": "../classic/classic/src/fx/target/Target.js",
       "requires": [],
       "uses": [],
-      "idx": 57
-    },
-    {
-      "path": "../classic/classic/src/fx/target/Element.js",
-      "requires": [
-        57
-      ],
-      "uses": [],
       "idx": 58
     },
     {
-      "path": "../classic/classic/src/fx/target/ElementCSS.js",
+      "path": "../classic/classic/src/fx/target/Element.js",
       "requires": [
         58
       ],
@@ -648,47 +644,55 @@ var Ext = Ext || {};
       "idx": 59
     },
     {
-      "path": "../classic/classic/src/fx/target/CompositeElement.js",
+      "path": "../classic/classic/src/fx/target/ElementCSS.js",
       "requires": [
-        58
+        59
       ],
       "uses": [],
       "idx": 60
     },
     {
-      "path": "../classic/classic/src/fx/target/CompositeElementCSS.js",
+      "path": "../classic/classic/src/fx/target/CompositeElement.js",
       "requires": [
-        59,
-        60
+        59
       ],
       "uses": [],
       "idx": 61
     },
     {
-      "path": "../classic/classic/src/fx/target/Sprite.js",
+      "path": "../classic/classic/src/fx/target/CompositeElementCSS.js",
       "requires": [
-        57
+        60,
+        61
       ],
       "uses": [],
       "idx": 62
     },
     {
-      "path": "../classic/classic/src/fx/target/CompositeSprite.js",
+      "path": "../classic/classic/src/fx/target/Sprite.js",
       "requires": [
-        62
+        58
       ],
       "uses": [],
       "idx": 63
     },
     {
+      "path": "../classic/classic/src/fx/target/CompositeSprite.js",
+      "requires": [
+        63
+      ],
+      "uses": [],
+      "idx": 64
+    },
+    {
       "path": "../classic/classic/src/fx/target/Component.js",
       "requires": [
-        57
+        58
       ],
       "uses": [
-        76
+        77
       ],
-      "idx": 64
+      "idx": 65
     },
     {
       "path": "../classic/classic/src/fx/Queue.js",
@@ -696,116 +700,110 @@ var Ext = Ext || {};
         5
       ],
       "uses": [],
-      "idx": 65
+      "idx": 66
     },
     {
       "path": "../classic/classic/src/fx/Manager.js",
       "requires": [
-        55,
         56,
-        58,
+        57,
         59,
         60,
         61,
         62,
         63,
         64,
-        65
+        65,
+        66
       ],
       "uses": [],
-      "idx": 66
+      "idx": 67
     },
     {
       "path": "../classic/classic/src/fx/Animator.js",
       "requires": [
-        51,
-        66
+        52,
+        67
       ],
       "uses": [
-        72
+        73
       ],
-      "idx": 67
+      "idx": 68
     },
     {
       "path": "../classic/classic/src/fx/CubicBezier.js",
       "requires": [],
       "uses": [],
-      "idx": 68
+      "idx": 69
     },
     {
       "path": "../classic/classic/src/fx/Easing.js",
       "requires": [
-        68
+        69
       ],
       "uses": [],
-      "idx": 69
+      "idx": 70
     },
     {
       "path": "../classic/classic/src/fx/DrawPath.js",
       "requires": [],
       "uses": [],
-      "idx": 70
+      "idx": 71
     },
     {
       "path": "../classic/classic/src/fx/PropertyHandler.js",
       "requires": [
-        70
-      ],
-      "uses": [],
-      "idx": 71
-    },
-    {
-      "path": "../classic/classic/src/fx/Anim.js",
-      "requires": [
-        51,
-        66,
-        67,
-        68,
-        69,
         71
       ],
       "uses": [],
       "idx": 72
     },
     {
-      "path": "../classic/classic/src/util/Animate.js",
+      "path": "../classic/classic/src/fx/Anim.js",
       "requires": [
-        66,
+        52,
+        67,
+        68,
+        69,
+        70,
         72
       ],
       "uses": [],
       "idx": 73
     },
     {
-      "path": "../packages/core/src/dom/Fly.js",
+      "path": "../classic/classic/src/util/Animate.js",
       "requires": [
-        49
+        67,
+        73
       ],
       "uses": [],
       "idx": 74
     },
     {
+      "path": "../packages/core/src/dom/Fly.js",
+      "requires": [
+        50
+      ],
+      "uses": [],
+      "idx": 75
+    },
+    {
       "path": "../packages/core/src/dom/CompositeElementLite.js",
       "requires": [
-        74
+        75
       ],
       "uses": [
-        49
+        50
       ],
-      "idx": 75
+      "idx": 76
     },
     {
       "path": "../packages/core/src/GlobalEvents.js",
       "requires": [
         4,
-        49
+        50
       ],
-      "uses": [],
-      "idx": 76
-    },
-    {
-      "path": "../packages/core/src/Glyph.js",
-      "requires": [],
       "uses": [],
       "idx": 77
     },
@@ -816,6 +814,25 @@ var Ext = Ext || {};
       "idx": 78
     },
     {
+      "path": "../packages/core/src/util/Format.js",
+      "requires": [],
+      "uses": [
+        80,
+        229
+      ],
+      "idx": 79
+    },
+    {
+      "path": "../packages/core/src/Template.js",
+      "requires": [
+        79
+      ],
+      "uses": [
+        229
+      ],
+      "idx": 80
+    },
+    {
       "path": "../packages/core/src/mixin/Inheritable.js",
       "requires": [
         0
@@ -823,7 +840,7 @@ var Ext = Ext || {};
       "uses": [
         20
       ],
-      "idx": 79
+      "idx": 81
     },
     {
       "path": "../packages/core/src/mixin/Bindable.js",
@@ -831,7 +848,7 @@ var Ext = Ext || {};
       "uses": [
         12
       ],
-      "idx": 80
+      "idx": 82
     },
     {
       "path": "../packages/core/src/mixin/ComponentDelegation.js",
@@ -842,81 +859,45 @@ var Ext = Ext || {};
       "uses": [
         2
       ],
-      "idx": 81
+      "idx": 83
     },
     {
       "path": "../packages/core/src/Widget.js",
       "requires": [
         24,
-        49,
-        79,
-        80,
-        81
+        50,
+        81,
+        82,
+        83
       ],
       "uses": [
         20,
         23
       ],
-      "idx": 82
-    },
-    {
-      "path": "../packages/core/src/ProgressBase.js",
-      "requires": [],
-      "uses": [
-        89
-      ],
-      "idx": 83
-    },
-    {
-      "path": "../packages/core/src/Progress.js",
-      "requires": [
-        82,
-        83
-      ],
-      "uses": [],
       "idx": 84
-    },
-    {
-      "path": "../packages/core/src/util/Format.js",
-      "requires": [],
-      "uses": [
-        86,
-        226
-      ],
-      "idx": 85
-    },
-    {
-      "path": "../packages/core/src/Template.js",
-      "requires": [
-        85
-      ],
-      "uses": [
-        226
-      ],
-      "idx": 86
     },
     {
       "path": "../packages/core/src/util/XTemplateParser.js",
       "requires": [],
       "uses": [],
-      "idx": 87
+      "idx": 85
     },
     {
       "path": "../packages/core/src/util/XTemplateCompiler.js",
       "requires": [
-        87
+        85
       ],
       "uses": [],
-      "idx": 88
+      "idx": 86
     },
     {
       "path": "../packages/core/src/XTemplate.js",
       "requires": [
-        86,
-        88
+        80,
+        86
       ],
       "uses": [],
-      "idx": 89
+      "idx": 87
     },
     {
       "path": "../packages/core/src/app/EventDomain.js",
@@ -924,92 +905,108 @@ var Ext = Ext || {};
         2
       ],
       "uses": [],
-      "idx": 90
+      "idx": 88
     },
     {
       "path": "../packages/core/src/app/domain/Component.js",
       "requires": [
-        82,
-        90
+        84,
+        88
       ],
       "uses": [],
-      "idx": 91
+      "idx": 89
     },
     {
       "path": "../classic/classic/src/util/ProtoElement.js",
       "requires": [],
       "uses": [
-        49,
-        226
+        50,
+        229
       ],
-      "idx": 92
+      "idx": 90
     },
     {
       "path": "../packages/core/src/dom/CompositeElement.js",
       "requires": [
-        75
+        76
       ],
       "uses": [],
-      "idx": 93
-    },
-    {
-      "path": "../packages/core/src/util/CSS.js",
-      "requires": [],
-      "uses": [
-        49
-      ],
-      "idx": 94
+      "idx": 91
     },
     {
       "path": "../packages/core/src/scroll/Scroller.js",
       "requires": [
-        24,
-        94
+        12,
+        24
       ],
       "uses": [
-        76
+        77,
+        107,
+        108
       ],
+      "idx": 92
+    },
+    {
+      "path": "../packages/core/src/fx/easing/Abstract.js",
+      "requires": [],
+      "uses": [],
+      "idx": 93
+    },
+    {
+      "path": "../packages/core/src/fx/easing/Momentum.js",
+      "requires": [
+        93
+      ],
+      "uses": [],
+      "idx": 94
+    },
+    {
+      "path": "../packages/core/src/fx/easing/Bounce.js",
+      "requires": [
+        93
+      ],
+      "uses": [],
       "idx": 95
     },
     {
-      "path": "../classic/classic/src/util/Floating.js",
-      "requires": [],
-      "uses": [
-        20,
-        49,
-        76,
-        352
+      "path": "../packages/core/src/fx/easing/BoundMomentum.js",
+      "requires": [
+        93,
+        94,
+        95
       ],
+      "uses": [],
       "idx": 96
     },
     {
-      "path": "../classic/classic/src/util/ElementContainer.js",
-      "requires": [],
+      "path": "../packages/core/src/fx/easing/Linear.js",
+      "requires": [
+        93
+      ],
       "uses": [],
       "idx": 97
     },
     {
-      "path": "../classic/classic/src/util/Renderable.js",
+      "path": "../packages/core/src/fx/easing/EaseOut.js",
       "requires": [
-        49
+        97
       ],
-      "uses": [
-        89,
-        105,
-        226
-      ],
+      "uses": [],
       "idx": 98
     },
     {
-      "path": "../classic/classic/src/state/Provider.js",
+      "path": "../packages/core/src/util/translatable/Abstract.js",
       "requires": [
-        51
+        24,
+        97
       ],
-      "uses": [],
+      "uses": [
+        19
+      ],
       "idx": 99
     },
     {
-      "path": "../classic/classic/src/state/Manager.js",
+      "path": "../packages/core/src/util/translatable/Dom.js",
       "requires": [
         99
       ],
@@ -1017,13 +1014,129 @@ var Ext = Ext || {};
       "idx": 100
     },
     {
-      "path": "../classic/classic/src/state/Stateful.js",
+      "path": "../packages/core/src/util/translatable/CssTransform.js",
       "requires": [
-        56,
         100
       ],
       "uses": [],
       "idx": 101
+    },
+    {
+      "path": "../packages/core/src/util/translatable/ScrollPosition.js",
+      "requires": [
+        100
+      ],
+      "uses": [],
+      "idx": 102
+    },
+    {
+      "path": "../packages/core/src/util/translatable/ScrollParent.js",
+      "requires": [
+        100
+      ],
+      "uses": [],
+      "idx": 103
+    },
+    {
+      "path": "../packages/core/src/util/translatable/CssPosition.js",
+      "requires": [
+        100
+      ],
+      "uses": [],
+      "idx": 104
+    },
+    {
+      "path": "../packages/core/src/util/Translatable.js",
+      "requires": [
+        101,
+        102,
+        103,
+        104
+      ],
+      "uses": [],
+      "idx": 105
+    },
+    {
+      "path": "../packages/core/src/scroll/Indicator.js",
+      "requires": [
+        84
+      ],
+      "uses": [],
+      "idx": 106
+    },
+    {
+      "path": "../packages/core/src/scroll/TouchScroller.js",
+      "requires": [
+        77,
+        92,
+        96,
+        98,
+        105,
+        106
+      ],
+      "uses": [],
+      "idx": 107
+    },
+    {
+      "path": "../packages/core/src/scroll/DomScroller.js",
+      "requires": [
+        92
+      ],
+      "uses": [],
+      "idx": 108
+    },
+    {
+      "path": "../classic/classic/src/util/Floating.js",
+      "requires": [],
+      "uses": [
+        20,
+        77,
+        332
+      ],
+      "idx": 109
+    },
+    {
+      "path": "../classic/classic/src/util/ElementContainer.js",
+      "requires": [],
+      "uses": [],
+      "idx": 110
+    },
+    {
+      "path": "../classic/classic/src/util/Renderable.js",
+      "requires": [
+        50
+      ],
+      "uses": [
+        87,
+        118,
+        229
+      ],
+      "idx": 111
+    },
+    {
+      "path": "../classic/classic/src/state/Provider.js",
+      "requires": [
+        52
+      ],
+      "uses": [],
+      "idx": 112
+    },
+    {
+      "path": "../classic/classic/src/state/Manager.js",
+      "requires": [
+        112
+      ],
+      "uses": [],
+      "idx": 113
+    },
+    {
+      "path": "../classic/classic/src/state/Stateful.js",
+      "requires": [
+        57,
+        113
+      ],
+      "uses": [],
+      "idx": 114
     },
     {
       "path": "../classic/classic/src/util/Focusable.js",
@@ -1033,9 +1146,10 @@ var Ext = Ext || {};
       "uses": [
         23,
         35,
-        49
+        50,
+        118
       ],
-      "idx": 102
+      "idx": 115
     },
     {
       "path": "../packages/core/src/mixin/Accessible.js",
@@ -1043,7 +1157,7 @@ var Ext = Ext || {};
         0
       ],
       "uses": [],
-      "idx": 103
+      "idx": 116
     },
     {
       "path": "../classic/classic/src/util/KeyboardInteractive.js",
@@ -1053,7 +1167,7 @@ var Ext = Ext || {};
       "uses": [
         35
       ],
-      "idx": 104
+      "idx": 117
     },
     {
       "path": "../classic/classic/src/Component.js",
@@ -1061,86 +1175,89 @@ var Ext = Ext || {};
         20,
         23,
         25,
-        51,
-        73,
-        76,
-        79,
-        80,
+        52,
+        74,
+        77,
         81,
+        82,
+        83,
+        90,
+        91,
         92,
-        93,
-        95,
-        96,
-        97,
-        98,
-        101,
-        102,
-        103,
-        104
+        107,
+        108,
+        109,
+        110,
+        111,
+        114,
+        115,
+        116,
+        117
       ],
       "uses": [
         1,
-        49,
-        66,
-        89,
-        226,
-        347,
-        348,
-        349,
-        352,
-        360,
-        362,
-        432,
-        578,
-        593,
-        597
+        50,
+        67,
+        87,
+        194,
+        229,
+        327,
+        328,
+        329,
+        332,
+        339,
+        341,
+        411,
+        554,
+        568,
+        572
       ],
-      "idx": 105
+      "idx": 118
     },
     {
       "path": "../classic/classic/src/layout/container/border/Region.js",
       "requires": [],
       "uses": [],
-      "idx": 106
+      "idx": 119
     },
     {
       "path": "../packages/core/src/app/EventBus.js",
       "requires": [
-        91
+        89
       ],
       "uses": [
-        90
+        88
       ],
-      "idx": 107
+      "idx": 120
     },
     {
       "path": "../packages/core/src/app/domain/Global.js",
       "requires": [
-        76,
-        90
+        77,
+        88
       ],
       "uses": [],
-      "idx": 108
+      "idx": 121
     },
     {
       "path": "../packages/core/src/app/BaseController.js",
       "requires": [
         4,
-        107,
-        108
+        120,
+        121
       ],
       "uses": [
-        165,
-        166,
-        205
+        178,
+        179,
+        208
       ],
-      "idx": 109
+      "idx": 122
     },
     {
       "path": "../packages/core/src/app/Util.js",
       "requires": [],
       "uses": [],
-      "idx": 110
+      "idx": 123
     },
     {
       "path": "../packages/core/src/util/CollectionKey.js",
@@ -1148,39 +1265,39 @@ var Ext = Ext || {};
         3
       ],
       "uses": [],
-      "idx": 111
+      "idx": 124
     },
     {
       "path": "../packages/core/src/util/Grouper.js",
       "requires": [
-        53
+        54
       ],
       "uses": [],
-      "idx": 112
+      "idx": 125
     },
     {
       "path": "../packages/core/src/util/Collection.js",
       "requires": [
         4,
-        50,
-        53,
-        111,
-        112
+        51,
+        54,
+        124,
+        125
       ],
       "uses": [
-        155,
-        156,
-        157
+        168,
+        169,
+        170
       ],
-      "idx": 113
+      "idx": 126
     },
     {
       "path": "../packages/core/src/util/ObjectTemplate.js",
       "requires": [
-        89
+        87
       ],
       "uses": [],
-      "idx": 114
+      "idx": 127
     },
     {
       "path": "../packages/core/src/data/schema/Role.js",
@@ -1188,211 +1305,107 @@ var Ext = Ext || {};
       "uses": [
         12
       ],
-      "idx": 115
+      "idx": 128
     },
     {
       "path": "../packages/core/src/data/schema/Association.js",
       "requires": [
-        115
-      ],
-      "uses": [],
-      "idx": 116
-    },
-    {
-      "path": "../packages/core/src/data/schema/OneToOne.js",
-      "requires": [
-        116
-      ],
-      "uses": [],
-      "idx": 117
-    },
-    {
-      "path": "../packages/core/src/data/schema/ManyToOne.js",
-      "requires": [
-        116
-      ],
-      "uses": [],
-      "idx": 118
-    },
-    {
-      "path": "../packages/core/src/data/schema/ManyToMany.js",
-      "requires": [
-        116
-      ],
-      "uses": [],
-      "idx": 119
-    },
-    {
-      "path": "../packages/core/src/util/Inflector.js",
-      "requires": [],
-      "uses": [],
-      "idx": 120
-    },
-    {
-      "path": "../packages/core/src/data/schema/Namer.js",
-      "requires": [
-        12,
-        120
-      ],
-      "uses": [],
-      "idx": 121
-    },
-    {
-      "path": "../packages/core/src/data/schema/Schema.js",
-      "requires": [
-        12,
-        114,
-        117,
-        118,
-        119,
-        121
-      ],
-      "uses": [],
-      "idx": 122
-    },
-    {
-      "path": "../packages/core/src/data/AbstractStore.js",
-      "requires": [
-        4,
-        12,
-        50,
-        113,
-        122
-      ],
-      "uses": [
-        161
-      ],
-      "idx": 123
-    },
-    {
-      "path": "../packages/core/src/data/Error.js",
-      "requires": [],
-      "uses": [],
-      "idx": 124
-    },
-    {
-      "path": "../packages/core/src/data/ErrorCollection.js",
-      "requires": [
-        55,
-        124
-      ],
-      "uses": [
-        133
-      ],
-      "idx": 125
-    },
-    {
-      "path": "../packages/core/src/data/operation/Operation.js",
-      "requires": [],
-      "uses": [],
-      "idx": 126
-    },
-    {
-      "path": "../packages/core/src/data/operation/Create.js",
-      "requires": [
-        126
-      ],
-      "uses": [],
-      "idx": 127
-    },
-    {
-      "path": "../packages/core/src/data/operation/Destroy.js",
-      "requires": [
-        126
-      ],
-      "uses": [],
-      "idx": 128
-    },
-    {
-      "path": "../packages/core/src/data/operation/Read.js",
-      "requires": [
-        126
+        128
       ],
       "uses": [],
       "idx": 129
     },
     {
-      "path": "../packages/core/src/data/operation/Update.js",
+      "path": "../packages/core/src/data/schema/OneToOne.js",
       "requires": [
-        126
+        129
       ],
       "uses": [],
       "idx": 130
     },
     {
-      "path": "../packages/core/src/data/SortTypes.js",
-      "requires": [],
+      "path": "../packages/core/src/data/schema/ManyToOne.js",
+      "requires": [
+        129
+      ],
       "uses": [],
       "idx": 131
     },
     {
-      "path": "../packages/core/src/data/validator/Validator.js",
+      "path": "../packages/core/src/data/schema/ManyToMany.js",
       "requires": [
-        12
+        129
       ],
       "uses": [],
       "idx": 132
     },
     {
-      "path": "../packages/core/src/data/field/Field.js",
-      "requires": [
-        12,
-        131,
-        132
-      ],
+      "path": "../packages/core/src/util/Inflector.js",
+      "requires": [],
       "uses": [],
       "idx": 133
     },
     {
-      "path": "../packages/core/src/data/field/Boolean.js",
+      "path": "../packages/core/src/data/schema/Namer.js",
       "requires": [
+        12,
         133
       ],
       "uses": [],
       "idx": 134
     },
     {
-      "path": "../packages/core/src/data/field/Date.js",
+      "path": "../packages/core/src/data/schema/Schema.js",
       "requires": [
-        133
+        12,
+        127,
+        130,
+        131,
+        132,
+        134
       ],
       "uses": [],
       "idx": 135
     },
     {
-      "path": "../packages/core/src/data/field/Integer.js",
+      "path": "../packages/core/src/data/AbstractStore.js",
       "requires": [
-        133
+        4,
+        12,
+        51,
+        126,
+        135
       ],
-      "uses": [],
+      "uses": [
+        174
+      ],
       "idx": 136
     },
     {
-      "path": "../packages/core/src/data/field/Number.js",
-      "requires": [
-        136
-      ],
+      "path": "../packages/core/src/data/Error.js",
+      "requires": [],
       "uses": [],
       "idx": 137
     },
     {
-      "path": "../packages/core/src/data/field/String.js",
+      "path": "../packages/core/src/data/ErrorCollection.js",
       "requires": [
-        133
+        56,
+        137
       ],
-      "uses": [],
+      "uses": [
+        146
+      ],
       "idx": 138
     },
     {
-      "path": "../packages/core/src/data/identifier/Generator.js",
-      "requires": [
-        12
-      ],
+      "path": "../packages/core/src/data/operation/Operation.js",
+      "requires": [],
       "uses": [],
       "idx": 139
     },
     {
-      "path": "../packages/core/src/data/identifier/Sequential.js",
+      "path": "../packages/core/src/data/operation/Create.js",
       "requires": [
         139
       ],
@@ -1400,37 +1413,141 @@ var Ext = Ext || {};
       "idx": 140
     },
     {
+      "path": "../packages/core/src/data/operation/Destroy.js",
+      "requires": [
+        139
+      ],
+      "uses": [],
+      "idx": 141
+    },
+    {
+      "path": "../packages/core/src/data/operation/Read.js",
+      "requires": [
+        139
+      ],
+      "uses": [],
+      "idx": 142
+    },
+    {
+      "path": "../packages/core/src/data/operation/Update.js",
+      "requires": [
+        139
+      ],
+      "uses": [],
+      "idx": 143
+    },
+    {
+      "path": "../packages/core/src/data/SortTypes.js",
+      "requires": [],
+      "uses": [],
+      "idx": 144
+    },
+    {
+      "path": "../packages/core/src/data/validator/Validator.js",
+      "requires": [
+        12
+      ],
+      "uses": [],
+      "idx": 145
+    },
+    {
+      "path": "../packages/core/src/data/field/Field.js",
+      "requires": [
+        12,
+        144,
+        145
+      ],
+      "uses": [],
+      "idx": 146
+    },
+    {
+      "path": "../packages/core/src/data/field/Boolean.js",
+      "requires": [
+        146
+      ],
+      "uses": [],
+      "idx": 147
+    },
+    {
+      "path": "../packages/core/src/data/field/Date.js",
+      "requires": [
+        146
+      ],
+      "uses": [],
+      "idx": 148
+    },
+    {
+      "path": "../packages/core/src/data/field/Integer.js",
+      "requires": [
+        146
+      ],
+      "uses": [],
+      "idx": 149
+    },
+    {
+      "path": "../packages/core/src/data/field/Number.js",
+      "requires": [
+        149
+      ],
+      "uses": [],
+      "idx": 150
+    },
+    {
+      "path": "../packages/core/src/data/field/String.js",
+      "requires": [
+        146
+      ],
+      "uses": [],
+      "idx": 151
+    },
+    {
+      "path": "../packages/core/src/data/identifier/Generator.js",
+      "requires": [
+        12
+      ],
+      "uses": [],
+      "idx": 152
+    },
+    {
+      "path": "../packages/core/src/data/identifier/Sequential.js",
+      "requires": [
+        152
+      ],
+      "uses": [],
+      "idx": 153
+    },
+    {
       "path": "../packages/core/src/data/Model.js",
       "requires": [
-        122,
-        125,
-        126,
-        127,
-        128,
-        129,
-        130,
-        132,
-        133,
-        134,
         135,
-        136,
-        137,
         138,
         139,
-        140
+        140,
+        141,
+        142,
+        143,
+        145,
+        146,
+        147,
+        148,
+        149,
+        150,
+        151,
+        152,
+        153
       ],
       "uses": [
         12,
-        143,
-        225
+        156,
+        228
       ],
-      "idx": 141
+      "idx": 154
     },
     {
       "path": "../packages/core/src/data/ResultSet.js",
       "requires": [],
       "uses": [],
-      "idx": 142
+      "idx": 155
     },
     {
       "path": "../packages/core/src/data/reader/Reader.js",
@@ -1438,13 +1555,13 @@ var Ext = Ext || {};
         4,
         12,
         22,
-        89,
-        142
+        87,
+        155
       ],
       "uses": [
-        122
+        135
       ],
-      "idx": 143
+      "idx": 156
     },
     {
       "path": "../packages/core/src/data/writer/Writer.js",
@@ -1452,64 +1569,65 @@ var Ext = Ext || {};
         12
       ],
       "uses": [],
-      "idx": 144
+      "idx": 157
     },
     {
       "path": "../packages/core/src/data/proxy/Proxy.js",
       "requires": [
         4,
         12,
-        122,
-        143,
-        144
+        135,
+        156,
+        157
       ],
       "uses": [
-        126,
-        127,
-        128,
-        129,
-        130,
+        139,
+        140,
         141,
-        174
+        142,
+        143,
+        154,
+        187
       ],
-      "idx": 145
+      "idx": 158
     },
     {
       "path": "../packages/core/src/data/proxy/Client.js",
       "requires": [
-        145
+        158
       ],
       "uses": [],
-      "idx": 146
+      "idx": 159
     },
     {
       "path": "../packages/core/src/data/proxy/Memory.js",
       "requires": [
-        146
+        159
       ],
       "uses": [
-        50,
-        54
+        51,
+        55
       ],
-      "idx": 147
+      "idx": 160
     },
     {
       "path": "../packages/core/src/data/ProxyStore.js",
       "requires": [
-        123,
-        126,
-        127,
-        128,
-        129,
-        130,
+        136,
+        139,
+        140,
         141,
-        145,
-        147
+        142,
+        143,
+        154,
+        158,
+        160
       ],
       "uses": [
-        122
+        1,
+        135
       ],
-      "idx": 148
+      "idx": 161
     },
     {
       "path": "../packages/core/src/data/LocalStore.js",
@@ -1517,210 +1635,209 @@ var Ext = Ext || {};
         0
       ],
       "uses": [
-        113
+        126
       ],
-      "idx": 149
+      "idx": 162
     },
     {
       "path": "../packages/core/src/data/proxy/Server.js",
       "requires": [
-        145
+        158
       ],
       "uses": [
-        86,
-        222
+        80,
+        225
       ],
-      "idx": 150
+      "idx": 163
     },
     {
       "path": "../packages/core/src/data/proxy/Ajax.js",
       "requires": [
         18,
-        150
+        163
       ],
       "uses": [],
-      "idx": 151
+      "idx": 164
     },
     {
       "path": "../packages/core/src/data/reader/Json.js",
       "requires": [
         78,
-        143
+        156
       ],
       "uses": [],
-      "idx": 152
+      "idx": 165
     },
     {
       "path": "../packages/core/src/data/writer/Json.js",
       "requires": [
-        144
-      ],
-      "uses": [],
-      "idx": 153
-    },
-    {
-      "path": "../packages/core/src/util/Group.js",
-      "requires": [
-        113
-      ],
-      "uses": [],
-      "idx": 154
-    },
-    {
-      "path": "../packages/core/src/util/SorterCollection.js",
-      "requires": [
-        53,
-        113
-      ],
-      "uses": [],
-      "idx": 155
-    },
-    {
-      "path": "../packages/core/src/util/FilterCollection.js",
-      "requires": [
-        50,
-        113
-      ],
-      "uses": [],
-      "idx": 156
-    },
-    {
-      "path": "../packages/core/src/util/GroupCollection.js",
-      "requires": [
-        113,
-        154,
-        155,
-        156
-      ],
-      "uses": [],
-      "idx": 157
-    },
-    {
-      "path": "../packages/core/src/data/Store.js",
-      "requires": [
-        1,
-        141,
-        148,
-        149,
-        151,
-        152,
-        153,
         157
-      ],
-      "uses": [
-        112,
-        161,
-        210
-      ],
-      "idx": 158
-    },
-    {
-      "path": "../packages/core/src/data/reader/Array.js",
-      "requires": [
-        152
-      ],
-      "uses": [],
-      "idx": 159
-    },
-    {
-      "path": "../packages/core/src/data/ArrayStore.js",
-      "requires": [
-        147,
-        158,
-        159
-      ],
-      "uses": [],
-      "idx": 160
-    },
-    {
-      "path": "../packages/core/src/data/StoreManager.js",
-      "requires": [
-        55,
-        160
-      ],
-      "uses": [
-        12,
-        147,
-        153,
-        158,
-        159
-      ],
-      "idx": 161
-    },
-    {
-      "path": "../packages/core/src/app/domain/Store.js",
-      "requires": [
-        90,
-        123
-      ],
-      "uses": [],
-      "idx": 162
-    },
-    {
-      "path": "../packages/core/src/app/route/Queue.js",
-      "requires": [],
-      "uses": [
-        55
-      ],
-      "idx": 163
-    },
-    {
-      "path": "../packages/core/src/app/route/Route.js",
-      "requires": [],
-      "uses": [
-        85,
-        86
-      ],
-      "idx": 164
-    },
-    {
-      "path": "../packages/core/src/util/History.js",
-      "requires": [
-        51
-      ],
-      "uses": [
-        335
-      ],
-      "idx": 165
-    },
-    {
-      "path": "../packages/core/src/app/route/Router.js",
-      "requires": [
-        163,
-        164,
-        165
       ],
       "uses": [],
       "idx": 166
     },
     {
+      "path": "../packages/core/src/util/Group.js",
+      "requires": [
+        126
+      ],
+      "uses": [],
+      "idx": 167
+    },
+    {
+      "path": "../packages/core/src/util/SorterCollection.js",
+      "requires": [
+        54,
+        126
+      ],
+      "uses": [],
+      "idx": 168
+    },
+    {
+      "path": "../packages/core/src/util/FilterCollection.js",
+      "requires": [
+        51,
+        126
+      ],
+      "uses": [],
+      "idx": 169
+    },
+    {
+      "path": "../packages/core/src/util/GroupCollection.js",
+      "requires": [
+        126,
+        167,
+        168,
+        169
+      ],
+      "uses": [],
+      "idx": 170
+    },
+    {
+      "path": "../packages/core/src/data/Store.js",
+      "requires": [
+        1,
+        154,
+        161,
+        162,
+        164,
+        165,
+        166,
+        170
+      ],
+      "uses": [
+        125,
+        174,
+        213
+      ],
+      "idx": 171
+    },
+    {
+      "path": "../packages/core/src/data/reader/Array.js",
+      "requires": [
+        165
+      ],
+      "uses": [],
+      "idx": 172
+    },
+    {
+      "path": "../packages/core/src/data/ArrayStore.js",
+      "requires": [
+        160,
+        171,
+        172
+      ],
+      "uses": [],
+      "idx": 173
+    },
+    {
+      "path": "../packages/core/src/data/StoreManager.js",
+      "requires": [
+        56,
+        173
+      ],
+      "uses": [
+        12,
+        160,
+        166,
+        171,
+        172
+      ],
+      "idx": 174
+    },
+    {
+      "path": "../packages/core/src/app/domain/Store.js",
+      "requires": [
+        88,
+        136
+      ],
+      "uses": [],
+      "idx": 175
+    },
+    {
+      "path": "../packages/core/src/app/route/Queue.js",
+      "requires": [],
+      "uses": [
+        56
+      ],
+      "idx": 176
+    },
+    {
+      "path": "../packages/core/src/app/route/Route.js",
+      "requires": [],
+      "uses": [
+        80
+      ],
+      "idx": 177
+    },
+    {
+      "path": "../packages/core/src/util/History.js",
+      "requires": [
+        52
+      ],
+      "uses": [
+        322
+      ],
+      "idx": 178
+    },
+    {
+      "path": "../packages/core/src/app/route/Router.js",
+      "requires": [
+        176,
+        177,
+        178
+      ],
+      "uses": [],
+      "idx": 179
+    },
+    {
       "path": "../packages/core/src/app/Controller.js",
       "requires": [
         20,
-        91,
-        109,
-        110,
-        161,
-        162,
-        166
+        89,
+        122,
+        123,
+        174,
+        175,
+        179
       ],
       "uses": [
         23,
-        122
+        135
       ],
-      "idx": 167
+      "idx": 180
     },
     {
       "path": "../packages/core/src/app/Application.js",
       "requires": [
-        55,
-        165,
-        167
+        56,
+        178,
+        180
       ],
       "uses": [
-        166
+        179
       ],
-      "idx": 168
+      "idx": 181
     },
     {
       "path": "../packages/core/src/app/Profile.js",
@@ -1728,44 +1845,44 @@ var Ext = Ext || {};
         4
       ],
       "uses": [
-        167
+        180
       ],
-      "idx": 169
+      "idx": 182
     },
     {
       "path": "../packages/core/src/app/domain/View.js",
       "requires": [
-        90
+        88
       ],
       "uses": [],
-      "idx": 170
+      "idx": 183
     },
     {
       "path": "../packages/core/src/app/ViewController.js",
       "requires": [
         12,
-        109,
-        170
+        122,
+        183
       ],
       "uses": [],
-      "idx": 171
+      "idx": 184
     },
     {
       "path": "../packages/core/src/util/Bag.js",
       "requires": [],
       "uses": [],
-      "idx": 172
+      "idx": 185
     },
     {
       "path": "../packages/core/src/util/Scheduler.js",
       "requires": [
         4,
-        172
+        185
       ],
       "uses": [
-        76
+        77
       ],
-      "idx": 173
+      "idx": 186
     },
     {
       "path": "../packages/core/src/data/Batch.js",
@@ -1773,150 +1890,38 @@ var Ext = Ext || {};
         4
       ],
       "uses": [],
-      "idx": 174
+      "idx": 187
     },
     {
       "path": "../packages/core/src/data/matrix/Slice.js",
       "requires": [],
       "uses": [],
-      "idx": 175
+      "idx": 188
     },
     {
       "path": "../packages/core/src/data/matrix/Side.js",
       "requires": [
-        175
-      ],
-      "uses": [],
-      "idx": 176
-    },
-    {
-      "path": "../packages/core/src/data/matrix/Matrix.js",
-      "requires": [
-        176
-      ],
-      "uses": [],
-      "idx": 177
-    },
-    {
-      "path": "../packages/core/src/data/session/ChangesVisitor.js",
-      "requires": [],
-      "uses": [],
-      "idx": 178
-    },
-    {
-      "path": "../packages/core/src/data/session/ChildChangesVisitor.js",
-      "requires": [
-        178
-      ],
-      "uses": [],
-      "idx": 179
-    },
-    {
-      "path": "../packages/core/src/data/session/BatchVisitor.js",
-      "requires": [],
-      "uses": [
-        174
-      ],
-      "idx": 180
-    },
-    {
-      "path": "../packages/core/src/data/Session.js",
-      "requires": [
-        122,
-        174,
-        177,
-        178,
-        179,
-        180
-      ],
-      "uses": [],
-      "idx": 181
-    },
-    {
-      "path": "../packages/core/src/util/Schedulable.js",
-      "requires": [],
-      "uses": [],
-      "idx": 182
-    },
-    {
-      "path": "../packages/core/src/app/bind/BaseBinding.js",
-      "requires": [
-        182
-      ],
-      "uses": [],
-      "idx": 183
-    },
-    {
-      "path": "../packages/core/src/app/bind/Binding.js",
-      "requires": [
-        183
-      ],
-      "uses": [],
-      "idx": 184
-    },
-    {
-      "path": "../packages/core/src/app/bind/AbstractStub.js",
-      "requires": [
-        182,
-        184
-      ],
-      "uses": [],
-      "idx": 185
-    },
-    {
-      "path": "../packages/core/src/app/bind/Stub.js",
-      "requires": [
-        184,
-        185
-      ],
-      "uses": [
-        190
-      ],
-      "idx": 186
-    },
-    {
-      "path": "../packages/core/src/app/bind/LinkStub.js",
-      "requires": [
-        186
-      ],
-      "uses": [],
-      "idx": 187
-    },
-    {
-      "path": "../packages/core/src/app/bind/RootStub.js",
-      "requires": [
-        185,
-        186,
-        187
-      ],
-      "uses": [],
-      "idx": 188
-    },
-    {
-      "path": "../packages/core/src/app/bind/Multi.js",
-      "requires": [
-        183
+        188
       ],
       "uses": [],
       "idx": 189
     },
     {
-      "path": "../packages/core/src/app/bind/Formula.js",
+      "path": "../packages/core/src/data/matrix/Matrix.js",
       "requires": [
-        22,
-        182
+        189
       ],
       "uses": [],
       "idx": 190
     },
     {
-      "path": "../packages/core/src/util/Fly.js",
+      "path": "../packages/core/src/data/session/ChangesVisitor.js",
       "requires": [],
       "uses": [],
       "idx": 191
     },
     {
-      "path": "../packages/core/src/parse/Tokenizer.js",
+      "path": "../packages/core/src/data/session/ChildChangesVisitor.js",
       "requires": [
         191
       ],
@@ -1924,29 +1929,34 @@ var Ext = Ext || {};
       "idx": 192
     },
     {
-      "path": "../packages/core/src/parse/Symbol.js",
+      "path": "../packages/core/src/data/session/BatchVisitor.js",
       "requires": [],
-      "uses": [],
+      "uses": [
+        187
+      ],
       "idx": 193
     },
     {
-      "path": "../packages/core/src/parse/symbol/Constant.js",
+      "path": "../packages/core/src/data/Session.js",
       "requires": [
+        135,
+        187,
+        190,
+        191,
+        192,
         193
       ],
       "uses": [],
       "idx": 194
     },
     {
-      "path": "../packages/core/src/parse/symbol/Infix.js",
-      "requires": [
-        193
-      ],
+      "path": "../packages/core/src/util/Schedulable.js",
+      "requires": [],
       "uses": [],
       "idx": 195
     },
     {
-      "path": "../packages/core/src/parse/symbol/InfixRight.js",
+      "path": "../packages/core/src/app/bind/BaseBinding.js",
       "requires": [
         195
       ],
@@ -1954,136 +1964,157 @@ var Ext = Ext || {};
       "idx": 196
     },
     {
-      "path": "../packages/core/src/parse/symbol/Paren.js",
+      "path": "../packages/core/src/app/bind/Binding.js",
       "requires": [
-        193
+        196
       ],
       "uses": [],
       "idx": 197
     },
     {
-      "path": "../packages/core/src/parse/symbol/Prefix.js",
+      "path": "../packages/core/src/app/bind/AbstractStub.js",
       "requires": [
-        193
+        195,
+        197
       ],
       "uses": [],
       "idx": 198
     },
     {
-      "path": "../packages/core/src/parse/Parser.js",
+      "path": "../packages/core/src/app/bind/Stub.js",
       "requires": [
-        191,
-        192,
-        194,
-        196,
         197,
         198
       ],
       "uses": [
-        193,
-        195
+        203
       ],
       "idx": 199
     },
     {
-      "path": "../packages/core/src/app/bind/Parser.js",
+      "path": "../packages/core/src/app/bind/LinkStub.js",
       "requires": [
-        85,
         199
       ],
       "uses": [],
       "idx": 200
     },
     {
-      "path": "../packages/core/src/app/bind/Template.js",
+      "path": "../packages/core/src/app/bind/RootStub.js",
       "requires": [
-        85,
+        198,
+        199,
         200
       ],
       "uses": [],
       "idx": 201
     },
     {
-      "path": "../packages/core/src/app/bind/TemplateBinding.js",
+      "path": "../packages/core/src/app/bind/Multi.js",
       "requires": [
-        183,
-        189,
-        201
+        196
       ],
       "uses": [],
       "idx": 202
     },
     {
+      "path": "../packages/core/src/app/bind/Formula.js",
+      "requires": [
+        22,
+        195
+      ],
+      "uses": [],
+      "idx": 203
+    },
+    {
+      "path": "../packages/core/src/app/bind/Template.js",
+      "requires": [
+        79
+      ],
+      "uses": [],
+      "idx": 204
+    },
+    {
+      "path": "../packages/core/src/app/bind/TemplateBinding.js",
+      "requires": [
+        196,
+        202,
+        204
+      ],
+      "uses": [],
+      "idx": 205
+    },
+    {
       "path": "../packages/core/src/data/ChainedStore.js",
       "requires": [
-        123,
-        149
+        136,
+        162
       ],
       "uses": [
-        86,
-        161
+        80,
+        174
       ],
-      "idx": 203
+      "idx": 206
     },
     {
       "path": "../packages/core/src/app/ViewModel.js",
       "requires": [
         3,
         12,
-        173,
-        181,
-        187,
-        188,
-        189,
-        190,
+        186,
+        194,
+        200,
+        201,
         202,
-        203
+        203,
+        205,
+        206
       ],
       "uses": [
         1,
-        122
+        135
       ],
-      "idx": 204
+      "idx": 207
     },
     {
       "path": "../packages/core/src/app/domain/Controller.js",
       "requires": [
-        90,
-        167
+        88,
+        180
       ],
       "uses": [
-        109
+        122
       ],
-      "idx": 205
+      "idx": 208
     },
     {
       "path": "../packages/core/src/direct/Manager.js",
       "requires": [
         4,
-        55
+        56
       ],
       "uses": [
-        86
+        80
       ],
-      "idx": 206
+      "idx": 209
     },
     {
       "path": "../packages/core/src/direct/Provider.js",
       "requires": [
         4,
-        206
+        209
       ],
       "uses": [],
-      "idx": 207
+      "idx": 210
     },
     {
       "path": "../packages/core/src/app/domain/Direct.js",
       "requires": [
-        90,
-        207
+        88,
+        210
       ],
       "uses": [],
-      "idx": 208
+      "idx": 211
     },
     {
       "path": "../packages/core/src/data/PageMap.js",
@@ -2091,103 +2122,103 @@ var Ext = Ext || {};
         22
       ],
       "uses": [],
-      "idx": 209
+      "idx": 212
     },
     {
       "path": "../packages/core/src/data/BufferedStore.js",
       "requires": [
-        50,
-        53,
-        112,
-        148,
-        209
+        51,
+        54,
+        125,
+        161,
+        212
       ],
       "uses": [
-        155,
-        156,
-        157
-      ],
-      "idx": 210
-    },
-    {
-      "path": "../packages/core/src/data/proxy/Direct.js",
-      "requires": [
-        150,
-        206
-      ],
-      "uses": [],
-      "idx": 211
-    },
-    {
-      "path": "../packages/core/src/data/DirectStore.js",
-      "requires": [
-        158,
-        211
-      ],
-      "uses": [],
-      "idx": 212
-    },
-    {
-      "path": "../packages/core/src/data/JsonP.js",
-      "requires": [],
-      "uses": [
-        76
+        168,
+        169,
+        170
       ],
       "idx": 213
     },
     {
-      "path": "../packages/core/src/data/proxy/JsonP.js",
+      "path": "../packages/core/src/data/proxy/Direct.js",
       "requires": [
-        150,
-        213
+        163,
+        209
       ],
       "uses": [],
       "idx": 214
     },
     {
-      "path": "../packages/core/src/data/JsonPStore.js",
+      "path": "../packages/core/src/data/DirectStore.js",
       "requires": [
-        152,
-        158,
+        171,
         214
       ],
       "uses": [],
       "idx": 215
     },
     {
-      "path": "../packages/core/src/data/JsonStore.js",
+      "path": "../packages/core/src/data/JsonP.js",
+      "requires": [],
+      "uses": [
+        77
+      ],
+      "idx": 216
+    },
+    {
+      "path": "../packages/core/src/data/proxy/JsonP.js",
       "requires": [
-        151,
-        152,
-        153,
-        158
+        163,
+        216
       ],
       "uses": [],
-      "idx": 216
+      "idx": 217
+    },
+    {
+      "path": "../packages/core/src/data/JsonPStore.js",
+      "requires": [
+        165,
+        171,
+        217
+      ],
+      "uses": [],
+      "idx": 218
+    },
+    {
+      "path": "../packages/core/src/data/JsonStore.js",
+      "requires": [
+        164,
+        165,
+        166,
+        171
+      ],
+      "uses": [],
+      "idx": 219
     },
     {
       "path": "../packages/core/src/data/ModelManager.js",
       "requires": [
-        122
+        135
       ],
       "uses": [
-        141
+        154
       ],
-      "idx": 217
+      "idx": 220
     },
     {
       "path": "../packages/core/src/data/NodeInterface.js",
       "requires": [
         4,
-        134,
-        136,
-        138,
-        153
+        147,
+        149,
+        151,
+        166
       ],
       "uses": [
-        122
+        135
       ],
-      "idx": 218
+      "idx": 221
     },
     {
       "path": "../packages/core/src/mixin/Queryable.js",
@@ -2195,412 +2226,324 @@ var Ext = Ext || {};
       "uses": [
         23
       ],
-      "idx": 219
+      "idx": 222
     },
     {
       "path": "../packages/core/src/data/TreeModel.js",
       "requires": [
-        141,
-        218,
-        219
+        154,
+        221,
+        222
       ],
       "uses": [],
-      "idx": 220
+      "idx": 223
     },
     {
       "path": "../packages/core/src/data/NodeStore.js",
       "requires": [
-        158,
-        218,
-        220
+        171,
+        221,
+        223
       ],
       "uses": [
-        141
+        154
       ],
-      "idx": 221
+      "idx": 224
     },
     {
       "path": "../packages/core/src/data/Request.js",
       "requires": [],
       "uses": [],
-      "idx": 222
+      "idx": 225
     },
     {
       "path": "../packages/core/src/data/TreeStore.js",
       "requires": [
-        53,
-        158,
-        218,
-        220
+        54,
+        171,
+        221,
+        223
       ],
       "uses": [
-        141
-      ],
-      "idx": 223
-    },
-    {
-      "path": "../packages/core/src/data/Types.js",
-      "requires": [
-        131
-      ],
-      "uses": [],
-      "idx": 224
-    },
-    {
-      "path": "../packages/core/src/data/Validation.js",
-      "requires": [
-        141
-      ],
-      "uses": [],
-      "idx": 225
-    },
-    {
-      "path": "../packages/core/src/dom/Helper.js",
-      "requires": [],
-      "uses": [
-        86
+        154
       ],
       "idx": 226
     },
     {
-      "path": "../packages/core/src/dom/Query.js",
+      "path": "../packages/core/src/data/Types.js",
       "requires": [
-        21,
-        226
+        144
       ],
-      "uses": [
-        22
-      ],
+      "uses": [],
       "idx": 227
     },
     {
-      "path": "../packages/core/src/data/reader/Xml.js",
+      "path": "../packages/core/src/data/Validation.js",
       "requires": [
-        143,
-        227
+        154
       ],
       "uses": [],
       "idx": 228
     },
     {
-      "path": "../packages/core/src/data/writer/Xml.js",
-      "requires": [
-        144
+      "path": "../packages/core/src/dom/Helper.js",
+      "requires": [],
+      "uses": [
+        80
       ],
-      "uses": [],
       "idx": 229
     },
     {
-      "path": "../packages/core/src/data/XmlStore.js",
+      "path": "../packages/core/src/dom/Query.js",
       "requires": [
-        151,
-        158,
-        228,
+        21,
         229
       ],
-      "uses": [],
+      "uses": [
+        22
+      ],
       "idx": 230
     },
     {
-      "path": "../packages/core/src/data/identifier/Negative.js",
+      "path": "../packages/core/src/data/reader/Xml.js",
       "requires": [
-        140
+        156,
+        230
       ],
       "uses": [],
       "idx": 231
     },
     {
-      "path": "../packages/core/src/data/identifier/Uuid.js",
+      "path": "../packages/core/src/data/writer/Xml.js",
       "requires": [
-        139
+        157
       ],
       "uses": [],
       "idx": 232
     },
     {
-      "path": "../packages/core/src/data/proxy/WebStorage.js",
+      "path": "../packages/core/src/data/XmlStore.js",
       "requires": [
-        140,
-        146
+        164,
+        171,
+        231,
+        232
       ],
-      "uses": [
-        53,
-        86,
-        142
-      ],
+      "uses": [],
       "idx": 233
     },
     {
-      "path": "../packages/core/src/data/proxy/LocalStorage.js",
+      "path": "../packages/core/src/data/identifier/Negative.js",
       "requires": [
-        233
+        153
       ],
       "uses": [],
       "idx": 234
     },
     {
-      "path": "../packages/core/src/data/proxy/Rest.js",
+      "path": "../packages/core/src/data/identifier/Uuid.js",
       "requires": [
-        151
+        152
       ],
       "uses": [],
       "idx": 235
     },
     {
-      "path": "../packages/core/src/data/proxy/SessionStorage.js",
+      "path": "../packages/core/src/data/proxy/WebStorage.js",
       "requires": [
-        233
+        153,
+        159
       ],
-      "uses": [],
+      "uses": [
+        54,
+        80,
+        155
+      ],
       "idx": 236
     },
     {
-      "path": "../packages/core/src/data/validator/Bound.js",
+      "path": "../packages/core/src/data/proxy/LocalStorage.js",
       "requires": [
-        132
+        236
       ],
-      "uses": [
-        86
-      ],
+      "uses": [],
       "idx": 237
     },
     {
-      "path": "../packages/core/src/data/validator/Format.js",
+      "path": "../packages/core/src/data/proxy/Rest.js",
       "requires": [
-        132
+        164
       ],
       "uses": [],
       "idx": 238
     },
     {
-      "path": "../packages/core/src/data/validator/Email.js",
+      "path": "../packages/core/src/data/proxy/SessionStorage.js",
       "requires": [
-        238
+        236
       ],
       "uses": [],
       "idx": 239
     },
     {
-      "path": "../packages/core/src/data/validator/List.js",
+      "path": "../packages/core/src/data/validator/Bound.js",
       "requires": [
-        132
+        145
       ],
-      "uses": [],
+      "uses": [
+        80
+      ],
       "idx": 240
     },
     {
-      "path": "../packages/core/src/data/validator/Exclusion.js",
+      "path": "../packages/core/src/data/validator/Format.js",
       "requires": [
-        240
+        145
       ],
       "uses": [],
       "idx": 241
     },
     {
-      "path": "../packages/core/src/data/validator/Inclusion.js",
+      "path": "../packages/core/src/data/validator/Email.js",
       "requires": [
-        240
+        241
       ],
       "uses": [],
       "idx": 242
     },
     {
-      "path": "../packages/core/src/data/validator/Length.js",
+      "path": "../packages/core/src/data/validator/List.js",
       "requires": [
-        237
+        145
       ],
       "uses": [],
       "idx": 243
     },
     {
-      "path": "../packages/core/src/data/validator/Presence.js",
+      "path": "../packages/core/src/data/validator/Exclusion.js",
       "requires": [
-        132
+        243
       ],
       "uses": [],
       "idx": 244
     },
     {
-      "path": "../packages/core/src/data/validator/Range.js",
+      "path": "../packages/core/src/data/validator/Inclusion.js",
       "requires": [
-        237
+        243
       ],
       "uses": [],
       "idx": 245
     },
     {
-      "path": "../packages/core/src/direct/Event.js",
-      "requires": [],
+      "path": "../packages/core/src/data/validator/Length.js",
+      "requires": [
+        240
+      ],
       "uses": [],
       "idx": 246
     },
     {
-      "path": "../packages/core/src/direct/RemotingEvent.js",
+      "path": "../packages/core/src/data/validator/Presence.js",
       "requires": [
-        246
+        145
       ],
-      "uses": [
-        206
-      ],
+      "uses": [],
       "idx": 247
     },
     {
-      "path": "../packages/core/src/direct/ExceptionEvent.js",
+      "path": "../packages/core/src/data/validator/Range.js",
       "requires": [
-        247
+        240
       ],
       "uses": [],
       "idx": 248
     },
     {
-      "path": "../packages/core/src/direct/JsonProvider.js",
+      "path": "../packages/core/src/direct/Event.js",
+      "requires": [],
+      "uses": [],
+      "idx": 249
+    },
+    {
+      "path": "../packages/core/src/direct/RemotingEvent.js",
       "requires": [
-        207
+        249
       ],
       "uses": [
-        206,
-        248
+        209
       ],
-      "idx": 249
+      "idx": 250
+    },
+    {
+      "path": "../packages/core/src/direct/ExceptionEvent.js",
+      "requires": [
+        250
+      ],
+      "uses": [],
+      "idx": 251
+    },
+    {
+      "path": "../packages/core/src/direct/JsonProvider.js",
+      "requires": [
+        210
+      ],
+      "uses": [
+        209,
+        251
+      ],
+      "idx": 252
     },
     {
       "path": "../packages/core/src/direct/PollingProvider.js",
       "requires": [
         18,
-        56,
-        248,
-        249
+        57,
+        251,
+        252
       ],
       "uses": [
-        206,
-        335
+        209,
+        322
       ],
-      "idx": 250
+      "idx": 253
     },
     {
       "path": "../packages/core/src/direct/RemotingMethod.js",
       "requires": [],
       "uses": [],
-      "idx": 251
+      "idx": 254
     },
     {
       "path": "../packages/core/src/direct/Transaction.js",
       "requires": [],
       "uses": [],
-      "idx": 252
+      "idx": 255
     },
     {
       "path": "../packages/core/src/direct/RemotingProvider.js",
       "requires": [
         1,
-        55,
-        206,
-        249,
-        251,
-        252
+        56,
+        209,
+        252,
+        254,
+        255
       ],
       "uses": [
         18,
         78,
-        248
+        251
       ],
-      "idx": 253
+      "idx": 256
     },
     {
       "path": "../packages/core/src/dom/GarbageCollector.js",
       "requires": [],
       "uses": [
-        49
+        50
       ],
-      "idx": 254
-    },
-    {
-      "path": "../packages/core/src/dom/TouchAction.js",
-      "requires": [
-        34,
-        49
-      ],
-      "uses": [],
-      "idx": 255
-    },
-    {
-      "path": "../packages/core/src/drag/Constraint.js",
-      "requires": [
-        12
-      ],
-      "uses": [],
-      "idx": 256
-    },
-    {
-      "path": "../packages/core/src/drag/Info.js",
-      "requires": [
-        10
-      ],
-      "uses": [],
       "idx": 257
-    },
-    {
-      "path": "../packages/core/src/drag/Item.js",
-      "requires": [
-        3,
-        4
-      ],
-      "uses": [],
-      "idx": 258
-    },
-    {
-      "path": "../packages/core/src/drag/Manager.js",
-      "requires": [],
-      "uses": [
-        49,
-        257
-      ],
-      "idx": 259
-    },
-    {
-      "path": "../packages/core/src/drag/Source.js",
-      "requires": [
-        256,
-        258
-      ],
-      "uses": [
-        12,
-        257
-      ],
-      "idx": 260
-    },
-    {
-      "path": "../packages/core/src/drag/Target.js",
-      "requires": [
-        258,
-        259
-      ],
-      "uses": [],
-      "idx": 261
-    },
-    {
-      "path": "../packages/core/src/drag/proxy/None.js",
-      "requires": [
-        12
-      ],
-      "uses": [],
-      "idx": 262
-    },
-    {
-      "path": "../packages/core/src/drag/proxy/Original.js",
-      "requires": [
-        262
-      ],
-      "uses": [],
-      "idx": 263
-    },
-    {
-      "path": "../packages/core/src/drag/proxy/Placeholder.js",
-      "requires": [
-        262
-      ],
-      "uses": [],
-      "idx": 264
     },
     {
       "path": "../packages/core/src/event/gesture/Recognizer.js",
@@ -2609,10 +2552,68 @@ var Ext = Ext || {};
         37
       ],
       "uses": [],
-      "idx": 265
+      "idx": 258
     },
     {
       "path": "../packages/core/src/event/gesture/SingleTouch.js",
+      "requires": [
+        258
+      ],
+      "uses": [],
+      "idx": 259
+    },
+    {
+      "path": "../packages/core/src/event/gesture/DoubleTap.js",
+      "requires": [
+        259
+      ],
+      "uses": [],
+      "idx": 260
+    },
+    {
+      "path": "../packages/core/src/event/gesture/Drag.js",
+      "requires": [
+        259
+      ],
+      "uses": [],
+      "idx": 261
+    },
+    {
+      "path": "../packages/core/src/event/gesture/Swipe.js",
+      "requires": [
+        259
+      ],
+      "uses": [],
+      "idx": 262
+    },
+    {
+      "path": "../packages/core/src/event/gesture/EdgeSwipe.js",
+      "requires": [
+        262
+      ],
+      "uses": [
+        50
+      ],
+      "idx": 263
+    },
+    {
+      "path": "../packages/core/src/event/gesture/LongPress.js",
+      "requires": [
+        259
+      ],
+      "uses": [],
+      "idx": 264
+    },
+    {
+      "path": "../packages/core/src/event/gesture/MultiTouch.js",
+      "requires": [
+        258
+      ],
+      "uses": [],
+      "idx": 265
+    },
+    {
+      "path": "../packages/core/src/event/gesture/Pinch.js",
       "requires": [
         265
       ],
@@ -2620,65 +2621,58 @@ var Ext = Ext || {};
       "idx": 266
     },
     {
-      "path": "../packages/core/src/event/gesture/DoubleTap.js",
+      "path": "../packages/core/src/event/gesture/Rotate.js",
       "requires": [
-        266
+        265
       ],
-      "uses": [
-        49
-      ],
+      "uses": [],
       "idx": 267
     },
     {
-      "path": "../packages/core/src/event/gesture/Drag.js",
+      "path": "../packages/core/src/event/gesture/Tap.js",
       "requires": [
-        266
+        259
       ],
-      "uses": [
-        49
-      ],
+      "uses": [],
       "idx": 268
     },
     {
-      "path": "../packages/core/src/event/gesture/Swipe.js",
+      "path": "../packages/core/src/event/publisher/Focus.js",
       "requires": [
-        266
+        36,
+        50,
+        77
       ],
-      "uses": [],
+      "uses": [
+        35
+      ],
       "idx": 269
     },
     {
-      "path": "../packages/core/src/event/gesture/EdgeSwipe.js",
-      "requires": [
-        269
-      ],
-      "uses": [
-        49
-      ],
+      "path": "../packages/core/src/fx/State.js",
+      "requires": [],
+      "uses": [],
       "idx": 270
     },
     {
-      "path": "../packages/core/src/event/gesture/LongPress.js",
+      "path": "../packages/core/src/fx/animation/Abstract.js",
       "requires": [
-        266
+        24,
+        270
       ],
-      "uses": [
-        37,
-        49,
-        268
-      ],
+      "uses": [],
       "idx": 271
     },
     {
-      "path": "../packages/core/src/event/gesture/MultiTouch.js",
+      "path": "../packages/core/src/fx/animation/Slide.js",
       "requires": [
-        265
+        271
       ],
       "uses": [],
       "idx": 272
     },
     {
-      "path": "../packages/core/src/event/gesture/Pinch.js",
+      "path": "../packages/core/src/fx/animation/SlideOut.js",
       "requires": [
         272
       ],
@@ -2686,76 +2680,83 @@ var Ext = Ext || {};
       "idx": 273
     },
     {
-      "path": "../packages/core/src/event/gesture/Rotate.js",
+      "path": "../packages/core/src/fx/animation/Fade.js",
       "requires": [
-        272
+        271
       ],
       "uses": [],
       "idx": 274
     },
     {
-      "path": "../packages/core/src/event/gesture/Tap.js",
+      "path": "../packages/core/src/fx/animation/FadeOut.js",
       "requires": [
-        266
+        274
       ],
-      "uses": [
-        49
-      ],
+      "uses": [],
       "idx": 275
     },
     {
-      "path": "../packages/core/src/event/publisher/Focus.js",
+      "path": "../packages/core/src/fx/animation/Flip.js",
       "requires": [
-        36,
-        49,
-        76
+        271
       ],
-      "uses": [
-        35
-      ],
+      "uses": [],
       "idx": 276
     },
     {
-      "path": "../packages/core/src/fx/State.js",
-      "requires": [],
+      "path": "../packages/core/src/fx/animation/Pop.js",
+      "requires": [
+        271
+      ],
       "uses": [],
       "idx": 277
     },
     {
-      "path": "../packages/core/src/fx/animation/Abstract.js",
+      "path": "../packages/core/src/fx/animation/PopOut.js",
       "requires": [
-        24,
         277
       ],
       "uses": [],
       "idx": 278
     },
     {
-      "path": "../packages/core/src/fx/animation/Slide.js",
+      "path": "../packages/core/src/fx/Animation.js",
       "requires": [
+        272,
+        273,
+        274,
+        275,
+        276,
+        277,
         278
       ],
-      "uses": [],
+      "uses": [
+        271
+      ],
       "idx": 279
     },
     {
-      "path": "../packages/core/src/fx/animation/SlideOut.js",
+      "path": "../packages/core/src/fx/runner/Css.js",
       "requires": [
+        24,
         279
       ],
       "uses": [],
       "idx": 280
     },
     {
-      "path": "../packages/core/src/fx/animation/Fade.js",
+      "path": "../packages/core/src/fx/runner/CssTransition.js",
       "requires": [
-        278
+        19,
+        280
       ],
-      "uses": [],
+      "uses": [
+        279
+      ],
       "idx": 281
     },
     {
-      "path": "../packages/core/src/fx/animation/FadeOut.js",
+      "path": "../packages/core/src/fx/Runner.js",
       "requires": [
         281
       ],
@@ -2763,23 +2764,23 @@ var Ext = Ext || {};
       "idx": 282
     },
     {
-      "path": "../packages/core/src/fx/animation/Flip.js",
+      "path": "../packages/core/src/fx/animation/Cube.js",
       "requires": [
-        278
+        271
       ],
       "uses": [],
       "idx": 283
     },
     {
-      "path": "../packages/core/src/fx/animation/Pop.js",
+      "path": "../packages/core/src/fx/animation/Wipe.js",
       "requires": [
-        278
+        279
       ],
       "uses": [],
       "idx": 284
     },
     {
-      "path": "../packages/core/src/fx/animation/PopOut.js",
+      "path": "../packages/core/src/fx/animation/WipeOut.js",
       "requires": [
         284
       ],
@@ -2787,136 +2788,20 @@ var Ext = Ext || {};
       "idx": 285
     },
     {
-      "path": "../packages/core/src/fx/Animation.js",
-      "requires": [
-        279,
-        280,
-        281,
-        282,
-        283,
-        284,
-        285
-      ],
-      "uses": [
-        278
-      ],
-      "idx": 286
-    },
-    {
-      "path": "../packages/core/src/fx/runner/Css.js",
-      "requires": [
-        24,
-        286
-      ],
-      "uses": [],
-      "idx": 287
-    },
-    {
-      "path": "../packages/core/src/fx/runner/CssTransition.js",
-      "requires": [
-        19,
-        287
-      ],
-      "uses": [
-        286
-      ],
-      "idx": 288
-    },
-    {
-      "path": "../packages/core/src/fx/Runner.js",
-      "requires": [
-        288
-      ],
-      "uses": [],
-      "idx": 289
-    },
-    {
-      "path": "../packages/core/src/fx/animation/Cube.js",
-      "requires": [
-        278
-      ],
-      "uses": [],
-      "idx": 290
-    },
-    {
-      "path": "../packages/core/src/fx/animation/Wipe.js",
-      "requires": [
-        286
-      ],
-      "uses": [],
-      "idx": 291
-    },
-    {
-      "path": "../packages/core/src/fx/animation/WipeOut.js",
-      "requires": [
-        291
-      ],
-      "uses": [],
-      "idx": 292
-    },
-    {
-      "path": "../packages/core/src/fx/easing/Abstract.js",
-      "requires": [],
-      "uses": [],
-      "idx": 293
-    },
-    {
-      "path": "../packages/core/src/fx/easing/Bounce.js",
-      "requires": [
-        293
-      ],
-      "uses": [],
-      "idx": 294
-    },
-    {
-      "path": "../packages/core/src/fx/easing/Momentum.js",
-      "requires": [
-        293
-      ],
-      "uses": [],
-      "idx": 295
-    },
-    {
-      "path": "../packages/core/src/fx/easing/BoundMomentum.js",
-      "requires": [
-        293,
-        294,
-        295
-      ],
-      "uses": [],
-      "idx": 296
-    },
-    {
-      "path": "../packages/core/src/fx/easing/Linear.js",
-      "requires": [
-        293
-      ],
-      "uses": [],
-      "idx": 297
-    },
-    {
       "path": "../packages/core/src/fx/easing/EaseIn.js",
       "requires": [
-        297
+        97
       ],
       "uses": [],
-      "idx": 298
-    },
-    {
-      "path": "../packages/core/src/fx/easing/EaseOut.js",
-      "requires": [
-        297
-      ],
-      "uses": [],
-      "idx": 299
+      "idx": 286
     },
     {
       "path": "../packages/core/src/fx/easing/Easing.js",
       "requires": [
-        297
+        97
       ],
       "uses": [],
-      "idx": 300
+      "idx": 287
     },
     {
       "path": "../packages/core/src/fx/layout/card/Abstract.js",
@@ -2924,21 +2809,138 @@ var Ext = Ext || {};
         24
       ],
       "uses": [],
-      "idx": 301
+      "idx": 288
     },
     {
       "path": "../packages/core/src/fx/layout/card/Style.js",
       "requires": [
-        286,
-        301
+        279,
+        288
+      ],
+      "uses": [
+        281
+      ],
+      "idx": 289
+    },
+    {
+      "path": "../packages/core/src/fx/layout/card/Slide.js",
+      "requires": [
+        289
+      ],
+      "uses": [],
+      "idx": 290
+    },
+    {
+      "path": "../packages/core/src/fx/layout/card/Cover.js",
+      "requires": [
+        289
+      ],
+      "uses": [],
+      "idx": 291
+    },
+    {
+      "path": "../packages/core/src/fx/layout/card/Reveal.js",
+      "requires": [
+        289
+      ],
+      "uses": [],
+      "idx": 292
+    },
+    {
+      "path": "../packages/core/src/fx/layout/card/Fade.js",
+      "requires": [
+        289
+      ],
+      "uses": [],
+      "idx": 293
+    },
+    {
+      "path": "../packages/core/src/fx/layout/card/Flip.js",
+      "requires": [
+        289
+      ],
+      "uses": [],
+      "idx": 294
+    },
+    {
+      "path": "../packages/core/src/fx/layout/card/Pop.js",
+      "requires": [
+        289
+      ],
+      "uses": [],
+      "idx": 295
+    },
+    {
+      "path": "../packages/core/src/fx/layout/card/Scroll.js",
+      "requires": [
+        97,
+        288
+      ],
+      "uses": [
+        19
+      ],
+      "idx": 296
+    },
+    {
+      "path": "../packages/core/src/fx/layout/Card.js",
+      "requires": [
+        290,
+        291,
+        292,
+        293,
+        294,
+        295,
+        296
       ],
       "uses": [
         288
       ],
+      "idx": 297
+    },
+    {
+      "path": "../packages/core/src/fx/layout/card/Cube.js",
+      "requires": [
+        289
+      ],
+      "uses": [],
+      "idx": 298
+    },
+    {
+      "path": "../packages/core/src/fx/layout/card/ScrollCover.js",
+      "requires": [
+        296
+      ],
+      "uses": [],
+      "idx": 299
+    },
+    {
+      "path": "../packages/core/src/fx/layout/card/ScrollReveal.js",
+      "requires": [
+        296
+      ],
+      "uses": [],
+      "idx": 300
+    },
+    {
+      "path": "../packages/core/src/fx/runner/CssAnimation.js",
+      "requires": [
+        280
+      ],
+      "uses": [
+        279
+      ],
+      "idx": 301
+    },
+    {
+      "path": "../packages/core/src/list/AbstractTreeItem.js",
+      "requires": [
+        84
+      ],
+      "uses": [],
       "idx": 302
     },
     {
-      "path": "../packages/core/src/fx/layout/card/Slide.js",
+      "path": "../packages/core/src/list/RootTreeItem.js",
       "requires": [
         302
       ],
@@ -2946,7 +2948,7 @@ var Ext = Ext || {};
       "idx": 303
     },
     {
-      "path": "../packages/core/src/fx/layout/card/Cover.js",
+      "path": "../packages/core/src/list/TreeItem.js",
       "requires": [
         302
       ],
@@ -2954,134 +2956,17 @@ var Ext = Ext || {};
       "idx": 304
     },
     {
-      "path": "../packages/core/src/fx/layout/card/Reveal.js",
-      "requires": [
-        302
-      ],
-      "uses": [],
-      "idx": 305
-    },
-    {
-      "path": "../packages/core/src/fx/layout/card/Fade.js",
-      "requires": [
-        302
-      ],
-      "uses": [],
-      "idx": 306
-    },
-    {
-      "path": "../packages/core/src/fx/layout/card/Flip.js",
-      "requires": [
-        302
-      ],
-      "uses": [],
-      "idx": 307
-    },
-    {
-      "path": "../packages/core/src/fx/layout/card/Pop.js",
-      "requires": [
-        302
-      ],
-      "uses": [],
-      "idx": 308
-    },
-    {
-      "path": "../packages/core/src/fx/layout/card/Scroll.js",
-      "requires": [
-        297,
-        301
-      ],
-      "uses": [
-        19
-      ],
-      "idx": 309
-    },
-    {
-      "path": "../packages/core/src/fx/layout/Card.js",
-      "requires": [
-        303,
-        304,
-        305,
-        306,
-        307,
-        308,
-        309
-      ],
-      "uses": [
-        301
-      ],
-      "idx": 310
-    },
-    {
-      "path": "../packages/core/src/fx/layout/card/Cube.js",
-      "requires": [
-        302
-      ],
-      "uses": [],
-      "idx": 311
-    },
-    {
-      "path": "../packages/core/src/fx/layout/card/ScrollCover.js",
-      "requires": [
-        309
-      ],
-      "uses": [],
-      "idx": 312
-    },
-    {
-      "path": "../packages/core/src/fx/layout/card/ScrollReveal.js",
-      "requires": [
-        309
-      ],
-      "uses": [],
-      "idx": 313
-    },
-    {
-      "path": "../packages/core/src/fx/runner/CssAnimation.js",
-      "requires": [
-        287
-      ],
-      "uses": [
-        286
-      ],
-      "idx": 314
-    },
-    {
-      "path": "../packages/core/src/list/AbstractTreeItem.js",
-      "requires": [
-        82
-      ],
-      "uses": [],
-      "idx": 315
-    },
-    {
-      "path": "../packages/core/src/list/RootTreeItem.js",
-      "requires": [
-        315
-      ],
-      "uses": [],
-      "idx": 316
-    },
-    {
-      "path": "../packages/core/src/list/TreeItem.js",
-      "requires": [
-        82,
-        315
-      ],
-      "uses": [],
-      "idx": 317
-    },
-    {
       "path": "../packages/core/src/list/Tree.js",
       "requires": [
-        82,
-        316,
-        317
+        84,
+        194,
+        303,
+        304
       ],
       "uses": [
-        161
+        174
       ],
-      "idx": 318
+      "idx": 305
     },
     {
       "path": "../packages/core/src/mixin/Container.js",
@@ -3091,7 +2976,7 @@ var Ext = Ext || {};
       "uses": [
         20
       ],
-      "idx": 319
+      "idx": 306
     },
     {
       "path": "../packages/core/src/mixin/Hookable.js",
@@ -3099,7 +2984,7 @@ var Ext = Ext || {};
         0
       ],
       "uses": [],
-      "idx": 320
+      "idx": 307
     },
     {
       "path": "../packages/core/src/mixin/Mashup.js",
@@ -3107,18 +2992,18 @@ var Ext = Ext || {};
         0
       ],
       "uses": [],
-      "idx": 321
+      "idx": 308
     },
     {
       "path": "../packages/core/src/mixin/Responsive.js",
       "requires": [
         0,
-        76
+        77
       ],
       "uses": [
-        49
+        50
       ],
-      "idx": 322
+      "idx": 309
     },
     {
       "path": "../packages/core/src/mixin/Selectable.js",
@@ -3126,9 +3011,9 @@ var Ext = Ext || {};
         0
       ],
       "uses": [
-        55
+        56
       ],
-      "idx": 323
+      "idx": 310
     },
     {
       "path": "../packages/core/src/mixin/Traversable.js",
@@ -3136,74 +3021,202 @@ var Ext = Ext || {};
         0
       ],
       "uses": [],
-      "idx": 324
+      "idx": 311
     },
     {
       "path": "../packages/core/src/perf/Accumulator.js",
       "requires": [
-        89
+        87
       ],
       "uses": [],
-      "idx": 325
+      "idx": 312
     },
     {
       "path": "../packages/core/src/perf/Monitor.js",
       "requires": [
-        325
+        312
       ],
       "uses": [],
-      "idx": 326
+      "idx": 313
     },
     {
       "path": "../packages/core/src/plugin/Abstract.js",
       "requires": [],
       "uses": [],
-      "idx": 327
+      "idx": 314
     },
     {
       "path": "../packages/core/src/plugin/LazyItems.js",
       "requires": [
-        327
+        314
       ],
       "uses": [],
-      "idx": 328
+      "idx": 315
     },
     {
       "path": "../packages/core/src/util/Base64.js",
       "requires": [],
       "uses": [],
-      "idx": 329
+      "idx": 316
     },
     {
       "path": "../packages/core/src/util/DelimitedValue.js",
       "requires": [],
       "uses": [],
-      "idx": 330
+      "idx": 317
     },
     {
       "path": "../packages/core/src/util/CSV.js",
       "requires": [
-        330
+        317
       ],
       "uses": [],
-      "idx": 331
+      "idx": 318
     },
     {
       "path": "../packages/core/src/util/ItemCollection.js",
       "requires": [
-        55
+        56
       ],
       "uses": [],
-      "idx": 332
+      "idx": 319
     },
     {
       "path": "../packages/core/src/util/LocalStorage.js",
       "requires": [],
       "uses": [],
-      "idx": 333
+      "idx": 320
     },
     {
       "path": "../packages/core/src/util/TSV.js",
+      "requires": [
+        317
+      ],
+      "uses": [],
+      "idx": 321
+    },
+    {
+      "path": "../packages/core/src/util/TaskManager.js",
+      "requires": [
+        57
+      ],
+      "uses": [],
+      "idx": 322
+    },
+    {
+      "path": "../packages/core/src/util/TextMetrics.js",
+      "requires": [
+        50
+      ],
+      "uses": [],
+      "idx": 323
+    },
+    {
+      "path": "../packages/core/src/util/paintmonitor/OverflowChange.js",
+      "requires": [
+        46
+      ],
+      "uses": [],
+      "idx": 324
+    },
+    {
+      "path": "../classic/classic/src/Action.js",
+      "requires": [],
+      "uses": [],
+      "idx": 325
+    },
+    {
+      "path": "../classic/classic/src/ElementLoader.js",
+      "requires": [
+        52
+      ],
+      "uses": [
+        17,
+        18
+      ],
+      "idx": 326
+    },
+    {
+      "path": "../classic/classic/src/ComponentLoader.js",
+      "requires": [
+        326
+      ],
+      "uses": [],
+      "idx": 327
+    },
+    {
+      "path": "../classic/classic/src/layout/SizeModel.js",
+      "requires": [],
+      "uses": [],
+      "idx": 328
+    },
+    {
+      "path": "../classic/classic/src/layout/Layout.js",
+      "requires": [
+        12,
+        87,
+        328
+      ],
+      "uses": [
+        554
+      ],
+      "idx": 329
+    },
+    {
+      "path": "../classic/classic/src/layout/container/Container.js",
+      "requires": [
+        87,
+        110,
+        329
+      ],
+      "uses": [
+        229
+      ],
+      "idx": 330
+    },
+    {
+      "path": "../classic/classic/src/layout/container/Auto.js",
+      "requires": [
+        330
+      ],
+      "uses": [
+        87
+      ],
+      "idx": 331
+    },
+    {
+      "path": "../classic/classic/src/ZIndexManager.js",
+      "requires": [
+        77,
+        168,
+        169
+      ],
+      "uses": [
+        50,
+        126
+      ],
+      "idx": 332
+    },
+    {
+      "path": "../classic/classic/src/container/Container.js",
+      "requires": [
+        56,
+        118,
+        222,
+        306,
+        331,
+        332
+      ],
+      "uses": [
+        12,
+        20,
+        23,
+        319
+      ],
+      "idx": 333
+    },
+    {
+      "path": "../classic/classic/src/layout/container/Editor.js",
       "requires": [
         330
       ],
@@ -3211,448 +3224,255 @@ var Ext = Ext || {};
       "idx": 334
     },
     {
-      "path": "../packages/core/src/util/TaskManager.js",
-      "requires": [
-        56
-      ],
-      "uses": [],
-      "idx": 335
-    },
-    {
-      "path": "../packages/core/src/util/TextMetrics.js",
-      "requires": [
-        49
-      ],
-      "uses": [],
-      "idx": 336
-    },
-    {
-      "path": "../packages/core/src/util/translatable/Abstract.js",
-      "requires": [
-        24,
-        297
-      ],
-      "uses": [
-        19
-      ],
-      "idx": 337
-    },
-    {
-      "path": "../packages/core/src/util/translatable/Dom.js",
-      "requires": [
-        337
-      ],
-      "uses": [],
-      "idx": 338
-    },
-    {
-      "path": "../packages/core/src/util/translatable/CssTransform.js",
-      "requires": [
-        338
-      ],
-      "uses": [],
-      "idx": 339
-    },
-    {
-      "path": "../packages/core/src/util/translatable/ScrollPosition.js",
-      "requires": [
-        338
-      ],
-      "uses": [],
-      "idx": 340
-    },
-    {
-      "path": "../packages/core/src/util/translatable/ScrollParent.js",
-      "requires": [
-        338
-      ],
-      "uses": [],
-      "idx": 341
-    },
-    {
-      "path": "../packages/core/src/util/translatable/CssPosition.js",
-      "requires": [
-        338
-      ],
-      "uses": [],
-      "idx": 342
-    },
-    {
-      "path": "../packages/core/src/util/Translatable.js",
-      "requires": [
-        339,
-        340,
-        341,
-        342
-      ],
-      "uses": [],
-      "idx": 343
-    },
-    {
-      "path": "../packages/core/src/util/paintmonitor/OverflowChange.js",
-      "requires": [
-        45
-      ],
-      "uses": [],
-      "idx": 344
-    },
-    {
-      "path": "../classic/classic/src/Action.js",
-      "requires": [],
-      "uses": [],
-      "idx": 345
-    },
-    {
-      "path": "../classic/classic/src/ElementLoader.js",
-      "requires": [
-        51
-      ],
-      "uses": [
-        17,
-        18
-      ],
-      "idx": 346
-    },
-    {
-      "path": "../classic/classic/src/ComponentLoader.js",
-      "requires": [
-        346
-      ],
-      "uses": [],
-      "idx": 347
-    },
-    {
-      "path": "../classic/classic/src/layout/SizeModel.js",
-      "requires": [],
-      "uses": [],
-      "idx": 348
-    },
-    {
-      "path": "../classic/classic/src/layout/Layout.js",
-      "requires": [
-        12,
-        89,
-        348
-      ],
-      "uses": [
-        49,
-        578
-      ],
-      "idx": 349
-    },
-    {
-      "path": "../classic/classic/src/layout/container/Container.js",
-      "requires": [
-        89,
-        97,
-        349
-      ],
-      "uses": [
-        226
-      ],
-      "idx": 350
-    },
-    {
-      "path": "../classic/classic/src/layout/container/Auto.js",
-      "requires": [
-        350
-      ],
-      "uses": [
-        89
-      ],
-      "idx": 351
-    },
-    {
-      "path": "../classic/classic/src/ZIndexManager.js",
-      "requires": [
-        76,
-        155,
-        156
-      ],
-      "uses": [
-        49,
-        113
-      ],
-      "idx": 352
-    },
-    {
-      "path": "../classic/classic/src/container/Container.js",
-      "requires": [
-        55,
-        105,
-        219,
-        319,
-        332,
-        345,
-        351,
-        352
-      ],
-      "uses": [
-        12,
-        20,
-        23
-      ],
-      "idx": 353
-    },
-    {
-      "path": "../classic/classic/src/layout/container/Editor.js",
-      "requires": [
-        350
-      ],
-      "uses": [],
-      "idx": 354
-    },
-    {
       "path": "../classic/classic/src/Editor.js",
       "requires": [
-        353,
-        354
+        333,
+        334
       ],
       "uses": [
         1,
         20
       ],
-      "idx": 355
+      "idx": 335
     },
     {
       "path": "../classic/classic/src/EventManager.js",
       "requires": [],
       "uses": [
-        76
+        77
       ],
-      "idx": 356
-    },
-    {
-      "path": "../classic/classic/src/Gadget.js",
-      "requires": [
-        82
-      ],
-      "uses": [],
-      "idx": 357
+      "idx": 336
     },
     {
       "path": "../classic/classic/src/Img.js",
       "requires": [
-        77,
-        105
+        118
       ],
       "uses": [],
-      "idx": 358
+      "idx": 337
     },
     {
       "path": "../classic/classic/src/util/StoreHolder.js",
       "requires": [
-        161
+        174
       ],
       "uses": [],
-      "idx": 359
+      "idx": 338
     },
     {
       "path": "../classic/classic/src/LoadMask.js",
       "requires": [
-        105,
-        359
+        118,
+        338
       ],
       "uses": [
-        49,
-        76,
-        161
+        77,
+        174
       ],
-      "idx": 360
+      "idx": 339
     },
     {
       "path": "../classic/classic/src/layout/component/Component.js",
       "requires": [
-        349
+        329
       ],
       "uses": [],
-      "idx": 361
+      "idx": 340
     },
     {
       "path": "../classic/classic/src/layout/component/Auto.js",
       "requires": [
-        361
+        340
       ],
       "uses": [],
-      "idx": 362
+      "idx": 341
     },
     {
       "path": "../classic/classic/src/layout/component/ProgressBar.js",
       "requires": [
-        362
+        341
       ],
       "uses": [],
-      "idx": 363
+      "idx": 342
     },
     {
       "path": "../classic/classic/src/ProgressBar.js",
       "requires": [
-        83,
-        86,
-        93,
-        105,
-        335,
-        363
+        80,
+        91,
+        118,
+        322,
+        342
       ],
       "uses": [
-        72
+        73,
+        87
       ],
-      "idx": 364
+      "idx": 343
+    },
+    {
+      "path": "../classic/classic/src/ProgressBarWidget.js",
+      "requires": [
+        84,
+        343
+      ],
+      "uses": [
+        87
+      ],
+      "idx": 344
     },
     {
       "path": "../classic/classic/src/dom/ButtonElement.js",
       "requires": [
-        49
+        50
       ],
       "uses": [],
-      "idx": 365
+      "idx": 345
     },
     {
       "path": "../classic/classic/src/button/Manager.js",
       "requires": [],
       "uses": [],
-      "idx": 366
+      "idx": 346
     },
     {
       "path": "../classic/classic/src/menu/Manager.js",
       "requires": [],
       "uses": [
         20,
-        95,
-        105,
-        542
+        118,
+        519
       ],
-      "idx": 367
+      "idx": 347
     },
     {
       "path": "../classic/classic/src/util/ClickRepeater.js",
       "requires": [
-        51
+        52
       ],
       "uses": [],
-      "idx": 368
+      "idx": 348
     },
     {
       "path": "../classic/classic/src/button/Button.js",
       "requires": [
-        77,
-        105,
-        219,
-        336,
-        365,
-        366,
-        367,
-        368
+        117,
+        118,
+        222,
+        323,
+        345,
+        346,
+        347,
+        348
       ],
       "uses": [
-        487
+        467
       ],
-      "idx": 369
+      "idx": 349
     },
     {
       "path": "../classic/classic/src/button/Split.js",
       "requires": [
-        369
+        349
       ],
       "uses": [
-        49
+        50,
+        118
       ],
-      "idx": 370
+      "idx": 350
     },
     {
       "path": "../classic/classic/src/button/Cycle.js",
       "requires": [
-        370
+        350
       ],
       "uses": [],
-      "idx": 371
+      "idx": 351
     },
     {
       "path": "../classic/classic/src/layout/container/SegmentedButton.js",
       "requires": [
-        350
+        330
       ],
       "uses": [],
-      "idx": 372
+      "idx": 352
     },
     {
       "path": "../classic/classic/src/button/Segmented.js",
       "requires": [
-        353,
-        369,
-        372
+        333,
+        349,
+        352
       ],
       "uses": [],
-      "idx": 373
+      "idx": 353
     },
     {
       "path": "../classic/classic/src/panel/Bar.js",
       "requires": [
-        353
+        333
       ],
       "uses": [],
-      "idx": 374
+      "idx": 354
     },
     {
       "path": "../classic/classic/src/panel/Title.js",
       "requires": [
-        77,
-        105
+        118
       ],
       "uses": [],
-      "idx": 375
+      "idx": 355
     },
     {
       "path": "../classic/classic/src/panel/Tool.js",
       "requires": [
-        77,
-        105
+        118
       ],
       "uses": [
-        487
+        467
       ],
-      "idx": 376
+      "idx": 356
     },
     {
       "path": "../classic/classic/src/util/KeyMap.js",
       "requires": [],
       "uses": [],
-      "idx": 377
+      "idx": 357
     },
     {
       "path": "../classic/classic/src/util/KeyNav.js",
       "requires": [
-        377
+        357
       ],
       "uses": [],
-      "idx": 378
+      "idx": 358
     },
     {
       "path": "../classic/classic/src/util/FocusableContainer.js",
       "requires": [
         0,
-        378
+        358
       ],
       "uses": [
-        49,
-        105
+        118
       ],
-      "idx": 379
+      "idx": 359
     },
     {
       "path": "../classic/classic/src/panel/Header.js",
       "requires": [
-        362,
-        374,
-        375,
-        376,
-        379
+        194,
+        341,
+        354,
+        355,
+        356,
+        359
       ],
       "uses": [
         20,
-        105
+        118
       ],
-      "idx": 380
+      "idx": 360
     },
     {
       "path": "../classic/classic/src/layout/container/boxOverflow/None.js",
@@ -3660,466 +3480,471 @@ var Ext = Ext || {};
         12
       ],
       "uses": [],
-      "idx": 381
+      "idx": 361
     },
     {
       "path": "../classic/classic/src/layout/container/boxOverflow/Scroller.js",
       "requires": [
         4,
-        49,
-        368,
-        381
+        50,
+        348,
+        361
       ],
       "uses": [],
-      "idx": 382
+      "idx": 362
     },
     {
       "path": "../classic/classic/src/dd/DragDropManager.js",
       "requires": [
-        33,
-        34
+        33
       ],
       "uses": [
-        49,
-        415,
-        487
+        395,
+        467
       ],
-      "idx": 383
+      "idx": 363
     },
     {
       "path": "../classic/classic/src/resizer/Splitter.js",
       "requires": [
-        89,
-        105
+        87,
+        118
       ],
       "uses": [
-        411
+        391
       ],
-      "idx": 384
+      "idx": 364
     },
     {
       "path": "../classic/classic/src/layout/container/Box.js",
       "requires": [
-        85,
-        350,
-        381,
-        382,
-        383,
-        384
+        79,
+        330,
+        361,
+        362,
+        363,
+        364
       ],
       "uses": [
         12,
-        348,
-        362
+        194,
+        328,
+        341
       ],
-      "idx": 385
+      "idx": 365
     },
     {
       "path": "../classic/classic/src/layout/container/HBox.js",
       "requires": [
-        385
+        365
       ],
       "uses": [],
-      "idx": 386
+      "idx": 366
     },
     {
       "path": "../classic/classic/src/layout/container/VBox.js",
       "requires": [
-        385
+        365
       ],
       "uses": [],
-      "idx": 387
+      "idx": 367
     },
     {
       "path": "../classic/classic/src/toolbar/Toolbar.js",
       "requires": [
-        353,
-        362,
-        379,
-        386,
-        387
+        194,
+        333,
+        341,
+        359,
+        366,
+        367
       ],
       "uses": [
-        469,
-        490,
-        627
+        449,
+        470,
+        602
       ],
-      "idx": 388
+      "idx": 368
     },
     {
       "path": "../classic/classic/src/dd/DragDrop.js",
       "requires": [
-        383
+        363
       ],
       "uses": [
-        49
+        50
       ],
-      "idx": 389
+      "idx": 369
     },
     {
       "path": "../classic/classic/src/dd/DD.js",
       "requires": [
-        383,
-        389
+        363,
+        369
       ],
       "uses": [
-        49
+        50
       ],
-      "idx": 390
+      "idx": 370
     },
     {
       "path": "../classic/classic/src/dd/DDProxy.js",
       "requires": [
-        390
+        370
       ],
       "uses": [
-        383
+        363
       ],
-      "idx": 391
+      "idx": 371
     },
     {
       "path": "../classic/classic/src/dd/StatusProxy.js",
       "requires": [
-        105
+        118
       ],
       "uses": [],
-      "idx": 392
+      "idx": 372
     },
     {
       "path": "../classic/classic/src/dd/DragSource.js",
       "requires": [
-        383,
-        391,
-        392
+        363,
+        371,
+        372
       ],
       "uses": [
-        362
+        194,
+        341
       ],
-      "idx": 393
+      "idx": 373
     },
     {
       "path": "../classic/classic/src/panel/Proxy.js",
       "requires": [],
       "uses": [
-        49
+        50
       ],
-      "idx": 394
+      "idx": 374
     },
     {
       "path": "../classic/classic/src/panel/DD.js",
       "requires": [
-        393,
-        394
+        373,
+        374
       ],
       "uses": [],
-      "idx": 395
+      "idx": 375
     },
     {
       "path": "../classic/classic/src/layout/component/Dock.js",
       "requires": [
-        361
+        340
       ],
       "uses": [
         23,
-        49,
-        348
+        50,
+        328
       ],
-      "idx": 396
+      "idx": 376
     },
     {
       "path": "../classic/classic/src/util/Memento.js",
       "requires": [],
       "uses": [],
-      "idx": 397
+      "idx": 377
     },
     {
       "path": "../classic/classic/src/container/DockingContainer.js",
       "requires": [
-        49,
-        55
+        50,
+        56
       ],
       "uses": [
         23,
-        226,
-        332
+        229,
+        319
       ],
-      "idx": 398
+      "idx": 378
     },
     {
       "path": "../classic/classic/src/panel/Panel.js",
       "requires": [
-        49,
-        55,
-        72,
-        89,
-        353,
-        380,
-        388,
-        395,
-        396,
-        397,
-        398
+        50,
+        56,
+        73,
+        87,
+        333,
+        357,
+        360,
+        368,
+        375,
+        376,
+        377,
+        378
       ],
       "uses": [
         1,
         20,
-        85,
-        92,
-        93,
-        105,
-        226,
-        351,
-        362,
-        376,
-        378,
-        432
+        90,
+        91,
+        118,
+        194,
+        229,
+        331,
+        341,
+        356,
+        358,
+        411,
+        471
       ],
-      "idx": 399
+      "idx": 379
     },
     {
       "path": "../classic/classic/src/layout/container/Table.js",
       "requires": [
-        350
+        330
       ],
       "uses": [],
-      "idx": 400
+      "idx": 380
     },
     {
       "path": "../classic/classic/src/container/ButtonGroup.js",
       "requires": [
+        359,
         379,
-        399,
-        400
+        380
       ],
       "uses": [],
-      "idx": 401
+      "idx": 381
     },
     {
       "path": "../classic/classic/src/container/Monitor.js",
       "requires": [],
       "uses": [
-        55
+        56
       ],
-      "idx": 402
+      "idx": 382
     },
     {
       "path": "../classic/classic/src/plugin/Responsive.js",
       "requires": [
-        322
+        309
       ],
       "uses": [],
-      "idx": 403
+      "idx": 383
     },
     {
       "path": "../classic/classic/src/plugin/Viewport.js",
       "requires": [
-        403
+        383
       ],
       "uses": [
-        49,
-        348
+        50,
+        118,
+        328
       ],
-      "idx": 404
+      "idx": 384
     },
     {
       "path": "../classic/classic/src/container/Viewport.js",
       "requires": [
-        322,
-        353,
-        404
+        309,
+        333,
+        384
       ],
       "uses": [],
-      "idx": 405
+      "idx": 385
     },
     {
       "path": "../classic/classic/src/layout/container/Anchor.js",
       "requires": [
-        351
+        331
       ],
       "uses": [],
-      "idx": 406
+      "idx": 386
     },
     {
       "path": "../classic/classic/src/dashboard/Panel.js",
       "requires": [
-        399
+        379
       ],
       "uses": [
         20
       ],
-      "idx": 407
+      "idx": 387
     },
     {
       "path": "../classic/classic/src/dashboard/Column.js",
       "requires": [
-        353,
-        406,
-        407
+        333,
+        386,
+        387
       ],
       "uses": [],
-      "idx": 408
+      "idx": 388
     },
     {
       "path": "../classic/classic/src/layout/container/Column.js",
       "requires": [
-        351
+        331
       ],
       "uses": [],
-      "idx": 409
+      "idx": 389
     },
     {
       "path": "../classic/classic/src/dd/DragTracker.js",
       "requires": [
-        51
+        52
       ],
       "uses": [
         33,
-        378
+        358
       ],
-      "idx": 410
+      "idx": 390
     },
     {
       "path": "../classic/classic/src/resizer/SplitterTracker.js",
       "requires": [
         33,
-        410
+        390
       ],
       "uses": [
-        49,
-        297
+        50,
+        97
       ],
-      "idx": 411
+      "idx": 391
     },
     {
       "path": "../classic/classic/src/layout/container/ColumnSplitterTracker.js",
       "requires": [
-        411
+        391
       ],
       "uses": [],
-      "idx": 412
+      "idx": 392
     },
     {
       "path": "../classic/classic/src/layout/container/ColumnSplitter.js",
       "requires": [
-        384,
-        412
+        364,
+        392
       ],
       "uses": [],
-      "idx": 413
+      "idx": 393
     },
     {
       "path": "../classic/classic/src/layout/container/Dashboard.js",
       "requires": [
-        409,
-        413
+        389,
+        393
       ],
       "uses": [
-        362
+        194,
+        341
       ],
-      "idx": 414
+      "idx": 394
     },
     {
       "path": "../classic/classic/src/dd/DDTarget.js",
       "requires": [
-        389
+        369
       ],
       "uses": [],
-      "idx": 415
+      "idx": 395
     },
     {
       "path": "../classic/classic/src/dd/ScrollManager.js",
       "requires": [
-        383
+        363
       ],
       "uses": [],
-      "idx": 416
+      "idx": 396
     },
     {
       "path": "../classic/classic/src/dd/DropTarget.js",
       "requires": [
-        415,
-        416
+        395,
+        396
       ],
       "uses": [],
-      "idx": 417
+      "idx": 397
     },
     {
       "path": "../classic/classic/src/dashboard/DropZone.js",
       "requires": [
-        417
+        397
       ],
       "uses": [],
-      "idx": 418
+      "idx": 398
     },
     {
       "path": "../classic/classic/src/dashboard/Part.js",
       "requires": [
         3,
         12,
-        114
+        127
       ],
       "uses": [],
-      "idx": 419
+      "idx": 399
     },
     {
       "path": "../classic/classic/src/dashboard/Dashboard.js",
       "requires": [
-        399,
-        408,
-        414,
-        418,
-        419
+        379,
+        388,
+        394,
+        398,
+        399
       ],
       "uses": [
         12,
-        100,
-        113
+        113,
+        126
       ],
-      "idx": 420
+      "idx": 400
     },
     {
       "path": "../classic/classic/src/dd/DragZone.js",
       "requires": [
-        393
+        373
       ],
       "uses": [
-        416,
-        422
+        396,
+        402
       ],
-      "idx": 421
+      "idx": 401
     },
     {
       "path": "../classic/classic/src/dd/Registry.js",
       "requires": [],
       "uses": [],
-      "idx": 422
+      "idx": 402
     },
     {
       "path": "../classic/classic/src/dd/DropZone.js",
       "requires": [
-        417,
-        422
+        397,
+        402
       ],
       "uses": [
-        383
+        363
       ],
-      "idx": 423
+      "idx": 403
     },
     {
       "path": "../classic/classic/src/dom/Layer.js",
       "requires": [
-        49
+        50
       ],
       "uses": [
-        226
+        229
       ],
-      "idx": 424
+      "idx": 404
     },
     {
       "path": "../classic/classic/src/enums.js",
       "requires": [],
       "uses": [],
-      "idx": 425
+      "idx": 405
     },
     {
       "path": "../classic/classic/src/event/publisher/MouseEnterLeave.js",
@@ -4127,62 +3952,54 @@ var Ext = Ext || {};
         36
       ],
       "uses": [],
-      "idx": 426
+      "idx": 406
     },
     {
       "path": "../classic/classic/src/flash/Component.js",
       "requires": [
-        105
+        118
       ],
       "uses": [],
-      "idx": 427
+      "idx": 407
     },
     {
       "path": "../classic/classic/src/form/action/Action.js",
       "requires": [],
       "uses": [],
-      "idx": 428
+      "idx": 408
     },
     {
       "path": "../classic/classic/src/form/action/Load.js",
       "requires": [
         17,
-        428
+        408
       ],
       "uses": [
         18
       ],
-      "idx": 429
+      "idx": 409
     },
     {
       "path": "../classic/classic/src/form/action/Submit.js",
       "requires": [
-        428
+        408
       ],
       "uses": [
         18,
-        226
+        229
       ],
-      "idx": 430
-    },
-    {
-      "path": "../classic/classic/src/form/action/StandardSubmit.js",
-      "requires": [
-        430
-      ],
-      "uses": [],
-      "idx": 431
+      "idx": 410
     },
     {
       "path": "../classic/classic/src/util/ComponentDragger.js",
       "requires": [
-        410
+        390
       ],
       "uses": [
         33,
-        49
+        50
       ],
-      "idx": 432
+      "idx": 411
     },
     {
       "path": "../classic/classic/src/util/FocusTrap.js",
@@ -4190,269 +4007,271 @@ var Ext = Ext || {};
         0
       ],
       "uses": [],
-      "idx": 433
+      "idx": 412
     },
     {
       "path": "../classic/classic/src/window/Window.js",
       "requires": [
         33,
-        399,
-        432,
+        379,
+        411,
+        412
+      ],
+      "uses": [],
+      "idx": 413
+    },
+    {
+      "path": "../classic/classic/src/form/Labelable.js",
+      "requires": [
+        0,
+        87
+      ],
+      "uses": [
+        50,
+        466
+      ],
+      "idx": 414
+    },
+    {
+      "path": "../classic/classic/src/form/field/Field.js",
+      "requires": [],
+      "uses": [],
+      "idx": 415
+    },
+    {
+      "path": "../classic/classic/src/form/field/Base.js",
+      "requires": [
+        1,
+        87,
+        118,
+        414,
+        415
+      ],
+      "uses": [
+        229
+      ],
+      "idx": 416
+    },
+    {
+      "path": "../classic/classic/src/form/field/VTypes.js",
+      "requires": [],
+      "uses": [],
+      "idx": 417
+    },
+    {
+      "path": "../classic/classic/src/form/trigger/Trigger.js",
+      "requires": [
+        12,
+        348
+      ],
+      "uses": [
+        50,
+        87
+      ],
+      "idx": 418
+    },
+    {
+      "path": "../classic/classic/src/form/field/Text.js",
+      "requires": [
+        323,
+        416,
+        417,
+        418
+      ],
+      "uses": [
+        79,
+        80,
+        91
+      ],
+      "idx": 419
+    },
+    {
+      "path": "../classic/classic/src/form/field/TextArea.js",
+      "requires": [
+        1,
+        87,
+        419
+      ],
+      "uses": [
+        79,
+        323
+      ],
+      "idx": 420
+    },
+    {
+      "path": "../classic/classic/src/window/MessageBox.js",
+      "requires": [
+        343,
+        349,
+        366,
+        368,
+        386,
+        413,
+        419,
+        420
+      ],
+      "uses": [
+        118,
+        194,
+        333,
+        341,
+        342,
+        471
+      ],
+      "idx": 421
+    },
+    {
+      "path": "../classic/classic/src/form/Basic.js",
+      "requires": [
+        1,
+        52,
+        56,
+        138,
+        409,
+        410,
+        421
+      ],
+      "uses": [
+        382
+      ],
+      "idx": 422
+    },
+    {
+      "path": "../classic/classic/src/form/FieldAncestor.js",
+      "requires": [
+        0,
+        382
+      ],
+      "uses": [],
+      "idx": 423
+    },
+    {
+      "path": "../classic/classic/src/layout/component/field/FieldContainer.js",
+      "requires": [
+        341
+      ],
+      "uses": [],
+      "idx": 424
+    },
+    {
+      "path": "../classic/classic/src/form/FieldContainer.js",
+      "requires": [
+        333,
+        414,
+        423,
+        424
+      ],
+      "uses": [],
+      "idx": 425
+    },
+    {
+      "path": "../classic/classic/src/layout/container/CheckboxGroup.js",
+      "requires": [
+        330
+      ],
+      "uses": [
+        229
+      ],
+      "idx": 426
+    },
+    {
+      "path": "../classic/classic/src/form/CheckboxManager.js",
+      "requires": [
+        56
+      ],
+      "uses": [],
+      "idx": 427
+    },
+    {
+      "path": "../classic/classic/src/form/field/Checkbox.js",
+      "requires": [
+        87,
+        416,
+        427
+      ],
+      "uses": [],
+      "idx": 428
+    },
+    {
+      "path": "../classic/classic/src/form/CheckboxGroup.js",
+      "requires": [
+        415,
+        416,
+        425,
+        426,
+        428
+      ],
+      "uses": [],
+      "idx": 429
+    },
+    {
+      "path": "../classic/classic/src/form/FieldSet.js",
+      "requires": [
+        333,
+        423
+      ],
+      "uses": [
+        50,
+        90,
+        118,
+        194,
+        229,
+        341,
+        356,
+        386,
+        428,
+        557
+      ],
+      "idx": 430
+    },
+    {
+      "path": "../classic/classic/src/form/Label.js",
+      "requires": [
+        79,
+        118
+      ],
+      "uses": [],
+      "idx": 431
+    },
+    {
+      "path": "../classic/classic/src/form/Panel.js",
+      "requires": [
+        57,
+        379,
+        422,
+        423
+      ],
+      "uses": [],
+      "idx": 432
+    },
+    {
+      "path": "../classic/classic/src/form/RadioManager.js",
+      "requires": [
+        56
+      ],
+      "uses": [],
+      "idx": 433
+    },
+    {
+      "path": "../classic/classic/src/form/field/Radio.js",
+      "requires": [
+        428,
         433
       ],
       "uses": [],
       "idx": 434
     },
     {
-      "path": "../classic/classic/src/form/Labelable.js",
-      "requires": [
-        0,
-        89
-      ],
-      "uses": [
-        49,
-        486
-      ],
-      "idx": 435
-    },
-    {
-      "path": "../classic/classic/src/form/field/Field.js",
-      "requires": [],
-      "uses": [],
-      "idx": 436
-    },
-    {
-      "path": "../classic/classic/src/form/field/Base.js",
-      "requires": [
-        1,
-        89,
-        105,
-        435,
-        436
-      ],
-      "uses": [
-        86,
-        226
-      ],
-      "idx": 437
-    },
-    {
-      "path": "../classic/classic/src/form/field/VTypes.js",
-      "requires": [],
-      "uses": [],
-      "idx": 438
-    },
-    {
-      "path": "../classic/classic/src/form/trigger/Trigger.js",
-      "requires": [
-        12,
-        368
-      ],
-      "uses": [
-        49,
-        89
-      ],
-      "idx": 439
-    },
-    {
-      "path": "../classic/classic/src/form/field/Text.js",
-      "requires": [
-        336,
-        437,
-        438,
-        439
-      ],
-      "uses": [
-        85,
-        86,
-        93
-      ],
-      "idx": 440
-    },
-    {
-      "path": "../classic/classic/src/form/field/TextArea.js",
-      "requires": [
-        1,
-        89,
-        440
-      ],
-      "uses": [
-        85,
-        336
-      ],
-      "idx": 441
-    },
-    {
-      "path": "../classic/classic/src/window/MessageBox.js",
-      "requires": [
-        364,
-        369,
-        386,
-        388,
-        406,
-        434,
-        440,
-        441
-      ],
-      "uses": [
-        105,
-        353,
-        362,
-        363
-      ],
-      "idx": 442
-    },
-    {
-      "path": "../classic/classic/src/form/Basic.js",
-      "requires": [
-        1,
-        51,
-        55,
-        125,
-        429,
-        430,
-        431,
-        442
-      ],
-      "uses": [
-        402
-      ],
-      "idx": 443
-    },
-    {
-      "path": "../classic/classic/src/form/FieldAncestor.js",
-      "requires": [
-        0,
-        402
-      ],
-      "uses": [],
-      "idx": 444
-    },
-    {
-      "path": "../classic/classic/src/layout/component/field/FieldContainer.js",
-      "requires": [
-        362
-      ],
-      "uses": [],
-      "idx": 445
-    },
-    {
-      "path": "../classic/classic/src/form/FieldContainer.js",
-      "requires": [
-        353,
-        435,
-        444,
-        445
-      ],
-      "uses": [],
-      "idx": 446
-    },
-    {
-      "path": "../classic/classic/src/layout/container/CheckboxGroup.js",
-      "requires": [
-        350
-      ],
-      "uses": [
-        226
-      ],
-      "idx": 447
-    },
-    {
-      "path": "../classic/classic/src/form/CheckboxManager.js",
-      "requires": [
-        55
-      ],
-      "uses": [],
-      "idx": 448
-    },
-    {
-      "path": "../classic/classic/src/form/field/Checkbox.js",
-      "requires": [
-        89,
-        437,
-        448
-      ],
-      "uses": [],
-      "idx": 449
-    },
-    {
-      "path": "../classic/classic/src/form/CheckboxGroup.js",
-      "requires": [
-        436,
-        437,
-        446,
-        447,
-        449
-      ],
-      "uses": [],
-      "idx": 450
-    },
-    {
-      "path": "../classic/classic/src/form/FieldSet.js",
-      "requires": [
-        353,
-        444
-      ],
-      "uses": [
-        49,
-        92,
-        105,
-        226,
-        362,
-        376,
-        406,
-        449,
-        581
-      ],
-      "idx": 451
-    },
-    {
-      "path": "../classic/classic/src/form/Label.js",
-      "requires": [
-        85,
-        105
-      ],
-      "uses": [],
-      "idx": 452
-    },
-    {
-      "path": "../classic/classic/src/form/Panel.js",
-      "requires": [
-        56,
-        399,
-        443,
-        444
-      ],
-      "uses": [],
-      "idx": 453
-    },
-    {
-      "path": "../classic/classic/src/form/RadioManager.js",
-      "requires": [
-        55
-      ],
-      "uses": [],
-      "idx": 454
-    },
-    {
-      "path": "../classic/classic/src/form/field/Radio.js",
-      "requires": [
-        449,
-        454
-      ],
-      "uses": [],
-      "idx": 455
-    },
-    {
       "path": "../classic/classic/src/form/RadioGroup.js",
       "requires": [
-        450,
-        455
+        359,
+        429,
+        434
       ],
       "uses": [
-        454
+        433
       ],
-      "idx": 456
+      "idx": 435
     },
     {
       "path": "../classic/classic/src/form/action/DirectAction.js",
@@ -4460,1535 +4279,1501 @@ var Ext = Ext || {};
         0
       ],
       "uses": [
-        206
+        209
       ],
-      "idx": 457
+      "idx": 436
     },
     {
       "path": "../classic/classic/src/form/action/DirectLoad.js",
       "requires": [
-        206,
-        429,
-        457
+        209,
+        409,
+        436
       ],
       "uses": [],
-      "idx": 458
+      "idx": 437
     },
     {
       "path": "../classic/classic/src/form/action/DirectSubmit.js",
       "requires": [
-        206,
-        430,
-        457
+        209,
+        410,
+        436
       ],
       "uses": [],
-      "idx": 459
+      "idx": 438
+    },
+    {
+      "path": "../classic/classic/src/form/action/StandardSubmit.js",
+      "requires": [
+        410
+      ],
+      "uses": [],
+      "idx": 439
     },
     {
       "path": "../classic/classic/src/form/field/Picker.js",
       "requires": [
-        378,
-        440
+        358,
+        419
       ],
       "uses": [],
-      "idx": 460
+      "idx": 440
     },
     {
       "path": "../classic/classic/src/selection/Model.js",
       "requires": [
         4,
         12,
-        172,
-        359
+        338
       ],
-      "uses": [],
-      "idx": 461
+      "uses": [
+        126
+      ],
+      "idx": 441
     },
     {
       "path": "../classic/classic/src/selection/DataViewModel.js",
       "requires": [
-        378,
-        461
+        358,
+        441
       ],
       "uses": [],
-      "idx": 462
+      "idx": 442
     },
     {
       "path": "../classic/classic/src/view/NavigationModel.js",
       "requires": [
         12,
-        51,
-        359
+        52,
+        338
       ],
       "uses": [
-        378
+        50,
+        358
       ],
-      "idx": 463
+      "idx": 443
     },
     {
       "path": "../classic/classic/src/view/AbstractView.js",
       "requires": [
-        75,
-        94,
-        105,
-        359,
-        360,
-        462,
-        463
+        76,
+        118,
+        338,
+        339,
+        442,
+        443
       ],
       "uses": [
         12,
         19,
-        49,
-        86,
-        89,
-        161,
-        226,
-        335
+        80,
+        87,
+        174,
+        229,
+        322
       ],
-      "idx": 464
+      "idx": 444
     },
     {
       "path": "../classic/classic/src/view/View.js",
       "requires": [
-        464
+        444
       ],
       "uses": [],
-      "idx": 465
+      "idx": 445
     },
     {
       "path": "../classic/classic/src/view/BoundListKeyNav.js",
       "requires": [
-        463
+        443
       ],
       "uses": [
         35,
-        378
+        358
       ],
-      "idx": 466
+      "idx": 446
     },
     {
       "path": "../classic/classic/src/layout/component/BoundList.js",
       "requires": [
-        362
+        341
       ],
       "uses": [],
-      "idx": 467
+      "idx": 447
     },
     {
       "path": "../classic/classic/src/toolbar/Item.js",
       "requires": [
-        105,
-        388
+        118,
+        368
       ],
       "uses": [],
-      "idx": 468
+      "idx": 448
     },
     {
       "path": "../classic/classic/src/toolbar/TextItem.js",
       "requires": [
-        89,
-        388,
-        468
+        87,
+        368,
+        448
       ],
       "uses": [],
-      "idx": 469
+      "idx": 449
     },
     {
       "path": "../classic/classic/src/form/trigger/Spinner.js",
       "requires": [
-        439
+        418
       ],
       "uses": [],
-      "idx": 470
+      "idx": 450
     },
     {
       "path": "../classic/classic/src/form/field/Spinner.js",
       "requires": [
-        378,
-        440,
-        470
+        358,
+        419,
+        450
       ],
       "uses": [],
-      "idx": 471
+      "idx": 451
     },
     {
       "path": "../classic/classic/src/form/field/Number.js",
       "requires": [
-        471
+        451
       ],
       "uses": [
-        85,
-        86
+        79,
+        80
       ],
-      "idx": 472
+      "idx": 452
     },
     {
       "path": "../classic/classic/src/toolbar/Paging.js",
       "requires": [
-        359,
-        388,
-        469,
-        472
+        338,
+        368,
+        449,
+        452
       ],
       "uses": [
-        86,
-        362,
-        470
+        80,
+        194,
+        341,
+        450
       ],
-      "idx": 473
+      "idx": 453
     },
     {
       "path": "../classic/classic/src/view/BoundList.js",
       "requires": [
-        49,
-        219,
-        465,
-        466,
-        467,
-        473
+        50,
+        222,
+        445,
+        446,
+        447,
+        453
       ],
       "uses": [
-        89,
-        362
+        87,
+        194,
+        341,
+        471
       ],
-      "idx": 474
+      "idx": 454
     },
     {
       "path": "../classic/classic/src/form/field/ComboBox.js",
       "requires": [
         1,
-        161,
-        359,
-        460,
-        474
+        174,
+        338,
+        440,
+        454
       ],
       "uses": [
-        49,
+        35,
         50,
-        89,
-        113,
-        141,
-        156,
-        226,
-        378,
-        462,
-        466,
-        467
+        51,
+        87,
+        126,
+        154,
+        169,
+        194,
+        229,
+        442,
+        446,
+        447
       ],
-      "idx": 475
+      "idx": 455
     },
     {
       "path": "../classic/classic/src/picker/Month.js",
       "requires": [
-        89,
-        105,
-        368,
-        369
+        87,
+        118,
+        348,
+        349
       ],
       "uses": [
-        362
+        194,
+        341
       ],
-      "idx": 476
+      "idx": 456
     },
     {
       "path": "../classic/classic/src/picker/Date.js",
       "requires": [
-        66,
-        89,
-        105,
-        368,
-        369,
-        370,
-        378,
-        476
+        67,
+        87,
+        118,
+        348,
+        349,
+        350,
+        358,
+        456
       ],
       "uses": [
-        86,
-        226,
-        362
+        80,
+        194,
+        229,
+        341
       ],
-      "idx": 477
+      "idx": 457
     },
     {
       "path": "../classic/classic/src/form/field/Date.js",
       "requires": [
-        460,
-        477
+        440,
+        457
       ],
       "uses": [
-        86,
-        362
+        80,
+        194,
+        341
       ],
-      "idx": 478
+      "idx": 458
     },
     {
       "path": "../classic/classic/src/form/field/Display.js",
       "requires": [
-        85,
-        89,
-        437
+        79,
+        87,
+        416
       ],
       "uses": [],
-      "idx": 479
+      "idx": 459
     },
     {
       "path": "../classic/classic/src/form/field/FileButton.js",
       "requires": [
-        369
+        349
       ],
-      "uses": [],
-      "idx": 480
+      "uses": [
+        118
+      ],
+      "idx": 460
     },
     {
       "path": "../classic/classic/src/form/trigger/Component.js",
       "requires": [
-        439
+        418
       ],
       "uses": [],
-      "idx": 481
+      "idx": 461
     },
     {
       "path": "../classic/classic/src/form/field/File.js",
       "requires": [
-        440,
-        480,
-        481
+        419,
+        460,
+        461
       ],
       "uses": [
-        362
+        194,
+        341
       ],
-      "idx": 482
+      "idx": 462
     },
     {
       "path": "../classic/classic/src/form/field/Hidden.js",
       "requires": [
-        437
+        416
       ],
       "uses": [],
-      "idx": 483
+      "idx": 463
     },
     {
       "path": "../classic/classic/src/tip/Tip.js",
       "requires": [
-        399
+        379
       ],
       "uses": [
-        34,
-        105
+        118
       ],
-      "idx": 484
+      "idx": 464
     },
     {
       "path": "../classic/classic/src/tip/ToolTip.js",
       "requires": [
-        32,
-        484
-      ],
-      "uses": [
-        74
-      ],
-      "idx": 485
-    },
-    {
-      "path": "../classic/classic/src/tip/QuickTip.js",
-      "requires": [
-        485
-      ],
-      "uses": [],
-      "idx": 486
-    },
-    {
-      "path": "../classic/classic/src/tip/QuickTipManager.js",
-      "requires": [
-        486
-      ],
-      "uses": [],
-      "idx": 487
-    },
-    {
-      "path": "../classic/classic/src/picker/Color.js",
-      "requires": [
-        89,
-        105
-      ],
-      "uses": [],
-      "idx": 488
-    },
-    {
-      "path": "../classic/classic/src/layout/component/field/HtmlEditor.js",
-      "requires": [
-        445
-      ],
-      "uses": [],
-      "idx": 489
-    },
-    {
-      "path": "../classic/classic/src/toolbar/Separator.js",
-      "requires": [
-        388,
-        468
-      ],
-      "uses": [],
-      "idx": 490
-    },
-    {
-      "path": "../classic/classic/src/layout/container/boxOverflow/Menu.js",
-      "requires": [
-        369,
-        381,
-        490
-      ],
-      "uses": [
-        362,
-        382,
-        387,
-        396,
-        449,
-        540,
-        542,
-        627
-      ],
-      "idx": 491
-    },
-    {
-      "path": "../classic/classic/src/form/field/HtmlEditor.js",
-      "requires": [
-        85,
-        335,
-        387,
-        388,
-        436,
-        446,
-        468,
-        487,
-        488,
-        489,
-        491
-      ],
-      "uses": [
-        1,
-        86,
-        105,
-        226,
-        362,
-        382,
-        396,
-        542
-      ],
-      "idx": 492
-    },
-    {
-      "path": "../classic/classic/src/view/TagKeyNav.js",
-      "requires": [
-        466
-      ],
-      "uses": [],
-      "idx": 493
-    },
-    {
-      "path": "../classic/classic/src/form/field/Tag.js",
-      "requires": [
-        158,
-        203,
-        461,
-        475,
-        493
-      ],
-      "uses": [
-        50,
-        86,
-        89,
-        147,
-        152,
-        153
-      ],
-      "idx": 494
-    },
-    {
-      "path": "../classic/classic/src/picker/Time.js",
-      "requires": [
-        158,
-        474
+        464
       ],
       "uses": [
         50
       ],
-      "idx": 495
+      "idx": 465
+    },
+    {
+      "path": "../classic/classic/src/tip/QuickTip.js",
+      "requires": [
+        465
+      ],
+      "uses": [],
+      "idx": 466
+    },
+    {
+      "path": "../classic/classic/src/tip/QuickTipManager.js",
+      "requires": [
+        466
+      ],
+      "uses": [],
+      "idx": 467
+    },
+    {
+      "path": "../classic/classic/src/picker/Color.js",
+      "requires": [
+        87,
+        118
+      ],
+      "uses": [],
+      "idx": 468
+    },
+    {
+      "path": "../classic/classic/src/layout/component/field/HtmlEditor.js",
+      "requires": [
+        424
+      ],
+      "uses": [],
+      "idx": 469
+    },
+    {
+      "path": "../classic/classic/src/toolbar/Separator.js",
+      "requires": [
+        368,
+        448
+      ],
+      "uses": [],
+      "idx": 470
+    },
+    {
+      "path": "../classic/classic/src/layout/container/boxOverflow/Menu.js",
+      "requires": [
+        349,
+        361,
+        470
+      ],
+      "uses": [
+        194,
+        341,
+        362,
+        367,
+        376,
+        519,
+        602
+      ],
+      "idx": 471
+    },
+    {
+      "path": "../classic/classic/src/form/field/HtmlEditor.js",
+      "requires": [
+        79,
+        322,
+        367,
+        368,
+        415,
+        425,
+        448,
+        467,
+        468,
+        469,
+        471
+      ],
+      "uses": [
+        1,
+        80,
+        118,
+        194,
+        229,
+        341,
+        362,
+        376,
+        519
+      ],
+      "idx": 472
+    },
+    {
+      "path": "../classic/classic/src/form/field/Tag.js",
+      "requires": [
+        171,
+        206,
+        441,
+        455
+      ],
+      "uses": [
+        51,
+        87
+      ],
+      "idx": 473
+    },
+    {
+      "path": "../classic/classic/src/picker/Time.js",
+      "requires": [
+        171,
+        454
+      ],
+      "uses": [
+        51
+      ],
+      "idx": 474
     },
     {
       "path": "../classic/classic/src/form/field/Time.js",
       "requires": [
-        466,
-        475,
-        478,
-        495
+        446,
+        455,
+        458,
+        474
       ],
       "uses": [
-        86,
-        89,
-        462,
-        467
+        80,
+        87,
+        194,
+        442,
+        447
       ],
-      "idx": 496
+      "idx": 475
     },
     {
       "path": "../classic/classic/src/form/field/Trigger.js",
       "requires": [
-        226,
-        368,
-        440
+        229,
+        348,
+        419
       ],
       "uses": [],
-      "idx": 497
+      "idx": 476
     },
     {
       "path": "../classic/classic/src/grid/CellContext.js",
       "requires": [],
       "uses": [],
-      "idx": 498
+      "idx": 477
     },
     {
       "path": "../classic/classic/src/grid/CellEditor.js",
       "requires": [
-        355
+        335
       ],
-      "uses": [
-        49,
-        353
-      ],
-      "idx": 499
+      "uses": [],
+      "idx": 478
     },
     {
       "path": "../classic/classic/src/grid/ColumnComponentLayout.js",
       "requires": [
-        362
+        341
       ],
       "uses": [],
-      "idx": 500
+      "idx": 479
     },
     {
       "path": "../classic/classic/src/layout/container/Fit.js",
       "requires": [
-        350
+        330
       ],
       "uses": [],
-      "idx": 501
+      "idx": 480
     },
     {
       "path": "../classic/classic/src/panel/Table.js",
       "requires": [
-        399,
-        501
+        379,
+        480
       ],
       "uses": [
         1,
-        76,
-        161,
-        226,
-        505,
-        511,
-        521,
-        554,
-        555,
-        598,
-        599,
-        600
+        174,
+        229,
+        484,
+        499,
+        531,
+        532,
+        573,
+        574,
+        575
       ],
-      "idx": 502
+      "idx": 481
     },
     {
       "path": "../classic/classic/src/grid/ColumnLayout.js",
       "requires": [
-        386,
-        502
+        366,
+        481
       ],
       "uses": [],
-      "idx": 503
+      "idx": 482
     },
     {
       "path": "../classic/classic/src/grid/ColumnManager.js",
       "requires": [],
       "uses": [],
-      "idx": 504
+      "idx": 483
     },
     {
       "path": "../classic/classic/src/grid/NavigationModel.js",
       "requires": [
-        463
+        443
       ],
       "uses": [
         20,
         35,
-        74,
-        105,
-        378,
-        498
+        50,
+        75,
+        118,
+        358,
+        477
       ],
-      "idx": 505
+      "idx": 484
     },
     {
       "path": "../classic/classic/src/view/TableLayout.js",
       "requires": [
-        362
+        341
       ],
       "uses": [],
-      "idx": 506
+      "idx": 485
     },
     {
       "path": "../classic/classic/src/grid/locking/RowSynchronizer.js",
       "requires": [],
       "uses": [],
-      "idx": 507
+      "idx": 486
     },
     {
       "path": "../classic/classic/src/view/NodeCache.js",
       "requires": [
-        75
+        76
       ],
       "uses": [
-        49,
-        74
+        50,
+        75
       ],
-      "idx": 508
+      "idx": 487
     },
     {
       "path": "../classic/classic/src/view/Table.js",
       "requires": [
         1,
-        55,
-        219,
-        465,
-        498,
-        506,
-        507,
-        508
+        56,
+        445,
+        477,
+        485,
+        486,
+        487
       ],
       "uses": [
         12,
-        49,
-        74,
-        89,
-        105,
-        141,
-        521
+        50,
+        75,
+        87,
+        118,
+        154,
+        499
       ],
-      "idx": 509
+      "idx": 488
     },
     {
       "path": "../classic/classic/src/grid/Panel.js",
       "requires": [
-        502,
+        481,
+        488
+      ],
+      "uses": [],
+      "idx": 489
+    },
+    {
+      "path": "../classic/classic/src/grid/RowEditorButtons.js",
+      "requires": [
+        333
+      ],
+      "uses": [
+        194,
+        341,
+        349,
+        379
+      ],
+      "idx": 490
+    },
+    {
+      "path": "../classic/classic/src/grid/RowEditor.js",
+      "requires": [
+        358,
+        432,
+        465,
+        490
+      ],
+      "uses": [
+        77,
+        194,
+        331,
+        333,
+        341,
+        376,
+        459,
+        477
+      ],
+      "idx": 491
+    },
+    {
+      "path": "../classic/classic/src/grid/Scroller.js",
+      "requires": [],
+      "uses": [],
+      "idx": 492
+    },
+    {
+      "path": "../classic/classic/src/view/DropZone.js",
+      "requires": [
+        403
+      ],
+      "uses": [
+        118,
+        194,
+        341
+      ],
+      "idx": 493
+    },
+    {
+      "path": "../classic/classic/src/grid/ViewDropZone.js",
+      "requires": [
+        493
+      ],
+      "uses": [],
+      "idx": 494
+    },
+    {
+      "path": "../classic/classic/src/grid/plugin/HeaderResizer.js",
+      "requires": [
+        33,
+        314,
+        390
+      ],
+      "uses": [
+        500
+      ],
+      "idx": 495
+    },
+    {
+      "path": "../classic/classic/src/grid/header/DragZone.js",
+      "requires": [
+        401
+      ],
+      "uses": [],
+      "idx": 496
+    },
+    {
+      "path": "../classic/classic/src/grid/header/DropZone.js",
+      "requires": [
+        403
+      ],
+      "uses": [
+        363
+      ],
+      "idx": 497
+    },
+    {
+      "path": "../classic/classic/src/grid/plugin/HeaderReorderer.js",
+      "requires": [
+        314,
+        496,
+        497
+      ],
+      "uses": [],
+      "idx": 498
+    },
+    {
+      "path": "../classic/classic/src/grid/header/Container.js",
+      "requires": [
+        333,
+        358,
+        359,
+        482,
+        495,
+        498
+      ],
+      "uses": [
+        1,
+        118,
+        194,
+        341,
+        362,
+        367,
+        376,
+        483,
+        500,
+        517,
+        518,
+        519
+      ],
+      "idx": 499
+    },
+    {
+      "path": "../classic/classic/src/grid/column/Column.js",
+      "requires": [
+        204,
+        479,
+        482,
+        499
+      ],
+      "uses": [
+        79,
+        495
+      ],
+      "idx": 500
+    },
+    {
+      "path": "../classic/classic/src/grid/column/Action.js",
+      "requires": [
+        500
+      ],
+      "uses": [
+        50
+      ],
+      "idx": 501
+    },
+    {
+      "path": "../classic/classic/src/grid/column/Boolean.js",
+      "requires": [
+        500
+      ],
+      "uses": [],
+      "idx": 502
+    },
+    {
+      "path": "../classic/classic/src/grid/column/Check.js",
+      "requires": [
+        500
+      ],
+      "uses": [],
+      "idx": 503
+    },
+    {
+      "path": "../classic/classic/src/grid/column/Date.js",
+      "requires": [
+        500
+      ],
+      "uses": [
+        79
+      ],
+      "idx": 504
+    },
+    {
+      "path": "../classic/classic/src/grid/column/Number.js",
+      "requires": [
+        79,
+        500
+      ],
+      "uses": [],
+      "idx": 505
+    },
+    {
+      "path": "../classic/classic/src/grid/column/RowNumberer.js",
+      "requires": [
+        500
+      ],
+      "uses": [],
+      "idx": 506
+    },
+    {
+      "path": "../classic/classic/src/grid/column/Template.js",
+      "requires": [
+        87,
+        500
+      ],
+      "uses": [
+        503
+      ],
+      "idx": 507
+    },
+    {
+      "path": "../classic/classic/src/grid/column/Widget.js",
+      "requires": [
+        500
+      ],
+      "uses": [],
+      "idx": 508
+    },
+    {
+      "path": "../classic/classic/src/grid/feature/Feature.js",
+      "requires": [
+        52
+      ],
+      "uses": [],
+      "idx": 509
+    },
+    {
+      "path": "../classic/classic/src/grid/feature/AbstractSummary.js",
+      "requires": [
         509
       ],
       "uses": [],
       "idx": 510
     },
     {
-      "path": "../classic/classic/src/grid/RowContext.js",
-      "requires": [],
+      "path": "../classic/classic/src/grid/feature/GroupStore.js",
+      "requires": [
+        52
+      ],
       "uses": [
-        12
+        126
       ],
       "idx": 511
     },
     {
-      "path": "../classic/classic/src/grid/RowEditorButtons.js",
+      "path": "../classic/classic/src/grid/feature/Grouping.js",
       "requires": [
-        353
+        509,
+        510,
+        511
       ],
       "uses": [
-        362,
-        369,
-        399
+        87,
+        154,
+        499
       ],
       "idx": 512
     },
     {
-      "path": "../classic/classic/src/grid/RowEditor.js",
+      "path": "../classic/classic/src/grid/feature/GroupingSummary.js",
       "requires": [
-        378,
-        453,
-        485,
         512
       ],
-      "uses": [
-        49,
-        66,
-        76,
-        351,
-        353,
-        362,
-        396,
-        479,
-        498
-      ],
+      "uses": [],
       "idx": 513
     },
     {
-      "path": "../classic/classic/src/grid/Scroller.js",
-      "requires": [],
-      "uses": [],
+      "path": "../classic/classic/src/grid/feature/RowBody.js",
+      "requires": [
+        509
+      ],
+      "uses": [
+        87
+      ],
       "idx": 514
     },
     {
-      "path": "../classic/classic/src/view/DropZone.js",
+      "path": "../classic/classic/src/grid/feature/Summary.js",
       "requires": [
-        423
+        510
       ],
       "uses": [
-        105,
-        362
+        87,
+        118,
+        154,
+        194,
+        341
       ],
       "idx": 515
     },
     {
-      "path": "../classic/classic/src/grid/ViewDropZone.js",
+      "path": "../classic/classic/src/menu/Item.js",
       "requires": [
-        515
+        118,
+        222
       ],
-      "uses": [],
+      "uses": [
+        347,
+        467
+      ],
       "idx": 516
     },
     {
-      "path": "../classic/classic/src/grid/plugin/HeaderResizer.js",
+      "path": "../classic/classic/src/menu/CheckItem.js",
       "requires": [
-        33,
-        327,
-        410
+        516
       ],
       "uses": [
-        522
+        347
       ],
       "idx": 517
     },
     {
-      "path": "../classic/classic/src/grid/header/DragZone.js",
+      "path": "../classic/classic/src/menu/Separator.js",
       "requires": [
-        421
+        516
       ],
       "uses": [],
       "idx": 518
     },
     {
-      "path": "../classic/classic/src/grid/header/DropZone.js",
-      "requires": [
-        423
-      ],
-      "uses": [
-        383
-      ],
-      "idx": 519
-    },
-    {
-      "path": "../classic/classic/src/grid/plugin/HeaderReorderer.js",
-      "requires": [
-        327,
-        518,
-        519
-      ],
-      "uses": [],
-      "idx": 520
-    },
-    {
-      "path": "../classic/classic/src/grid/header/Container.js",
-      "requires": [
-        353,
-        378,
-        379,
-        503,
-        517,
-        520
-      ],
-      "uses": [
-        1,
-        105,
-        362,
-        382,
-        387,
-        396,
-        504,
-        522,
-        540,
-        541,
-        542
-      ],
-      "idx": 521
-    },
-    {
-      "path": "../classic/classic/src/grid/column/Column.js",
-      "requires": [
-        200,
-        500,
-        503,
-        521
-      ],
-      "uses": [
-        53,
-        85,
-        517
-      ],
-      "idx": 522
-    },
-    {
-      "path": "../classic/classic/src/grid/column/ActionProxy.js",
-      "requires": [],
-      "uses": [],
-      "idx": 523
-    },
-    {
-      "path": "../classic/classic/src/grid/column/Action.js",
-      "requires": [
-        77,
-        522,
-        523
-      ],
-      "uses": [
-        49
-      ],
-      "idx": 524
-    },
-    {
-      "path": "../classic/classic/src/grid/column/Boolean.js",
-      "requires": [
-        522
-      ],
-      "uses": [],
-      "idx": 525
-    },
-    {
-      "path": "../classic/classic/src/grid/column/Check.js",
-      "requires": [
-        522
-      ],
-      "uses": [
-        498
-      ],
-      "idx": 526
-    },
-    {
-      "path": "../classic/classic/src/grid/column/Date.js",
-      "requires": [
-        522
-      ],
-      "uses": [
-        85
-      ],
-      "idx": 527
-    },
-    {
-      "path": "../classic/classic/src/grid/column/Number.js",
-      "requires": [
-        85,
-        522
-      ],
-      "uses": [],
-      "idx": 528
-    },
-    {
-      "path": "../classic/classic/src/grid/column/RowNumberer.js",
-      "requires": [
-        522
-      ],
-      "uses": [],
-      "idx": 529
-    },
-    {
-      "path": "../classic/classic/src/grid/column/Template.js",
-      "requires": [
-        89,
-        522
-      ],
-      "uses": [
-        526
-      ],
-      "idx": 530
-    },
-    {
-      "path": "../classic/classic/src/grid/column/Widget.js",
-      "requires": [
-        522
-      ],
-      "uses": [],
-      "idx": 531
-    },
-    {
-      "path": "../classic/classic/src/grid/feature/Feature.js",
-      "requires": [
-        51
-      ],
-      "uses": [],
-      "idx": 532
-    },
-    {
-      "path": "../classic/classic/src/grid/feature/AbstractSummary.js",
-      "requires": [
-        532
-      ],
-      "uses": [],
-      "idx": 533
-    },
-    {
-      "path": "../classic/classic/src/grid/feature/GroupStore.js",
-      "requires": [
-        51
-      ],
-      "uses": [
-        113
-      ],
-      "idx": 534
-    },
-    {
-      "path": "../classic/classic/src/grid/feature/Grouping.js",
-      "requires": [
-        532,
-        533,
-        534
-      ],
-      "uses": [
-        89,
-        141,
-        521
-      ],
-      "idx": 535
-    },
-    {
-      "path": "../classic/classic/src/grid/feature/GroupingSummary.js",
-      "requires": [
-        535
-      ],
-      "uses": [],
-      "idx": 536
-    },
-    {
-      "path": "../classic/classic/src/grid/feature/RowBody.js",
-      "requires": [
-        532
-      ],
-      "uses": [
-        89
-      ],
-      "idx": 537
-    },
-    {
-      "path": "../classic/classic/src/grid/feature/Summary.js",
-      "requires": [
-        533
-      ],
-      "uses": [
-        89,
-        105,
-        141,
-        362
-      ],
-      "idx": 538
-    },
-    {
-      "path": "../classic/classic/src/menu/Item.js",
-      "requires": [
-        77,
-        105,
-        219
-      ],
-      "uses": [
-        367,
-        487
-      ],
-      "idx": 539
-    },
-    {
-      "path": "../classic/classic/src/menu/CheckItem.js",
-      "requires": [
-        539
-      ],
-      "uses": [
-        367
-      ],
-      "idx": 540
-    },
-    {
-      "path": "../classic/classic/src/menu/Separator.js",
-      "requires": [
-        539
-      ],
-      "uses": [],
-      "idx": 541
-    },
-    {
       "path": "../classic/classic/src/menu/Menu.js",
       "requires": [
+        347,
+        359,
         367,
         379,
-        387,
-        399,
-        539,
-        540,
-        541
+        516,
+        517,
+        518
       ],
       "uses": [
         20,
-        35,
-        49,
-        362,
-        378
+        50,
+        194,
+        341
       ],
-      "idx": 542
+      "idx": 519
     },
     {
       "path": "../classic/classic/src/grid/filters/filter/Base.js",
       "requires": [
         12,
-        382,
-        387,
-        396,
-        542
+        194,
+        362,
+        367,
+        376,
+        519
       ],
       "uses": [
         1,
-        50
+        51
       ],
-      "idx": 543
+      "idx": 520
     },
     {
       "path": "../classic/classic/src/grid/filters/filter/SingleFilter.js",
       "requires": [
-        543
+        520
       ],
       "uses": [],
-      "idx": 544
+      "idx": 521
     },
     {
       "path": "../classic/classic/src/grid/filters/filter/Boolean.js",
       "requires": [
-        544
+        521
       ],
       "uses": [],
-      "idx": 545
+      "idx": 522
     },
     {
       "path": "../classic/classic/src/grid/filters/filter/TriFilter.js",
       "requires": [
-        543
+        520
       ],
       "uses": [],
-      "idx": 546
+      "idx": 523
     },
     {
       "path": "../classic/classic/src/grid/filters/filter/Date.js",
       "requires": [
-        362,
-        540,
-        546
+        194,
+        341,
+        517,
+        523
       ],
       "uses": [
-        382,
-        387,
-        396,
-        477,
-        591
+        457,
+        519
       ],
-      "idx": 547
+      "idx": 524
     },
     {
       "path": "../classic/classic/src/grid/filters/filter/List.js",
       "requires": [
-        544
+        521
       ],
       "uses": [
-        158,
-        161
+        171,
+        174
       ],
-      "idx": 548
+      "idx": 525
     },
     {
       "path": "../classic/classic/src/grid/filters/filter/Number.js",
       "requires": [
-        362,
-        470,
-        546
+        194,
+        341,
+        450,
+        523
       ],
       "uses": [
-        472
+        452
       ],
-      "idx": 549
+      "idx": 526
     },
     {
       "path": "../classic/classic/src/grid/filters/filter/String.js",
       "requires": [
-        362,
-        440,
-        544
+        194,
+        341,
+        419,
+        521
       ],
-      "uses": [
-        50
-      ],
-      "idx": 550
+      "uses": [],
+      "idx": 527
     },
     {
       "path": "../classic/classic/src/grid/filters/Filters.js",
       "requires": [
-        327,
-        359,
-        543,
-        544,
-        545,
-        546,
-        547,
-        548,
-        549,
-        550
+        314,
+        338,
+        520,
+        521,
+        522,
+        523,
+        524,
+        525,
+        526,
+        527
       ],
       "uses": [
         12
       ],
-      "idx": 551
+      "idx": 528
     },
     {
       "path": "../classic/classic/src/grid/locking/HeaderContainer.js",
       "requires": [
-        504,
-        521
+        483,
+        499
       ],
       "uses": [],
-      "idx": 552
+      "idx": 529
     },
     {
       "path": "../classic/classic/src/grid/locking/View.js",
       "requires": [
-        51,
-        102,
-        105,
-        359,
-        464,
-        509
+        52,
+        115,
+        118,
+        338,
+        444,
+        488
       ],
       "uses": [
-        95,
-        360,
-        498
+        339,
+        477
       ],
-      "idx": 553
+      "idx": 530
     },
     {
       "path": "../classic/classic/src/grid/locking/Lockable.js",
       "requires": [
-        105,
-        509,
-        521,
-        552,
-        553
+        118,
+        488,
+        499,
+        529,
+        530
       ],
       "uses": [
         1,
-        161,
-        351,
-        362,
-        384,
-        385
+        174,
+        194,
+        331,
+        341,
+        364,
+        365
       ],
-      "idx": 554
+      "idx": 531
     },
     {
       "path": "../classic/classic/src/grid/plugin/BufferedRenderer.js",
       "requires": [
-        327
+        314
       ],
       "uses": [
         1,
-        49,
-        507
+        50,
+        486
       ],
-      "idx": 555
+      "idx": 532
     },
     {
       "path": "../classic/classic/src/grid/plugin/Editing.js",
       "requires": [
         4,
-        327,
-        378,
-        437,
-        509,
-        522
+        314,
+        358,
+        416,
+        488,
+        500
       ],
       "uses": [
         20,
-        105,
-        362,
-        498
+        194,
+        341,
+        477
       ],
-      "idx": 556
+      "idx": 533
     },
     {
       "path": "../classic/classic/src/grid/plugin/CellEditing.js",
       "requires": [
         1,
-        499,
-        556
+        478,
+        533
       ],
       "uses": [
-        55,
-        498
+        56,
+        194,
+        334,
+        341,
+        477
       ],
-      "idx": 557
+      "idx": 534
     },
     {
       "path": "../classic/classic/src/plugin/AbstractClipboard.js",
       "requires": [
-        327,
-        377
+        314,
+        357
       ],
       "uses": [
-        49
+        50
       ],
-      "idx": 558
+      "idx": 535
     },
     {
       "path": "../classic/classic/src/grid/plugin/Clipboard.js",
       "requires": [
-        85,
-        334,
-        558
+        79,
+        321,
+        535
       ],
       "uses": [
-        498
+        477
       ],
-      "idx": 559
+      "idx": 536
     },
     {
       "path": "../classic/classic/src/grid/plugin/DragDrop.js",
       "requires": [
-        327
+        314
       ],
       "uses": [
-        516,
-        633
+        494,
+        608
       ],
-      "idx": 560
+      "idx": 537
     },
     {
       "path": "../classic/classic/src/grid/plugin/RowEditing.js",
       "requires": [
-        513,
-        556
+        491,
+        533
       ],
       "uses": [],
-      "idx": 561
+      "idx": 538
     },
     {
       "path": "../classic/classic/src/grid/plugin/RowExpander.js",
       "requires": [
-        327,
-        537
+        314,
+        514
       ],
       "uses": [
-        89,
-        522
+        87,
+        500
       ],
-      "idx": 562
-    },
-    {
-      "path": "../classic/classic/src/grid/plugin/RowWidget.js",
-      "requires": [
-        3,
-        562
-      ],
-      "uses": [
-        327,
-        537
-      ],
-      "idx": 563
+      "idx": 539
     },
     {
       "path": "../classic/classic/src/grid/property/Grid.js",
       "requires": [
-        510
+        489
       ],
       "uses": [
         20,
-        89,
-        141,
-        354,
-        362,
-        437,
-        440,
-        470,
-        472,
-        475,
+        87,
+        154,
+        194,
+        334,
+        341,
+        416,
+        419,
+        450,
+        452,
+        455,
+        458,
         478,
-        498,
-        499,
-        509,
-        557,
-        565,
-        568
+        488,
+        534,
+        541,
+        544
       ],
-      "idx": 564
+      "idx": 540
     },
     {
       "path": "../classic/classic/src/grid/property/HeaderContainer.js",
       "requires": [
-        85,
-        521
+        79,
+        499
       ],
       "uses": [],
-      "idx": 565
+      "idx": 541
     },
     {
       "path": "../classic/classic/src/grid/property/Property.js",
       "requires": [
-        141
+        154
       ],
       "uses": [],
-      "idx": 566
+      "idx": 542
     },
     {
       "path": "../classic/classic/src/grid/property/Reader.js",
       "requires": [
-        143
+        156
       ],
       "uses": [
-        142
+        155
       ],
-      "idx": 567
+      "idx": 543
     },
     {
       "path": "../classic/classic/src/grid/property/Store.js",
       "requires": [
-        147,
-        158,
-        566,
-        567
+        160,
+        171,
+        542,
+        543
       ],
       "uses": [
-        153
+        166
       ],
-      "idx": 568
+      "idx": 544
     },
     {
       "path": "../classic/classic/src/grid/selection/Selection.js",
       "requires": [],
       "uses": [],
-      "idx": 569
+      "idx": 545
     },
     {
       "path": "../classic/classic/src/grid/selection/Cells.js",
       "requires": [
-        569
+        545
       ],
       "uses": [
-        498
+        477
       ],
-      "idx": 570
+      "idx": 546
     },
     {
       "path": "../classic/classic/src/grid/selection/Columns.js",
       "requires": [
-        569
+        545
       ],
       "uses": [
-        498
+        477
       ],
-      "idx": 571
+      "idx": 547
     },
     {
       "path": "../classic/classic/src/grid/selection/Replicator.js",
       "requires": [
-        327
+        314
       ],
       "uses": [],
-      "idx": 572
+      "idx": 548
     },
     {
       "path": "../classic/classic/src/grid/selection/Rows.js",
       "requires": [
-        113,
-        569
+        126,
+        545
       ],
       "uses": [
-        498
+        477
       ],
-      "idx": 573
+      "idx": 549
     },
     {
       "path": "../classic/classic/src/grid/selection/SelectionExtender.js",
       "requires": [
-        410
+        390
       ],
       "uses": [
-        49,
-        335
+        50,
+        322
       ],
-      "idx": 574
+      "idx": 550
     },
     {
       "path": "../classic/classic/src/grid/selection/SpreadsheetModel.js",
       "requires": [
-        461,
-        529,
-        569,
-        570,
-        571,
-        573,
-        574
+        441,
+        506,
+        545,
+        546,
+        547,
+        549,
+        550
       ],
       "uses": [
-        351,
-        416,
-        498,
-        500,
-        526
+        194,
+        331,
+        396,
+        477,
+        479
       ],
-      "idx": 575
+      "idx": 551
     },
     {
       "path": "../classic/classic/src/util/Queue.js",
       "requires": [],
       "uses": [],
-      "idx": 576
+      "idx": 552
     },
     {
       "path": "../classic/classic/src/layout/ContextItem.js",
       "requires": [],
       "uses": [
-        55,
-        66,
-        72,
-        348
+        56,
+        67,
+        73,
+        328
       ],
-      "idx": 577
+      "idx": 553
     },
     {
       "path": "../classic/classic/src/layout/Context.js",
       "requires": [
-        66,
-        72,
-        326,
-        349,
-        576,
-        577
+        67,
+        73,
+        313,
+        329,
+        552,
+        553
       ],
       "uses": [],
-      "idx": 578
+      "idx": 554
     },
     {
       "path": "../classic/classic/src/layout/SizePolicy.js",
       "requires": [],
       "uses": [],
-      "idx": 579
+      "idx": 555
     },
     {
       "path": "../classic/classic/src/layout/component/Body.js",
       "requires": [
-        362
+        341
       ],
       "uses": [],
-      "idx": 580
+      "idx": 556
     },
     {
       "path": "../classic/classic/src/layout/component/FieldSet.js",
       "requires": [
-        580
+        556
       ],
       "uses": [],
-      "idx": 581
+      "idx": 557
     },
     {
       "path": "../classic/classic/src/layout/container/Absolute.js",
       "requires": [
-        406
+        386
       ],
       "uses": [],
-      "idx": 582
+      "idx": 558
     },
     {
       "path": "../classic/classic/src/layout/container/Accordion.js",
       "requires": [
-        387
+        367
       ],
       "uses": [],
-      "idx": 583
+      "idx": 559
     },
     {
       "path": "../classic/classic/src/resizer/BorderSplitter.js",
       "requires": [
-        384
+        364
       ],
       "uses": [
-        594
+        569
       ],
-      "idx": 584
+      "idx": 560
     },
     {
       "path": "../classic/classic/src/layout/container/Border.js",
       "requires": [
-        72,
-        106,
-        350,
-        584
+        73,
+        119,
+        330,
+        560
       ],
       "uses": [
-        85,
-        362
+        79,
+        194,
+        341
       ],
-      "idx": 585
+      "idx": 561
     },
     {
       "path": "../classic/classic/src/layout/container/Card.js",
       "requires": [
-        501
+        480
       ],
       "uses": [
-        49
+        50
       ],
-      "idx": 586
+      "idx": 562
     },
     {
       "path": "../classic/classic/src/layout/container/Center.js",
       "requires": [
-        501
+        480
       ],
       "uses": [],
-      "idx": 587
+      "idx": 563
     },
     {
       "path": "../classic/classic/src/layout/container/Form.js",
       "requires": [
-        351
+        331
       ],
       "uses": [],
-      "idx": 588
-    },
-    {
-      "path": "../classic/classic/src/menu/Bar.js",
-      "requires": [
-        542
-      ],
-      "uses": [],
-      "idx": 589
+      "idx": 564
     },
     {
       "path": "../classic/classic/src/menu/ColorPicker.js",
       "requires": [
-        488,
-        542
+        468,
+        519
       ],
       "uses": [
-        362,
-        367
+        194,
+        341,
+        347
       ],
-      "idx": 590
+      "idx": 565
     },
     {
       "path": "../classic/classic/src/menu/DatePicker.js",
       "requires": [
-        477,
-        542
+        457,
+        519
       ],
       "uses": [
-        362,
-        367
+        194,
+        341,
+        347
       ],
-      "idx": 591
+      "idx": 566
     },
     {
       "path": "../classic/classic/src/panel/Pinnable.js",
@@ -5996,487 +5781,497 @@ var Ext = Ext || {};
         0
       ],
       "uses": [
-        362,
-        376
+        194,
+        341,
+        356
       ],
-      "idx": 592
+      "idx": 567
     },
     {
       "path": "../classic/classic/src/plugin/Manager.js",
       "requires": [],
       "uses": [],
-      "idx": 593
+      "idx": 568
     },
     {
       "path": "../classic/classic/src/resizer/BorderSplitterTracker.js",
       "requires": [
         33,
-        411
+        391
       ],
       "uses": [],
-      "idx": 594
+      "idx": 569
     },
     {
       "path": "../classic/classic/src/resizer/Handle.js",
       "requires": [
-        105
+        118
       ],
       "uses": [],
-      "idx": 595
+      "idx": 570
     },
     {
       "path": "../classic/classic/src/resizer/ResizeTracker.js",
       "requires": [
-        410
+        390
       ],
-      "uses": [
-        49
-      ],
-      "idx": 596
+      "uses": [],
+      "idx": 571
     },
     {
       "path": "../classic/classic/src/resizer/Resizer.js",
       "requires": [
-        51
+        52
       ],
       "uses": [
-        49,
-        86,
-        105,
-        596
+        50,
+        80,
+        118,
+        229,
+        571
       ],
-      "idx": 597
+      "idx": 572
     },
     {
       "path": "../classic/classic/src/selection/CellModel.js",
       "requires": [
-        462,
-        498
+        442,
+        477
       ],
       "uses": [],
-      "idx": 598
+      "idx": 573
     },
     {
       "path": "../classic/classic/src/selection/RowModel.js",
       "requires": [
-        462,
-        498
+        442,
+        477
       ],
       "uses": [],
-      "idx": 599
+      "idx": 574
     },
     {
       "path": "../classic/classic/src/selection/CheckboxModel.js",
       "requires": [
-        526,
-        599
+        574
       ],
       "uses": [
-        351,
-        498,
+        194,
+        331,
+        477,
+        479,
         500
       ],
-      "idx": 600
+      "idx": 575
     },
     {
       "path": "../classic/classic/src/selection/TreeModel.js",
       "requires": [
-        599
+        574
       ],
       "uses": [],
-      "idx": 601
+      "idx": 576
     },
     {
       "path": "../classic/classic/src/slider/Thumb.js",
       "requires": [
-        85,
-        410
+        79,
+        390
       ],
       "uses": [
-        72
+        73
       ],
-      "idx": 602
+      "idx": 577
     },
     {
       "path": "../classic/classic/src/slider/Tip.js",
       "requires": [
-        484
+        464
       ],
       "uses": [],
-      "idx": 603
+      "idx": 578
     },
     {
       "path": "../classic/classic/src/slider/Multi.js",
       "requires": [
-        85,
-        86,
-        437,
-        602,
-        603
+        79,
+        80,
+        416,
+        577,
+        578
       ],
       "uses": [
-        226
+        229
       ],
-      "idx": 604
+      "idx": 579
     },
     {
       "path": "../classic/classic/src/slider/Single.js",
       "requires": [
-        604
+        579
       ],
       "uses": [],
-      "idx": 605
+      "idx": 580
     },
     {
       "path": "../classic/classic/src/slider/Widget.js",
       "requires": [
-        82,
-        604
+        84,
+        579
       ],
       "uses": [
-        72,
-        85
+        73,
+        79
       ],
-      "idx": 606
+      "idx": 581
     },
     {
       "path": "../classic/classic/src/sparkline/Shape.js",
       "requires": [],
       "uses": [],
-      "idx": 607
+      "idx": 582
     },
     {
       "path": "../classic/classic/src/sparkline/CanvasBase.js",
       "requires": [
-        607
+        582
       ],
       "uses": [],
-      "idx": 608
+      "idx": 583
     },
     {
       "path": "../classic/classic/src/sparkline/CanvasCanvas.js",
       "requires": [
-        608
+        583
       ],
       "uses": [],
-      "idx": 609
+      "idx": 584
     },
     {
       "path": "../classic/classic/src/sparkline/VmlCanvas.js",
       "requires": [
-        608
+        583
       ],
       "uses": [],
-      "idx": 610
+      "idx": 585
     },
     {
       "path": "../classic/classic/src/sparkline/Base.js",
       "requires": [
-        82,
-        89,
-        351,
-        396,
-        485,
-        609,
-        610
+        84,
+        87,
+        194,
+        331,
+        376,
+        465,
+        584,
+        585
       ],
       "uses": [],
-      "idx": 611
+      "idx": 586
     },
     {
       "path": "../classic/classic/src/sparkline/BarBase.js",
       "requires": [
-        611
+        586
       ],
       "uses": [],
-      "idx": 612
+      "idx": 587
     },
     {
       "path": "../classic/classic/src/sparkline/RangeMap.js",
       "requires": [],
       "uses": [],
-      "idx": 613
+      "idx": 588
     },
     {
       "path": "../classic/classic/src/sparkline/Bar.js",
       "requires": [
-        89,
-        612,
-        613
+        87,
+        587,
+        588
       ],
       "uses": [],
-      "idx": 614
+      "idx": 589
     },
     {
       "path": "../classic/classic/src/sparkline/Box.js",
       "requires": [
-        89,
-        611
+        87,
+        586
       ],
       "uses": [],
-      "idx": 615
+      "idx": 590
     },
     {
       "path": "../classic/classic/src/sparkline/Bullet.js",
       "requires": [
-        89,
-        611
+        87,
+        586
       ],
       "uses": [],
-      "idx": 616
+      "idx": 591
     },
     {
       "path": "../classic/classic/src/sparkline/Discrete.js",
       "requires": [
-        89,
-        612
+        87,
+        587
       ],
       "uses": [],
-      "idx": 617
+      "idx": 592
     },
     {
       "path": "../classic/classic/src/sparkline/Line.js",
       "requires": [
-        89,
-        611,
-        613
+        87,
+        586,
+        588
       ],
       "uses": [],
-      "idx": 618
+      "idx": 593
     },
     {
       "path": "../classic/classic/src/sparkline/Pie.js",
       "requires": [
-        89,
-        611
+        87,
+        586
       ],
       "uses": [],
-      "idx": 619
+      "idx": 594
     },
     {
       "path": "../classic/classic/src/sparkline/TriState.js",
       "requires": [
-        89,
-        612,
-        613
+        87,
+        587,
+        588
       ],
       "uses": [],
-      "idx": 620
+      "idx": 595
     },
     {
       "path": "../classic/classic/src/state/CookieProvider.js",
       "requires": [
-        99
+        112
       ],
       "uses": [],
-      "idx": 621
+      "idx": 596
     },
     {
       "path": "../classic/classic/src/state/LocalStorageProvider.js",
       "requires": [
-        99,
-        333
+        112,
+        320
       ],
       "uses": [],
-      "idx": 622
+      "idx": 597
     },
     {
       "path": "../classic/classic/src/tab/Tab.js",
       "requires": [
-        369
+        349
       ],
       "uses": [],
-      "idx": 623
+      "idx": 598
     },
     {
       "path": "../classic/classic/src/tab/Bar.js",
       "requires": [
         34,
-        374,
-        379,
-        580,
-        623
+        354,
+        359,
+        556,
+        598
       ],
       "uses": [
         33
       ],
-      "idx": 624
+      "idx": 599
     },
     {
       "path": "../classic/classic/src/tab/Panel.js",
       "requires": [
-        399,
-        586,
-        624
+        379,
+        562,
+        599
       ],
       "uses": [
-        362,
-        623
+        194,
+        341,
+        598
       ],
-      "idx": 625
+      "idx": 600
     },
     {
       "path": "../classic/classic/src/toolbar/Breadcrumb.js",
       "requires": [
-        223,
-        353,
-        370,
-        379
+        226,
+        333,
+        350,
+        359
       ],
       "uses": [
-        23,
-        161
+        174
       ],
-      "idx": 626
+      "idx": 601
     },
     {
       "path": "../classic/classic/src/toolbar/Fill.js",
       "requires": [
-        105,
-        388
+        118,
+        368
       ],
       "uses": [],
-      "idx": 627
+      "idx": 602
     },
     {
       "path": "../classic/classic/src/toolbar/Spacer.js",
       "requires": [
-        105,
-        388
+        118,
+        368
       ],
       "uses": [],
-      "idx": 628
+      "idx": 603
     },
     {
       "path": "../classic/classic/src/tree/Column.js",
       "requires": [
-        522
+        500
       ],
-      "uses": [
-        77
-      ],
-      "idx": 629
+      "uses": [],
+      "idx": 604
     },
     {
       "path": "../classic/classic/src/tree/NavigationModel.js",
       "requires": [
-        505
+        484
       ],
       "uses": [
         35
       ],
-      "idx": 630
+      "idx": 605
     },
     {
       "path": "../classic/classic/src/tree/View.js",
       "requires": [
-        509
+        488
       ],
       "uses": [
-        49,
-        89
+        50,
+        87
       ],
-      "idx": 631
+      "idx": 606
     },
     {
       "path": "../classic/classic/src/tree/Panel.js",
       "requires": [
-        223,
-        502,
-        601,
-        629,
-        630,
-        631
+        226,
+        481,
+        576,
+        604,
+        605,
+        606
       ],
       "uses": [
-        161,
-        351,
-        500
+        174,
+        194,
+        331,
+        479
       ],
-      "idx": 632
+      "idx": 607
     },
     {
       "path": "../classic/classic/src/view/DragZone.js",
       "requires": [
-        421
+        401
       ],
       "uses": [
-        49,
-        86
+        80
       ],
-      "idx": 633
+      "idx": 608
     },
     {
       "path": "../classic/classic/src/tree/ViewDragZone.js",
       "requires": [
-        633
+        608
       ],
       "uses": [
-        86
+        80
       ],
-      "idx": 634
+      "idx": 609
     },
     {
       "path": "../classic/classic/src/tree/ViewDropZone.js",
       "requires": [
-        515
+        493
       ],
       "uses": [],
-      "idx": 635
+      "idx": 610
     },
     {
       "path": "../classic/classic/src/tree/plugin/TreeViewDragDrop.js",
       "requires": [
-        327
+        314
       ],
       "uses": [
-        634,
-        635
+        609,
+        610
       ],
-      "idx": 636
+      "idx": 611
+    },
+    {
+      "path": "../classic/classic/src/util/CSS.js",
+      "requires": [],
+      "uses": [
+        50
+      ],
+      "idx": 612
     },
     {
       "path": "../classic/classic/src/util/Cookies.js",
       "requires": [],
       "uses": [],
-      "idx": 637
+      "idx": 613
     },
     {
       "path": "../classic/classic/src/view/MultiSelectorSearch.js",
       "requires": [
-        399
+        379
       ],
       "uses": [
-        50,
-        161,
-        362,
-        396,
-        440,
-        501,
-        510
+        51,
+        174,
+        194,
+        341,
+        376,
+        419,
+        480,
+        489
       ],
-      "idx": 638
+      "idx": 614
     },
     {
       "path": "../classic/classic/src/view/MultiSelector.js",
       "requires": [
-        396,
-        501,
-        510,
-        638
+        194,
+        376,
+        480,
+        489,
+        614
       ],
       "uses": [],
-      "idx": 639
+      "idx": 615
     },
     {
       "path": "../classic/classic/src/window/Toast.js",
       "requires": [
-        434
+        413
       ],
       "uses": [
         1
       ],
-      "idx": 640
+      "idx": 616
     }
   ],
   "classes": {
@@ -6486,7 +6281,7 @@ var Ext = Ext || {};
       "alternates": []
     },
     "Ext.Action": {
-      "idx": 345,
+      "idx": 325,
       "alias": [],
       "alternates": []
     },
@@ -6501,7 +6296,7 @@ var Ext = Ext || {};
       "alternates": []
     },
     "Ext.Component": {
-      "idx": 105,
+      "idx": 118,
       "alias": [
         "widget.box",
         "widget.component"
@@ -6511,7 +6306,7 @@ var Ext = Ext || {};
       ]
     },
     "Ext.ComponentLoader": {
-      "idx": 347,
+      "idx": 327,
       "alias": [],
       "alternates": []
     },
@@ -6533,19 +6328,19 @@ var Ext = Ext || {};
       "alternates": []
     },
     "Ext.Editor": {
-      "idx": 355,
+      "idx": 335,
       "alias": [
         "widget.editor"
       ],
       "alternates": []
     },
     "Ext.ElementLoader": {
-      "idx": 346,
+      "idx": 326,
       "alias": [],
       "alternates": []
     },
     "Ext.EventManager": {
-      "idx": 356,
+      "idx": 336,
       "alias": [],
       "alternates": []
     },
@@ -6556,25 +6351,15 @@ var Ext = Ext || {};
         "Ext.EventedBase"
       ]
     },
-    "Ext.Gadget": {
-      "idx": 357,
-      "alias": [],
-      "alternates": []
-    },
     "Ext.GlobalEvents": {
-      "idx": 76,
+      "idx": 77,
       "alias": [],
       "alternates": [
         "Ext.globalEvents"
       ]
     },
-    "Ext.Glyph": {
-      "idx": 77,
-      "alias": [],
-      "alternates": []
-    },
     "Ext.Img": {
-      "idx": 358,
+      "idx": 337,
       "alias": [
         "widget.image",
         "widget.imagecomponent"
@@ -6582,7 +6367,7 @@ var Ext = Ext || {};
       "alternates": []
     },
     "Ext.LoadMask": {
-      "idx": 360,
+      "idx": 339,
       "alias": [
         "widget.loadmask"
       ],
@@ -6593,26 +6378,18 @@ var Ext = Ext || {};
       "alias": [],
       "alternates": []
     },
-    "Ext.Progress": {
-      "idx": 84,
-      "alias": [
-        "widget.progress",
-        "widget.progressbarwidget"
-      ],
-      "alternates": [
-        "Ext.ProgressBarWidget"
-      ]
-    },
     "Ext.ProgressBar": {
-      "idx": 364,
+      "idx": 343,
       "alias": [
         "widget.progressbar"
       ],
       "alternates": []
     },
-    "Ext.ProgressBase": {
-      "idx": 83,
-      "alias": [],
+    "Ext.ProgressBarWidget": {
+      "idx": 344,
+      "alias": [
+        "widget.progressbarwidget"
+      ],
       "alternates": []
     },
     "Ext.Promise": {
@@ -6626,180 +6403,173 @@ var Ext = Ext || {};
       "alternates": []
     },
     "Ext.Template": {
-      "idx": 86,
+      "idx": 80,
       "alias": [],
       "alternates": []
     },
     "Ext.Widget": {
-      "idx": 82,
+      "idx": 84,
       "alias": [
         "widget.widget"
       ],
       "alternates": []
     },
     "Ext.XTemplate": {
-      "idx": 89,
+      "idx": 87,
       "alias": [],
       "alternates": []
     },
     "Ext.ZIndexManager": {
-      "idx": 352,
+      "idx": 332,
       "alias": [],
       "alternates": [
         "Ext.WindowGroup"
       ]
     },
     "Ext.app.Application": {
-      "idx": 168,
+      "idx": 181,
       "alias": [],
       "alternates": []
     },
     "Ext.app.BaseController": {
-      "idx": 109,
+      "idx": 122,
       "alias": [],
       "alternates": []
     },
     "Ext.app.Controller": {
-      "idx": 167,
+      "idx": 180,
       "alias": [],
       "alternates": []
     },
     "Ext.app.EventBus": {
-      "idx": 107,
+      "idx": 120,
       "alias": [],
       "alternates": []
     },
     "Ext.app.EventDomain": {
-      "idx": 90,
+      "idx": 88,
       "alias": [],
       "alternates": []
     },
     "Ext.app.Profile": {
-      "idx": 169,
+      "idx": 182,
       "alias": [],
       "alternates": []
     },
     "Ext.app.Util": {
-      "idx": 110,
+      "idx": 123,
       "alias": [],
       "alternates": []
     },
     "Ext.app.ViewController": {
-      "idx": 171,
-      "alias": [
-        "controller.controller"
-      ],
+      "idx": 184,
+      "alias": [],
       "alternates": []
     },
     "Ext.app.ViewModel": {
-      "idx": 204,
+      "idx": 207,
       "alias": [
         "viewmodel.default"
       ],
       "alternates": []
     },
     "Ext.app.bind.AbstractStub": {
-      "idx": 185,
+      "idx": 198,
       "alias": [],
       "alternates": []
     },
     "Ext.app.bind.BaseBinding": {
-      "idx": 183,
+      "idx": 196,
       "alias": [],
       "alternates": []
     },
     "Ext.app.bind.Binding": {
-      "idx": 184,
+      "idx": 197,
       "alias": [],
       "alternates": []
     },
     "Ext.app.bind.Formula": {
-      "idx": 190,
+      "idx": 203,
       "alias": [],
       "alternates": []
     },
     "Ext.app.bind.LinkStub": {
-      "idx": 187,
-      "alias": [],
-      "alternates": []
-    },
-    "Ext.app.bind.Multi": {
-      "idx": 189,
-      "alias": [],
-      "alternates": []
-    },
-    "Ext.app.bind.Parser": {
       "idx": 200,
       "alias": [],
       "alternates": []
     },
-    "Ext.app.bind.RootStub": {
-      "idx": 188,
-      "alias": [],
-      "alternates": []
-    },
-    "Ext.app.bind.Stub": {
-      "idx": 186,
-      "alias": [],
-      "alternates": []
-    },
-    "Ext.app.bind.Template": {
-      "idx": 201,
-      "alias": [],
-      "alternates": []
-    },
-    "Ext.app.bind.TemplateBinding": {
+    "Ext.app.bind.Multi": {
       "idx": 202,
       "alias": [],
       "alternates": []
     },
-    "Ext.app.domain.Component": {
-      "idx": 91,
+    "Ext.app.bind.RootStub": {
+      "idx": 201,
       "alias": [],
       "alternates": []
     },
-    "Ext.app.domain.Controller": {
+    "Ext.app.bind.Stub": {
+      "idx": 199,
+      "alias": [],
+      "alternates": []
+    },
+    "Ext.app.bind.Template": {
+      "idx": 204,
+      "alias": [],
+      "alternates": []
+    },
+    "Ext.app.bind.TemplateBinding": {
       "idx": 205,
       "alias": [],
       "alternates": []
     },
-    "Ext.app.domain.Direct": {
+    "Ext.app.domain.Component": {
+      "idx": 89,
+      "alias": [],
+      "alternates": []
+    },
+    "Ext.app.domain.Controller": {
       "idx": 208,
       "alias": [],
       "alternates": []
     },
+    "Ext.app.domain.Direct": {
+      "idx": 211,
+      "alias": [],
+      "alternates": []
+    },
     "Ext.app.domain.Global": {
-      "idx": 108,
+      "idx": 121,
       "alias": [],
       "alternates": []
     },
     "Ext.app.domain.Store": {
-      "idx": 162,
+      "idx": 175,
       "alias": [],
       "alternates": []
     },
     "Ext.app.domain.View": {
-      "idx": 170,
+      "idx": 183,
       "alias": [],
       "alternates": []
     },
     "Ext.app.route.Queue": {
-      "idx": 163,
+      "idx": 176,
       "alias": [],
       "alternates": []
     },
     "Ext.app.route.Route": {
-      "idx": 164,
+      "idx": 177,
       "alias": [],
       "alternates": []
     },
     "Ext.app.route.Router": {
-      "idx": 166,
+      "idx": 179,
       "alias": [],
       "alternates": []
     },
     "Ext.button.Button": {
-      "idx": 369,
+      "idx": 349,
       "alias": [
         "widget.button"
       ],
@@ -6808,7 +6578,7 @@ var Ext = Ext || {};
       ]
     },
     "Ext.button.Cycle": {
-      "idx": 371,
+      "idx": 351,
       "alias": [
         "widget.cycle"
       ],
@@ -6817,21 +6587,21 @@ var Ext = Ext || {};
       ]
     },
     "Ext.button.Manager": {
-      "idx": 366,
+      "idx": 346,
       "alias": [],
       "alternates": [
         "Ext.ButtonToggleManager"
       ]
     },
     "Ext.button.Segmented": {
-      "idx": 373,
+      "idx": 353,
       "alias": [
         "widget.segmentedbutton"
       ],
       "alternates": []
     },
     "Ext.button.Split": {
-      "idx": 370,
+      "idx": 350,
       "alias": [
         "widget.splitbutton"
       ],
@@ -6840,7 +6610,7 @@ var Ext = Ext || {};
       ]
     },
     "Ext.container.ButtonGroup": {
-      "idx": 401,
+      "idx": 381,
       "alias": [
         "widget.buttongroup"
       ],
@@ -6849,7 +6619,7 @@ var Ext = Ext || {};
       ]
     },
     "Ext.container.Container": {
-      "idx": 353,
+      "idx": 333,
       "alias": [
         "widget.container"
       ],
@@ -6859,17 +6629,17 @@ var Ext = Ext || {};
       ]
     },
     "Ext.container.DockingContainer": {
-      "idx": 398,
+      "idx": 378,
       "alias": [],
       "alternates": []
     },
     "Ext.container.Monitor": {
-      "idx": 402,
+      "idx": 382,
       "alias": [],
       "alternates": []
     },
     "Ext.container.Viewport": {
-      "idx": 405,
+      "idx": 385,
       "alias": [
         "widget.viewport"
       ],
@@ -6878,45 +6648,45 @@ var Ext = Ext || {};
       ]
     },
     "Ext.dashboard.Column": {
-      "idx": 408,
+      "idx": 388,
       "alias": [
         "widget.dashboard-column"
       ],
       "alternates": []
     },
     "Ext.dashboard.Dashboard": {
-      "idx": 420,
+      "idx": 400,
       "alias": [
         "widget.dashboard"
       ],
       "alternates": []
     },
     "Ext.dashboard.DropZone": {
-      "idx": 418,
+      "idx": 398,
       "alias": [],
       "alternates": []
     },
     "Ext.dashboard.Panel": {
-      "idx": 407,
+      "idx": 387,
       "alias": [
         "widget.dashboard-panel"
       ],
       "alternates": []
     },
     "Ext.dashboard.Part": {
-      "idx": 419,
+      "idx": 399,
       "alias": [
         "part.part"
       ],
       "alternates": []
     },
     "Ext.data.AbstractStore": {
-      "idx": 123,
+      "idx": 136,
       "alias": [],
       "alternates": []
     },
     "Ext.data.ArrayStore": {
-      "idx": 160,
+      "idx": 173,
       "alias": [
         "store.array"
       ],
@@ -6925,19 +6695,19 @@ var Ext = Ext || {};
       ]
     },
     "Ext.data.Batch": {
-      "idx": 174,
+      "idx": 187,
       "alias": [],
       "alternates": []
     },
     "Ext.data.BufferedStore": {
-      "idx": 210,
+      "idx": 213,
       "alias": [
         "store.buffered"
       ],
       "alternates": []
     },
     "Ext.data.ChainedStore": {
-      "idx": 203,
+      "idx": 206,
       "alias": [
         "store.chained"
       ],
@@ -6949,113 +6719,113 @@ var Ext = Ext || {};
       "alternates": []
     },
     "Ext.data.DirectStore": {
-      "idx": 212,
+      "idx": 215,
       "alias": [
         "store.direct"
       ],
       "alternates": []
     },
     "Ext.data.Error": {
-      "idx": 124,
+      "idx": 137,
       "alias": [],
       "alternates": []
     },
     "Ext.data.ErrorCollection": {
-      "idx": 125,
+      "idx": 138,
       "alias": [],
       "alternates": [
         "Ext.data.Errors"
       ]
     },
     "Ext.data.JsonP": {
-      "idx": 213,
+      "idx": 216,
       "alias": [],
       "alternates": []
     },
     "Ext.data.JsonPStore": {
-      "idx": 215,
+      "idx": 218,
       "alias": [
         "store.jsonp"
       ],
       "alternates": []
     },
     "Ext.data.JsonStore": {
-      "idx": 216,
+      "idx": 219,
       "alias": [
         "store.json"
       ],
       "alternates": []
     },
     "Ext.data.LocalStore": {
-      "idx": 149,
+      "idx": 162,
       "alias": [],
       "alternates": []
     },
     "Ext.data.Model": {
-      "idx": 141,
+      "idx": 154,
       "alias": [],
       "alternates": [
         "Ext.data.Record"
       ]
     },
     "Ext.data.ModelManager": {
-      "idx": 217,
+      "idx": 220,
       "alias": [],
       "alternates": [
         "Ext.ModelMgr"
       ]
     },
     "Ext.data.NodeInterface": {
-      "idx": 218,
+      "idx": 221,
       "alias": [],
       "alternates": []
     },
     "Ext.data.NodeStore": {
-      "idx": 221,
+      "idx": 224,
       "alias": [
         "store.node"
       ],
       "alternates": []
     },
     "Ext.data.PageMap": {
-      "idx": 209,
+      "idx": 212,
       "alias": [],
       "alternates": []
     },
     "Ext.data.ProxyStore": {
-      "idx": 148,
+      "idx": 161,
       "alias": [],
       "alternates": []
     },
     "Ext.data.Request": {
-      "idx": 222,
+      "idx": 225,
       "alias": [],
       "alternates": []
     },
     "Ext.data.ResultSet": {
-      "idx": 142,
+      "idx": 155,
       "alias": [],
       "alternates": []
     },
     "Ext.data.Session": {
-      "idx": 181,
+      "idx": 194,
       "alias": [],
       "alternates": []
     },
     "Ext.data.SortTypes": {
-      "idx": 131,
+      "idx": 144,
       "alias": [],
       "alternates": []
     },
     "Ext.data.Store": {
-      "idx": 158,
+      "idx": 171,
       "alias": [
         "store.store"
       ],
       "alternates": []
     },
     "Ext.data.StoreManager": {
-      "idx": 161,
+      "idx": 174,
       "alias": [],
       "alternates": [
         "Ext.StoreMgr",
@@ -7064,36 +6834,36 @@ var Ext = Ext || {};
       ]
     },
     "Ext.data.TreeModel": {
-      "idx": 220,
+      "idx": 223,
       "alias": [],
       "alternates": []
     },
     "Ext.data.TreeStore": {
-      "idx": 223,
+      "idx": 226,
       "alias": [
         "store.tree"
       ],
       "alternates": []
     },
     "Ext.data.Types": {
-      "idx": 224,
+      "idx": 227,
       "alias": [],
       "alternates": []
     },
     "Ext.data.Validation": {
-      "idx": 225,
+      "idx": 228,
       "alias": [],
       "alternates": []
     },
     "Ext.data.XmlStore": {
-      "idx": 230,
+      "idx": 233,
       "alias": [
         "store.xml"
       ],
       "alternates": []
     },
     "Ext.data.field.Boolean": {
-      "idx": 134,
+      "idx": 147,
       "alias": [
         "data.field.bool",
         "data.field.boolean"
@@ -7101,14 +6871,14 @@ var Ext = Ext || {};
       "alternates": []
     },
     "Ext.data.field.Date": {
-      "idx": 135,
+      "idx": 148,
       "alias": [
         "data.field.date"
       ],
       "alternates": []
     },
     "Ext.data.field.Field": {
-      "idx": 133,
+      "idx": 146,
       "alias": [
         "data.field.auto"
       ],
@@ -7117,7 +6887,7 @@ var Ext = Ext || {};
       ]
     },
     "Ext.data.field.Integer": {
-      "idx": 136,
+      "idx": 149,
       "alias": [
         "data.field.int",
         "data.field.integer"
@@ -7125,7 +6895,7 @@ var Ext = Ext || {};
       "alternates": []
     },
     "Ext.data.field.Number": {
-      "idx": 137,
+      "idx": 150,
       "alias": [
         "data.field.float",
         "data.field.number"
@@ -7133,7 +6903,7 @@ var Ext = Ext || {};
       "alternates": []
     },
     "Ext.data.field.String": {
-      "idx": 138,
+      "idx": 151,
       "alias": [
         "data.field.string"
       ],
@@ -7145,85 +6915,85 @@ var Ext = Ext || {};
       "alternates": []
     },
     "Ext.data.identifier.Generator": {
-      "idx": 139,
+      "idx": 152,
       "alias": [
         "data.identifier.default"
       ],
       "alternates": []
     },
     "Ext.data.identifier.Negative": {
-      "idx": 231,
+      "idx": 234,
       "alias": [
         "data.identifier.negative"
       ],
       "alternates": []
     },
     "Ext.data.identifier.Sequential": {
-      "idx": 140,
+      "idx": 153,
       "alias": [
         "data.identifier.sequential"
       ],
       "alternates": []
     },
     "Ext.data.identifier.Uuid": {
-      "idx": 232,
+      "idx": 235,
       "alias": [
         "data.identifier.uuid"
       ],
       "alternates": []
     },
     "Ext.data.matrix.Matrix": {
-      "idx": 177,
+      "idx": 190,
       "alias": [],
       "alternates": []
     },
     "Ext.data.matrix.Side": {
-      "idx": 176,
+      "idx": 189,
       "alias": [],
       "alternates": []
     },
     "Ext.data.matrix.Slice": {
-      "idx": 175,
+      "idx": 188,
       "alias": [],
       "alternates": []
     },
     "Ext.data.operation.Create": {
-      "idx": 127,
+      "idx": 140,
       "alias": [
         "data.operation.create"
       ],
       "alternates": []
     },
     "Ext.data.operation.Destroy": {
-      "idx": 128,
+      "idx": 141,
       "alias": [
         "data.operation.destroy"
       ],
       "alternates": []
     },
     "Ext.data.operation.Operation": {
-      "idx": 126,
+      "idx": 139,
       "alias": [],
       "alternates": [
         "Ext.data.Operation"
       ]
     },
     "Ext.data.operation.Read": {
-      "idx": 129,
+      "idx": 142,
       "alias": [
         "data.operation.read"
       ],
       "alternates": []
     },
     "Ext.data.operation.Update": {
-      "idx": 130,
+      "idx": 143,
       "alias": [
         "data.operation.update"
       ],
       "alternates": []
     },
     "Ext.data.proxy.Ajax": {
-      "idx": 151,
+      "idx": 164,
       "alias": [
         "proxy.ajax"
       ],
@@ -7233,14 +7003,14 @@ var Ext = Ext || {};
       ]
     },
     "Ext.data.proxy.Client": {
-      "idx": 146,
+      "idx": 159,
       "alias": [],
       "alternates": [
         "Ext.data.ClientProxy"
       ]
     },
     "Ext.data.proxy.Direct": {
-      "idx": 211,
+      "idx": 214,
       "alias": [
         "proxy.direct"
       ],
@@ -7249,7 +7019,7 @@ var Ext = Ext || {};
       ]
     },
     "Ext.data.proxy.JsonP": {
-      "idx": 214,
+      "idx": 217,
       "alias": [
         "proxy.jsonp",
         "proxy.scripttag"
@@ -7259,7 +7029,7 @@ var Ext = Ext || {};
       ]
     },
     "Ext.data.proxy.LocalStorage": {
-      "idx": 234,
+      "idx": 237,
       "alias": [
         "proxy.localstorage"
       ],
@@ -7268,7 +7038,7 @@ var Ext = Ext || {};
       ]
     },
     "Ext.data.proxy.Memory": {
-      "idx": 147,
+      "idx": 160,
       "alias": [
         "proxy.memory"
       ],
@@ -7277,7 +7047,7 @@ var Ext = Ext || {};
       ]
     },
     "Ext.data.proxy.Proxy": {
-      "idx": 145,
+      "idx": 158,
       "alias": [
         "proxy.proxy"
       ],
@@ -7287,7 +7057,7 @@ var Ext = Ext || {};
       ]
     },
     "Ext.data.proxy.Rest": {
-      "idx": 235,
+      "idx": 238,
       "alias": [
         "proxy.rest"
       ],
@@ -7296,7 +7066,7 @@ var Ext = Ext || {};
       ]
     },
     "Ext.data.proxy.Server": {
-      "idx": 150,
+      "idx": 163,
       "alias": [
         "proxy.server"
       ],
@@ -7305,7 +7075,7 @@ var Ext = Ext || {};
       ]
     },
     "Ext.data.proxy.SessionStorage": {
-      "idx": 236,
+      "idx": 239,
       "alias": [
         "proxy.sessionstorage"
       ],
@@ -7314,14 +7084,14 @@ var Ext = Ext || {};
       ]
     },
     "Ext.data.proxy.WebStorage": {
-      "idx": 233,
+      "idx": 236,
       "alias": [],
       "alternates": [
         "Ext.data.WebStorageProxy"
       ]
     },
     "Ext.data.reader.Array": {
-      "idx": 159,
+      "idx": 172,
       "alias": [
         "reader.array"
       ],
@@ -7330,7 +7100,7 @@ var Ext = Ext || {};
       ]
     },
     "Ext.data.reader.Json": {
-      "idx": 152,
+      "idx": 165,
       "alias": [
         "reader.json"
       ],
@@ -7339,7 +7109,7 @@ var Ext = Ext || {};
       ]
     },
     "Ext.data.reader.Reader": {
-      "idx": 143,
+      "idx": 156,
       "alias": [
         "reader.base"
       ],
@@ -7349,7 +7119,7 @@ var Ext = Ext || {};
       ]
     },
     "Ext.data.reader.Xml": {
-      "idx": 228,
+      "idx": 231,
       "alias": [
         "reader.xml"
       ],
@@ -7377,131 +7147,131 @@ var Ext = Ext || {};
       "alternates": []
     },
     "Ext.data.schema.Association": {
-      "idx": 116,
+      "idx": 129,
       "alias": [],
       "alternates": []
     },
     "Ext.data.schema.ManyToMany": {
-      "idx": 119,
+      "idx": 132,
       "alias": [],
       "alternates": []
     },
     "Ext.data.schema.ManyToOne": {
-      "idx": 118,
+      "idx": 131,
       "alias": [],
       "alternates": []
     },
     "Ext.data.schema.Namer": {
-      "idx": 121,
+      "idx": 134,
       "alias": [
         "namer.default"
       ],
       "alternates": []
     },
     "Ext.data.schema.OneToOne": {
-      "idx": 117,
+      "idx": 130,
       "alias": [],
       "alternates": []
     },
     "Ext.data.schema.Role": {
-      "idx": 115,
+      "idx": 128,
       "alias": [],
       "alternates": []
     },
     "Ext.data.schema.Schema": {
-      "idx": 122,
+      "idx": 135,
       "alias": [
         "schema.default"
       ],
       "alternates": []
     },
     "Ext.data.session.BatchVisitor": {
-      "idx": 180,
+      "idx": 193,
       "alias": [],
       "alternates": []
     },
     "Ext.data.session.ChangesVisitor": {
-      "idx": 178,
+      "idx": 191,
       "alias": [],
       "alternates": []
     },
     "Ext.data.session.ChildChangesVisitor": {
-      "idx": 179,
+      "idx": 192,
       "alias": [],
       "alternates": []
     },
     "Ext.data.validator.Bound": {
-      "idx": 237,
+      "idx": 240,
       "alias": [
         "data.validator.bound"
       ],
       "alternates": []
     },
     "Ext.data.validator.Email": {
-      "idx": 239,
+      "idx": 242,
       "alias": [
         "data.validator.email"
       ],
       "alternates": []
     },
     "Ext.data.validator.Exclusion": {
-      "idx": 241,
+      "idx": 244,
       "alias": [
         "data.validator.exclusion"
       ],
       "alternates": []
     },
     "Ext.data.validator.Format": {
-      "idx": 238,
+      "idx": 241,
       "alias": [
         "data.validator.format"
       ],
       "alternates": []
     },
     "Ext.data.validator.Inclusion": {
-      "idx": 242,
+      "idx": 245,
       "alias": [
         "data.validator.inclusion"
       ],
       "alternates": []
     },
     "Ext.data.validator.Length": {
-      "idx": 243,
+      "idx": 246,
       "alias": [
         "data.validator.length"
       ],
       "alternates": []
     },
     "Ext.data.validator.List": {
-      "idx": 240,
+      "idx": 243,
       "alias": [
         "data.validator.list"
       ],
       "alternates": []
     },
     "Ext.data.validator.Presence": {
-      "idx": 244,
+      "idx": 247,
       "alias": [
         "data.validator.presence"
       ],
       "alternates": []
     },
     "Ext.data.validator.Range": {
-      "idx": 245,
+      "idx": 248,
       "alias": [
         "data.validator.range"
       ],
       "alternates": []
     },
     "Ext.data.validator.Validator": {
-      "idx": 132,
+      "idx": 145,
       "alias": [
         "data.validator.base"
       ],
       "alternates": []
     },
     "Ext.data.writer.Json": {
-      "idx": 153,
+      "idx": 166,
       "alias": [
         "writer.json"
       ],
@@ -7510,7 +7280,7 @@ var Ext = Ext || {};
       ]
     },
     "Ext.data.writer.Writer": {
-      "idx": 144,
+      "idx": 157,
       "alias": [
         "writer.base"
       ],
@@ -7520,7 +7290,7 @@ var Ext = Ext || {};
       ]
     },
     "Ext.data.writer.Xml": {
-      "idx": 229,
+      "idx": 232,
       "alias": [
         "writer.xml"
       ],
@@ -7529,27 +7299,27 @@ var Ext = Ext || {};
       ]
     },
     "Ext.dd.DD": {
-      "idx": 390,
+      "idx": 370,
       "alias": [],
       "alternates": []
     },
     "Ext.dd.DDProxy": {
-      "idx": 391,
+      "idx": 371,
       "alias": [],
       "alternates": []
     },
     "Ext.dd.DDTarget": {
-      "idx": 415,
+      "idx": 395,
       "alias": [],
       "alternates": []
     },
     "Ext.dd.DragDrop": {
-      "idx": 389,
+      "idx": 369,
       "alias": [],
       "alternates": []
     },
     "Ext.dd.DragDropManager": {
-      "idx": 383,
+      "idx": 363,
       "alias": [],
       "alternates": [
         "Ext.dd.DragDropMgr",
@@ -7557,132 +7327,134 @@ var Ext = Ext || {};
       ]
     },
     "Ext.dd.DragSource": {
-      "idx": 393,
+      "idx": 373,
       "alias": [],
       "alternates": []
     },
     "Ext.dd.DragTracker": {
-      "idx": 410,
+      "idx": 390,
       "alias": [],
       "alternates": []
     },
     "Ext.dd.DragZone": {
-      "idx": 421,
+      "idx": 401,
       "alias": [],
       "alternates": []
     },
     "Ext.dd.DropTarget": {
-      "idx": 417,
+      "idx": 397,
       "alias": [],
       "alternates": []
     },
     "Ext.dd.DropZone": {
-      "idx": 423,
+      "idx": 403,
       "alias": [],
       "alternates": []
     },
     "Ext.dd.Registry": {
-      "idx": 422,
+      "idx": 402,
       "alias": [],
       "alternates": []
     },
     "Ext.dd.ScrollManager": {
-      "idx": 416,
+      "idx": 396,
       "alias": [],
       "alternates": []
     },
     "Ext.dd.StatusProxy": {
-      "idx": 392,
+      "idx": 372,
       "alias": [],
       "alternates": []
     },
     "Ext.direct.Event": {
-      "idx": 246,
+      "idx": 249,
       "alias": [
         "direct.event"
       ],
       "alternates": []
     },
     "Ext.direct.ExceptionEvent": {
-      "idx": 248,
+      "idx": 251,
       "alias": [
         "direct.exception"
       ],
       "alternates": []
     },
     "Ext.direct.JsonProvider": {
-      "idx": 249,
+      "idx": 252,
       "alias": [
         "direct.jsonprovider"
       ],
       "alternates": []
     },
     "Ext.direct.Manager": {
-      "idx": 206,
+      "idx": 209,
       "alias": [],
       "alternates": []
     },
     "Ext.direct.PollingProvider": {
-      "idx": 250,
+      "idx": 253,
       "alias": [
         "direct.pollingprovider"
       ],
       "alternates": []
     },
     "Ext.direct.Provider": {
-      "idx": 207,
+      "idx": 210,
       "alias": [
         "direct.provider"
       ],
       "alternates": []
     },
     "Ext.direct.RemotingEvent": {
-      "idx": 247,
+      "idx": 250,
       "alias": [
         "direct.rpc"
       ],
       "alternates": []
     },
     "Ext.direct.RemotingMethod": {
-      "idx": 251,
+      "idx": 254,
       "alias": [],
       "alternates": []
     },
     "Ext.direct.RemotingProvider": {
-      "idx": 253,
+      "idx": 256,
       "alias": [
         "direct.remotingprovider"
       ],
       "alternates": []
     },
     "Ext.direct.Transaction": {
-      "idx": 252,
+      "idx": 255,
       "alias": [
         "direct.transaction"
       ],
-      "alternates": []
+      "alternates": [
+        "Ext.Direct.Transaction"
+      ]
     },
     "Ext.dom.ButtonElement": {
-      "idx": 365,
+      "idx": 345,
       "alias": [],
       "alternates": []
     },
     "Ext.dom.CompositeElement": {
-      "idx": 93,
+      "idx": 91,
       "alias": [],
       "alternates": [
         "Ext.CompositeElement"
       ]
     },
     "Ext.dom.CompositeElementLite": {
-      "idx": 75,
+      "idx": 76,
       "alias": [],
       "alternates": [
         "Ext.CompositeElementLite"
       ]
     },
     "Ext.dom.Element": {
-      "idx": 49,
+      "idx": 50,
       "alias": [],
       "alternates": [
         "Ext.Element"
@@ -7694,19 +7466,19 @@ var Ext = Ext || {};
       "alternates": []
     },
     "Ext.dom.Fly": {
-      "idx": 74,
+      "idx": 75,
       "alias": [],
       "alternates": [
         "Ext.dom.Element.Fly"
       ]
     },
     "Ext.dom.GarbageCollector": {
-      "idx": 254,
+      "idx": 257,
       "alias": [],
       "alternates": []
     },
     "Ext.dom.Helper": {
-      "idx": 226,
+      "idx": 229,
       "alias": [],
       "alternates": [
         "Ext.DomHelper",
@@ -7714,14 +7486,14 @@ var Ext = Ext || {};
       ]
     },
     "Ext.dom.Layer": {
-      "idx": 424,
+      "idx": 404,
       "alias": [],
       "alternates": [
         "Ext.Layer"
       ]
     },
     "Ext.dom.Query": {
-      "idx": 227,
+      "idx": 230,
       "alias": [],
       "alternates": [
         "Ext.core.DomQuery",
@@ -7740,11 +7512,6 @@ var Ext = Ext || {};
       "alias": [],
       "alternates": []
     },
-    "Ext.dom.TouchAction": {
-      "idx": 255,
-      "alias": [],
-      "alternates": []
-    },
     "Ext.dom.Underlay": {
       "idx": 27,
       "alias": [],
@@ -7755,59 +7522,6 @@ var Ext = Ext || {};
       "alias": [],
       "alternates": []
     },
-    "Ext.drag.Constraint": {
-      "idx": 256,
-      "alias": [
-        "drag.constraint.base"
-      ],
-      "alternates": []
-    },
-    "Ext.drag.Info": {
-      "idx": 257,
-      "alias": [],
-      "alternates": []
-    },
-    "Ext.drag.Item": {
-      "idx": 258,
-      "alias": [],
-      "alternates": []
-    },
-    "Ext.drag.Manager": {
-      "idx": 259,
-      "alias": [],
-      "alternates": []
-    },
-    "Ext.drag.Source": {
-      "idx": 260,
-      "alias": [],
-      "alternates": []
-    },
-    "Ext.drag.Target": {
-      "idx": 261,
-      "alias": [],
-      "alternates": []
-    },
-    "Ext.drag.proxy.None": {
-      "idx": 262,
-      "alias": [
-        "drag.proxy.none"
-      ],
-      "alternates": []
-    },
-    "Ext.drag.proxy.Original": {
-      "idx": 263,
-      "alias": [
-        "drag.proxy.original"
-      ],
-      "alternates": []
-    },
-    "Ext.drag.proxy.Placeholder": {
-      "idx": 264,
-      "alias": [
-        "drag.proxy.placeholder"
-      ],
-      "alternates": []
-    },
     "Ext.event.Event": {
       "idx": 35,
       "alias": [],
@@ -7816,57 +7530,57 @@ var Ext = Ext || {};
       ]
     },
     "Ext.event.gesture.DoubleTap": {
-      "idx": 267,
+      "idx": 260,
       "alias": [],
       "alternates": []
     },
     "Ext.event.gesture.Drag": {
-      "idx": 268,
+      "idx": 261,
       "alias": [],
       "alternates": []
     },
     "Ext.event.gesture.EdgeSwipe": {
-      "idx": 270,
+      "idx": 263,
       "alias": [],
       "alternates": []
     },
     "Ext.event.gesture.LongPress": {
-      "idx": 271,
+      "idx": 264,
       "alias": [],
       "alternates": []
     },
     "Ext.event.gesture.MultiTouch": {
-      "idx": 272,
-      "alias": [],
-      "alternates": []
-    },
-    "Ext.event.gesture.Pinch": {
-      "idx": 273,
-      "alias": [],
-      "alternates": []
-    },
-    "Ext.event.gesture.Recognizer": {
       "idx": 265,
       "alias": [],
       "alternates": []
     },
-    "Ext.event.gesture.Rotate": {
-      "idx": 274,
-      "alias": [],
-      "alternates": []
-    },
-    "Ext.event.gesture.SingleTouch": {
+    "Ext.event.gesture.Pinch": {
       "idx": 266,
       "alias": [],
       "alternates": []
     },
+    "Ext.event.gesture.Recognizer": {
+      "idx": 258,
+      "alias": [],
+      "alternates": []
+    },
+    "Ext.event.gesture.Rotate": {
+      "idx": 267,
+      "alias": [],
+      "alternates": []
+    },
+    "Ext.event.gesture.SingleTouch": {
+      "idx": 259,
+      "alias": [],
+      "alternates": []
+    },
     "Ext.event.gesture.Swipe": {
-      "idx": 269,
+      "idx": 262,
       "alias": [],
       "alternates": []
     },
     "Ext.event.gesture.Tap": {
-      "idx": 275,
+      "idx": 268,
       "alias": [],
       "alternates": []
     },
@@ -7876,17 +7590,17 @@ var Ext = Ext || {};
       "alternates": []
     },
     "Ext.event.publisher.ElementPaint": {
-      "idx": 48,
+      "idx": 49,
       "alias": [],
       "alternates": []
     },
     "Ext.event.publisher.ElementSize": {
-      "idx": 44,
+      "idx": 45,
       "alias": [],
       "alternates": []
     },
     "Ext.event.publisher.Focus": {
-      "idx": 276,
+      "idx": 269,
       "alias": [],
       "alternates": []
     },
@@ -7896,7 +7610,7 @@ var Ext = Ext || {};
       "alternates": []
     },
     "Ext.event.publisher.MouseEnterLeave": {
-      "idx": 426,
+      "idx": 406,
       "alias": [],
       "alternates": []
     },
@@ -7906,7 +7620,7 @@ var Ext = Ext || {};
       "alternates": []
     },
     "Ext.flash.Component": {
-      "idx": 427,
+      "idx": 407,
       "alias": [
         "widget.flash"
       ],
@@ -7915,57 +7629,57 @@ var Ext = Ext || {};
       ]
     },
     "Ext.form.Basic": {
-      "idx": 443,
+      "idx": 422,
       "alias": [],
       "alternates": [
         "Ext.form.BasicForm"
       ]
     },
     "Ext.form.CheckboxGroup": {
-      "idx": 450,
+      "idx": 429,
       "alias": [
         "widget.checkboxgroup"
       ],
       "alternates": []
     },
     "Ext.form.CheckboxManager": {
-      "idx": 448,
+      "idx": 427,
       "alias": [],
       "alternates": []
     },
     "Ext.form.FieldAncestor": {
-      "idx": 444,
+      "idx": 423,
       "alias": [],
       "alternates": []
     },
     "Ext.form.FieldContainer": {
-      "idx": 446,
+      "idx": 425,
       "alias": [
         "widget.fieldcontainer"
       ],
       "alternates": []
     },
     "Ext.form.FieldSet": {
-      "idx": 451,
+      "idx": 430,
       "alias": [
         "widget.fieldset"
       ],
       "alternates": []
     },
     "Ext.form.Label": {
-      "idx": 452,
+      "idx": 431,
       "alias": [
         "widget.label"
       ],
       "alternates": []
     },
     "Ext.form.Labelable": {
-      "idx": 435,
+      "idx": 414,
       "alias": [],
       "alternates": []
     },
     "Ext.form.Panel": {
-      "idx": 453,
+      "idx": 432,
       "alias": [
         "widget.form"
       ],
@@ -7975,31 +7689,31 @@ var Ext = Ext || {};
       ]
     },
     "Ext.form.RadioGroup": {
-      "idx": 456,
+      "idx": 435,
       "alias": [
         "widget.radiogroup"
       ],
       "alternates": []
     },
     "Ext.form.RadioManager": {
-      "idx": 454,
+      "idx": 433,
       "alias": [],
       "alternates": []
     },
     "Ext.form.action.Action": {
-      "idx": 428,
+      "idx": 408,
       "alias": [],
       "alternates": [
         "Ext.form.Action"
       ]
     },
     "Ext.form.action.DirectAction": {
-      "idx": 457,
+      "idx": 436,
       "alias": [],
       "alternates": []
     },
     "Ext.form.action.DirectLoad": {
-      "idx": 458,
+      "idx": 437,
       "alias": [
         "formaction.directload"
       ],
@@ -8008,7 +7722,7 @@ var Ext = Ext || {};
       ]
     },
     "Ext.form.action.DirectSubmit": {
-      "idx": 459,
+      "idx": 438,
       "alias": [
         "formaction.directsubmit"
       ],
@@ -8017,7 +7731,7 @@ var Ext = Ext || {};
       ]
     },
     "Ext.form.action.Load": {
-      "idx": 429,
+      "idx": 409,
       "alias": [
         "formaction.load"
       ],
@@ -8026,14 +7740,14 @@ var Ext = Ext || {};
       ]
     },
     "Ext.form.action.StandardSubmit": {
-      "idx": 431,
+      "idx": 439,
       "alias": [
         "formaction.standardsubmit"
       ],
       "alternates": []
     },
     "Ext.form.action.Submit": {
-      "idx": 430,
+      "idx": 410,
       "alias": [
         "formaction.submit"
       ],
@@ -8042,7 +7756,7 @@ var Ext = Ext || {};
       ]
     },
     "Ext.form.field.Base": {
-      "idx": 437,
+      "idx": 416,
       "alias": [
         "widget.field"
       ],
@@ -8052,7 +7766,7 @@ var Ext = Ext || {};
       ]
     },
     "Ext.form.field.Checkbox": {
-      "idx": 449,
+      "idx": 428,
       "alias": [
         "widget.checkbox",
         "widget.checkboxfield"
@@ -8062,7 +7776,7 @@ var Ext = Ext || {};
       ]
     },
     "Ext.form.field.ComboBox": {
-      "idx": 475,
+      "idx": 455,
       "alias": [
         "widget.combo",
         "widget.combobox"
@@ -8072,7 +7786,7 @@ var Ext = Ext || {};
       ]
     },
     "Ext.form.field.Date": {
-      "idx": 478,
+      "idx": 458,
       "alias": [
         "widget.datefield"
       ],
@@ -8082,7 +7796,7 @@ var Ext = Ext || {};
       ]
     },
     "Ext.form.field.Display": {
-      "idx": 479,
+      "idx": 459,
       "alias": [
         "widget.displayfield"
       ],
@@ -8092,12 +7806,12 @@ var Ext = Ext || {};
       ]
     },
     "Ext.form.field.Field": {
-      "idx": 436,
+      "idx": 415,
       "alias": [],
       "alternates": []
     },
     "Ext.form.field.File": {
-      "idx": 482,
+      "idx": 462,
       "alias": [
         "widget.filefield",
         "widget.fileuploadfield"
@@ -8109,14 +7823,14 @@ var Ext = Ext || {};
       ]
     },
     "Ext.form.field.FileButton": {
-      "idx": 480,
+      "idx": 460,
       "alias": [
         "widget.filebutton"
       ],
       "alternates": []
     },
     "Ext.form.field.Hidden": {
-      "idx": 483,
+      "idx": 463,
       "alias": [
         "widget.hidden",
         "widget.hiddenfield"
@@ -8126,7 +7840,7 @@ var Ext = Ext || {};
       ]
     },
     "Ext.form.field.HtmlEditor": {
-      "idx": 492,
+      "idx": 472,
       "alias": [
         "widget.htmleditor"
       ],
@@ -8135,7 +7849,7 @@ var Ext = Ext || {};
       ]
     },
     "Ext.form.field.Number": {
-      "idx": 472,
+      "idx": 452,
       "alias": [
         "widget.numberfield"
       ],
@@ -8145,7 +7859,7 @@ var Ext = Ext || {};
       ]
     },
     "Ext.form.field.Picker": {
-      "idx": 460,
+      "idx": 440,
       "alias": [
         "widget.pickerfield"
       ],
@@ -8154,7 +7868,7 @@ var Ext = Ext || {};
       ]
     },
     "Ext.form.field.Radio": {
-      "idx": 455,
+      "idx": 434,
       "alias": [
         "widget.radio",
         "widget.radiofield"
@@ -8164,7 +7878,7 @@ var Ext = Ext || {};
       ]
     },
     "Ext.form.field.Spinner": {
-      "idx": 471,
+      "idx": 451,
       "alias": [
         "widget.spinnerfield"
       ],
@@ -8173,14 +7887,14 @@ var Ext = Ext || {};
       ]
     },
     "Ext.form.field.Tag": {
-      "idx": 494,
+      "idx": 473,
       "alias": [
         "widget.tagfield"
       ],
       "alternates": []
     },
     "Ext.form.field.Text": {
-      "idx": 440,
+      "idx": 419,
       "alias": [
         "widget.textfield"
       ],
@@ -8190,7 +7904,7 @@ var Ext = Ext || {};
       ]
     },
     "Ext.form.field.TextArea": {
-      "idx": 441,
+      "idx": 420,
       "alias": [
         "widget.textarea",
         "widget.textareafield"
@@ -8200,7 +7914,7 @@ var Ext = Ext || {};
       ]
     },
     "Ext.form.field.Time": {
-      "idx": 496,
+      "idx": 475,
       "alias": [
         "widget.timefield"
       ],
@@ -8210,7 +7924,7 @@ var Ext = Ext || {};
       ]
     },
     "Ext.form.field.Trigger": {
-      "idx": 497,
+      "idx": 476,
       "alias": [
         "widget.trigger",
         "widget.triggerfield"
@@ -8222,102 +7936,102 @@ var Ext = Ext || {};
       ]
     },
     "Ext.form.field.VTypes": {
-      "idx": 438,
+      "idx": 417,
       "alias": [],
       "alternates": [
         "Ext.form.VTypes"
       ]
     },
     "Ext.form.trigger.Component": {
-      "idx": 481,
+      "idx": 461,
       "alias": [
         "trigger.component"
       ],
       "alternates": []
     },
     "Ext.form.trigger.Spinner": {
-      "idx": 470,
+      "idx": 450,
       "alias": [
         "trigger.spinner"
       ],
       "alternates": []
     },
     "Ext.form.trigger.Trigger": {
-      "idx": 439,
+      "idx": 418,
       "alias": [
         "trigger.trigger"
       ],
       "alternates": []
     },
     "Ext.fx.Anim": {
-      "idx": 72,
+      "idx": 73,
       "alias": [],
       "alternates": []
     },
     "Ext.fx.Animation": {
-      "idx": 286,
+      "idx": 279,
       "alias": [],
       "alternates": []
     },
     "Ext.fx.Animator": {
-      "idx": 67,
-      "alias": [],
-      "alternates": []
-    },
-    "Ext.fx.CubicBezier": {
       "idx": 68,
       "alias": [],
       "alternates": []
     },
-    "Ext.fx.DrawPath": {
-      "idx": 70,
-      "alias": [],
-      "alternates": []
-    },
-    "Ext.fx.Easing": {
+    "Ext.fx.CubicBezier": {
       "idx": 69,
       "alias": [],
       "alternates": []
     },
-    "Ext.fx.Manager": {
-      "idx": 66,
-      "alias": [],
-      "alternates": []
-    },
-    "Ext.fx.PropertyHandler": {
+    "Ext.fx.DrawPath": {
       "idx": 71,
       "alias": [],
       "alternates": []
     },
+    "Ext.fx.Easing": {
+      "idx": 70,
+      "alias": [],
+      "alternates": []
+    },
+    "Ext.fx.Manager": {
+      "idx": 67,
+      "alias": [],
+      "alternates": []
+    },
+    "Ext.fx.PropertyHandler": {
+      "idx": 72,
+      "alias": [],
+      "alternates": []
+    },
     "Ext.fx.Queue": {
-      "idx": 65,
+      "idx": 66,
       "alias": [],
       "alternates": []
     },
     "Ext.fx.Runner": {
-      "idx": 289,
+      "idx": 282,
       "alias": [],
       "alternates": []
     },
     "Ext.fx.State": {
-      "idx": 277,
+      "idx": 270,
       "alias": [],
       "alternates": []
     },
     "Ext.fx.animation.Abstract": {
-      "idx": 278,
+      "idx": 271,
       "alias": [],
       "alternates": []
     },
     "Ext.fx.animation.Cube": {
-      "idx": 290,
+      "idx": 283,
       "alias": [
         "animation.cube"
       ],
       "alternates": []
     },
     "Ext.fx.animation.Fade": {
-      "idx": 281,
+      "idx": 274,
       "alias": [
         "animation.fade",
         "animation.fadeIn"
@@ -8327,21 +8041,21 @@ var Ext = Ext || {};
       ]
     },
     "Ext.fx.animation.FadeOut": {
-      "idx": 282,
+      "idx": 275,
       "alias": [
         "animation.fadeOut"
       ],
       "alternates": []
     },
     "Ext.fx.animation.Flip": {
-      "idx": 283,
+      "idx": 276,
       "alias": [
         "animation.flip"
       ],
       "alternates": []
     },
     "Ext.fx.animation.Pop": {
-      "idx": 284,
+      "idx": 277,
       "alias": [
         "animation.pop",
         "animation.popIn"
@@ -8351,14 +8065,14 @@ var Ext = Ext || {};
       ]
     },
     "Ext.fx.animation.PopOut": {
-      "idx": 285,
+      "idx": 278,
       "alias": [
         "animation.popOut"
       ],
       "alternates": []
     },
     "Ext.fx.animation.Slide": {
-      "idx": 279,
+      "idx": 272,
       "alias": [
         "animation.slide",
         "animation.slideIn"
@@ -8368,252 +8082,252 @@ var Ext = Ext || {};
       ]
     },
     "Ext.fx.animation.SlideOut": {
-      "idx": 280,
+      "idx": 273,
       "alias": [
         "animation.slideOut"
       ],
       "alternates": []
     },
     "Ext.fx.animation.Wipe": {
-      "idx": 291,
+      "idx": 284,
       "alias": [],
       "alternates": [
         "Ext.fx.animation.WipeIn"
       ]
     },
     "Ext.fx.animation.WipeOut": {
-      "idx": 292,
+      "idx": 285,
       "alias": [],
       "alternates": []
     },
     "Ext.fx.easing.Abstract": {
-      "idx": 293,
+      "idx": 93,
       "alias": [],
       "alternates": []
     },
     "Ext.fx.easing.Bounce": {
-      "idx": 294,
+      "idx": 95,
       "alias": [],
       "alternates": []
     },
     "Ext.fx.easing.BoundMomentum": {
-      "idx": 296,
+      "idx": 96,
       "alias": [],
       "alternates": []
     },
     "Ext.fx.easing.EaseIn": {
-      "idx": 298,
+      "idx": 286,
       "alias": [
         "easing.ease-in"
       ],
       "alternates": []
     },
     "Ext.fx.easing.EaseOut": {
-      "idx": 299,
+      "idx": 98,
       "alias": [
         "easing.ease-out"
       ],
       "alternates": []
     },
     "Ext.fx.easing.Easing": {
-      "idx": 300,
+      "idx": 287,
       "alias": [],
       "alternates": []
     },
     "Ext.fx.easing.Linear": {
-      "idx": 297,
+      "idx": 97,
       "alias": [
         "easing.linear"
       ],
       "alternates": []
     },
     "Ext.fx.easing.Momentum": {
-      "idx": 295,
+      "idx": 94,
       "alias": [],
       "alternates": []
     },
     "Ext.fx.layout.Card": {
-      "idx": 310,
+      "idx": 297,
       "alias": [],
       "alternates": []
     },
     "Ext.fx.layout.card.Abstract": {
-      "idx": 301,
+      "idx": 288,
       "alias": [],
       "alternates": []
     },
     "Ext.fx.layout.card.Cover": {
-      "idx": 304,
+      "idx": 291,
       "alias": [
         "fx.layout.card.cover"
       ],
       "alternates": []
     },
     "Ext.fx.layout.card.Cube": {
-      "idx": 311,
+      "idx": 298,
       "alias": [
         "fx.layout.card.cube"
       ],
       "alternates": []
     },
     "Ext.fx.layout.card.Fade": {
-      "idx": 306,
+      "idx": 293,
       "alias": [
         "fx.layout.card.fade"
       ],
       "alternates": []
     },
     "Ext.fx.layout.card.Flip": {
-      "idx": 307,
+      "idx": 294,
       "alias": [
         "fx.layout.card.flip"
       ],
       "alternates": []
     },
     "Ext.fx.layout.card.Pop": {
-      "idx": 308,
+      "idx": 295,
       "alias": [
         "fx.layout.card.pop"
       ],
       "alternates": []
     },
     "Ext.fx.layout.card.Reveal": {
-      "idx": 305,
+      "idx": 292,
       "alias": [
         "fx.layout.card.reveal"
       ],
       "alternates": []
     },
     "Ext.fx.layout.card.Scroll": {
-      "idx": 309,
+      "idx": 296,
       "alias": [
         "fx.layout.card.scroll"
       ],
       "alternates": []
     },
     "Ext.fx.layout.card.ScrollCover": {
-      "idx": 312,
+      "idx": 299,
       "alias": [
         "fx.layout.card.scrollcover"
       ],
       "alternates": []
     },
     "Ext.fx.layout.card.ScrollReveal": {
-      "idx": 313,
+      "idx": 300,
       "alias": [
         "fx.layout.card.scrollreveal"
       ],
       "alternates": []
     },
     "Ext.fx.layout.card.Slide": {
-      "idx": 303,
+      "idx": 290,
       "alias": [
         "fx.layout.card.slide"
       ],
       "alternates": []
     },
     "Ext.fx.layout.card.Style": {
-      "idx": 302,
+      "idx": 289,
       "alias": [],
       "alternates": []
     },
     "Ext.fx.runner.Css": {
-      "idx": 287,
+      "idx": 280,
       "alias": [],
       "alternates": []
     },
     "Ext.fx.runner.CssAnimation": {
-      "idx": 314,
+      "idx": 301,
       "alias": [],
       "alternates": []
     },
     "Ext.fx.runner.CssTransition": {
-      "idx": 288,
+      "idx": 281,
       "alias": [],
       "alternates": [
         "Ext.Animator"
       ]
     },
     "Ext.fx.target.Component": {
-      "idx": 64,
+      "idx": 65,
       "alias": [],
       "alternates": []
     },
     "Ext.fx.target.CompositeElement": {
-      "idx": 60,
-      "alias": [],
-      "alternates": []
-    },
-    "Ext.fx.target.CompositeElementCSS": {
       "idx": 61,
       "alias": [],
       "alternates": []
     },
-    "Ext.fx.target.CompositeSprite": {
-      "idx": 63,
-      "alias": [],
-      "alternates": []
-    },
-    "Ext.fx.target.Element": {
-      "idx": 58,
-      "alias": [],
-      "alternates": []
-    },
-    "Ext.fx.target.ElementCSS": {
-      "idx": 59,
-      "alias": [],
-      "alternates": []
-    },
-    "Ext.fx.target.Sprite": {
+    "Ext.fx.target.CompositeElementCSS": {
       "idx": 62,
       "alias": [],
       "alternates": []
     },
+    "Ext.fx.target.CompositeSprite": {
+      "idx": 64,
+      "alias": [],
+      "alternates": []
+    },
+    "Ext.fx.target.Element": {
+      "idx": 59,
+      "alias": [],
+      "alternates": []
+    },
+    "Ext.fx.target.ElementCSS": {
+      "idx": 60,
+      "alias": [],
+      "alternates": []
+    },
+    "Ext.fx.target.Sprite": {
+      "idx": 63,
+      "alias": [],
+      "alternates": []
+    },
     "Ext.fx.target.Target": {
-      "idx": 57,
+      "idx": 58,
       "alias": [],
       "alternates": []
     },
     "Ext.grid.CellContext": {
-      "idx": 498,
+      "idx": 477,
       "alias": [],
       "alternates": []
     },
     "Ext.grid.CellEditor": {
-      "idx": 499,
+      "idx": 478,
       "alias": [],
       "alternates": []
     },
     "Ext.grid.ColumnComponentLayout": {
-      "idx": 500,
+      "idx": 479,
       "alias": [
         "layout.columncomponent"
       ],
       "alternates": []
     },
     "Ext.grid.ColumnLayout": {
-      "idx": 503,
+      "idx": 482,
       "alias": [
         "layout.gridcolumn"
       ],
       "alternates": []
     },
     "Ext.grid.ColumnManager": {
-      "idx": 504,
+      "idx": 483,
       "alias": [],
       "alternates": [
         "Ext.grid.ColumnModel"
       ]
     },
     "Ext.grid.NavigationModel": {
-      "idx": 505,
+      "idx": 484,
       "alias": [
         "view.navigation.grid"
       ],
       "alternates": []
     },
     "Ext.grid.Panel": {
-      "idx": 510,
+      "idx": 489,
       "alias": [
         "widget.grid",
         "widget.gridpanel"
@@ -8624,37 +8338,32 @@ var Ext = Ext || {};
         "Ext.grid.GridPanel"
       ]
     },
-    "Ext.grid.RowContext": {
-      "idx": 511,
-      "alias": [],
-      "alternates": []
-    },
     "Ext.grid.RowEditor": {
-      "idx": 513,
+      "idx": 491,
       "alias": [
         "widget.roweditor"
       ],
       "alternates": []
     },
     "Ext.grid.RowEditorButtons": {
-      "idx": 512,
+      "idx": 490,
       "alias": [
         "widget.roweditorbuttons"
       ],
       "alternates": []
     },
     "Ext.grid.Scroller": {
-      "idx": 514,
+      "idx": 492,
       "alias": [],
       "alternates": []
     },
     "Ext.grid.ViewDropZone": {
-      "idx": 516,
+      "idx": 494,
       "alias": [],
       "alternates": []
     },
     "Ext.grid.column.Action": {
-      "idx": 524,
+      "idx": 501,
       "alias": [
         "widget.actioncolumn"
       ],
@@ -8662,13 +8371,8 @@ var Ext = Ext || {};
         "Ext.grid.ActionColumn"
       ]
     },
-    "Ext.grid.column.ActionProxy": {
-      "idx": 523,
-      "alias": [],
-      "alternates": []
-    },
     "Ext.grid.column.Boolean": {
-      "idx": 525,
+      "idx": 502,
       "alias": [
         "widget.booleancolumn"
       ],
@@ -8677,7 +8381,7 @@ var Ext = Ext || {};
       ]
     },
     "Ext.grid.column.Check": {
-      "idx": 526,
+      "idx": 503,
       "alias": [
         "widget.checkcolumn"
       ],
@@ -8687,7 +8391,7 @@ var Ext = Ext || {};
       ]
     },
     "Ext.grid.column.Column": {
-      "idx": 522,
+      "idx": 500,
       "alias": [
         "widget.gridcolumn"
       ],
@@ -8696,7 +8400,7 @@ var Ext = Ext || {};
       ]
     },
     "Ext.grid.column.Date": {
-      "idx": 527,
+      "idx": 504,
       "alias": [
         "widget.datecolumn"
       ],
@@ -8705,7 +8409,7 @@ var Ext = Ext || {};
       ]
     },
     "Ext.grid.column.Number": {
-      "idx": 528,
+      "idx": 505,
       "alias": [
         "widget.numbercolumn"
       ],
@@ -8714,7 +8418,7 @@ var Ext = Ext || {};
       ]
     },
     "Ext.grid.column.RowNumberer": {
-      "idx": 529,
+      "idx": 506,
       "alias": [
         "widget.rownumberer"
       ],
@@ -8723,7 +8427,7 @@ var Ext = Ext || {};
       ]
     },
     "Ext.grid.column.Template": {
-      "idx": 530,
+      "idx": 507,
       "alias": [
         "widget.templatecolumn"
       ],
@@ -8732,94 +8436,94 @@ var Ext = Ext || {};
       ]
     },
     "Ext.grid.column.Widget": {
-      "idx": 531,
+      "idx": 508,
       "alias": [
         "widget.widgetcolumn"
       ],
       "alternates": []
     },
     "Ext.grid.feature.AbstractSummary": {
-      "idx": 533,
+      "idx": 510,
       "alias": [
         "feature.abstractsummary"
       ],
       "alternates": []
     },
     "Ext.grid.feature.Feature": {
-      "idx": 532,
+      "idx": 509,
       "alias": [
         "feature.feature"
       ],
       "alternates": []
     },
     "Ext.grid.feature.GroupStore": {
-      "idx": 534,
+      "idx": 511,
       "alias": [],
       "alternates": []
     },
     "Ext.grid.feature.Grouping": {
-      "idx": 535,
+      "idx": 512,
       "alias": [
         "feature.grouping"
       ],
       "alternates": []
     },
     "Ext.grid.feature.GroupingSummary": {
-      "idx": 536,
+      "idx": 513,
       "alias": [
         "feature.groupingsummary"
       ],
       "alternates": []
     },
     "Ext.grid.feature.RowBody": {
-      "idx": 537,
+      "idx": 514,
       "alias": [
         "feature.rowbody"
       ],
       "alternates": []
     },
     "Ext.grid.feature.Summary": {
-      "idx": 538,
+      "idx": 515,
       "alias": [
         "feature.summary"
       ],
       "alternates": []
     },
     "Ext.grid.filters.Filters": {
-      "idx": 551,
+      "idx": 528,
       "alias": [
         "plugin.gridfilters"
       ],
       "alternates": []
     },
     "Ext.grid.filters.filter.Base": {
-      "idx": 543,
+      "idx": 520,
       "alias": [],
       "alternates": []
     },
     "Ext.grid.filters.filter.Boolean": {
-      "idx": 545,
+      "idx": 522,
       "alias": [
         "grid.filter.boolean"
       ],
       "alternates": []
     },
     "Ext.grid.filters.filter.Date": {
-      "idx": 547,
+      "idx": 524,
       "alias": [
         "grid.filter.date"
       ],
       "alternates": []
     },
     "Ext.grid.filters.filter.List": {
-      "idx": 548,
+      "idx": 525,
       "alias": [
         "grid.filter.list"
       ],
       "alternates": []
     },
     "Ext.grid.filters.filter.Number": {
-      "idx": 549,
+      "idx": 526,
       "alias": [
         "grid.filter.number",
         "grid.filter.numeric"
@@ -8827,135 +8531,128 @@ var Ext = Ext || {};
       "alternates": []
     },
     "Ext.grid.filters.filter.SingleFilter": {
-      "idx": 544,
+      "idx": 521,
       "alias": [],
       "alternates": []
     },
     "Ext.grid.filters.filter.String": {
-      "idx": 550,
+      "idx": 527,
       "alias": [
         "grid.filter.string"
       ],
       "alternates": []
     },
     "Ext.grid.filters.filter.TriFilter": {
-      "idx": 546,
+      "idx": 523,
       "alias": [],
       "alternates": []
     },
     "Ext.grid.header.Container": {
-      "idx": 521,
+      "idx": 499,
       "alias": [
         "widget.headercontainer"
       ],
       "alternates": []
     },
     "Ext.grid.header.DragZone": {
-      "idx": 518,
+      "idx": 496,
       "alias": [],
       "alternates": []
     },
     "Ext.grid.header.DropZone": {
-      "idx": 519,
+      "idx": 497,
       "alias": [],
       "alternates": []
     },
     "Ext.grid.locking.HeaderContainer": {
-      "idx": 552,
+      "idx": 529,
       "alias": [],
       "alternates": []
     },
     "Ext.grid.locking.Lockable": {
-      "idx": 554,
+      "idx": 531,
       "alias": [],
       "alternates": [
         "Ext.grid.Lockable"
       ]
     },
     "Ext.grid.locking.RowSynchronizer": {
-      "idx": 507,
+      "idx": 486,
       "alias": [],
       "alternates": []
     },
     "Ext.grid.locking.View": {
-      "idx": 553,
+      "idx": 530,
       "alias": [],
       "alternates": [
         "Ext.grid.LockingView"
       ]
     },
     "Ext.grid.plugin.BufferedRenderer": {
-      "idx": 555,
+      "idx": 532,
       "alias": [
         "plugin.bufferedrenderer"
       ],
       "alternates": []
     },
     "Ext.grid.plugin.CellEditing": {
-      "idx": 557,
+      "idx": 534,
       "alias": [
         "plugin.cellediting"
       ],
       "alternates": []
     },
     "Ext.grid.plugin.Clipboard": {
-      "idx": 559,
+      "idx": 536,
       "alias": [
         "plugin.clipboard"
       ],
       "alternates": []
     },
     "Ext.grid.plugin.DragDrop": {
-      "idx": 560,
+      "idx": 537,
       "alias": [
         "plugin.gridviewdragdrop"
       ],
       "alternates": []
     },
     "Ext.grid.plugin.Editing": {
-      "idx": 556,
+      "idx": 533,
       "alias": [
         "editing.editing"
       ],
       "alternates": []
     },
     "Ext.grid.plugin.HeaderReorderer": {
-      "idx": 520,
+      "idx": 498,
       "alias": [
         "plugin.gridheaderreorderer"
       ],
       "alternates": []
     },
     "Ext.grid.plugin.HeaderResizer": {
-      "idx": 517,
+      "idx": 495,
       "alias": [
         "plugin.gridheaderresizer"
       ],
       "alternates": []
     },
     "Ext.grid.plugin.RowEditing": {
-      "idx": 561,
+      "idx": 538,
       "alias": [
         "plugin.rowediting"
       ],
       "alternates": []
     },
     "Ext.grid.plugin.RowExpander": {
-      "idx": 562,
+      "idx": 539,
       "alias": [
         "plugin.rowexpander"
       ],
       "alternates": []
     },
-    "Ext.grid.plugin.RowWidget": {
-      "idx": 563,
-      "alias": [
-        "plugin.rowwidget"
-      ],
-      "alternates": []
-    },
     "Ext.grid.property.Grid": {
-      "idx": 564,
+      "idx": 540,
       "alias": [
         "widget.propertygrid"
       ],
@@ -8964,118 +8661,118 @@ var Ext = Ext || {};
       ]
     },
     "Ext.grid.property.HeaderContainer": {
-      "idx": 565,
+      "idx": 541,
       "alias": [],
       "alternates": [
         "Ext.grid.PropertyColumnModel"
       ]
     },
     "Ext.grid.property.Property": {
-      "idx": 566,
+      "idx": 542,
       "alias": [],
       "alternates": [
         "Ext.PropGridProperty"
       ]
     },
     "Ext.grid.property.Reader": {
-      "idx": 567,
+      "idx": 543,
       "alias": [],
       "alternates": []
     },
     "Ext.grid.property.Store": {
-      "idx": 568,
+      "idx": 544,
       "alias": [],
       "alternates": [
         "Ext.grid.PropertyStore"
       ]
     },
     "Ext.grid.selection.Cells": {
-      "idx": 570,
+      "idx": 546,
       "alias": [],
       "alternates": []
     },
     "Ext.grid.selection.Columns": {
-      "idx": 571,
+      "idx": 547,
       "alias": [],
       "alternates": []
     },
     "Ext.grid.selection.Replicator": {
-      "idx": 572,
+      "idx": 548,
       "alias": [
         "plugin.selectionreplicator"
       ],
       "alternates": []
     },
     "Ext.grid.selection.Rows": {
-      "idx": 573,
+      "idx": 549,
       "alias": [],
       "alternates": []
     },
     "Ext.grid.selection.Selection": {
-      "idx": 569,
+      "idx": 545,
       "alias": [],
       "alternates": []
     },
     "Ext.grid.selection.SelectionExtender": {
-      "idx": 574,
+      "idx": 550,
       "alias": [],
       "alternates": []
     },
     "Ext.grid.selection.SpreadsheetModel": {
-      "idx": 575,
+      "idx": 551,
       "alias": [
         "selection.spreadsheet"
       ],
       "alternates": []
     },
     "Ext.layout.Context": {
-      "idx": 578,
+      "idx": 554,
       "alias": [],
       "alternates": []
     },
     "Ext.layout.ContextItem": {
-      "idx": 577,
+      "idx": 553,
       "alias": [],
       "alternates": []
     },
     "Ext.layout.Layout": {
-      "idx": 349,
+      "idx": 329,
       "alias": [],
       "alternates": []
     },
     "Ext.layout.SizeModel": {
-      "idx": 348,
+      "idx": 328,
       "alias": [],
       "alternates": []
     },
     "Ext.layout.component.Auto": {
-      "idx": 362,
+      "idx": 341,
       "alias": [
         "layout.autocomponent"
       ],
       "alternates": []
     },
     "Ext.layout.component.Body": {
-      "idx": 580,
+      "idx": 556,
       "alias": [
         "layout.body"
       ],
       "alternates": []
     },
     "Ext.layout.component.BoundList": {
-      "idx": 467,
+      "idx": 447,
       "alias": [
         "layout.boundlist"
       ],
       "alternates": []
     },
     "Ext.layout.component.Component": {
-      "idx": 361,
+      "idx": 340,
       "alias": [],
       "alternates": []
     },
     "Ext.layout.component.Dock": {
-      "idx": 396,
+      "idx": 376,
       "alias": [
         "layout.dock"
       ],
@@ -9084,35 +8781,35 @@ var Ext = Ext || {};
       ]
     },
     "Ext.layout.component.FieldSet": {
-      "idx": 581,
+      "idx": 557,
       "alias": [
         "layout.fieldset"
       ],
       "alternates": []
     },
     "Ext.layout.component.ProgressBar": {
-      "idx": 363,
+      "idx": 342,
       "alias": [
         "layout.progressbar"
       ],
       "alternates": []
     },
     "Ext.layout.component.field.FieldContainer": {
-      "idx": 445,
+      "idx": 424,
       "alias": [
         "layout.fieldcontainer"
       ],
       "alternates": []
     },
     "Ext.layout.component.field.HtmlEditor": {
-      "idx": 489,
+      "idx": 469,
       "alias": [
         "layout.htmleditor"
       ],
       "alternates": []
     },
     "Ext.layout.container.Absolute": {
-      "idx": 582,
+      "idx": 558,
       "alias": [
         "layout.absolute"
       ],
@@ -9121,7 +8818,7 @@ var Ext = Ext || {};
       ]
     },
     "Ext.layout.container.Accordion": {
-      "idx": 583,
+      "idx": 559,
       "alias": [
         "layout.accordion"
       ],
@@ -9130,7 +8827,7 @@ var Ext = Ext || {};
       ]
     },
     "Ext.layout.container.Anchor": {
-      "idx": 406,
+      "idx": 386,
       "alias": [
         "layout.anchor"
       ],
@@ -9139,7 +8836,7 @@ var Ext = Ext || {};
       ]
     },
     "Ext.layout.container.Auto": {
-      "idx": 351,
+      "idx": 331,
       "alias": [
         "layout.auto",
         "layout.autocontainer"
@@ -9147,7 +8844,7 @@ var Ext = Ext || {};
       "alternates": []
     },
     "Ext.layout.container.Border": {
-      "idx": 585,
+      "idx": 561,
       "alias": [
         "layout.border"
       ],
@@ -9156,7 +8853,7 @@ var Ext = Ext || {};
       ]
     },
     "Ext.layout.container.Box": {
-      "idx": 385,
+      "idx": 365,
       "alias": [
         "layout.box"
       ],
@@ -9165,7 +8862,7 @@ var Ext = Ext || {};
       ]
     },
     "Ext.layout.container.Card": {
-      "idx": 586,
+      "idx": 562,
       "alias": [
         "layout.card"
       ],
@@ -9174,7 +8871,7 @@ var Ext = Ext || {};
       ]
     },
     "Ext.layout.container.Center": {
-      "idx": 587,
+      "idx": 563,
       "alias": [
         "layout.center",
         "layout.ux.center"
@@ -9184,14 +8881,14 @@ var Ext = Ext || {};
       ]
     },
     "Ext.layout.container.CheckboxGroup": {
-      "idx": 447,
+      "idx": 426,
       "alias": [
         "layout.checkboxgroup"
       ],
       "alternates": []
     },
     "Ext.layout.container.Column": {
-      "idx": 409,
+      "idx": 389,
       "alias": [
         "layout.column"
       ],
@@ -9200,19 +8897,19 @@ var Ext = Ext || {};
       ]
     },
     "Ext.layout.container.ColumnSplitter": {
-      "idx": 413,
+      "idx": 393,
       "alias": [
         "widget.columnsplitter"
       ],
       "alternates": []
     },
     "Ext.layout.container.ColumnSplitterTracker": {
-      "idx": 412,
+      "idx": 392,
       "alias": [],
       "alternates": []
     },
     "Ext.layout.container.Container": {
-      "idx": 350,
+      "idx": 330,
       "alias": [
         "layout.container"
       ],
@@ -9221,21 +8918,21 @@ var Ext = Ext || {};
       ]
     },
     "Ext.layout.container.Dashboard": {
-      "idx": 414,
+      "idx": 394,
       "alias": [
         "layout.dashboard"
       ],
       "alternates": []
     },
     "Ext.layout.container.Editor": {
-      "idx": 354,
+      "idx": 334,
       "alias": [
         "layout.editor"
       ],
       "alternates": []
     },
     "Ext.layout.container.Fit": {
-      "idx": 501,
+      "idx": 480,
       "alias": [
         "layout.fit"
       ],
@@ -9244,7 +8941,7 @@ var Ext = Ext || {};
       ]
     },
     "Ext.layout.container.Form": {
-      "idx": 588,
+      "idx": 564,
       "alias": [
         "layout.form"
       ],
@@ -9253,7 +8950,7 @@ var Ext = Ext || {};
       ]
     },
     "Ext.layout.container.HBox": {
-      "idx": 386,
+      "idx": 366,
       "alias": [
         "layout.hbox"
       ],
@@ -9262,14 +8959,14 @@ var Ext = Ext || {};
       ]
     },
     "Ext.layout.container.SegmentedButton": {
-      "idx": 372,
+      "idx": 352,
       "alias": [
         "layout.segmentedbutton"
       ],
       "alternates": []
     },
     "Ext.layout.container.Table": {
-      "idx": 400,
+      "idx": 380,
       "alias": [
         "layout.table"
       ],
@@ -9278,7 +8975,7 @@ var Ext = Ext || {};
       ]
     },
     "Ext.layout.container.VBox": {
-      "idx": 387,
+      "idx": 367,
       "alias": [
         "layout.vbox"
       ],
@@ -9287,12 +8984,12 @@ var Ext = Ext || {};
       ]
     },
     "Ext.layout.container.border.Region": {
-      "idx": 106,
+      "idx": 119,
       "alias": [],
       "alternates": []
     },
     "Ext.layout.container.boxOverflow.Menu": {
-      "idx": 491,
+      "idx": 471,
       "alias": [
         "box.overflow.Menu",
         "box.overflow.menu"
@@ -9302,7 +8999,7 @@ var Ext = Ext || {};
       ]
     },
     "Ext.layout.container.boxOverflow.None": {
-      "idx": 381,
+      "idx": 361,
       "alias": [
         "box.overflow.None",
         "box.overflow.none"
@@ -9312,7 +9009,7 @@ var Ext = Ext || {};
       ]
     },
     "Ext.layout.container.boxOverflow.Scroller": {
-      "idx": 382,
+      "idx": 362,
       "alias": [
         "box.overflow.Scroller",
         "box.overflow.scroller"
@@ -9322,59 +9019,52 @@ var Ext = Ext || {};
       ]
     },
     "Ext.list.AbstractTreeItem": {
-      "idx": 315,
+      "idx": 302,
       "alias": [],
       "alternates": []
     },
     "Ext.list.RootTreeItem": {
-      "idx": 316,
+      "idx": 303,
       "alias": [],
       "alternates": []
     },
     "Ext.list.Tree": {
-      "idx": 318,
+      "idx": 305,
       "alias": [
         "widget.treelist"
       ],
       "alternates": []
     },
     "Ext.list.TreeItem": {
-      "idx": 317,
+      "idx": 304,
       "alias": [
         "widget.treelistitem"
       ],
       "alternates": []
     },
-    "Ext.menu.Bar": {
-      "idx": 589,
-      "alias": [
-        "widget.menubar"
-      ],
-      "alternates": []
-    },
     "Ext.menu.CheckItem": {
-      "idx": 540,
+      "idx": 517,
       "alias": [
         "widget.menucheckitem"
       ],
       "alternates": []
     },
     "Ext.menu.ColorPicker": {
-      "idx": 590,
+      "idx": 565,
       "alias": [
         "widget.colormenu"
       ],
       "alternates": []
     },
     "Ext.menu.DatePicker": {
-      "idx": 591,
+      "idx": 566,
       "alias": [
         "widget.datemenu"
       ],
       "alternates": []
     },
     "Ext.menu.Item": {
-      "idx": 539,
+      "idx": 516,
       "alias": [
         "widget.menuitem"
       ],
@@ -9383,43 +9073,43 @@ var Ext = Ext || {};
       ]
     },
     "Ext.menu.Manager": {
-      "idx": 367,
+      "idx": 347,
       "alias": [],
       "alternates": [
         "Ext.menu.MenuMgr"
       ]
     },
     "Ext.menu.Menu": {
-      "idx": 542,
+      "idx": 519,
       "alias": [
         "widget.menu"
       ],
       "alternates": []
     },
     "Ext.menu.Separator": {
-      "idx": 541,
+      "idx": 518,
       "alias": [
         "widget.menuseparator"
       ],
       "alternates": []
     },
     "Ext.mixin.Accessible": {
-      "idx": 103,
+      "idx": 116,
       "alias": [],
       "alternates": []
     },
     "Ext.mixin.Bindable": {
-      "idx": 80,
+      "idx": 82,
       "alias": [],
       "alternates": []
     },
     "Ext.mixin.ComponentDelegation": {
-      "idx": 81,
+      "idx": 83,
       "alias": [],
       "alternates": []
     },
     "Ext.mixin.Container": {
-      "idx": 319,
+      "idx": 306,
       "alias": [],
       "alternates": []
     },
@@ -9429,7 +9119,7 @@ var Ext = Ext || {};
       "alternates": []
     },
     "Ext.mixin.Hookable": {
-      "idx": 320,
+      "idx": 307,
       "alias": [],
       "alternates": []
     },
@@ -9439,12 +9129,12 @@ var Ext = Ext || {};
       "alternates": []
     },
     "Ext.mixin.Inheritable": {
-      "idx": 79,
+      "idx": 81,
       "alias": [],
       "alternates": []
     },
     "Ext.mixin.Mashup": {
-      "idx": 321,
+      "idx": 308,
       "alias": [],
       "alternates": []
     },
@@ -9454,17 +9144,17 @@ var Ext = Ext || {};
       "alternates": []
     },
     "Ext.mixin.Queryable": {
-      "idx": 219,
+      "idx": 222,
       "alias": [],
       "alternates": []
     },
     "Ext.mixin.Responsive": {
-      "idx": 322,
+      "idx": 309,
       "alias": [],
       "alternates": []
     },
     "Ext.mixin.Selectable": {
-      "idx": 323,
+      "idx": 310,
       "alias": [],
       "alternates": []
     },
@@ -9474,29 +9164,29 @@ var Ext = Ext || {};
       "alternates": []
     },
     "Ext.mixin.Traversable": {
-      "idx": 324,
+      "idx": 311,
       "alias": [],
       "alternates": []
     },
     "Ext.panel.Bar": {
-      "idx": 374,
+      "idx": 354,
       "alias": [],
       "alternates": []
     },
     "Ext.panel.DD": {
-      "idx": 395,
+      "idx": 375,
       "alias": [],
       "alternates": []
     },
     "Ext.panel.Header": {
-      "idx": 380,
+      "idx": 360,
       "alias": [
         "widget.header"
       ],
       "alternates": []
     },
     "Ext.panel.Panel": {
-      "idx": 399,
+      "idx": 379,
       "alias": [
         "widget.panel"
       ],
@@ -9505,92 +9195,52 @@ var Ext = Ext || {};
       ]
     },
     "Ext.panel.Pinnable": {
-      "idx": 592,
+      "idx": 567,
       "alias": [],
       "alternates": []
     },
     "Ext.panel.Proxy": {
-      "idx": 394,
+      "idx": 374,
       "alias": [],
       "alternates": [
         "Ext.dd.PanelProxy"
       ]
     },
     "Ext.panel.Table": {
-      "idx": 502,
+      "idx": 481,
       "alias": [
         "widget.tablepanel"
       ],
       "alternates": []
     },
     "Ext.panel.Title": {
-      "idx": 375,
+      "idx": 355,
       "alias": [
         "widget.title"
       ],
       "alternates": []
     },
     "Ext.panel.Tool": {
-      "idx": 376,
+      "idx": 356,
       "alias": [
         "widget.tool"
       ],
       "alternates": []
     },
-    "Ext.parse.Parser": {
-      "idx": 199,
-      "alias": [],
-      "alternates": []
-    },
-    "Ext.parse.Symbol": {
-      "idx": 193,
-      "alias": [],
-      "alternates": []
-    },
-    "Ext.parse.Tokenizer": {
-      "idx": 192,
-      "alias": [],
-      "alternates": []
-    },
-    "Ext.parse.symbol.Constant": {
-      "idx": 194,
-      "alias": [],
-      "alternates": []
-    },
-    "Ext.parse.symbol.Infix": {
-      "idx": 195,
-      "alias": [],
-      "alternates": []
-    },
-    "Ext.parse.symbol.InfixRight": {
-      "idx": 196,
-      "alias": [],
-      "alternates": []
-    },
-    "Ext.parse.symbol.Paren": {
-      "idx": 197,
-      "alias": [],
-      "alternates": []
-    },
-    "Ext.parse.symbol.Prefix": {
-      "idx": 198,
-      "alias": [],
-      "alternates": []
-    },
     "Ext.perf.Accumulator": {
-      "idx": 325,
+      "idx": 312,
       "alias": [],
       "alternates": []
     },
     "Ext.perf.Monitor": {
-      "idx": 326,
+      "idx": 313,
       "alias": [],
       "alternates": [
         "Ext.Perf"
       ]
     },
     "Ext.picker.Color": {
-      "idx": 488,
+      "idx": 468,
       "alias": [
         "widget.colorpicker"
       ],
@@ -9599,7 +9249,7 @@ var Ext = Ext || {};
       ]
     },
     "Ext.picker.Date": {
-      "idx": 477,
+      "idx": 457,
       "alias": [
         "widget.datepicker"
       ],
@@ -9608,7 +9258,7 @@ var Ext = Ext || {};
       ]
     },
     "Ext.picker.Month": {
-      "idx": 476,
+      "idx": 456,
       "alias": [
         "widget.monthpicker"
       ],
@@ -9617,33 +9267,33 @@ var Ext = Ext || {};
       ]
     },
     "Ext.picker.Time": {
-      "idx": 495,
+      "idx": 474,
       "alias": [
         "widget.timepicker"
       ],
       "alternates": []
     },
     "Ext.plugin.Abstract": {
-      "idx": 327,
+      "idx": 314,
       "alias": [],
       "alternates": [
         "Ext.AbstractPlugin"
       ]
     },
     "Ext.plugin.AbstractClipboard": {
-      "idx": 558,
+      "idx": 535,
       "alias": [],
       "alternates": []
     },
     "Ext.plugin.LazyItems": {
-      "idx": 328,
+      "idx": 315,
       "alias": [
         "plugin.lazyitems"
       ],
       "alternates": []
     },
     "Ext.plugin.Manager": {
-      "idx": 593,
+      "idx": 568,
       "alias": [],
       "alternates": [
         "Ext.PluginManager",
@@ -9651,14 +9301,14 @@ var Ext = Ext || {};
       ]
     },
     "Ext.plugin.Responsive": {
-      "idx": 403,
+      "idx": 383,
       "alias": [
         "plugin.responsive"
       ],
       "alternates": []
     },
     "Ext.plugin.Viewport": {
-      "idx": 404,
+      "idx": 384,
       "alias": [
         "plugin.viewport"
       ],
@@ -9680,74 +9330,97 @@ var Ext = Ext || {};
       "alternates": []
     },
     "Ext.resizer.BorderSplitter": {
-      "idx": 584,
+      "idx": 560,
       "alias": [
         "widget.bordersplitter"
       ],
       "alternates": []
     },
     "Ext.resizer.BorderSplitterTracker": {
-      "idx": 594,
+      "idx": 569,
       "alias": [],
       "alternates": []
     },
     "Ext.resizer.Handle": {
-      "idx": 595,
+      "idx": 570,
       "alias": [],
       "alternates": []
     },
     "Ext.resizer.ResizeTracker": {
-      "idx": 596,
+      "idx": 571,
       "alias": [],
       "alternates": []
     },
     "Ext.resizer.Resizer": {
-      "idx": 597,
+      "idx": 572,
       "alias": [],
       "alternates": [
         "Ext.Resizable"
       ]
     },
     "Ext.resizer.Splitter": {
-      "idx": 384,
+      "idx": 364,
       "alias": [
         "widget.splitter"
       ],
       "alternates": []
     },
     "Ext.resizer.SplitterTracker": {
-      "idx": 411,
+      "idx": 391,
       "alias": [],
+      "alternates": []
+    },
+    "Ext.scroll.DomScroller": {
+      "idx": 108,
+      "alias": [
+        "scroller.dom"
+      ],
+      "alternates": []
+    },
+    "Ext.scroll.Indicator": {
+      "idx": 106,
+      "alias": [
+        "widget.scrollindicator"
+      ],
       "alternates": []
     },
     "Ext.scroll.Scroller": {
-      "idx": 95,
-      "alias": [],
+      "idx": 92,
+      "alias": [
+        "scroller.scroller"
+      ],
+      "alternates": []
+    },
+    "Ext.scroll.TouchScroller": {
+      "idx": 107,
+      "alias": [
+        "scroller.touch"
+      ],
       "alternates": []
     },
     "Ext.selection.CellModel": {
-      "idx": 598,
+      "idx": 573,
       "alias": [
         "selection.cellmodel"
       ],
       "alternates": []
     },
     "Ext.selection.CheckboxModel": {
-      "idx": 600,
+      "idx": 575,
       "alias": [
         "selection.checkboxmodel"
       ],
       "alternates": []
     },
     "Ext.selection.DataViewModel": {
-      "idx": 462,
+      "idx": 442,
       "alias": [
         "selection.dataviewmodel"
       ],
       "alternates": []
     },
     "Ext.selection.Model": {
-      "idx": 461,
+      "idx": 441,
       "alias": [
         "selection.abstract"
       ],
@@ -9756,21 +9429,21 @@ var Ext = Ext || {};
       ]
     },
     "Ext.selection.RowModel": {
-      "idx": 599,
+      "idx": 574,
       "alias": [
         "selection.rowmodel"
       ],
       "alternates": []
     },
     "Ext.selection.TreeModel": {
-      "idx": 601,
+      "idx": 576,
       "alias": [
         "selection.treemodel"
       ],
       "alternates": []
     },
     "Ext.slider.Multi": {
-      "idx": 604,
+      "idx": 579,
       "alias": [
         "widget.multislider"
       ],
@@ -9779,7 +9452,7 @@ var Ext = Ext || {};
       ]
     },
     "Ext.slider.Single": {
-      "idx": 605,
+      "idx": 580,
       "alias": [
         "widget.slider",
         "widget.sliderfield"
@@ -9792,146 +9465,144 @@ var Ext = Ext || {};
       ]
     },
     "Ext.slider.Thumb": {
-      "idx": 602,
+      "idx": 577,
       "alias": [],
       "alternates": []
     },
     "Ext.slider.Tip": {
-      "idx": 603,
+      "idx": 578,
       "alias": [
         "widget.slidertip"
       ],
       "alternates": []
     },
     "Ext.slider.Widget": {
-      "idx": 606,
+      "idx": 581,
       "alias": [
         "widget.sliderwidget"
       ],
       "alternates": []
     },
     "Ext.sparkline.Bar": {
-      "idx": 614,
+      "idx": 589,
       "alias": [
         "widget.sparklinebar"
       ],
       "alternates": []
     },
     "Ext.sparkline.BarBase": {
-      "idx": 612,
+      "idx": 587,
       "alias": [],
       "alternates": []
     },
     "Ext.sparkline.Base": {
-      "idx": 611,
-      "alias": [
-        "widget.sparkline"
-      ],
+      "idx": 586,
+      "alias": [],
       "alternates": []
     },
     "Ext.sparkline.Box": {
-      "idx": 615,
+      "idx": 590,
       "alias": [
         "widget.sparklinebox"
       ],
       "alternates": []
     },
     "Ext.sparkline.Bullet": {
-      "idx": 616,
+      "idx": 591,
       "alias": [
         "widget.sparklinebullet"
       ],
       "alternates": []
     },
     "Ext.sparkline.CanvasBase": {
-      "idx": 608,
+      "idx": 583,
       "alias": [],
       "alternates": []
     },
     "Ext.sparkline.CanvasCanvas": {
-      "idx": 609,
+      "idx": 584,
       "alias": [],
       "alternates": []
     },
     "Ext.sparkline.Discrete": {
-      "idx": 617,
+      "idx": 592,
       "alias": [
         "widget.sparklinediscrete"
       ],
       "alternates": []
     },
     "Ext.sparkline.Line": {
-      "idx": 618,
+      "idx": 593,
       "alias": [
         "widget.sparklineline"
       ],
       "alternates": []
     },
     "Ext.sparkline.Pie": {
-      "idx": 619,
+      "idx": 594,
       "alias": [
         "widget.sparklinepie"
       ],
       "alternates": []
     },
     "Ext.sparkline.RangeMap": {
-      "idx": 613,
+      "idx": 588,
       "alias": [],
       "alternates": []
     },
     "Ext.sparkline.Shape": {
-      "idx": 607,
+      "idx": 582,
       "alias": [],
       "alternates": []
     },
     "Ext.sparkline.TriState": {
-      "idx": 620,
+      "idx": 595,
       "alias": [
         "widget.sparklinetristate"
       ],
       "alternates": []
     },
     "Ext.sparkline.VmlCanvas": {
-      "idx": 610,
+      "idx": 585,
       "alias": [],
       "alternates": []
     },
     "Ext.state.CookieProvider": {
-      "idx": 621,
+      "idx": 596,
       "alias": [],
       "alternates": []
     },
     "Ext.state.LocalStorageProvider": {
-      "idx": 622,
+      "idx": 597,
       "alias": [
         "state.localstorage"
       ],
       "alternates": []
     },
     "Ext.state.Manager": {
-      "idx": 100,
+      "idx": 113,
       "alias": [],
       "alternates": []
     },
     "Ext.state.Provider": {
-      "idx": 99,
+      "idx": 112,
       "alias": [],
       "alternates": []
     },
     "Ext.state.Stateful": {
-      "idx": 101,
+      "idx": 114,
       "alias": [],
       "alternates": []
     },
     "Ext.tab.Bar": {
-      "idx": 624,
+      "idx": 599,
       "alias": [
         "widget.tabbar"
       ],
       "alternates": []
     },
     "Ext.tab.Panel": {
-      "idx": 625,
+      "idx": 600,
       "alias": [
         "widget.tabpanel"
       ],
@@ -9940,14 +9611,14 @@ var Ext = Ext || {};
       ]
     },
     "Ext.tab.Tab": {
-      "idx": 623,
+      "idx": 598,
       "alias": [
         "widget.tab"
       ],
       "alternates": []
     },
     "Ext.tip.QuickTip": {
-      "idx": 486,
+      "idx": 466,
       "alias": [
         "widget.quicktip"
       ],
@@ -9956,14 +9627,14 @@ var Ext = Ext || {};
       ]
     },
     "Ext.tip.QuickTipManager": {
-      "idx": 487,
+      "idx": 467,
       "alias": [],
       "alternates": [
         "Ext.QuickTips"
       ]
     },
     "Ext.tip.Tip": {
-      "idx": 484,
+      "idx": 464,
       "alias": [
         "widget.tip"
       ],
@@ -9972,7 +9643,7 @@ var Ext = Ext || {};
       ]
     },
     "Ext.tip.ToolTip": {
-      "idx": 485,
+      "idx": 465,
       "alias": [
         "widget.tooltip"
       ],
@@ -9981,14 +9652,14 @@ var Ext = Ext || {};
       ]
     },
     "Ext.toolbar.Breadcrumb": {
-      "idx": 626,
+      "idx": 601,
       "alias": [
         "widget.breadcrumb"
       ],
       "alternates": []
     },
     "Ext.toolbar.Fill": {
-      "idx": 627,
+      "idx": 602,
       "alias": [
         "widget.tbfill"
       ],
@@ -9997,7 +9668,7 @@ var Ext = Ext || {};
       ]
     },
     "Ext.toolbar.Item": {
-      "idx": 468,
+      "idx": 448,
       "alias": [
         "widget.tbitem"
       ],
@@ -10006,7 +9677,7 @@ var Ext = Ext || {};
       ]
     },
     "Ext.toolbar.Paging": {
-      "idx": 473,
+      "idx": 453,
       "alias": [
         "widget.pagingtoolbar"
       ],
@@ -10015,7 +9686,7 @@ var Ext = Ext || {};
       ]
     },
     "Ext.toolbar.Separator": {
-      "idx": 490,
+      "idx": 470,
       "alias": [
         "widget.tbseparator"
       ],
@@ -10024,7 +9695,7 @@ var Ext = Ext || {};
       ]
     },
     "Ext.toolbar.Spacer": {
-      "idx": 628,
+      "idx": 603,
       "alias": [
         "widget.tbspacer"
       ],
@@ -10033,7 +9704,7 @@ var Ext = Ext || {};
       ]
     },
     "Ext.toolbar.TextItem": {
-      "idx": 469,
+      "idx": 449,
       "alias": [
         "widget.tbtext"
       ],
@@ -10042,7 +9713,7 @@ var Ext = Ext || {};
       ]
     },
     "Ext.toolbar.Toolbar": {
-      "idx": 388,
+      "idx": 368,
       "alias": [
         "widget.toolbar"
       ],
@@ -10051,21 +9722,21 @@ var Ext = Ext || {};
       ]
     },
     "Ext.tree.Column": {
-      "idx": 629,
+      "idx": 604,
       "alias": [
         "widget.treecolumn"
       ],
       "alternates": []
     },
     "Ext.tree.NavigationModel": {
-      "idx": 630,
+      "idx": 605,
       "alias": [
         "view.navigation.tree"
       ],
       "alternates": []
     },
     "Ext.tree.Panel": {
-      "idx": 632,
+      "idx": 607,
       "alias": [
         "widget.treepanel"
       ],
@@ -10075,91 +9746,91 @@ var Ext = Ext || {};
       ]
     },
     "Ext.tree.View": {
-      "idx": 631,
+      "idx": 606,
       "alias": [
         "widget.treeview"
       ],
       "alternates": []
     },
     "Ext.tree.ViewDragZone": {
-      "idx": 634,
+      "idx": 609,
       "alias": [],
       "alternates": []
     },
     "Ext.tree.ViewDropZone": {
-      "idx": 635,
+      "idx": 610,
       "alias": [],
       "alternates": []
     },
     "Ext.tree.plugin.TreeViewDragDrop": {
-      "idx": 636,
+      "idx": 611,
       "alias": [
         "plugin.treeviewdragdrop"
       ],
       "alternates": []
     },
     "Ext.util.AbstractMixedCollection": {
-      "idx": 52,
+      "idx": 53,
       "alias": [],
       "alternates": []
     },
     "Ext.util.Animate": {
-      "idx": 73,
+      "idx": 74,
       "alias": [],
       "alternates": []
     },
     "Ext.util.Bag": {
-      "idx": 172,
+      "idx": 185,
       "alias": [],
       "alternates": []
     },
     "Ext.util.Base64": {
-      "idx": 329,
+      "idx": 316,
       "alias": [],
       "alternates": []
     },
     "Ext.util.CSS": {
-      "idx": 94,
+      "idx": 612,
       "alias": [],
       "alternates": []
     },
     "Ext.util.CSV": {
-      "idx": 331,
+      "idx": 318,
       "alias": [],
       "alternates": []
     },
     "Ext.util.ClickRepeater": {
-      "idx": 368,
+      "idx": 348,
       "alias": [],
       "alternates": []
     },
     "Ext.util.Collection": {
-      "idx": 113,
+      "idx": 126,
       "alias": [],
       "alternates": []
     },
     "Ext.util.CollectionKey": {
-      "idx": 111,
+      "idx": 124,
       "alias": [],
       "alternates": []
     },
     "Ext.util.ComponentDragger": {
-      "idx": 432,
+      "idx": 411,
       "alias": [],
       "alternates": []
     },
     "Ext.util.Cookies": {
-      "idx": 637,
+      "idx": 613,
       "alias": [],
       "alternates": []
     },
     "Ext.util.DelimitedValue": {
-      "idx": 330,
+      "idx": 317,
       "alias": [],
       "alternates": []
     },
     "Ext.util.ElementContainer": {
-      "idx": 97,
+      "idx": 110,
       "alias": [],
       "alternates": []
     },
@@ -10169,57 +9840,52 @@ var Ext = Ext || {};
       "alternates": []
     },
     "Ext.util.Filter": {
-      "idx": 50,
+      "idx": 51,
       "alias": [],
       "alternates": []
     },
     "Ext.util.FilterCollection": {
-      "idx": 156,
+      "idx": 169,
       "alias": [],
       "alternates": []
     },
     "Ext.util.Floating": {
-      "idx": 96,
-      "alias": [],
-      "alternates": []
-    },
-    "Ext.util.Fly": {
-      "idx": 191,
+      "idx": 109,
       "alias": [],
       "alternates": []
     },
     "Ext.util.FocusTrap": {
-      "idx": 433,
+      "idx": 412,
       "alias": [],
       "alternates": []
     },
     "Ext.util.Focusable": {
-      "idx": 102,
+      "idx": 115,
       "alias": [],
       "alternates": []
     },
     "Ext.util.FocusableContainer": {
-      "idx": 379,
+      "idx": 359,
       "alias": [],
       "alternates": []
     },
     "Ext.util.Format": {
-      "idx": 85,
+      "idx": 79,
       "alias": [],
       "alternates": []
     },
     "Ext.util.Group": {
-      "idx": 154,
+      "idx": 167,
       "alias": [],
       "alternates": []
     },
     "Ext.util.GroupCollection": {
-      "idx": 157,
+      "idx": 170,
       "alias": [],
       "alternates": []
     },
     "Ext.util.Grouper": {
-      "idx": 112,
+      "idx": 125,
       "alias": [],
       "alternates": []
     },
@@ -10229,45 +9895,45 @@ var Ext = Ext || {};
       "alternates": []
     },
     "Ext.util.History": {
-      "idx": 165,
+      "idx": 178,
       "alias": [],
       "alternates": [
         "Ext.History"
       ]
     },
     "Ext.util.Inflector": {
-      "idx": 120,
+      "idx": 133,
       "alias": [],
       "alternates": []
     },
     "Ext.util.ItemCollection": {
-      "idx": 332,
+      "idx": 319,
       "alias": [],
       "alternates": [
         "Ext.ItemCollection"
       ]
     },
     "Ext.util.KeyMap": {
-      "idx": 377,
+      "idx": 357,
       "alias": [],
       "alternates": [
         "Ext.KeyMap"
       ]
     },
     "Ext.util.KeyNav": {
-      "idx": 378,
+      "idx": 358,
       "alias": [],
       "alternates": [
         "Ext.KeyNav"
       ]
     },
     "Ext.util.KeyboardInteractive": {
-      "idx": 104,
+      "idx": 117,
       "alias": [],
       "alternates": []
     },
     "Ext.util.LocalStorage": {
-      "idx": 333,
+      "idx": 320,
       "alias": [],
       "alternates": []
     },
@@ -10277,22 +9943,22 @@ var Ext = Ext || {};
       "alternates": []
     },
     "Ext.util.Memento": {
-      "idx": 397,
+      "idx": 377,
       "alias": [],
       "alternates": []
     },
     "Ext.util.MixedCollection": {
-      "idx": 55,
+      "idx": 56,
       "alias": [],
       "alternates": []
     },
     "Ext.util.ObjectTemplate": {
-      "idx": 114,
+      "idx": 127,
       "alias": [],
       "alternates": []
     },
     "Ext.util.Observable": {
-      "idx": 51,
+      "idx": 52,
       "alias": [],
       "alternates": []
     },
@@ -10302,7 +9968,7 @@ var Ext = Ext || {};
       "alternates": []
     },
     "Ext.util.PaintMonitor": {
-      "idx": 47,
+      "idx": 48,
       "alias": [],
       "alternates": []
     },
@@ -10317,12 +9983,12 @@ var Ext = Ext || {};
       "alternates": []
     },
     "Ext.util.ProtoElement": {
-      "idx": 92,
+      "idx": 90,
       "alias": [],
       "alternates": []
     },
     "Ext.util.Queue": {
-      "idx": 576,
+      "idx": 552,
       "alias": [],
       "alternates": []
     },
@@ -10332,94 +9998,94 @@ var Ext = Ext || {};
       "alternates": []
     },
     "Ext.util.Renderable": {
-      "idx": 98,
+      "idx": 111,
       "alias": [],
       "alternates": []
     },
     "Ext.util.Schedulable": {
-      "idx": 182,
+      "idx": 195,
       "alias": [],
       "alternates": []
     },
     "Ext.util.Scheduler": {
-      "idx": 173,
+      "idx": 186,
       "alias": [],
       "alternates": []
     },
     "Ext.util.SizeMonitor": {
-      "idx": 43,
+      "idx": 44,
       "alias": [],
       "alternates": []
     },
     "Ext.util.Sortable": {
-      "idx": 54,
+      "idx": 55,
       "alias": [],
       "alternates": []
     },
     "Ext.util.Sorter": {
-      "idx": 53,
+      "idx": 54,
       "alias": [],
       "alternates": []
     },
     "Ext.util.SorterCollection": {
-      "idx": 155,
+      "idx": 168,
       "alias": [],
       "alternates": []
     },
     "Ext.util.StoreHolder": {
-      "idx": 359,
+      "idx": 338,
       "alias": [],
       "alternates": []
     },
     "Ext.util.TSV": {
-      "idx": 334,
+      "idx": 321,
       "alias": [],
       "alternates": []
     },
     "Ext.util.TaskManager": {
-      "idx": 335,
+      "idx": 322,
       "alias": [],
       "alternates": [
         "Ext.TaskManager"
       ]
     },
     "Ext.util.TaskRunner": {
-      "idx": 56,
+      "idx": 57,
       "alias": [],
       "alternates": []
     },
     "Ext.util.TextMetrics": {
-      "idx": 336,
+      "idx": 323,
       "alias": [],
       "alternates": []
     },
     "Ext.util.Translatable": {
-      "idx": 343,
+      "idx": 105,
       "alias": [],
       "alternates": []
     },
     "Ext.util.XTemplateCompiler": {
-      "idx": 88,
+      "idx": 86,
       "alias": [],
       "alternates": []
     },
     "Ext.util.XTemplateParser": {
-      "idx": 87,
+      "idx": 85,
       "alias": [],
       "alternates": []
     },
     "Ext.util.paintmonitor.Abstract": {
-      "idx": 45,
-      "alias": [],
-      "alternates": []
-    },
-    "Ext.util.paintmonitor.CssAnimation": {
       "idx": 46,
       "alias": [],
       "alternates": []
     },
+    "Ext.util.paintmonitor.CssAnimation": {
+      "idx": 47,
+      "alias": [],
+      "alternates": []
+    },
     "Ext.util.paintmonitor.OverflowChange": {
-      "idx": 344,
+      "idx": 324,
       "alias": [],
       "alternates": []
     },
@@ -10428,53 +10094,58 @@ var Ext = Ext || {};
       "alias": [],
       "alternates": []
     },
-    "Ext.util.sizemonitor.OverflowChange": {
-      "idx": 42,
-      "alias": [],
-      "alternates": []
-    },
-    "Ext.util.sizemonitor.Scroll": {
+    "Ext.util.sizemonitor.Default": {
       "idx": 41,
       "alias": [],
       "alternates": []
     },
+    "Ext.util.sizemonitor.OverflowChange": {
+      "idx": 43,
+      "alias": [],
+      "alternates": []
+    },
+    "Ext.util.sizemonitor.Scroll": {
+      "idx": 42,
+      "alias": [],
+      "alternates": []
+    },
     "Ext.util.translatable.Abstract": {
-      "idx": 337,
+      "idx": 99,
       "alias": [],
       "alternates": []
     },
     "Ext.util.translatable.CssPosition": {
-      "idx": 342,
+      "idx": 104,
       "alias": [],
       "alternates": []
     },
     "Ext.util.translatable.CssTransform": {
-      "idx": 339,
+      "idx": 101,
       "alias": [],
       "alternates": []
     },
     "Ext.util.translatable.Dom": {
-      "idx": 338,
+      "idx": 100,
       "alias": [],
       "alternates": []
     },
     "Ext.util.translatable.ScrollParent": {
-      "idx": 341,
+      "idx": 103,
       "alias": [],
       "alternates": []
     },
     "Ext.util.translatable.ScrollPosition": {
-      "idx": 340,
+      "idx": 102,
       "alias": [],
       "alternates": []
     },
     "Ext.view.AbstractView": {
-      "idx": 464,
+      "idx": 444,
       "alias": [],
       "alternates": []
     },
     "Ext.view.BoundList": {
-      "idx": 474,
+      "idx": 454,
       "alias": [
         "widget.boundlist"
       ],
@@ -10483,50 +10154,50 @@ var Ext = Ext || {};
       ]
     },
     "Ext.view.BoundListKeyNav": {
-      "idx": 466,
+      "idx": 446,
       "alias": [
         "view.navigation.boundlist"
       ],
       "alternates": []
     },
     "Ext.view.DragZone": {
-      "idx": 633,
+      "idx": 608,
       "alias": [],
       "alternates": []
     },
     "Ext.view.DropZone": {
-      "idx": 515,
+      "idx": 493,
       "alias": [],
       "alternates": []
     },
     "Ext.view.MultiSelector": {
-      "idx": 639,
+      "idx": 615,
       "alias": [
         "widget.multiselector"
       ],
       "alternates": []
     },
     "Ext.view.MultiSelectorSearch": {
-      "idx": 638,
+      "idx": 614,
       "alias": [
         "widget.multiselector-search"
       ],
       "alternates": []
     },
     "Ext.view.NavigationModel": {
-      "idx": 463,
+      "idx": 443,
       "alias": [
         "view.navigation.default"
       ],
       "alternates": []
     },
     "Ext.view.NodeCache": {
-      "idx": 508,
+      "idx": 487,
       "alias": [],
       "alternates": []
     },
     "Ext.view.Table": {
-      "idx": 509,
+      "idx": 488,
       "alias": [
         "widget.gridview",
         "widget.tableview"
@@ -10536,21 +10207,14 @@ var Ext = Ext || {};
       ]
     },
     "Ext.view.TableLayout": {
-      "idx": 506,
+      "idx": 485,
       "alias": [
         "layout.tableview"
       ],
       "alternates": []
     },
-    "Ext.view.TagKeyNav": {
-      "idx": 493,
-      "alias": [
-        "view.navigation.tagfield"
-      ],
-      "alternates": []
-    },
     "Ext.view.View": {
-      "idx": 465,
+      "idx": 445,
       "alias": [
         "widget.dataview"
       ],
@@ -10559,21 +10223,21 @@ var Ext = Ext || {};
       ]
     },
     "Ext.window.MessageBox": {
-      "idx": 442,
+      "idx": 421,
       "alias": [
         "widget.messagebox"
       ],
       "alternates": []
     },
     "Ext.window.Toast": {
-      "idx": 640,
+      "idx": 616,
       "alias": [
         "widget.toast"
       ],
       "alternates": []
     },
     "Ext.window.Window": {
-      "idx": 434,
+      "idx": 413,
       "alias": [
         "widget.window"
       ],
@@ -10588,44 +10252,71 @@ var Ext = Ext || {};
         "dir": "${package.output}"
       },
       "creator": "Sencha",
-      "namespace": "Ext",
+      "output": "${framework.dir}/build",
       "requires": [
         "ext",
         "core",
         "classic"
       ],
       "type": "toolkit",
-      "version": "6.2.0.589"
-    },
-    "cmd": {
-      "version": "6.2.0.46"
+      "version": "6.0.0.640"
     },
     "core": {
       "alternateName": [
         "sencha-core"
       ],
       "creator": "Sencha",
+      "output": "${package.dir}/build",
       "requires": [
         "ext"
       ],
+      "slicer": {
+        "js": []
+      },
       "type": "code",
-      "version": "6.2.0.589"
+      "version": "6.0.0.640"
     },
     "ext": {
       "build": {
         "dir": "${package.output.base}"
       },
       "creator": "Sencha",
-      "license": "beta",
-      "namespace": "Ext",
-      "requires": [],
-      "resource": {
-        "paths": [
-          "resources"
+      "example": {
+        "path": [
+          "examples",
+          "templates"
+        ],
+        "apps": [
+          "admin-dashboard",
+          "executive-dashboard",
+          "kitchensink",
+          "classic/charts-kitchensink",
+          "classic/desktop",
+          "classic/ticket-app",
+          "classic/portal",
+          "classic/simple-tasks",
+          "classic/responsive-app",
+          "classic/aria",
+          "modern/addressbook",
+          "modern/energy",
+          "modern/stockapp",
+          "modern/states",
+          "modern/geocongress",
+          "modern/oreilly"
         ]
       },
+      "output": "${package.dir}/build",
+      "requires": [],
+      "subpkgs": [
+        "classic/classic",
+        "modern/modern",
+        "packages/charts",
+        "packages/amf",
+        "packages/soap",
+        "packages/ux"
+      ],
       "type": "framework",
-      "version": "6.2.0.589"
+      "version": "6.0.0.640"
     }
   },
   "bootRelative": true
@@ -10634,47 +10325,45 @@ var Ext = Ext || {};
 // @define Ext.Boot
 var Ext = Ext || {};
 //<editor-fold desc="Boot">
-/**
+/*
  * @class Ext.Boot
  * @singleton
- * @private
  */
 Ext.Boot = Ext.Boot || (function(emptyFn) {
     var doc = document,
         _emptyArray = [],
         _config = {
-            /**
+            /*
              * @cfg {Boolean} [disableCaching=true]
              * If `true` current timestamp is added to script URL's to prevent caching.
              * In debug builds, adding a "cache" or "disableCacheBuster" query parameter
              * to the page's URL will set this to `false`.
              */
             disableCaching: (/[?&](?:cache|disableCacheBuster)\b/i.test(location.search) || !(/http[s]?\:/i.test(location.href)) || /(^|[ ;])ext-cache=1/.test(doc.cookie)) ? false : true,
-            /**
+            /*
              * @cfg {String} [disableCachingParam="_dc"]
              * The query parameter name for the cache buster's timestamp.
              */
             disableCachingParam: '_dc',
-            /**
+            /*
              * @cfg {Boolean} loadDelay
              * Millisecond delay between asynchronous script injection (prevents stack
              * overflow on some user agents) 'false' disables delay but potentially
              * increases stack load.
              */
             loadDelay: false,
-            /**
+            /*
              * @cfg {Boolean} preserveScripts
              * `false` to remove asynchronously loaded scripts, `true` to retain script
              * element for browser debugger compatibility and improved load performance.
              */
             preserveScripts: true,
-            /**
-             * @cfg {String} [charset=UTF-8]
+            /*
+             * @cfg {String} charset
              * Optional charset to specify encoding of dynamic content.
              */
-            charset: 'UTF-8'
+            charset: undefined
         },
-        _assetConfig = {},
         cssRe = /\.css(?:\?|$)/i,
         resolverEl = doc.createElement('a'),
         isBrowser = typeof window !== 'undefined',
@@ -10684,9 +10373,6 @@ Ext.Boot = Ext.Boot || (function(emptyFn) {
             phantom: (window && (window._phantom || window.callPhantom)) || /PhantomJS/.test(window.navigator.userAgent)
         },
         _tags = (Ext.platformTags = {}),
-        // All calls to _debug are commented out to speed up old browsers a bit;
-        // yes that makes a difference because the cost of concatenating strings
-        // and passing them into _debug() adds up pretty quickly.
         _debug = function(message) {},
         //console.log(message);
         _apply = function(object, config, defaults) {
@@ -10700,41 +10386,8 @@ Ext.Boot = Ext.Boot || (function(emptyFn) {
             }
             return object;
         },
-        _merge = function() {
-            var lowerCase = false,
-                obj = Array.prototype.shift.call(arguments),
-                index, i, len, value;
-            if (typeof arguments[arguments.length - 1] === 'boolean') {
-                lowerCase = Array.prototype.pop.call(arguments);
-            }
-            len = arguments.length;
-            for (index = 0; index < len; index++) {
-                value = arguments[index];
-                if (typeof value === 'object') {
-                    for (i in value) {
-                        obj[lowerCase ? i.toLowerCase() : i] = value[i];
-                    }
-                }
-            }
-            return obj;
-        },
-        _getKeys = (typeof Object.keys == 'function') ? function(object) {
-            if (!object) {
-                return [];
-            }
-            return Object.keys(object);
-        } : function(object) {
-            var keys = [],
-                property;
-            for (property in object) {
-                if (object.hasOwnProperty(property)) {
-                    keys.push(property);
-                }
-            }
-            return keys;
-        },
         /*
-     * The Boot loader class manages Request objects that contain one or
+     * The Boot loader class manages Request objects that contain one or 
      * more individual urls that need to be loaded.  Requests can be performed
      * synchronously or asynchronously, but will always evaluate urls in the
      * order specified on the request object.
@@ -10745,16 +10398,11 @@ Ext.Boot = Ext.Boot || (function(emptyFn) {
             apply: _apply,
             env: _environment,
             config: _config,
-            /**
-             * @cfg {Object} assetConfig
-             * A map (url->assetConfig) that contains information about assets loaded by the Microlaoder.
-             */
-            assetConfig: _assetConfig,
             // Keyed by absolute URL this object holds "true" if that URL is already loaded
             // or an array of callbacks to call once it loads.
             scripts: {},
             /*
-                 Entry objects
+                 Entry objects 
 
                  'http://foo.com/bar/baz/Thing.js': {
                  done: true,
@@ -10763,7 +10411,7 @@ Ext.Boot = Ext.Boot || (function(emptyFn) {
                  requests: [ request1, ... ]
                  }
                  */
-            /**
+            /*
              * contains the current script name being loaded
              * (loadSync or sequential load only)
              */
@@ -10777,7 +10425,7 @@ Ext.Boot = Ext.Boot || (function(emptyFn) {
              * simple helper method for debugging
              */
             debug: _debug,
-            /**
+            /*
              * enables / disables loading scripts via script / link elements rather
              * than using ajax / eval
              */
@@ -10785,98 +10433,34 @@ Ext.Boot = Ext.Boot || (function(emptyFn) {
             listeners: [],
             Request: Request,
             Entry: Entry,
-            allowMultipleBrowsers: false,
-            browserNames: {
-                ie: 'IE',
-                firefox: 'Firefox',
-                safari: 'Safari',
-                chrome: 'Chrome',
-                opera: 'Opera',
-                dolfin: 'Dolfin',
-                edge: 'Edge',
-                webosbrowser: 'webOSBrowser',
-                chromeMobile: 'ChromeMobile',
-                chromeiOS: 'ChromeiOS',
-                silk: 'Silk',
-                other: 'Other'
-            },
-            osNames: {
-                ios: 'iOS',
-                android: 'Android',
-                windowsPhone: 'WindowsPhone',
-                webos: 'webOS',
-                blackberry: 'BlackBerry',
-                rimTablet: 'RIMTablet',
-                mac: 'MacOS',
-                win: 'Windows',
-                tizen: 'Tizen',
-                linux: 'Linux',
-                bada: 'Bada',
-                chromeOS: 'ChromeOS',
-                other: 'Other'
-            },
-            browserPrefixes: {
-                ie: 'MSIE ',
-                edge: 'Edge/',
-                firefox: 'Firefox/',
-                chrome: 'Chrome/',
-                safari: 'Version/',
-                opera: 'OPR/',
-                dolfin: 'Dolfin/',
-                webosbrowser: 'wOSBrowser/',
-                chromeMobile: 'CrMo/',
-                chromeiOS: 'CriOS/',
-                silk: 'Silk/'
-            },
-            // When a UA reports multiple browsers this list is used to prioritize the 'real' browser
-            // lower index number will win
-            browserPriority: [
-                'edge',
-                'opera',
-                'dolfin',
-                'webosbrowser',
-                'silk',
-                'chromeiOS',
-                'chromeMobile',
-                'ie',
-                'firefox',
-                'safari',
-                'chrome'
-            ],
-            osPrefixes: {
-                tizen: '(Tizen )',
-                ios: 'i(?:Pad|Phone|Pod)(?:.*)CPU(?: iPhone)? OS ',
-                android: '(Android |HTC_|Silk/)',
-                // Some HTC devices ship with an OSX userAgent by default,
-                // so we need to add a direct check for HTC_
-                windowsPhone: 'Windows Phone ',
-                blackberry: '(?:BlackBerry|BB)(?:.*)Version/',
-                rimTablet: 'RIM Tablet OS ',
-                webos: '(?:webOS|hpwOS)/',
-                bada: 'Bada/',
-                chromeOS: 'CrOS '
-            },
-            fallbackOSPrefixes: {
-                windows: 'win',
-                mac: 'mac',
-                linux: 'linux'
-            },
-            devicePrefixes: {
-                iPhone: 'iPhone',
-                iPod: 'iPod',
-                iPad: 'iPad'
-            },
-            maxIEVersion: 12,
             /**
-             * The default function that detects various platforms and sets tags
-             * in the platform map accordingly.  Examples are iOS, android, tablet, etc.
+             * The defult function that detects various platforms and sets tags
+             * in the platform map accrodingly.  Examples are iOS, android, tablet, etc.
              * @param tags the set of tags to populate
              */
             detectPlatformTags: function() {
-                var me = this,
-                    ua = navigator.userAgent,
-                    isMobile = /Mobile(\/|\s)/.test(ua),
+                var ua = navigator.userAgent,
+                    isMobile = _tags.isMobile = /Mobile(\/|\s)/.test(ua),
+                    isPhone, isDesktop, isTablet, touchSupported, isIE10, isBlackberry,
                     element = document.createElement('div'),
+                    uaTagChecks = [
+                        'iPhone',
+                        'iPod',
+                        'Android',
+                        'Silk',
+                        'Android 2',
+                        'BlackBerry',
+                        'BB',
+                        'iPad',
+                        'RIM Tablet OS',
+                        'MSIE 10',
+                        'Trident',
+                        'Chrome',
+                        'Tizen',
+                        'Firefox',
+                        'Safari',
+                        'Windows Phone'
+                    ],
                     isEventSupported = function(name, tag) {
                         if (tag === undefined) {
                             tag = window;
@@ -10895,134 +10479,51 @@ Ext.Boot = Ext.Boot || (function(emptyFn) {
                         }
                         return isSupported;
                     },
-                    // Browser Detection
-                    getBrowsers = function() {
-                        var browsers = {},
-                            maxIEVersion, prefix, value, key, index, len, match, version, matched;
-                        // MS Edge browser (and possibly others) can report multiple browsers in the UserAgent
-                        // "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.135 Safari/537.36 Edge/12.10240"
-                        // we use this to prioritize the actual browser in this situation
-                        len = me.browserPriority.length;
-                        for (index = 0; index < len; index++) {
-                            key = me.browserPriority[index];
-                            if (!matched) {
-                                value = me.browserPrefixes[key];
-                                match = ua.match(new RegExp('(' + value + ')([\\w\\._]+)'));
-                                version = match && match.length > 1 ? parseInt(match[2]) : 0;
-                                if (version) {
-                                    matched = true;
-                                }
-                            } else {
-                                version = 0;
-                            }
-                            browsers[key] = version;
-                        }
-                        //Deal with IE document mode
-                        if (browsers.ie) {
-                            var mode = document.documentMode;
-                            if (mode >= 8) {
-                                browsers.ie = mode;
-                            }
-                        }
-                        // Fancy IE greater than and less then quick tags
-                        version = browsers.ie || false;
-                        maxIEVersion = Math.max(version, me.maxIEVersion);
-                        for (index = 8; index <= maxIEVersion; ++index) {
-                            prefix = 'ie' + index;
-                            browsers[prefix + 'm'] = version ? version <= index : 0;
-                            browsers[prefix] = version ? version === index : 0;
-                            browsers[prefix + 'p'] = version ? version >= index : 0;
-                        }
-                        return browsers;
-                    },
-                    //OS Detection
-                    getOperatingSystems = function() {
-                        var systems = {},
-                            value, key, keys, index, len, match, matched, version, activeCount;
-                        keys = _getKeys(me.osPrefixes);
-                        len = keys.length;
-                        for (index = 0 , activeCount = 0; index < len; index++) {
-                            key = keys[index];
-                            value = me.osPrefixes[key];
-                            match = ua.match(new RegExp('(' + value + ')([^\\s;]+)'));
-                            matched = match ? match[1] : null;
-                            // This is here because some HTC android devices show an OSX Snow Leopard userAgent by default.
-                            // And the Kindle Fire doesn't have any indicator of Android as the OS in its User Agent
-                            if (matched && (matched === 'HTC_' || matched === 'Silk/')) {
-                                version = 2.3;
-                            } else {
-                                version = match && match.length > 1 ? parseFloat(match[match.length - 1]) : 0;
-                            }
-                            if (version) {
-                                activeCount++;
-                            }
-                            systems[key] = version;
-                        }
-                        keys = _getKeys(me.fallbackOSPrefixes);
-                        // If no OS could be found we resort to the fallbacks, otherwise we just
-                        // falsify the fallbacks
-                        len = keys.length;
-                        for (index = 0; index < len; index++) {
-                            key = keys[index];
-                            // No OS was detected from osPrefixes
-                            if (activeCount === 0) {
-                                value = me.fallbackOSPrefixes[key];
-                                match = ua.toLowerCase().match(new RegExp(value));
-                                systems[key] = match ? true : 0;
-                            } else {
-                                systems[key] = 0;
-                            }
-                        }
-                        return systems;
-                    },
-                    // Device Detection
-                    getDevices = function() {
-                        var devices = {},
-                            value, key, keys, index, len, match;
-                        keys = _getKeys(me.devicePrefixes);
-                        len = keys.length;
-                        for (index = 0; index < len; index++) {
-                            key = keys[index];
-                            value = me.devicePrefixes[key];
-                            match = ua.match(new RegExp(value));
-                            devices[key] = match ? true : 0;
-                        }
-                        return devices;
-                    },
-                    browsers = getBrowsers(),
-                    systems = getOperatingSystems(),
-                    devices = getDevices(),
-                    platformParams = Boot.loadPlatformsParam();
-                // We apply platformParams from the query here first to allow for forced user valued
-                // to be used in calculation of generated tags
-                _merge(_tags, browsers, systems, devices, platformParams, true);
-                _tags.phone = !!((_tags.iphone || _tags.ipod) || (!_tags.silk && (_tags.android && (_tags.android < 3 || isMobile))) || (_tags.blackberry && isMobile) || (_tags.windowsphone));
-                _tags.tablet = !!(!_tags.phone && (_tags.ipad || _tags.android || _tags.silk || _tags.rimtablet || (_tags.ie10 && /; Touch/.test(ua))));
-                _tags.touch = // if the browser has touch events we can be reasonably sure the device has
+                    uaTags = {},
+                    len = uaTagChecks.length,
+                    check, c;
+                for (c = 0; c < len; c++) {
+                    check = uaTagChecks[c];
+                    uaTags[check] = new RegExp(check).test(ua);
+                }
+                isPhone = (uaTags.iPhone || uaTags.iPod) || (!uaTags.Silk && (uaTags.Android && (uaTags['Android 2'] || isMobile))) || ((uaTags.BlackBerry || uaTags.BB) && uaTags.isMobile) || (uaTags['Windows Phone']);
+                isTablet = (!_tags.isPhone) && (uaTags.iPad || uaTags.Android || uaTags.Silk || uaTags['RIM Tablet OS'] || (uaTags['MSIE 10'] && /; Touch/.test(ua)));
+                touchSupported = // if the browser has touch events we can be reasonably sure the device has
                 // a touch screen
                 isEventSupported('touchend') || // browsers that use pointer event have maxTouchPoints > 0 if the
                 // device supports touch input
                 // http://www.w3.org/TR/pointerevents/#widl-Navigator-maxTouchPoints
                 navigator.maxTouchPoints || // IE10 uses a vendor-prefixed maxTouchPoints property
                 navigator.msMaxTouchPoints;
-                _tags.desktop = !_tags.phone && !_tags.tablet;
-                _tags.cordova = _tags.phonegap = !!(window.PhoneGap || window.Cordova || window.cordova);
-                _tags.webview = /(iPhone|iPod|iPad).*AppleWebKit(?!.*Safari)(?!.*FBAN)/i.test(ua);
-                _tags.androidstock = (_tags.android <= 4.3) && (_tags.safari || _tags.silk);
-                // Re-apply any query params here to allow for user override of generated tags (desktop, touch, tablet, etc)
-                _merge(_tags, platformParams, true);
+                isDesktop = !isPhone && !isTablet;
+                isIE10 = uaTags['MSIE 10'];
+                isBlackberry = uaTags.Blackberry || uaTags.BB;
+                _apply(_tags, Boot.loadPlatformsParam(), {
+                    phone: isPhone,
+                    tablet: isTablet,
+                    desktop: isDesktop,
+                    touch: touchSupported,
+                    ios: (uaTags.iPad || uaTags.iPhone || uaTags.iPod),
+                    android: uaTags.Android || uaTags.Silk,
+                    blackberry: isBlackberry,
+                    safari: uaTags.Safari && !isBlackberry,
+                    chrome: uaTags.Chrome,
+                    ie10: isIE10,
+                    windows: isIE10 || uaTags.Trident,
+                    tizen: uaTags.Tizen,
+                    firefox: uaTags.Firefox
+                });
             },
             /**
              * Extracts user supplied platform tags from the "platformTags" query parameter
              * of the form:
              *
-             *      ?platformTags=name:state,name:state,...
+             * ?platformTags=name:state,name:state,...
              *
              * (each tag defaults to true when state is unspecified)
              *
              * Example:
-             *
-             *      ?platformTags=isTablet,isPhone:false,isDesktop:0,iOS:1,Safari:true, ...
+             * ?platformTags=isTablet,isPhone:false,isDesktop:0,iOS:1,Safari:true, ...
              *
              * @returns {Object} the platform tags supplied by the query string
              */
@@ -11075,27 +10576,9 @@ Ext.Boot = Ext.Boot || (function(emptyFn) {
             },
             init: function() {
                 var scriptEls = doc.getElementsByTagName('script'),
-                    script = scriptEls[0],
                     len = scriptEls.length,
                     re = /\/ext(\-[a-z\-]+)?\.js$/,
-                    entry, src, state, baseUrl, key, n, origin;
-                // No check for script definedness because there always should be at least one
-                Boot.hasReadyState = ("readyState" in script);
-                Boot.hasAsync = ("async" in script);
-                Boot.hasDefer = ("defer" in script);
-                Boot.hasOnLoad = ("onload" in script);
-                // Feature detecting IE
-                Boot.isIE8 = Boot.hasReadyState && !Boot.hasAsync && Boot.hasDefer && !Boot.hasOnLoad;
-                Boot.isIE9 = Boot.hasReadyState && !Boot.hasAsync && Boot.hasDefer && Boot.hasOnLoad;
-                Boot.isIE10p = Boot.hasReadyState && Boot.hasAsync && Boot.hasDefer && Boot.hasOnLoad;
-                /*@cc_on
-                    if (@_jscript_version === 10) {
-                        Boot.isIE10 = true;
-                    }
-                  @*/
-                Boot.isIE10m = Boot.isIE10 || Boot.isIE9 || Boot.isIE8;
-                // IE11 does not support conditional compilation so we detect it by exclusion
-                Boot.isIE11 = Boot.isIE10p && !Boot.isIE10;
+                    entry, script, src, state, baseUrl, key, n, origin;
                 // Since we are loading after other scripts, and we needed to gather them
                 // anyway, we track them in _scripts so we don't have to ask for them all
                 // repeatedly.
@@ -11107,11 +10590,15 @@ Ext.Boot = Ext.Boot || (function(emptyFn) {
                     }
                     state = script.readyState || null;
                     // If we find a script file called "ext-*.js", then the base path is that file's base path.
-                    if (!baseUrl && re.test(src)) {
-                        baseUrl = src;
+                    if (!baseUrl) {
+                        if (re.test(src)) {
+                            Boot.hasReadyState = ("readyState" in script);
+                            Boot.hasAsync = ("async" in script) || !Boot.hasReadyState;
+                            baseUrl = src;
+                        }
                     }
                     if (!Boot.scripts[key = Boot.canonicalUrl(src)]) {
-                        //                         _debug("creating entry " + key + " in Boot.init");
+                        _debug("creating entry " + key + " in Boot.init");
                         entry = new Entry({
                             key: key,
                             url: src,
@@ -11126,6 +10613,8 @@ Ext.Boot = Ext.Boot || (function(emptyFn) {
                 if (!baseUrl) {
                     script = scriptEls[scriptEls.length - 1];
                     baseUrl = script.src;
+                    Boot.hasReadyState = ('readyState' in script);
+                    Boot.hasAsync = ("async" in script) || !Boot.hasReadyState;
                 }
                 Boot.baseUrl = baseUrl.substring(0, baseUrl.lastIndexOf('/') + 1);
                 origin = window.location.origin || window.location.protocol + "//" + window.location.hostname + (window.location.port ? ':' + window.location.port : '');
@@ -11133,7 +10622,7 @@ Ext.Boot = Ext.Boot || (function(emptyFn) {
                 Boot.detectPlatformTags();
                 Ext.filterPlatform = Boot.filterPlatform;
             },
-            /**
+            /*
              * This method returns a canonical URL for the given URL.
              *
              * For example, the following all produce the same canonical URL (which is the
@@ -11148,12 +10637,6 @@ Ext.Boot = Ext.Boot || (function(emptyFn) {
              * @private
              */
             canonicalUrl: function(url) {
-                // *WARNING WARNING WARNING*
-                // This method yields the most correct result we can get but it is EXPENSIVE!
-                // In ALL browsers! When called multiple times in a sequence, as if when
-                // we resolve dependencies for entries, it will cause garbage collection events
-                // and overall painful slowness. This is why we try to avoid it as much as we can.
-                // 
                 // @TODO - see if we need this fallback logic
                 // http://stackoverflow.com/questions/470832/getting-an-absolute-url-from-a-relative-one-ie6-issue
                 resolverEl.href = url;
@@ -11176,7 +10659,7 @@ Ext.Boot = Ext.Boot || (function(emptyFn) {
                 }
                 return ret;
             },
-            /**
+            /*
              * Get the config value corresponding to the specified name. If no name is given, will return the config object
              * @param {String} name The config property name
              * @return {Object}
@@ -11184,7 +10667,7 @@ Ext.Boot = Ext.Boot || (function(emptyFn) {
             getConfig: function(name) {
                 return name ? Boot.config[name] : Boot.config;
             },
-            /**
+            /*
              * Set the configuration.
              * @param {Object} config The config object to override the default values.
              * @return {Ext.Boot} this
@@ -11208,17 +10691,11 @@ Ext.Boot = Ext.Boot || (function(emptyFn) {
                 config.key = key;
                 return Boot.scripts[key] = new Entry(config);
             },
-            getEntry: function(url, cfg, canonicalPath) {
-                var key, entry;
-                // Canonicalizing URLs via anchor element href yields the most correct result
-                // but is *extremely* resource heavy so we need to avoid it whenever possible
-                key = canonicalPath ? url : Boot.canonicalUrl(url);
-                entry = Boot.scripts[key];
+            getEntry: function(url, cfg) {
+                var key = Boot.canonicalUrl(url),
+                    entry = Boot.scripts[key];
                 if (!entry) {
                     entry = Boot.create(url, key, cfg);
-                    if (canonicalPath) {
-                        entry.canonicalPath = true;
-                    }
                 }
                 return entry;
             },
@@ -11234,7 +10711,7 @@ Ext.Boot = Ext.Boot || (function(emptyFn) {
                 request.loadEntries(sync);
             },
             load: function(request) {
-                //                 _debug("Boot.load called");
+                _debug("Boot.load called");
                 var request = new Request(request);
                 if (request.sync || Boot.syncMode) {
                     return Boot.loadSync(request);
@@ -11242,7 +10719,7 @@ Ext.Boot = Ext.Boot || (function(emptyFn) {
                 // If there is a request in progress, we must
                 // queue this new request to be fired  when the current request completes.
                 if (Boot.currentRequest) {
-                    //                     _debug("current active request, suspending this request");
+                    _debug("current active request, suspending this request");
                     // trigger assignment of entries now to ensure that overlapping
                     // entries with currently running requests will synchronize state
                     // with this pending one as they complete
@@ -11255,7 +10732,7 @@ Ext.Boot = Ext.Boot || (function(emptyFn) {
                 return Boot;
             },
             loadSync: function(request) {
-                //                 _debug("Boot.loadSync called");
+                _debug("Boot.loadSync called");
                 var request = new Request(request);
                 Boot.syncMode++;
                 Boot.processRequest(request, true);
@@ -11279,7 +10756,7 @@ Ext.Boot = Ext.Boot || (function(emptyFn) {
                     while (Boot.suspendedQueue.length > 0) {
                         next = Boot.suspendedQueue.shift();
                         if (!next.done) {
-                            //                             _debug("resuming suspended request");
+                            _debug("resuming suspended request");
                             Boot.load(next);
                             break;
                         }
@@ -11305,22 +10782,11 @@ Ext.Boot = Ext.Boot || (function(emptyFn) {
                     Boot.listeners.push(listener);
                 }
             },
-            /**
+            /*
              * this is a helper function used by Ext.Loader to flush out
-             * 'uses' arrays for classes in some Ext versions
+             * 'uses' arrays for classes
              */
             getPathsFromIndexes: function(indexMap, loadOrder) {
-                // In older versions indexMap was an object instead of a sparse array
-                if (!('length' in indexMap)) {
-                    var indexArray = [],
-                        index;
-                    for (index in indexMap) {
-                        if (!isNaN(+index)) {
-                            indexArray[+index] = indexMap[index];
-                        }
-                    }
-                    indexMap = indexArray;
-                }
                 return Request.prototype.getPathsFromIndexes(indexMap, loadOrder);
             },
             createLoadOrderMap: function(loadOrder) {
@@ -11343,7 +10809,6 @@ Ext.Boot = Ext.Boot || (function(emptyFn) {
                             if (complete) {
                                 complete.call(scope, result);
                             }
-                            xhr.onreadystatechange = emptyFn;
                             xhr = null;
                         }
                     };
@@ -11351,7 +10816,7 @@ Ext.Boot = Ext.Boot || (function(emptyFn) {
                     xhr.onreadystatechange = readyStateChange;
                 }
                 try {
-                    //                     _debug("fetching " + url + " " + (async ? "async" : "sync"));
+                    _debug("fetching " + url + " " + (async ? "async" : "sync"));
                     xhr.open('GET', url, async);
                     xhr.send(null);
                 } catch (err) {
@@ -11368,10 +10833,12 @@ Ext.Boot = Ext.Boot || (function(emptyFn) {
                 entry.notifyRequests();
             }
         };
+    /*
+     * The request class encapsulates a series of Entry objects
+     * and provides notification around the completion of all Entries
+     * in this request.
+     */
     function Request(cfg) {
-        //The request class encapsulates a series of Entry objects
-        //and provides notification around the completion of all Entries
-        //in this request.
         if (cfg.$isRequest) {
             return cfg;
         }
@@ -11383,14 +10850,20 @@ Ext.Boot = Ext.Boot || (function(emptyFn) {
                 url
             ] : url,
             charset = cfg.charset || Boot.config.charset;
+        _apply(cfg, {
+            urls: urls,
+            charset: charset
+        });
         _apply(this, cfg);
-        delete this.url;
-        this.urls = urls;
-        this.charset = charset;
     }
     
     Request.prototype = {
         $isRequest: true,
+        /*
+         * @private
+         * @param manifest
+         * @returns {*}
+         */
         createLoadOrderMap: function(loadOrder) {
             var len = loadOrder.length,
                 loadOrderMap = {},
@@ -11401,99 +10874,120 @@ Ext.Boot = Ext.Boot || (function(emptyFn) {
             }
             return loadOrderMap;
         },
-        getLoadIndexes: function(item, indexMap, loadOrder, includeUses, skipLoaded) {
-            var resolved = [],
-                queue = [
-                    item
-                ],
-                itemIndex = item.idx,
-                queue, entry, dependencies, depIndex, i, len;
-            if (indexMap[itemIndex]) {
+        /*
+         * @private
+         * @param index
+         * @param indexMap
+         * @returns {{}}
+         */
+        getLoadIndexes: function(index, indexMap, loadOrder, includeUses, skipLoaded) {
+            var item = loadOrder[index],
+                len, i, reqs, entry, stop, added, idx, ridx, url;
+            if (indexMap[index]) {
                 // prevent cycles
-                return resolved;
+                return indexMap;
             }
-            // Both indexMap and resolved are sparse arrays keyed by indexes.
-            // This gives us a naturally sorted sequence of indexes later on
-            // when we need to convert them to paths.
-            // indexMap is the map of all indexes we have visited at least once
-            // per the current expandUrls() invocation, and resolved is the map
-            // of all dependencies for the current item that are not included
-            // in indexMap.
-            indexMap[itemIndex] = resolved[itemIndex] = true;
-            while (item = queue.shift()) {
-                // Canonicalizing URLs is expensive, we try to avoid it
-                if (item.canonicalPath) {
-                    entry = Boot.getEntry(item.path, null, true);
-                } else {
-                    entry = Boot.getEntry(this.prepareUrl(item.path));
-                }
-                if (!(skipLoaded && entry.done)) {
-                    if (includeUses && item.uses && item.uses.length) {
-                        dependencies = item.requires.concat(item.uses);
-                    } else {
-                        dependencies = item.requires;
-                    }
-                    for (i = 0 , len = dependencies.length; i < len; i++) {
-                        depIndex = dependencies[i];
-                        if (!indexMap[depIndex]) {
-                            indexMap[depIndex] = resolved[depIndex] = true;
-                            queue.push(loadOrder[depIndex]);
+            indexMap[index] = true;
+            stop = false;
+            while (!stop) {
+                added = false;
+                // iterate the requirements for each index and 
+                // accumulate in the index map
+                for (idx in indexMap) {
+                    if (indexMap.hasOwnProperty(idx)) {
+                        item = loadOrder[idx];
+                        if (!item) {
+                            
+                            continue;
+                        }
+                        url = this.prepareUrl(item.path);
+                        entry = Boot.getEntry(url);
+                        if (!skipLoaded || !entry || !entry.done) {
+                            reqs = item.requires;
+                            if (includeUses && item.uses) {
+                                reqs = reqs.concat(item.uses);
+                            }
+                            for (len = reqs.length , i = 0; i < len; i++) {
+                                ridx = reqs[i];
+                                // if we find a requirement that wasn't 
+                                // already in the index map, 
+                                // set the added flag to indicate we need to 
+                                // reprocess
+                                if (!indexMap[ridx]) {
+                                    indexMap[ridx] = true;
+                                    added = true;
+                                }
+                            }
                         }
                     }
                 }
-            }
-            return resolved;
-        },
-        getPathsFromIndexes: function(indexes, loadOrder) {
-            var paths = [],
-                index, len;
-            // indexes is a sparse array with values being true for defined indexes
-            for (index = 0 , len = indexes.length; index < len; index++) {
-                if (indexes[index]) {
-                    paths.push(loadOrder[index].path);
+                // if we made a pass through the index map and didn't add anything
+                // then we can stop
+                if (!added) {
+                    stop = true;
                 }
+            }
+            return indexMap;
+        },
+        getPathsFromIndexes: function(indexMap, loadOrder) {
+            var indexes = [],
+                paths = [],
+                index, len, i;
+            for (index in indexMap) {
+                if (indexMap.hasOwnProperty(index) && indexMap[index]) {
+                    indexes.push(index);
+                }
+            }
+            indexes.sort(function(a, b) {
+                return a - b;
+            });
+            // convert indexes back into load paths
+            for (len = indexes.length , i = 0; i < len; i++) {
+                paths.push(loadOrder[indexes[i]].path);
             }
             return paths;
         },
-        expandUrl: function(url, loadOrder, loadOrderMap, indexMap, includeUses, skipLoaded) {
-            var item, resolved;
-            if (loadOrder) {
-                item = loadOrderMap[url];
-                if (item) {
-                    resolved = this.getLoadIndexes(item, indexMap, loadOrder, includeUses, skipLoaded);
-                    if (resolved.length) {
-                        return this.getPathsFromIndexes(resolved, loadOrder);
-                    }
-                }
+        expandUrl: function(url, indexMap, includeUses, skipLoaded) {
+            if (typeof url == 'string') {
+                url = [
+                    url
+                ];
             }
-            return [
-                url
-            ];
-        },
-        expandUrls: function(urls, includeUses) {
             var me = this,
                 loadOrder = me.loadOrder,
-                expanded = [],
-                expandMap = {},
-                indexMap = [],
-                loadOrderMap, tmpExpanded, i, len, t, tlen, tUrl;
-            if (typeof urls === "string") {
+                loadOrderMap = me.loadOrderMap;
+            if (loadOrder) {
+                loadOrderMap = loadOrderMap || me.createLoadOrderMap(loadOrder);
+                me.loadOrderMap = loadOrderMap;
+                indexMap = indexMap || {};
+                var len = url.length,
+                    unmapped = [],
+                    i, item;
+                for (i = 0; i < len; i++) {
+                    item = loadOrderMap[url[i]];
+                    if (item) {
+                        me.getLoadIndexes(item.idx, indexMap, loadOrder, includeUses, skipLoaded);
+                    } else {
+                        unmapped.push(url[i]);
+                    }
+                }
+                return me.getPathsFromIndexes(indexMap, loadOrder).concat(unmapped);
+            }
+            return url;
+        },
+        expandUrls: function(urls, includeUses) {
+            if (typeof urls == "string") {
                 urls = [
                     urls
                 ];
             }
-            if (loadOrder) {
-                loadOrderMap = me.loadOrderMap;
-                if (!loadOrderMap) {
-                    loadOrderMap = me.loadOrderMap = me.createLoadOrderMap(loadOrder);
-                }
-            }
-            for (i = 0 , len = urls.length; i < len; i++) {
-                // We don't want to skip loaded entries (last argument === false).
-                // There are some overrides that get loaded before their respective classes,
-                // and when the class dependencies are processed we don't want to skip over
-                // the overrides' dependencies just because they were loaded first.
-                tmpExpanded = this.expandUrl(urls[i], loadOrder, loadOrderMap, indexMap, includeUses, false);
+            var expanded = [],
+                expandMap = {},
+                tmpExpanded,
+                len = urls.length,
+                i, t, tlen, tUrl;
+            for (i = 0; i < len; i++) {
+                tmpExpanded = this.expandUrl(urls[i], {}, includeUses, true);
                 for (t = 0 , tlen = tmpExpanded.length; t < tlen; t++) {
                     tUrl = tmpExpanded[t];
                     if (!expandMap[tUrl]) {
@@ -11502,7 +10996,7 @@ Ext.Boot = Ext.Boot || (function(emptyFn) {
                     }
                 }
             }
-            if (expanded.length === 0) {
+            if (expanded.length == 0) {
                 expanded = urls;
             }
             return expanded;
@@ -11538,23 +11032,16 @@ Ext.Boot = Ext.Boot || (function(emptyFn) {
         getEntries: function() {
             var me = this,
                 entries = me.entries,
-                loadOrderMap, item, i, entry, urls, url;
+                i, entry, urls, url;
             if (!entries) {
                 entries = [];
                 urls = me.getUrls();
-                // If we have loadOrder array then the map will be expanded by now
-                if (me.loadOrder) {
-                    loadOrderMap = me.loadOrderMap;
-                }
                 for (i = 0; i < urls.length; i++) {
                     url = me.prepareUrl(urls[i]);
-                    if (loadOrderMap) {
-                        item = loadOrderMap[url];
-                    }
                     entry = Boot.getEntry(url, {
                         buster: me.buster,
                         charset: me.charset
-                    }, item && item.canonicalPath);
+                    });
                     entry.requests.push(me);
                     entries.push(entry);
                 }
@@ -11567,7 +11054,7 @@ Ext.Boot = Ext.Boot || (function(emptyFn) {
                 entries = me.getEntries(),
                 len = entries.length,
                 start = me.loadStart || 0,
-                continueLoad, entries, entry, i;
+                continueLoad, entry, i;
             if (sync !== undefined) {
                 me.sync = sync;
             }
@@ -11648,21 +11135,23 @@ Ext.Boot = Ext.Boot || (function(emptyFn) {
             var listeners = this.listeners,
                 listener;
             if (listeners) {
-                //                 _debug("firing request listeners");
+                _debug("firing request listeners");
                 while ((listener = listeners.shift())) {
                     listener(this);
                 }
             }
         }
     };
+    /*
+     * The Entry class is a token to manage the load and evaluation
+     * state of a particular url.  It is used to notify all Requests
+     * interested in this url that the content is available.
+     */
     function Entry(cfg) {
-        //The Entry class is a token to manage the load and evaluation
-        //state of a particular url.  It is used to notify all Requests
-        //interested in this url that the content is available.
         if (cfg.$isEntry) {
             return cfg;
         }
-        //         _debug("creating entry for " + cfg.url);
+        _debug("creating entry for " + cfg.url);
         var charset = cfg.charset || Boot.config.charset,
             manifest = Ext.manifest,
             loader = manifest && manifest.loader,
@@ -11682,10 +11171,12 @@ Ext.Boot = Ext.Boot || (function(emptyFn) {
                 buster = busterParam + "=" + buster;
             }
         }
+        _apply(cfg, {
+            charset: charset,
+            buster: buster,
+            requests: []
+        });
         _apply(this, cfg);
-        this.charset = charset;
-        this.buster = buster;
-        this.requests = [];
     }
     
     Entry.prototype = {
@@ -11696,7 +11187,7 @@ Ext.Boot = Ext.Boot || (function(emptyFn) {
         isCrossDomain: function() {
             var me = this;
             if (me.crossDomain === undefined) {
-                //                 _debug("checking " + me.getLoadUrl() + " for prefix " + Boot.origin);
+                _debug("checking " + me.getLoadUrl() + " for prefix " + Boot.origin);
                 me.crossDomain = (me.getLoadUrl().indexOf(Boot.origin) !== 0);
             }
             return me.crossDomain;
@@ -11704,12 +11195,7 @@ Ext.Boot = Ext.Boot || (function(emptyFn) {
         isCss: function() {
             var me = this;
             if (me.css === undefined) {
-                if (me.url) {
-                    var assetConfig = Boot.assetConfig[me.url];
-                    me.css = assetConfig ? assetConfig.type === "css" : cssRe.test(me.url);
-                } else {
-                    me.css = false;
-                }
+                me.css = me.url && cssRe.test(me.url);
             }
             return this.css;
         },
@@ -11717,7 +11203,7 @@ Ext.Boot = Ext.Boot || (function(emptyFn) {
             var me = this,
                 el = me.el;
             if (!el) {
-                //                 _debug("creating element for " + me.url);
+                _debug("creating element for " + me.url);
                 if (me.isCss()) {
                     tag = tag || "link";
                     el = doc.createElement(tag);
@@ -11733,9 +11219,6 @@ Ext.Boot = Ext.Boot || (function(emptyFn) {
                     el = doc.createElement(tag);
                     el.type = 'text/javascript';
                     me.prop = 'src';
-                    if (me.charset) {
-                        el.charset = me.charset;
-                    }
                     if (Boot.hasAsync) {
                         el.async = false;
                     }
@@ -11746,8 +11229,7 @@ Ext.Boot = Ext.Boot || (function(emptyFn) {
         },
         getLoadUrl: function() {
             var me = this,
-                url;
-            url = me.canonicalPath ? me.url : Boot.canonicalUrl(me.url);
+                url = Boot.canonicalUrl(me.url);
             if (!me.loadUrl) {
                 me.loadUrl = !!me.buster ? (url + (url.indexOf('?') === -1 ? '?' : '&') + me.buster) : url;
             }
@@ -11778,29 +11260,26 @@ Ext.Boot = Ext.Boot || (function(emptyFn) {
         },
         createLoadElement: function(callback) {
             var me = this,
-                el = me.getElement();
-            me.preserve = true;
-            el.onerror = function() {
-                me.error = true;
-                if (callback) {
-                    callback();
-                    callback = null;
-                }
-            };
-            if (Boot.isIE10m) {
-                el.onreadystatechange = function() {
+                el = me.getElement(),
+                readyStateChange = function() {
                     if (this.readyState === 'loaded' || this.readyState === 'complete') {
                         if (callback) {
                             callback();
-                            callback = this.onreadystatechange = this.onerror = null;
                         }
                     }
+                },
+                errorFn = function() {
+                    me.error = true;
+                    if (callback) {
+                        callback();
+                    }
                 };
+            me.preserve = true;
+            el.onerror = errorFn;
+            if (Boot.hasReadyState) {
+                el.onreadystatechange = readyStateChange;
             } else {
-                el.onload = function() {
-                    callback();
-                    callback = this.onload = this.onerror = null;
-                };
+                el.onload = callback;
             }
             // IE starts loading here
             el[me.prop] = me.getLoadUrl();
@@ -11810,7 +11289,7 @@ Ext.Boot = Ext.Boot || (function(emptyFn) {
             this.evaluated = true;
         },
         inject: function(content, asset) {
-            //             _debug("injecting content for " + this.url);
+            _debug("injecting content for " + this.url);
             var me = this,
                 head = Boot.getHead(),
                 url = me.url,
@@ -11844,7 +11323,7 @@ Ext.Boot = Ext.Boot || (function(emptyFn) {
                 }
                 head.removeChild(base);
             } else {
-                // Debugger friendly, file names are still shown even though they're
+                // Debugger friendly, file names are still shown even though they're 
                 // eval'ed code. Breakpoints work on both Firebug and Chrome's Web
                 // Inspector.
                 if (url) {
@@ -11857,32 +11336,39 @@ Ext.Boot = Ext.Boot || (function(emptyFn) {
         loadCrossDomain: function() {
             var me = this,
                 complete = function() {
-                    me.el.onerror = me.el.onload = emptyFn;
-                    me.el = null;
                     me.loaded = me.evaluated = me.done = true;
                     me.notifyRequests();
                 };
-            me.createLoadElement(function() {
+            if (me.isCss()) {
+                me.createLoadElement();
+                me.evaluateLoadElement();
                 complete();
-            });
-            me.evaluateLoadElement();
-            // at this point, we need sequential evaluation,
-            // which means we can't advance the load until
-            // this entry has fully completed
-            return false;
+            } else {
+                me.createLoadElement(function() {
+                    complete();
+                });
+                me.evaluateLoadElement();
+                // at this point, we need sequential evaluation, 
+                // which means we can't advance the load until
+                // this entry has fully completed
+                return false;
+            }
+            return true;
         },
         loadElement: function() {
             var me = this,
                 complete = function() {
-                    me.el.onerror = me.el.onload = emptyFn;
-                    me.el = null;
                     me.loaded = me.evaluated = me.done = true;
                     me.notifyRequests();
                 };
-            me.createLoadElement(function() {
-                complete();
-            });
-            me.evaluateLoadElement();
+            if (me.isCss()) {
+                return me.loadCrossDomain();
+            } else {
+                me.createLoadElement(function() {
+                    complete();
+                });
+                me.evaluateLoadElement();
+            }
             return true;
         },
         loadSync: function() {
@@ -11900,36 +11386,32 @@ Ext.Boot = Ext.Boot || (function(emptyFn) {
             var me = this;
             if (!me.loaded) {
                 if (me.loading) {
-                    // if we're calling back through load and we're loading but haven't
-                    // yet loaded, then we should be in a sequential, cross domain
-                    // load scenario which means we can't continue the load on the
+                    // if we're calling back through load and we're loading but haven't 
+                    // yet loaded, then we should be in a sequential, cross domain 
+                    // load scenario which means we can't continue the load on the 
                     // request until this entry has fully evaluated, which will mean
                     // loaded = evaluated = done = true in one step.  For css files, this
-                    // will happen immediately upon <link> element creation / insertion,
+                    // will happen immediately upon <link> element creation / insertion, 
                     // but <script> elements will set this upon load notification
                     return false;
                 }
                 me.loading = true;
-                // for async modes, we have some options
+                // for async modes, we have some options 
                 if (!sync) {
                     // if cross domain, just inject the script tag and let the onload
-                    // events drive the progression.
-                    // IE10 also needs sequential loading because of a bug that makes it
-                    // fire readystate event prematurely:
-                    // https://connect.microsoft.com/IE/feedback/details/729164/ie10-dynamic-script-element-fires-loaded-readystate-prematurely
-                    if (Boot.isIE10 || me.isCrossDomain()) {
+                    // events drive the progression
+                    if (me.isCrossDomain()) {
                         return me.loadCrossDomain();
                     }
                     // for IE, use the readyStateChange allows us to load scripts in parallel
-                    // but serialize the evaluation by appending the script node to the
+                    // but serialize the evaluation by appending the script node to the 
                     // document
                     else if (!me.isCss() && Boot.hasReadyState) {
                         me.createLoadElement(function() {
                             me.loaded = true;
                             me.notifyRequests();
                         });
-                    } else if (Boot.useElements && // older webkit, phantomjs included, won't fire load for link elements
-                    !(me.isCss() && _environment.phantom)) {
+                    } else if (Boot.useElements) {
                         return me.loadElement();
                     } else // for other browsers, just ajax the content down in parallel, and use
                     // globalEval to serialize evaluation
@@ -11975,6 +11457,9 @@ Ext.Boot = Ext.Boot || (function(emptyFn) {
                 me.cleanup();
             }
         },
+        /*
+         * @private
+         */
         cleanup: function() {
             var me = this,
                 el = me.el,
@@ -12029,14 +11514,14 @@ Ext.Boot = Ext.Boot || (function(emptyFn) {
             var listeners = this.listeners,
                 listener;
             if (listeners && listeners.length > 0) {
-                //                 _debug("firing event listeners for url " + this.url);
+                _debug("firing event listeners for url " + this.url);
                 while ((listener = listeners.shift())) {
                     listener(this);
                 }
             }
         }
     };
-    /**
+    /*
      * Turns on or off the "cache buster" applied to dynamically loaded scripts. Normally
      * dynamically loaded scripts have an extra query parameter appended to avoid stale
      * cached scripts. This method can be used to disable this mechanism, and is primarily
@@ -12056,13 +11541,12 @@ Ext.Boot = Ext.Boot || (function(emptyFn) {
 // compressors to still process it.
 function() {}));
 //(eval("/*@cc_on!@*/!1"));
-/**
+/*
  * This method evaluates the given code free of any local variable. This
  * will be at global scope, in others it will be in a function.
- * @param {String} code The code to evaluate.
+ * @parma {String} code The code to evaluate.
  * @private
  * @method
- * @member Ext
  */
 Ext.globalEval = Ext.globalEval || (this.execScript ? function(code) {
     execScript(code);
@@ -12099,43 +11583,6 @@ if (!Function.prototype.bind) {
 }
 // to detect this polyfill if one want to improve it
 //</editor-fold>
-Ext.setResourcePath = function(poolName, path) {
-    var manifest = Ext.manifest || (Ext.manifest = {}),
-        paths = manifest.resources || (manifest.resources = {});
-    if (manifest) {
-        if (typeof poolName !== 'string') {
-            Ext.apply(paths, poolName);
-        } else {
-            paths[poolName] = path;
-        }
-        manifest.resources = paths;
-    }
-};
-Ext.getResourcePath = function(path, poolName, packageName) {
-    if (typeof path !== 'string') {
-        poolName = path.pool;
-        packageName = path.packageName;
-        path = path.path;
-    }
-    var manifest = Ext.manifest,
-        paths = manifest && manifest.resources,
-        poolPath = paths[poolName],
-        output = [];
-    if (poolPath == null) {
-        poolPath = paths.path;
-        if (poolPath == null) {
-            poolPath = 'resources';
-        }
-    }
-    if (poolPath) {
-        output.push(poolPath);
-    }
-    if (packageName) {
-        output.push(packageName);
-    }
-    output.push(path);
-    return output.join('/');
-};
 
 // @tag core
 /**
@@ -12181,6 +11628,7 @@ Ext.getResourcePath = function(path, poolName, packageName) {
 var Ext = Ext || {};
 // jshint ignore:line
 // @define Ext
+Ext._startTime = Date.now ? Date.now() : (+new Date());
 (function() {
     var global = this,
         objectPrototype = Object.prototype,
@@ -12209,27 +11657,6 @@ var Ext = Ext || {};
         iterableRe = /\[object\s*(?:Array|Arguments|\w*Collection|\w*List|HTML\s+document\.all\s+class)\]/,
         MSDateRe = /^\\?\/Date\(([-+])?(\d+)(?:[+-]\d{4})?\)\\?\/$/;
     Ext.global = global;
-    /**
-     * Returns the current timestamp.
-     * @return {Number} Milliseconds since UNIX epoch.
-     * @method now
-     * @member Ext
-     */
-    Ext.now = Date.now || (Date.now = function() {
-        return +new Date();
-    });
-    /**
-     * Returns the current high-resolution timestamp.
-     * @return {Number} Milliseconds ellapsed since arbitrary epoch.
-     * @method ticks
-     * @member Ext
-     * @since 6.0.1
-     */
-    Ext.ticks = (global.performance && global.performance.now) ? function() {
-        return performance.now();
-    } : // jshint ignore:line
-    Ext.now;
-    Ext._startTime = Ext.ticks();
     // Mark these special fn's for easy identification:
     emptyFn.$nullFn = identityFn.$nullFn = emptyFn.$emptyFn = identityFn.$identityFn = privateFn.$nullFn = true;
     privateFn.$privacy = 'framework';
@@ -12285,26 +11712,6 @@ var Ext = Ext || {};
         }
         return object;
     };
-    // Used by Ext.override
-    function addInstanceOverrides(target, owner, overrides) {
-        var name, value;
-        for (name in overrides) {
-            if (overrides.hasOwnProperty(name)) {
-                value = overrides[name];
-                if (typeof value === 'function') {
-                    if (owner.$className) {
-                        value.name = owner.$className + '#' + name;
-                    }
-                    value.$name = name;
-                    value.$owner = owner;
-                    value.$previous = target.hasOwnProperty(name) ? target[name] : // already hooked, so call previous hook
-                    callOverrideParent;
-                }
-                // calls by name on prototype
-                target[name] = value;
-            }
-        }
-    }
     Ext.buildSettings = Ext.apply({
         baseCSSPrefix: 'x-'
     }, Ext.buildSettings || {});
@@ -12370,7 +11777,7 @@ var Ext = Ext || {};
          * It is only reliable during dom-event-initiated cycles and
          * {@link Ext.draw.Animator} initiated cycles.
          */
-        frameStartTime: Ext.now(),
+        frameStartTime: +new Date(),
         /**
          * This object is initialized prior to loading the framework (Ext JS or Sencha
          * Touch) and contains settings and other information describing the application.
@@ -12454,35 +11861,22 @@ var Ext = Ext || {};
         /**
          * @property {Boolean} [enableAria=true] This property is provided for backward
          * compatibility with previous versions of Ext JS. Accessibility is always enabled
-         * in Ext JS 6.0+.
-         *
-         * This property is deprecated. To disable WAI-ARIA compatibility warnings,
-         * override `Ext.ariaWarn` function in your application startup code:
-         *
-         *      Ext.application({
-         *          launch: function() {
-         *              Ext.ariaWarn = Ext.emptyFn;
-         *          }
-         *      });
-         *
-         * For stricter compatibility with WAI-ARIA requirements, replace `Ext.ariaWarn`
-         * with a function that will raise an error instead:
-         *
-         *      Ext.application({
-         *          launch: function() {
-         *              Ext.ariaWarn = function(target, msg) {
-         *                  Ext.raise({
-         *                      msg: msg,
-         *                      component: target
-         *                  });
-         *              };
-         *          }
-         *      });
-         *
+         * in Ext JS 6.0+
          * @since 6.0.0
-         * @deprecated 6.0.2
          */
         enableAria: true,
+        /**
+         * @property {Boolean} [enableAriaButtons=true] Set to `false` to disable WAI-ARIA
+         * compatibility checks for buttons.
+         * @since 6.0.0
+         */
+        enableAriaButtons: true,
+        /**
+         * @property {Boolean} [enableAriaPanels=true] Set to `false` to disable WAI-ARIA
+         * compatibility checks for panels.
+         * @since 6.0.0
+         */
+        enableAriaPanels: true,
         startsWithHashRe: /^#/,
         /**
          * @property {RegExp}
@@ -12572,7 +11966,7 @@ var Ext = Ext || {};
         $eventNameMap: {},
         // Vendor-specific events do not work if lower-cased.  This regex specifies event
         // prefixes for names that should NOT be lower-cased by Ext.canonicalEventName()
-        $vendorEventRe: /^(DOMMouse|Moz.+|MS.+|webkit.+)/,
+        $vendorEventRe: /^(Moz.+|MS.+|webkit.+)/,
         // TODO: inlinable function - SDKTOOLS-686
         /**
          * @private
@@ -12598,6 +11992,17 @@ var Ext = Ext || {};
             }
             return object;
         },
+        /**
+         * Returns the current timestamp.
+         * @return {Number} Milliseconds since UNIX epoch.
+         * @method
+         */
+        now: (global.performance && global.performance.now) ? function() {
+            return performance.now();
+        } : // jshint ignore:line
+        (Date.now || (Date.now = function() {
+            return +new Date();
+        })),
         /**
          * Destroys all of the given objects. If arrays are passed, the elements of these
          * are destroyed recursively.
@@ -12683,16 +12088,25 @@ var Ext = Ext || {};
                 Ext.apply(target.prototype, overrides);
             } else {
                 var owner = target.self,
-                    privates;
+                    name, value;
                 if (owner && owner.$isClass) {
                     // if (instance of Ext.define'd class)
-                    privates = overrides.privates;
-                    if (privates) {
-                        overrides = Ext.apply({}, overrides);
-                        delete overrides.privates;
-                        addInstanceOverrides(target, owner, privates);
+                    for (name in overrides) {
+                        if (overrides.hasOwnProperty(name)) {
+                            value = overrides[name];
+                            if (typeof value === 'function') {
+                                if (owner.$className) {
+                                    value.name = owner.$className + '#' + name;
+                                }
+                                value.$name = name;
+                                value.$owner = owner;
+                                value.$previous = target.hasOwnProperty(name) ? target[name] : // already hooked, so call previous hook
+                                callOverrideParent;
+                            }
+                            // calls by name on prototype
+                            target[name] = value;
+                        }
                     }
-                    addInstanceOverrides(target, owner, overrides);
                 } else {
                     Ext.apply(target, overrides);
                 }
@@ -12923,17 +12337,16 @@ var Ext = Ext || {};
          * see {@link Ext.data.Model#copy Model.copy}.
          *
          * @param {Object} item The variable to clone
-         * @param {Boolean} [cloneDom=true] `true` to clone DOM nodes.
          * @return {Object} clone
          */
-        clone: function(item, cloneDom) {
+        clone: function(item) {
             if (item === null || item === undefined) {
                 return item;
             }
             // DOM nodes
             // TODO proxy this to Ext.Element.clone to handle automatic id attribute changing
             // recursively
-            if (cloneDom !== false && item.nodeType && item.cloneNode) {
+            if (item.nodeType && item.cloneNode) {
                 return item.cloneNode(true);
             }
             var type = toString.call(item),
@@ -12947,14 +12360,14 @@ var Ext = Ext || {};
                 i = item.length;
                 clone = [];
                 while (i--) {
-                    clone[i] = Ext.clone(item[i], cloneDom);
+                    clone[i] = Ext.clone(item[i]);
                 }
             }
             // Object
             else if (type === '[object Object]' && item.constructor === Object) {
                 clone = {};
                 for (key in item) {
-                    clone[key] = Ext.clone(item[key], cloneDom);
+                    clone[key] = Ext.clone(item[key]);
                 }
                 if (enumerables) {
                     for (j = enumerables.length; j--; ) {
@@ -13058,22 +12471,6 @@ var Ext = Ext || {};
             },
             deprecate: emptyFn
         },
-        ariaWarn: function(target, msg) {
-            // The checks still can be disabled by setting Ext.enableAria to false;
-            // this is for backwards compatibility. Also make sure we're not running
-            // under the slicer, warnings are pointless in that case.
-            if (Ext.enableAria && !Ext.slicer) {
-                if (!Ext.ariaWarn.first) {
-                    Ext.ariaWarn.first = true;
-                    Ext.log.warn("WAI-ARIA compatibility warnings can be suppressed " + "by adding the following to application startup code:");
-                    Ext.log.warn("    Ext.ariaWarn = Ext.emptyFn;");
-                }
-                Ext.log.warn({
-                    msg: msg,
-                    dump: target
-                });
-            }
-        },
         /**
          * @private
          */
@@ -13115,12 +12512,6 @@ var Ext = Ext || {};
     // Ext.apply(Ext
     Ext.returnTrue.$nullFn = Ext.returnId.$nullFn = true;
 }());
-
-// @override Ext
-// This file is order extremely early (typically right after Ext.js) due to the
-// above Cmd directive. This ensures that the "modern" and "classic" platform tags
-// are properly set up as soon as possible.
-Ext.platformTags.modern = !(Ext.platformTags.classic = Ext.isClassic = true);
 
 /**
  * A helper class for the native JavaScript Error object that adds a few useful capabilities for handling
@@ -13683,9 +13074,7 @@ Ext.Array = (function() {
          *
          *     sum(1, 2, 3); // returns 6
          *
-         * The iteration can be stopped by returning `false` from the callback function.  
-         * Returning `undefined` (i.e `return;`) will only exit the callback function and 
-         * proceed with the next iteration of the loop.
+         * The iteration can be stopped by returning false in the function callback.
          *
          *     Ext.Array.each(countries, function(name, index, countriesItSelf) {
          *         if (name === 'Singapore') {
@@ -13698,14 +13087,12 @@ Ext.Array = (function() {
          * @param {Array/NodeList/Object} iterable The value to be iterated. If this
          * argument is not iterable, the callback function is called once.
          * @param {Function} fn The callback function. If it returns `false`, the iteration
-         * stops and this method returns the current `index`. Returning `undefined` (i.e 
-         * `return;`) will only exit the callback function and proceed with the next iteration 
-         * in the loop.
+         * stops and this method returns the current `index`.
          * @param {Object} fn.item The item at the current `index` in the passed `array`
          * @param {Number} fn.index The current `index` within the `array`
          * @param {Array} fn.allItems The `array` itself which was passed as the first argument
-         * @param {Boolean} fn.return Return `false` to stop iteration.
-         * @param {Object} [scope] The scope (`this` reference) in which the specified function is executed.
+         * @param {Boolean} fn.return Return false to stop iteration.
+         * @param {Object} scope (Optional) The scope (`this` reference) in which the specified function is executed.
          * @param {Boolean} [reverse=false] Reverse the iteration order (loop from the end to the beginning).
          * @return {Boolean} See description for the `fn` parameter.
          */
@@ -13729,7 +13116,6 @@ Ext.Array = (function() {
                 return true;
             },
             /**
-         * @method
          * Iterates an array and invoke the given callback function for each item. Note that this will simply
          * delegate to the native `Array.prototype.forEach` method if supported. It doesn't support stopping the
          * iteration by returning `false` in the callback function like {@link Ext.Array#each}. However, performance
@@ -13752,7 +13138,6 @@ Ext.Array = (function() {
                 }
             },
             /**
-         * @method
          * Get the index of the provided `item` in the given `array`, a supplement for the
          * missing arrayPrototype.indexOf in Internet Explorer.
          *
@@ -13762,11 +13147,10 @@ Ext.Array = (function() {
          * @return {Number} The index of item in the array (or -1 if it is not found).
          */
             indexOf: supportsIndexOf ? function(array, item, from) {
-                // May be called with no array which causes an error.
-                return array ? arrayPrototype.indexOf.call(array, item, from) : -1;
+                return arrayPrototype.indexOf.call(array, item, from);
             } : function(array, item, from) {
                 var i,
-                    length = array ? array.length : 0;
+                    length = array.length;
                 for (i = (from < 0) ? Math.max(0, length + from) : from || 0; i < length; i++) {
                     if (array[i] === item) {
                         return i;
@@ -13775,7 +13159,6 @@ Ext.Array = (function() {
                 return -1;
             },
             /**
-         * @method
          * Checks whether or not the given `array` contains the specified `item`.
          *
          * @param {Array} array The array to check.
@@ -13856,7 +13239,6 @@ Ext.Array = (function() {
                 return ret;
             },
             /**
-         * @method
          * Creates a new array with the results of calling a provided function on every element in this array.
          *
          * @param {Array} array
@@ -13872,8 +13254,8 @@ Ext.Array = (function() {
                 return array.map(fn, scope);
             } : function(array, fn, scope) {
                 Ext.Assert.isFunction(fn, 'Ext.Array.map must have a callback function passed as second argument.');
-                var len = array.length,
-                    results = new Array(len),
+                var results = [],
+                    len = array.length,
                     i;
                 for (i = 0; i < len; i++) {
                     results[i] = fn.call(scope, array[i], i, array);
@@ -13881,7 +13263,6 @@ Ext.Array = (function() {
                 return results;
             },
             /**
-         * @method
          * Executes the specified function for each array element until the function returns a falsy value.
          * If such an item is found, the function will return `false` immediately.
          * Otherwise, it will return `true`.
@@ -13909,7 +13290,6 @@ Ext.Array = (function() {
                 return true;
             },
             /**
-         * @method
          * Executes the specified function for each array element until the function returns a truthy value.
          * If such an item is found, the function will return `true` immediately. Otherwise, it will return `false`.
          *
@@ -14000,7 +13380,6 @@ Ext.Array = (function() {
                 return clone;
             },
             /**
-         * @method
          * Creates a new array with all of the elements of this array for which
          * the provided filtering function returns a truthy value.
          *
@@ -14033,7 +13412,7 @@ Ext.Array = (function() {
          * @param {Array} array The array to search
          * @param {Function} fn The selection function to execute for each item.
          * @param {Mixed} fn.item The array item.
-         * @param {Number} fn.index The index of the array item.
+         * @param {String} fn.index The index of the array item.
          * @param {Object} scope (optional) The scope (<code>this</code> reference) in which the
          * function is executed. Defaults to the array
          * @return {Object} The first item in the array which returned true from the selection
@@ -14684,13 +14063,13 @@ Ext.Array = (function() {
             }
         };
     /**
-     * @method each
+     * @method
      * @member Ext
      * @inheritdoc Ext.Array#each
      */
     Ext.each = ExtArray.each;
     /**
-     * @method union
+     * @method
      * @member Ext.Array
      * @inheritdoc Ext.Array#merge
      */
@@ -14698,7 +14077,7 @@ Ext.Array = (function() {
     /**
      * Old alias to {@link Ext.Array#min}
      * @deprecated 4.0.0 Use {@link Ext.Array#min} instead
-     * @method min
+     * @method
      * @member Ext
      * @inheritdoc Ext.Array#min
      */
@@ -14706,7 +14085,7 @@ Ext.Array = (function() {
     /**
      * Old alias to {@link Ext.Array#max}
      * @deprecated 4.0.0 Use {@link Ext.Array#max} instead
-     * @method max
+     * @method
      * @member Ext
      * @inheritdoc Ext.Array#max
      */
@@ -14714,7 +14093,7 @@ Ext.Array = (function() {
     /**
      * Old alias to {@link Ext.Array#sum}
      * @deprecated 4.0.0 Use {@link Ext.Array#sum} instead
-     * @method sum
+     * @method
      * @member Ext
      * @inheritdoc Ext.Array#sum
      */
@@ -14722,7 +14101,7 @@ Ext.Array = (function() {
     /**
      * Old alias to {@link Ext.Array#mean}
      * @deprecated 4.0.0 Use {@link Ext.Array#mean} instead
-     * @method mean
+     * @method
      * @member Ext
      * @inheritdoc Ext.Array#mean
      */
@@ -14730,7 +14109,7 @@ Ext.Array = (function() {
     /**
      * Old alias to {@link Ext.Array#flatten}
      * @deprecated 4.0.0 Use {@link Ext.Array#flatten} instead
-     * @method flatten
+     * @method
      * @member Ext
      * @inheritdoc Ext.Array#flatten
      */
@@ -14738,7 +14117,7 @@ Ext.Array = (function() {
     /**
      * Old alias to {@link Ext.Array#clean}
      * @deprecated 4.0.0 Use {@link Ext.Array#clean} instead
-     * @method clean
+     * @method
      * @member Ext
      * @inheritdoc Ext.Array#clean
      */
@@ -14746,7 +14125,7 @@ Ext.Array = (function() {
     /**
      * Old alias to {@link Ext.Array#unique}
      * @deprecated 4.0.0 Use {@link Ext.Array#unique} instead
-     * @method unique
+     * @method
      * @member Ext
      * @inheritdoc Ext.Array#unique
      */
@@ -14754,13 +14133,13 @@ Ext.Array = (function() {
     /**
      * Old alias to {@link Ext.Array#pluck Ext.Array.pluck}
      * @deprecated 4.0.0 Use {@link Ext.Array#pluck Ext.Array.pluck} instead
-     * @method pluck
+     * @method
      * @member Ext
      * @inheritdoc Ext.Array#pluck
      */
     Ext.pluck = ExtArray.pluck;
     /**
-     * @method toArray
+     * @method
      * @member Ext
      * @inheritdoc Ext.Array#toArray
      */
@@ -14965,45 +14344,8 @@ Ext.String = (function() {
             }
             return other.length <= s.length;
         },
-        fromCharCode = String.fromCharCode,
         ExtString;
     return ExtString = {
-        /**
-         * Creates a string created by using the specified sequence of code points.
-         * @param {Number...} codePoint Codepoints from which to build the string.
-         * @return {String} A string built from the sequence of code points passed.
-         */
-        fromCodePoint: String.fromCodePoint || function() {
-            var codePoint,
-                result = '',
-                codeUnits = [],
-                index = -1,
-                length = arguments.length;
-            while (++index < length) {
-                codePoint = Number(arguments[index]);
-                if (!isFinite(codePoint) || // `NaN`, `+Infinity`, or `-Infinity`
-                codePoint < 0 || // not a valid Unicode code point
-                codePoint > 1114111 || // not a valid Unicode code point
-                Math.floor(codePoint) !== codePoint) // not an integer
-                {
-                    Ext.raise('Invalid code point: ' + codePoint);
-                }
-                if (codePoint <= 65535) {
-                    // BMP code point
-                    codeUnits.push(codePoint);
-                } else {
-                    // Astral code point; split in surrogate halves
-                    // http://mathiasbynens.be/notes/javascript-encoding#surrogate-formulae
-                    codePoint -= 65536;
-                    codeUnits.push((codePoint >> 10) + 55296, (codePoint % 1024) + 56320);
-                }
-                if (index + 1 === length) {
-                    result += fromCharCode(codeUnits);
-                    codeUnits.length = 0;
-                }
-            }
-            return result;
-        },
         /**
          * Inserts a substring into a string.
          * @param {String} s The original string.
@@ -15383,7 +14725,7 @@ Ext.String.resetCharacterEntities();
 /**
  * Old alias to {@link Ext.String#htmlEncode}
  * @deprecated Use {@link Ext.String#htmlEncode} instead
- * @method htmlEncode
+ * @method
  * @member Ext
  * @inheritdoc Ext.String#htmlEncode
  */
@@ -15391,7 +14733,7 @@ Ext.htmlEncode = Ext.String.htmlEncode;
 /**
  * Old alias to {@link Ext.String#htmlDecode}
  * @deprecated Use {@link Ext.String#htmlDecode} instead
- * @method htmlDecode
+ * @method
  * @member Ext
  * @inheritdoc Ext.String#htmlDecode
  */
@@ -15399,7 +14741,7 @@ Ext.htmlDecode = Ext.String.htmlDecode;
 /**
  * Old alias to {@link Ext.String#urlAppend}
  * @deprecated Use {@link Ext.String#urlAppend} instead
- * @method urlAppend
+ * @method
  * @member Ext
  * @inheritdoc Ext.String#urlAppend
  */
@@ -15678,9 +15020,7 @@ Ext.Date = (function() {
         };
     }
     /**
-     * @method xf
      * @private
-     * @param format
      * Create private copy of Ext JS's `Ext.util.Format.format()` method
      * + to remove unnecessary dependency
      * + to resolve namespace conflict with MS-Ajax's implementation
@@ -15691,7 +15031,7 @@ Ext.Date = (function() {
             return args[i];
         });
     }
-    utilDate = {
+    return utilDate = {
         /** @ignore */
         now: nativeDate.now,
         // always available due to polyfill in Ext.js
@@ -15860,28 +15200,6 @@ Ext.Date = (function() {
      */
         YEAR: "y",
         /**
-     * The number of days in a week.
-     * @type Number
-     */
-        DAYS_IN_WEEK: 7,
-        /**
-     * The number of months in a year.
-     * @type Number
-     */
-        MONTHS_IN_YEAR: 12,
-        /**
-     * The maximum number of days in a month.
-     * @type {Number}
-     */
-        MAX_DAYS_IN_MONTH: 31,
-        SUNDAY: 0,
-        MONDAY: 1,
-        TUESDAY: 2,
-        WEDNESDAY: 3,
-        THURSDAY: 4,
-        FRIDAY: 5,
-        SATURDAY: 6,
-        /**
      * An object hash containing default date values used during date parsing.
      * 
      * The following properties are available:
@@ -16021,27 +15339,6 @@ Ext.Date = (function() {
      * This may be overridden in a locale file.
      */
         defaultFormat: "m/d/Y",
-        //</locale>
-        //<locale>
-        /**
-     * @property {Number} firstDayOfWeek
-     * The day on which the week starts. `0` being Sunday, through `6` being Saturday.
-     *
-     * This may be overridden in a locale file.
-     */
-        firstDayOfWeek: 0,
-        //</locale>
-        //<locale>
-        /**
-     * @property {Number[]} weekendDays
-     * The days on which weekend falls. `0` being Sunday, through `6` being Saturday.
-     *
-     * This may be overridden in a locale file.
-     */
-        weekendDays: [
-            0,
-            6
-        ],
         //</locale>
         //<locale type="function">
         /**
@@ -16190,15 +15487,15 @@ Ext.Date = (function() {
      * @param {Number} millisecond (optional) Millisecond.
      * @return {Boolean} `true` if the passed parameters do not cause a Date "rollover", `false` otherwise.
      */
-        isValid: function(year, month, day, hour, minute, second, millisecond) {
+        isValid: function(y, m, d, h, i, s, ms) {
             // setup defaults
-            hour = hour || 0;
-            minute = minute || 0;
-            second = second || 0;
-            millisecond = millisecond || 0;
+            h = h || 0;
+            i = i || 0;
+            s = s || 0;
+            ms = ms || 0;
             // Special handling for year < 100
-            var dt = utilDate.add(new nativeDate(year < 100 ? 100 : year, month - 1, day, hour, minute, second, millisecond), utilDate.YEAR, year < 100 ? year - 100 : 0);
-            return year === dt.getFullYear() && month === dt.getMonth() + 1 && day === dt.getDate() && hour === dt.getHours() && minute === dt.getMinutes() && second === dt.getSeconds() && millisecond === dt.getMilliseconds();
+            var dt = utilDate.add(new nativeDate(y < 100 ? 100 : y, m - 1, d, h, i, s, ms), utilDate.YEAR, y < 100 ? y - 100 : 0);
+            return y === dt.getFullYear() && m === dt.getMonth() + 1 && d === dt.getDate() && h === dt.getHours() && i === dt.getMinutes() && s === dt.getSeconds() && ms === dt.getMilliseconds();
         },
         /**
      * Parses the passed string using the specified date format.
@@ -16324,7 +15621,7 @@ Ext.Date = (function() {
      * @private
      */
         parseCodes: {
-            /**
+            /*
          * Notes:
          * g = {Number} calculation group (0 or 1. only group 1 contributes to date calculations.)
          * c = {String} calculation method (required for group 1. null for group 0. {0} = currentGroup - position in regex result array)
@@ -16447,7 +15744,7 @@ Ext.Date = (function() {
                 // 2-digit year
                 s: "(\\d{2})"
             },
-            /**
+            /*
          * In the am/pm parsing routines, we allow both upper and lower case
          * even though it doesn't exactly match the spec. It gives much more flexibility
          * in being able to specify case insensitive regexes.
@@ -16790,11 +16087,10 @@ Ext.Date = (function() {
      * is the numeric day index within the week (0-6) which can be used in conjunction with
      * the {@link #monthNames} array to retrieve the textual day name.
      *
-     *    @example
-     *    var dt = new Date('1/10/2007'),
-     *        firstDay = Ext.Date.getFirstDayOfMonth(dt);
-     *
-     *    console.log(Ext.Date.dayNames[firstDay]); // output: 'Monday'
+     *      @example
+     *      var dt = new Date('1/10/2007'),
+     *          firstDay = Ext.Date.getFirstDayOfMonth(dt);
+     *      console.log(Ext.Date.dayNames[firstDay]); // output: 'Monday'
      *
      * @param {Date} date The date
      * @return {Number} The day number (0-6).
@@ -16808,11 +16104,11 @@ Ext.Date = (function() {
      * is the numeric day index within the week (0-6) which can be used in conjunction with
      * the {@link #monthNames} array to retrieve the textual day name.
      *
-     *    @example
-     *    var dt = new Date('1/10/2007'),
-     *        lastDay = Ext.Date.getLastDayOfMonth(dt);
+     *      @example
+     *      var dt = new Date('1/10/2007'),
+     *          lastDay = Ext.Date.getLastDayOfMonth(dt);
      *
-     *    console.log(Ext.Date.dayNames[lastDay]); // output: 'Wednesday'
+     *      console.log(Ext.Date.dayNames[lastDay]); // output: 'Wednesday'
      *
      * @param {Date} date The date
      * @return {Number} The day number (0-6).
@@ -16932,10 +16228,6 @@ Ext.Date = (function() {
      * @return {Date} this or the clone.
      */
         clearTime: function(date, clone) {
-            // handles invalid dates preventing the browser from crashing.
-            if (isNaN(date.getTime())) {
-                return date;
-            }
             if (clone) {
                 return utilDate.clearTime(utilDate.clone(date));
             }
@@ -16984,8 +16276,8 @@ Ext.Date = (function() {
      */
         add: function(date, interval, value) {
             var d = utilDate.clone(date),
-                base = 0,
-                day, decimalValue;
+                day, decimalValue,
+                base = 0;
             if (!interval || value === 0) {
                 return d;
             }
@@ -17024,7 +16316,7 @@ Ext.Date = (function() {
                         d.setTime(d.getTime() + value * 60 * 60 * 1000);
                         break;
                     case utilDate.DAY:
-                        d.setTime(d.getTime() + value * 24 * 60 * 60 * 1000);
+                        d.setDate(d.getDate() + value);
                         break;
                     case utilDate.MONTH:
                         day = date.getDate();
@@ -17113,58 +16405,6 @@ Ext.Date = (function() {
         between: function(date, start, end) {
             var t = date.getTime();
             return start.getTime() <= t && t <= end.getTime();
-        },
-        /**
-     * Checks if the date is a weekend day. Uses {@link #weekendDays}.
-     * @param {Date} date The date.
-     * @return {Boolean} `true` if the day falls on a weekend.
-     *
-     * @since 6.2.0
-     */
-        isWeekend: function(date) {
-            return Ext.Array.indexOf(this.weekendDays, date.getDay()) > -1;
-        },
-        /**
-     * Converts the passed UTC date into a local date.
-     * For example, if the passed date is:
-     * `Wed Jun 01 2016 00:10:00 GMT+1000 (AUS Eastern Standard Time)`, then
-     * the returned date will be `Wed Jun 01 2016 00:00:00 GMT+1000 (AUS Eastern Standard Time)`.
-     * @param {Date} d The date to convert.
-     * @return {Date} The date as a local. Does not modify the passed date.
-     *
-     * @since 6.2.0
-     */
-        utcToLocal: function(d) {
-            return new Date(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate(), d.getUTCHours(), d.getUTCMinutes(), d.getUTCSeconds(), d.getUTCMilliseconds());
-        },
-        /**
-     * Converts the passed local date into a UTC date.
-     * For example, if the passed date is:
-     * `Wed Jun 01 2016 00:00:00 GMT+1000 (AUS Eastern Standard Time)`, then
-     * the returned date will be `Wed Jun 01 2016 10:00:00 GMT+1000 (AUS Eastern Standard Time)`.
-     * @param {Date} d The date to convert.
-     * @return {Date} The date as UTC. Does not modify the passed date.
-     * 
-     * @since 6.2.0
-     */
-        localToUtc: function(d) {
-            return utilDate.utc(d.getFullYear(), d.getMonth(), d.getDate(), d.getHours(), d.getMinutes(), d.getSeconds(), d.getMilliseconds());
-        },
-        /**
-     * Create a UTC date.
-     * @param {Number} year The year.
-     * @param {Number} month The month.
-     * @param {Number} day The day.
-     * @param {Number} [hour=0] The hour.
-     * @param {Number} [min=0] The minutes.
-     * @param {Number} [s=0] The seconds.
-     * @param {Number} [ms=0] The milliseconds.
-     * @return {Date} The UTC date.
-     *
-     * @since 6.2.0
-     */
-        utc: function(year, month, day, hour, min, s, ms) {
-            return new Date(Date.UTC(year, month, day, hour || 0, min || 0, s || 0, ms || 0));
         },
         //Maintains compatibility with old static and prototype window.Date methods.
         compat: function() {
@@ -17276,7 +16516,6 @@ Ext.Date = (function() {
      * Align the date to `unit`.
      * @param {Date} date The date to be aligned.
      * @param {String} unit The unit. This unit is compatible with the date interval constants.
-     * @param {Number} step
      * @return {Date} The aligned date.
      */
         align: function(date, unit, step) {
@@ -17325,8 +16564,6 @@ Ext.Date = (function() {
             }
         }
     };
-    utilDate.parseCodes.C = utilDate.parseCodes.c;
-    return utilDate;
 }());
 
 /**
@@ -18089,31 +17326,27 @@ Ext.Function = (function() {
      *
      * @param {Number} id The id returned by `{@link Ext#asap}`.
      */
-    Ext.asapCancel = hasImmediate ? function(id) {
-        clearImmediate(id);
-    } : function(id) {
-        clearTimeout(id);
-    };
+    Ext.asapCancel = hasImmediate ? clearImmediate : clearTimeout;
     /**
-     * @method defer
+     * @method
      * @member Ext
      * @inheritdoc Ext.Function#defer
      */
     Ext.defer = ExtFunction.defer;
     /**
-     * @method interval
+     * @method
      * @member Ext
      * @inheritdoc Ext.Function#interval
      */
     Ext.interval = ExtFunction.interval;
     /**
-     * @method pass
+     * @method
      * @member Ext
      * @inheritdoc Ext.Function#pass
      */
     Ext.pass = ExtFunction.pass;
     /**
-     * @method bind
+     * @method
      * @member Ext
      * @inheritdoc Ext.Function#bind
      */
@@ -18142,8 +17375,6 @@ Ext.Number = (new function() {
             wrap: true
         };
     Ext.apply(ExtNumber, {
-        MIN_SAFE_INTEGER: Number.MIN_SAFE_INTEGER || -(math.pow(2, 53) - 1),
-        MAX_SAFE_INTEGER: Number.MAX_SAFE_INTEGER || math.pow(2, 53) - 1,
         Clip: {
             DEFAULT: ClipDefault,
             COUNT: Ext.applyIf({
@@ -18344,26 +17575,13 @@ Ext.Number = (new function() {
             return value;
         },
         /**
-         * Round a number to the nearest interval.
-         * @param {Number} value The value to round.
-         * @param {Number} interval The interval to round to.
-         * @return {Number} The rounded value.
-         *
-         * @since 6.2.0
-         */
-        roundToNearest: function(value, interval) {
-            interval = interval || 1;
-            return interval * math.round(value / interval);
-        },
-        /**
          * Returns the sign of the given number. See also MDN for Math.sign documentation
          * for the standard method this method emulates.
          * @param {Number} x The number.
          * @return {Number} The sign of the number `x`, indicating whether the number is
          * positive (1), negative (-1) or zero (0).
-         * @method sign
          */
-        sign: math.sign || function(x) {
+        sign: function(x) {
             x = +x;
             // force to a Number
             if (x === 0 || isNaN(x)) {
@@ -18372,42 +17590,6 @@ Ext.Number = (new function() {
             return (x > 0) ? 1 : -1;
         },
         /**
-         * Returns the base 10 logarithm of a number.
-         * This will use Math.log10, if available (ES6).
-         * @param {Number} x The number.
-         * @return {Number} Base 10 logarithm of the number 'x'.
-         * @method log10
-         */
-        log10: math.log10 || function(x) {
-            return math.log(x) * math.LOG10E;
-        },
-        /**
-         * Determines if two numbers `n1` and `n2` are equal within a given
-         * margin of precision `epsilon`.
-         * @param {Number} n1 First number.
-         * @param {Number} n2 Second number.
-         * @param {Number} epsilon Margin of precision.
-         * @returns {Boolean} `true`, if numbers are equal. `false` otherwise.
-         */
-        isEqual: function(n1, n2, epsilon) {
-            if (!(typeof n1 === 'number' && typeof n2 === 'number' && typeof epsilon === 'number')) {
-                Ext.raise("All parameters should be valid numbers.");
-            }
-            return math.abs(n1 - n2) < epsilon;
-        },
-        /**
-         * Determines if the value passed is a number and also finite.
-         * This a Polyfill version of Number.isFinite(),differently than 
-         * the isFinite() function, this method doesn't convert the parameter to a number.
-         * @param {Number} value Number to be tested.
-         * @returns {Boolean} `true`, if the parameter is a number and finite, `false` otherwise.
-         * @since 6.2
-         */
-        isFinite: Number.isFinite || function(value) {
-            return typeof value === 'number' && isFinite(value);
-        },
-        /**
-         * @method
          * Formats a number using fixed-point notation
          * @param {Number} value The number to format
          * @param {Number} precision The number of digits to show after the decimal point
@@ -18448,7 +17630,7 @@ Ext.Number = (new function() {
         /**
          * Corrects floating point numbers that overflow to a non-precise
          * value because of their floating nature, for example `0.1 + 0.2`
-         * @param {Number} n The number
+         * @param {Number} The number
          * @return {Number} The correctly rounded number
          */
         correctFloat: function(n) {
@@ -18489,7 +17671,6 @@ Ext.Number = (new function() {
             // @require Ext
             // @require Ext.lang.Date
             /**
-     * @method
      * Returns a new object with the given object as the prototype chain. This method is
      * designed to mimic the ECMA standard `Object.create` method and is assigned to that
      * function when it is available.
@@ -18572,7 +17753,7 @@ Ext.Number = (new function() {
      * @param {String} name
      * @param {Object/Array} value
      * @param {Boolean} [recursive=false] True to traverse object recursively
-     * @return {Object[]}
+     * @return {Array}
      */
             toQueryObjects: function(name, value, recursive) {
                 var self = ExtObject.toQueryObjects,
@@ -19065,7 +18246,6 @@ Ext.Number = (new function() {
                 return true;
             },
             /**
-     * @method
      * Shallow compares the contents of 2 objects using strict equality. Objects are
      * considered equal if they both have the same set of properties and the
      * value for those properties equals the other in the corresponding object.
@@ -19310,13 +18490,13 @@ Ext.apply(Ext, {
      * Numbers and numeric strings are coerced to Dates using the value as the millisecond era value.
      *
      * Strings are coerced to Dates by parsing using the {@link Ext.Date#defaultFormat defaultFormat}.
-     *
+     * 
      * For example
      *
      *     Ext.coerce('false', true);
-     *
+     *     
      * returns the boolean value `false` because the second parameter is of type `Boolean`.
-     *
+     * 
      * @param {Mixed} from The value to coerce
      * @param {Mixed} to The value it must be compared against
      * @return The coerced value.
@@ -19332,13 +18512,11 @@ Ext.apply(Ext, {
                 case 'number':
                     return Number(from);
                 case 'boolean':
-                    // See http://ecma262-5.com/ELS5_HTML.htm#Section_11.9.3 as to why '0'.
-                    // TL;DR => ('0' == 0), so if given string '0', we must return boolean false.
-                    return isString && (!from || from === 'false' || from === '0') ? false : Boolean(from);
+                    return isString && (!from || from === 'false') ? false : Boolean(from);
                 case 'null':
-                    return isString && (!from || from === 'null') ? null : false;
+                    return isString && (!from || from === 'null') ? null : from;
                 case 'undefined':
-                    return isString && (!from || from === 'undefined') ? undefined : false;
+                    return isString && (!from || from === 'undefined') ? undefined : from;
                 case 'date':
                     return isString && isNaN(from) ? Ext.Date.parse(from, Ext.Date.defaultFormat) : Date(Number(from));
             }
@@ -19366,9 +18544,6 @@ Ext.apply(Ext, {
      * @param {Boolean} [usePrototypeKeys=false] Pass `true` to copy keys off of the
      * prototype as well as the instance.
      * @return {Object} The `dest` object.
-     * @deprecated 6.0.1 Use {@link Ext#copy Ext.copy} instead. This old method
-     * would copy the named preoperties even if they did not exist in the source which
-     * could produce `undefined` values in the destination.
      */
     copyTo: function(dest, source, names, usePrototypeKeys) {
         if (typeof names === 'string') {
@@ -19379,45 +18554,6 @@ Ext.apply(Ext, {
             n = names ? names.length : 0; i < n; i++) {
             name = names[i];
             if (usePrototypeKeys || source.hasOwnProperty(name)) {
-                dest[name] = source[name];
-            }
-        }
-        return dest;
-    },
-    /**
-     * @method copy
-     * @member Ext
-     * Copies a set of named properties fom the source object to the destination object.
-     *
-     * Example:
-     *
-     *     var foo = { a: 1, b: 2, c: 3 };
-     *
-     *     var bar = Ext.copy({}, foo, 'a,c');
-     *     // bar = { a: 1, c: 3 };
-     *
-     * Important note: To borrow class prototype methods, use {@link Ext.Base#borrow} instead.
-     *
-     * @param {Object} dest The destination object.
-     * @param {Object} source The source object.
-     * @param {String/String[]} names Either an Array of property names, or a comma-delimited list
-     * of property names to copy.
-     * @param {Boolean} [usePrototypeKeys=false] Pass `true` to copy keys off of the
-     * prototype as well as the instance.
-     * @return {Object} The `dest` object.
-     */
-    copy: function(dest, source, names, usePrototypeKeys) {
-        if (typeof names === 'string') {
-            names = names.split(Ext.propertyNameSplitRe);
-        }
-        for (var name,
-            i = 0,
-            n = names ? names.length : 0; i < n; i++) {
-            name = names[i];
-            // Only copy a property if the source actually *has* that property.
-            // If we are including prototype properties, then ensure that a property of
-            // that name can be found *somewhere* in the prototype chain (otherwise we'd be copying undefined in which may break things)
-            if (source.hasOwnProperty(name) || (usePrototypeKeys && name in source)) {
                 dest[name] = source[name];
             }
         }
@@ -19442,9 +18578,6 @@ Ext.apply(Ext, {
      * @param {String/String[]} names Either an Array of property names, or a single string
      * with a list of property names separated by ",", ";" or spaces.
      * @return {Object} The `dest` object.
-     * @deprecated 6.0.1 Use {@link Ext#copyIf Ext.copyIf} instead. This old method
-     * would copy the named preoperties even if they did not exist in the source which
-     * could produce `undefined` values in the destination.
      */
     copyToIf: function(destination, source, names) {
         if (typeof names === 'string') {
@@ -19455,40 +18588,6 @@ Ext.apply(Ext, {
             n = names ? names.length : 0; i < n; i++) {
             name = names[i];
             if (destination[name] === undefined) {
-                destination[name] = source[name];
-            }
-        }
-        return destination;
-    },
-    /**
-     * @method copyIf
-     * @member Ext
-     * Copies a set of named properties fom the source object to the destination object
-     * if the destination object does not already have them.
-     *
-     * Example:
-     *
-     *     var foo = { a: 1, b: 2, c: 3 };
-     *
-     *     var bar = Ext.copyIf({ a:42 }, foo, 'a,c');
-     *     // bar = { a: 42, c: 3 };
-     *
-     * @param {Object} destination The destination object.
-     * @param {Object} source The source object.
-     * @param {String/String[]} names Either an Array of property names, or a single string
-     * with a list of property names separated by ",", ";" or spaces.
-     * @return {Object} The `dest` object.
-     */
-    copyIf: function(destination, source, names) {
-        if (typeof names === 'string') {
-            names = names.split(Ext.propertyNameSplitRe);
-        }
-        for (var name,
-            i = 0,
-            n = names ? names.length : 0; i < n; i++) {
-            name = names[i];
-            // Only copy a property if the destination has no property by that name
-            if (!(name in destination) && (name in source)) {
                 destination[name] = source[name];
             }
         }
@@ -19507,8 +18606,7 @@ Ext.apply(Ext, {
         // inline overrides
         var objectConstructor = Object.prototype.constructor,
             inlineOverrides = function(o) {
-                var m;
-                for (m in o) {
+                for (var m in o) {
                     if (!o.hasOwnProperty(m)) {
                         
                         continue;
@@ -19580,47 +18678,6 @@ Ext.apply(Ext, {
         } else {
             Ext.Object.each.call(Ext.Object, object, fn, scope);
         }
-    },
-    _resourcePoolRe: /^[<]([^<>@:]*)(?:[@]([^<>@:]+))?[>](.+)$/,
-    /**
-     * Resolves a resource URL that may contain a resource pool identifier token at the
-     * front. The tokens are formatted as HTML tags "&lt;poolName@packageName&gt;" followed
-     * by a normal relative path. This token is only processed if present at the first
-     * character of the given string.
-     *
-     * These tokens are parsed and the pieces are then passed to the
-     * {@link Ext#getResourcePath} method.
-     *
-     * For example:
-     *
-     *      [{
-     *          xtype: 'image',
-     *          src: '<shared>images/foo.png'
-     *      },{
-     *          xtype: 'image',
-     *          src: '<@package>images/foo.png'
-     *      },{
-     *          xtype: 'image',
-     *          src: '<shared@package>images/foo.png'
-     *      }]
-     *
-     * In the above example, "shared" is the name of a Sencha Cmd resource pool and
-     * "package" is the name of a Sencha Cmd package.
-     * @member Ext
-     * @param {String} url The URL that may contain a resource pool token at the front.
-     * @return {String}
-     * @since 6.0.1
-     */
-    resolveResource: function(url) {
-        var ret = url,
-            m;
-        if (url && url.charAt(0) === '<') {
-            m = Ext._resourcePoolRe.exec(url);
-            if (m) {
-                ret = Ext.getResourcePath(m[3], m[1], m[2]);
-            }
-        }
-        return ret;
     },
     /**
      *
@@ -19769,7 +18826,7 @@ Ext.apply(Ext, {
      *     button = Ext.factory({ text: 'Updated Button' }, 'Ext.Button', button); // Button updated
      *
      * @param {Object} config  The config object to instantiate or update an instance with.
-     * @param {String} [classReference]  The class to instantiate from (if there is a default).
+     * @param {String} classReference  The class to instantiate from.
      * @param {Object} [instance]  The instance to update.
      * @param [aliasNamespace]
      * @member Ext
@@ -19796,13 +18853,10 @@ Ext.apply(Ext, {
             }
         }
         if (config === true) {
-            if (!instance && !classReference) {
-                Ext.raise('[Ext.factory] Cannot determine type of class to create');
-            }
             return instance || Ext.create(classReference);
         }
         if (!Ext.isObject(config)) {
-            Ext.raise("Invalid config, must be a valid config object");
+            Ext.Logger.error("Invalid config, must be a valid config object");
         }
         if ('xtype' in config) {
             newInstance = manager.instantiateByAlias('widget.' + config.xtype, config);
@@ -20874,8 +19928,8 @@ Ext.apply(Ext, {
         }
     }
     if (!packages.ext && !packages.touch) {
-        Ext.setVersion('ext', '6.2.0.589');
-        Ext.setVersion('core', '6.2.0.589');
+        Ext.setVersion('ext', '6.0.0.640');
+        Ext.setVersion('core', '6.0.0.640');
     }
 })(Ext.manifest);
 
@@ -21501,10 +20555,8 @@ Ext.Config.prototype = {
                 values = me.values,
                 remaining = 0,
                 firstInstance = !initList,
-                cachedInitList, cfg, getter, needsInit, i, internalName, ln, names, name, value, isCached, valuesKey, field;
+                cachedInitList, cfg, getter, needsInit, i, internalName, ln, names, name, value, isCached, valuesKey;
             values = me.needsFork ? ExtObject.fork(values) : ExtObject.chain(values);
-            // Let apply/update methods know that the initConfig is currently running.
-            instance.isConfiguring = true;
             if (firstInstance) {
                 // When called to configure the first instance of the class to which we are
                 // bound we take a bit to plan for instance 2+.
@@ -21546,9 +20598,6 @@ Ext.Config.prototype = {
                     }
                 }
             }
-            // TODO - we need to combine the cached loop with the instanceConfig loop to
-            // avoid duplication of init getter setups (for correctness if a cached cfg
-            // calls on a non-cached cfg)
             ln = cachedInitList && cachedInitList.length;
             if (ln) {
                 // This is only ever done on the first instance we configure. Any config in
@@ -21591,6 +20640,8 @@ Ext.Config.prototype = {
                     instance.afterCachedConfig(instanceConfig);
                 }
             }
+            // Let apply/update methods know that the initConfig is currently running.
+            instance.isConfiguring = true;
             // Now that the cachedConfigs have been processed we can apply the instanceConfig
             // and hide the "configs" on the prototype. This will serve as the source for any
             // configs that need to initialize from their initial getter call.
@@ -21645,10 +20696,9 @@ Ext.Config.prototype = {
                         }
                     }
                     if (!cfg) {
-                        field = instance.self.prototype[name];
-                        if (instance.$configStrict && (typeof field === 'function') && !field.$nullFn) {
+                        if (instance.$configStrict && typeof instance.self.prototype[name] === 'function') {
                             // In strict mode you cannot override functions
-                            Ext.raise('Cannot override method ' + name + ' on ' + instance.$className + ' instance.');
+                            Ext.raise("Cannot override method " + name + " on " + instance.$className + " instance.");
                         }
                         // Not all "configs" use the config system so in this case simply put
                         // the value on the instance:
@@ -21669,7 +20719,7 @@ Ext.Config.prototype = {
                             if (valuesKey && valuesKey.constructor === Object) {
                                 value = ExtObject.merge(values[name], value);
                             } else {
-                                value = Ext.clone(value, false);
+                                value = Ext.clone(value);
                             }
                         }
                     }
@@ -21762,7 +20812,7 @@ Ext.Config.prototype = {
                         if (baseValue && baseValue.constructor === Object) {
                             value = Ext.Object.merge(baseValue, value);
                         } else {
-                            value = Ext.clone(value, false);
+                            value = Ext.clone(value);
                         }
                     }
                 }
@@ -21776,10 +20826,11 @@ Ext.Config.prototype = {
         reconfigure: function(instance, instanceConfig, options) {
             var currentConfig = instance.config,
                 configList = [],
-                strict = instance.$configStrict && !(options && options.strict === false),
+                strict = instance.$configStrict,
                 configs = this.configs,
                 defaults = options && options.defaults,
-                cfg, getter, i, len, name, names, prop;
+                applyProps = options && options.strict === false,
+                cfg, getter, i, len, name, names, setter;
             for (name in instanceConfig) {
                 if (defaults && instance.hasOwnProperty(name)) {
                     
@@ -21799,26 +20850,12 @@ Ext.Config.prototype = {
                     // To ensure that configs being set here get processed in the proper order
                     // we must give them init getters just in case they depend upon each other
                     instance[cfg.names.get] = cfg.initGetter || cfg.getInitGetter();
-                } else {
-                    // Check for existence of the property on the prototype before proceeding.
-                    // If present on the prototype, and if the property is a function we
-                    // do not allow it to be overridden by a property in the config object
-                    // in strict mode (unless the function on the prototype is a emptyFn or
-                    // identityFn).  Note that we always check the prototype, not the instance
-                    // because calling setConfig a second time should have the same results -
-                    // the first call may have set a function on the instance.
-                    prop = instance.self.prototype[name];
-                    if (strict) {
-                        if ((typeof prop === 'function') && !prop.$nullFn) {
-                            Ext.Error.raise("Cannot override method " + name + " on " + instance.$className + " instance.");
-                            
-                            continue;
-                        } else {
-                            if (name !== 'type') {
-                                Ext.log.warn('No such config "' + name + '" for class ' + instance.$className);
-                            }
-                        }
+                } else if (strict) {
+                    if (name !== 'type') {
+                        Ext.log.error('No such config "' + name + '" for class ' + instance.$className);
                     }
+                    
+                    continue;
                 }
                 configList.push(name);
             }
@@ -21841,9 +20878,15 @@ Ext.Config.prototype = {
                     names = cfg.names;
                     if (instance[names.set]) {
                         instance[names.set](instanceConfig[name]);
-                    } else {
-                        // apply non-config props directly to the instance
+                    } else if (applyProps) {
+                        if (instance.$configStrict && typeof instance.self.prototype[name] === 'function') {
+                            // In strict mode you cannot override functions
+                            Ext.raise("Cannot override method " + name + " on " + instance.$className + " instance.");
+                        }
+                        // apply non-config props directly to the instance if specified in options
                         instance[name] = instanceConfig[name];
+                    } else if (name !== 'type') {
+                        Ext.raise('Config "' + name + '" has no setter on class ' + instance.$className);
                     }
                 }
             }
@@ -22271,34 +21314,30 @@ Ext.Base = (function(flexSetter) {
          * @param {Object} members
          */
         addInheritableStatics: function(members) {
-            var me = this,
-                prototype = me.prototype,
-                inheritableStatics, hasInheritableStatics, name, member, current;
+            var inheritableStatics, hasInheritableStatics,
+                prototype = this.prototype,
+                name, member;
             inheritableStatics = prototype.$inheritableStatics;
             hasInheritableStatics = prototype.$hasInheritableStatics;
             if (!inheritableStatics) {
                 inheritableStatics = prototype.$inheritableStatics = [];
                 hasInheritableStatics = prototype.$hasInheritableStatics = {};
             }
-            var className = Ext.getClassName(me) + '.';
+            var className = Ext.getClassName(this) + '.';
             for (name in members) {
                 if (members.hasOwnProperty(name)) {
                     member = members[name];
-                    current = me[name];
                     if (typeof member == 'function') {
                         member.name = className + name;
                     }
-                    if (typeof current === 'function' && !current.$isClass && !current.$nullFn) {
-                        member.$previous = current;
-                    }
-                    me[name] = member;
+                    this[name] = member;
                     if (!hasInheritableStatics[name]) {
                         hasInheritableStatics[name] = true;
                         inheritableStatics.push(name);
                     }
                 }
             }
-            return me;
+            return this;
         },
         /**
          * Add methods / properties to the prototype of this class.
@@ -22544,9 +21583,6 @@ Ext.Base = (function(flexSetter) {
                 me.addInheritableStatics(inheritableStatics);
                 delete members.inheritableStatics;
             }
-            if (members.platformConfig) {
-                me.addPlatformConfig(members);
-            }
             if (config) {
                 me.addConfig(config);
                 delete members.config;
@@ -22561,56 +21597,6 @@ Ext.Base = (function(flexSetter) {
                 me.mixin(mixins);
             }
             return me;
-        },
-        addPlatformConfig: function(data) {
-            var me = this,
-                platformConfigs = data.platformConfig,
-                config = data.config,
-                added, classConfigs, configs, configurator, hoisted, keys, name, value, i, ln;
-            delete data.platformConfig;
-            if (platformConfigs instanceof Array) {
-                throw new Error('platformConfigs must be specified as an object.');
-            }
-            configurator = me.getConfigurator();
-            classConfigs = configurator.configs;
-            // Get the keys shortest to longest (ish).
-            keys = Ext.getPlatformConfigKeys(platformConfigs);
-            // To leverage the Configurator#add method, we want to generate potentially
-            // two objects to pass in: "added" and "hoisted". For any properties in an
-            // active platformConfig rule that set proper Configs in the base class, we
-            // need to put them in "added". If instead of the proper Config coming from
-            // a base class, it comes from this class's config block, we still need to
-            // put that config in "added" but we also need move the class-level config
-            // out of "config" and into "hoisted".
-            //
-            // This will ensure that the config defined at the class level is added to
-            // the Configurator first.
-            for (i = 0 , ln = keys.length; i < ln; ++i) {
-                configs = platformConfigs[keys[i]];
-                hoisted = added = null;
-                for (name in configs) {
-                    value = configs[name];
-                    // We have a few possibilities for each config name:
-                    if (config && name in config) {
-                        //  It is a proper Config defined by this class.
-                        (added || (added = {}))[name] = value;
-                        (hoisted || (hoisted = {}))[name] = config[name];
-                        delete config[name];
-                    } else if (name in classConfigs) {
-                        //  It is a proper Config defined by a base class.
-                        (added || (added = {}))[name] = value;
-                    } else {
-                        //  It is just a property to put on the prototype.
-                        data[name] = value;
-                    }
-                }
-                if (hoisted) {
-                    configurator.add(hoisted);
-                }
-                if (added) {
-                    configurator.add(added);
-                }
-            }
         },
         /**
          * @protected
@@ -22640,7 +21626,7 @@ Ext.Base = (function(flexSetter) {
          */
         mixin: function(name, mixinClass) {
             var me = this,
-                mixin, prototype, key, statics, i, ln, mixinName, staticName, mixinValue, mixins, mixinStatics;
+                mixin, prototype, key, statics, i, ln, staticName, mixinValue, mixins;
             if (typeof name !== 'string') {
                 mixins = name;
                 if (mixins instanceof Array) {
@@ -22653,7 +21639,7 @@ Ext.Base = (function(flexSetter) {
                     // mixins: {
                     //     foo: ...
                     // }
-                    for (mixinName in mixins) {
+                    for (var mixinName in mixins) {
                         me.mixin(mixinName, mixins[mixinName]);
                     }
                 }
@@ -22685,21 +21671,19 @@ Ext.Base = (function(flexSetter) {
                     // Ext.util.Observable.  In this example, since the first "observable"
                     // mixin's methods win, we also want its reference to be preserved.
                     Ext.applyIf(prototype.mixins, mixinValue);
-                } else if (!(key === 'mixinId' || key === 'config' || key === '$inheritableStatics') && (prototype[key] === undefined)) {
+                } else if (!(key === 'mixinId' || key === 'config') && (prototype[key] === undefined)) {
                     prototype[key] = mixinValue;
                 }
             }
             // Mixin statics inheritance
             statics = mixin.$inheritableStatics;
             if (statics) {
-                mixinStatics = {};
                 for (i = 0 , ln = statics.length; i < ln; i++) {
                     staticName = statics[i];
                     if (!me.hasOwnProperty(staticName)) {
-                        mixinStatics[staticName] = mixinClass[staticName];
+                        me[staticName] = mixinClass[staticName];
                     }
                 }
-                me.addInheritableStatics(mixinStatics);
             }
             if ('config' in mixin) {
                 me.addConfig(mixin.config, mixinClass);
@@ -22714,7 +21698,7 @@ Ext.Base = (function(flexSetter) {
          * Adds new config properties to this class. This is called for classes when they
          * are declared, then for any mixins that class may define and finally for any
          * overrides defined that target the class.
-         *
+         * 
          * @param {Object} config
          * @param {Ext.Class} [mixinClass] The mixin class if the configs are from a mixin.
          * @private
@@ -22738,7 +21722,7 @@ Ext.Base = (function(flexSetter) {
         },
         /**
          * Returns the `Ext.Configurator` for this class.
-         *
+         * 
          * @return {Ext.Configurator}
          * @private
          * @static
@@ -22970,12 +21954,11 @@ Ext.Base = (function(flexSetter) {
          *
          *      alert(obj.x);  // now alerts 42
          *
-         * This also works with static and private methods.
+         * This also works with static methods.
          *
          *      Ext.define('My.Derived2', {
          *          extend: 'My.Base',
          *
-         *          // privates: {
          *          statics: {
          *              method: function (x) {
          *                  return this.callParent([x*2]); // calls My.Base.method
@@ -22991,7 +21974,6 @@ Ext.Base = (function(flexSetter) {
          *      Ext.define('My.Derived2Override', {
          *          override: 'My.Derived2',
          *
-         *          // privates: {
          *          statics: {
          *              method: function (x) {
          *                  return this.callParent([x*2]); // calls My.Derived2.method
@@ -23002,7 +21984,7 @@ Ext.Base = (function(flexSetter) {
          *      alert(My.Derived2.method(10); // now alerts 40
          *
          * To override a method and replace it and also call the superclass method, use
-         * {@link #method-callSuper}. This is often done to patch a method to fix a bug.
+         * {@link #callSuper}. This is often done to patch a method to fix a bug.
          *
          * @protected
          * @param {Array/Arguments} args The arguments, either an array or the `arguments` object
@@ -23034,18 +22016,18 @@ Ext.Base = (function(flexSetter) {
             return superMethod.apply(this, args || noArgs);
         },
         /**
-         * This method is used by an **override** to call the superclass method but
-         * bypass any overridden method. This is often done to "patch" a method that
-         * contains a bug but for whatever reason cannot be fixed directly.
-         *
+         * This method is used by an override to call the superclass method but bypass any
+         * overridden method. This is often done to "patch" a method that contains a bug
+         * but for whatever reason cannot be fixed directly.
+         * 
          * Consider:
-         *
+         * 
          *      Ext.define('Ext.some.Class', {
          *          method: function () {
          *              console.log('Good');
          *          }
          *      });
-         *
+         * 
          *      Ext.define('Ext.some.DerivedClass', {
          *          extend: 'Ext.some.Class',
          *          
@@ -23057,10 +22039,10 @@ Ext.Base = (function(flexSetter) {
          *              this.callParent();
          *          }
          *      });
-         *
+         * 
          * To patch the bug in `Ext.some.DerivedClass.method`, the typical solution is to create an
          * override:
-         *
+         * 
          *      Ext.define('App.patches.DerivedClass', {
          *          override: 'Ext.some.DerivedClass',
          *          
@@ -23072,12 +22054,11 @@ Ext.Base = (function(flexSetter) {
          *              this.callSuper();
          *          }
          *      });
-         *
-         * The patch method cannot use {@link #method-callParent} to call the superclass
-         * `method` since that would call the overridden method containing the bug. In
-         * other words, the above patch would only produce "Fixed" then "Good" in the
-         * console log, whereas, using `callParent` would produce "Fixed" then "Bad"
-         * then "Good".
+         * 
+         * The patch method cannot use `callParent` to call the superclass `method` since
+         * that would call the overridden method containing the bug. In other words, the
+         * above patch would only produce "Fixed" then "Good" in the console log, whereas,
+         * using `callParent` would produce "Fixed" then "Bad" then "Good".
          *
          * @protected
          * @param {Array/Arguments} args The arguments, either an array or the `arguments` object
@@ -23239,34 +22220,8 @@ Ext.Base = (function(flexSetter) {
             return name in this.defaultConfig;
         },
         /**
-         * Returns the initial configuration passed to the constructor when
-         * instantiating this class.
-         *
-         * Given this example Ext.button.Button definition and instance:
-         *
-         *     Ext.define('MyApp.view.Button', {
-         *         extend: 'Ext.button.Button',
-         *         xtype: 'mybutton',
-         *     
-         *         scale: 'large',
-         *         enableToggle: true
-         *     });
-         *
-         *     var btn = Ext.create({
-         *         xtype: 'mybutton',
-         *         renderTo: Ext.getBody(),
-         *         text: 'Test Button'
-         *     });
-         *
-         * Calling `btn.getInitialConfig()` would return an object including the config
-         * options passed to the `create` method:
-         *
-         *     xtype: 'mybutton',
-         *     renderTo: // The document body itself
-         *     text: 'Test Button'
-         *
-         * Calling `btn.getInitialConfig('text')`returns **'Test Button'**.
-         *
+         * Returns the initial configuration passed to constructor when instantiating
+         * this class.
          * @param {String} [name] Name of the config option to return.
          * @return {Object/Mixed} The full config object or a single config value
          * when `name` parameter specified.
@@ -23324,6 +22279,7 @@ Ext.Base = (function(flexSetter) {
         /**
          * This method is called to cleanup an object and its resources. After calling
          * this method, the object should not be used any further.
+         * @protected
          */
         destroy: function() {
             var me = this,
@@ -23991,7 +22947,7 @@ Ext.Base = (function(flexSetter) {
         delete data.inheritableStatics;
     });
     Ext.createRuleFn = function(code) {
-        return new Function('$c', 'with($c) { try { return (' + code + '); } catch(e) { return false;}}');
+        return new Function('$c', 'with($c) { return (' + code + '); }');
     };
     Ext.expressionCache = new Ext.util.Cache({
         miss: Ext.createRuleFn
@@ -24078,7 +23034,53 @@ Ext.Base = (function(flexSetter) {
      * To adjust configs based on dynamic conditions, see `{@link Ext.mixin.Responsive}`.
      */
     ExtClass.registerPreprocessor('platformConfig', function(Class, data, hooks) {
-        Class.addPlatformConfig(data);
+        var platformConfigs = data.platformConfig,
+            config = data.config,
+            added, classConfigs, configs, configurator, hoisted, keys, name, value, i, ln;
+        delete data.platformConfig;
+        if (platformConfigs instanceof Array) {
+            throw new Error('platformConfigs must be specified as an object.');
+        }
+        configurator = Class.getConfigurator();
+        classConfigs = configurator.configs;
+        // Get the keys shortest to longest (ish).
+        keys = Ext.getPlatformConfigKeys(platformConfigs);
+        // To leverage the Configurator#add method, we want to generate potentially
+        // two objects to pass in: "added" and "hoisted". For any properties in an
+        // active platformConfig rule that set proper Configs in the base class, we
+        // need to put them in "added". If instead of the proper Config coming from
+        // a base class, it comes from this class's config block, we still need to
+        // put that config in "added" but we also need move the class-level config
+        // out of "config" and into "hoisted".
+        //
+        // This will ensure that the config defined at the class level is added to
+        // the Configurator first.
+        for (i = 0 , ln = keys.length; i < ln; ++i) {
+            configs = platformConfigs[keys[i]];
+            hoisted = added = null;
+            for (name in configs) {
+                value = configs[name];
+                // We have a few possibilities for each config name:
+                if (config && name in config) {
+                    //  It is a proper Config defined by this class.
+                    (added || (added = {}))[name] = value;
+                    (hoisted || (hoisted = {}))[name] = config[name];
+                    delete config[name];
+                } else if (name in classConfigs) {
+                    //  It is a proper Config defined by a base class.
+                    (added || (added = {}))[name] = value;
+                } else {
+                    //  It is just a property to put on the prototype.
+                    data[name] = value;
+                }
+            }
+            if (hoisted) {
+                configurator.add(hoisted);
+            }
+            if (added) {
+                configurator.add(added);
+            }
+        }
     });
     /**
      * @cfg {Object} config
@@ -24357,7 +23359,6 @@ Ext.Inventory = function() {
     me.aliasToName = {};
     me.nameToAliases = {};
     me.nameToAlternates = {};
-    me.nameToPrefix = {};
 };
 Ext.Inventory.prototype = {
     _array1: [
@@ -24366,13 +23367,13 @@ Ext.Inventory.prototype = {
     prefixes: null,
     dotRe: /\./g,
     wildcardRe: /\*/g,
-    addAlias: function(className, alias, update) {
-        return this.addMapping(className, alias, this.aliasToName, this.nameToAliases, update);
+    addAlias: function(className, alias) {
+        return this.addMapping(className, alias, this.aliasToName, this.nameToAliases);
     },
     addAlternate: function(className, alternate) {
         return this.addMapping(className, alternate, this.alternateToName, this.nameToAlternates);
     },
-    addMapping: function(className, alternate, toName, nameTo, update) {
+    addMapping: function(className, alternate, toName, nameTo) {
         var name = className.$className || className,
             mappings = name,
             array = this._array1,
@@ -24395,7 +23396,7 @@ Ext.Inventory.prototype = {
                     continue;
                 }
                 if (toName[a] !== cls) {
-                    if (!update && toName[a]) {
+                    if (toName[a]) {
                         Ext.log.warn("Overriding existing mapping: '" + a + "' From '" + toName[a] + "' to '" + cls + "'. Is this intentional?");
                     }
                     toName[a] = cls;
@@ -24516,7 +23517,7 @@ Ext.Inventory.prototype = {
         if (className in paths) {
             ret = paths[className];
         } else {
-            prefix = me.nameToPrefix[className] || (me.nameToPrefix[className] = me.getPrefix(className));
+            prefix = me.getPrefix(className);
             if (prefix) {
                 className = className.substring(prefix.length + 1);
                 ret = paths[prefix];
@@ -24531,47 +23532,25 @@ Ext.Inventory.prototype = {
     getPrefix: function(className) {
         if (className in this.paths) {
             return className;
-        } else if (className in this.nameToPrefix) {
-            return this.nameToPrefix[className];
         }
         var prefixes = this.getPrefixes(),
-            length = className.length,
-            items, currChar, currSubstr, prefix, j, jlen;
+            i = prefixes.length,
+            length, prefix;
         // Walk the prefixes backwards so we consider the longest ones first.
-        // Prefixes are kept in a sparse array grouped by length so we don't have to
-        // iterate over all of them, just the ones we need.
-        while (length-- > 0) {
-            items = prefixes[length];
-            if (items) {
-                currChar = className.charAt(length);
-                if (currChar !== '.') {
-                    
-                    continue;
-                }
-                currSubstr = className.substring(0, length);
-                for (j = 0 , jlen = items.length; j < jlen; j++) {
-                    prefix = items[j];
-                    if (prefix === className.substring(0, length)) {
-                        return prefix;
-                    }
-                }
+        while (i-- > 0) {
+            length = (prefix = prefixes[i]).length;
+            if (length < className.length && className.charAt(length) === '.' && prefix === className.substring(0, length)) {
+                return prefix;
             }
         }
         return '';
     },
     getPrefixes: function() {
         var me = this,
-            prefixes = me.prefixes,
-            names, name, nameLength, items, i, len;
+            prefixes = me.prefixes;
         if (!prefixes) {
-            names = me.names.slice(0);
-            me.prefixes = prefixes = [];
-            for (i = 0 , len = names.length; i < len; i++) {
-                name = names[i];
-                nameLength = name.length;
-                items = prefixes[nameLength] || (prefixes[nameLength] = []);
-                items.push(name);
-            }
+            me.prefixes = prefixes = me.names.slice(0);
+            prefixes.sort(me._compareNames);
         }
         return prefixes;
     },
@@ -24586,7 +23565,6 @@ Ext.Inventory.prototype = {
             i, a;
         delete nameToAliases[name];
         delete nameToAlternates[name];
-        delete me.nameToPrefix[name];
         if (aliases) {
             for (i = aliases.length; i--; ) {
                 // Aliases can be reassigned so if this class is the current mapping of
@@ -24691,9 +23669,15 @@ Ext.Inventory.prototype = {
         me.paths[name] = path;
         me.names.push(name);
         me.prefixes = null;
-        me.nameToPrefix = {};
         return me;
-    })
+    }),
+    _compareNames: function(lhs, rhs) {
+        var cmp = lhs.length - rhs.length;
+        if (!cmp) {
+            cmp = (lhs < rhs) ? -1 : 1;
+        }
+        return cmp;
+    }
 };
 
 // @tag class
@@ -25182,31 +24166,6 @@ Ext.ClassManager = (function(Class, alias, arraySlice, arrayFrom, global) {
                 return value;
             },
             /**
-         * Changes the mapping of an `xtype` to map to the specified component class.
-         * @param {String/Ext.Class} cls The class or class name to which `xtype` is mapped.
-         * @param {String} xtype The `xtype` to map or redefine as `cls`.
-         * @since 6.0.1
-         * @private
-         */
-            setXType: function(cls, xtype) {
-                var className = cls.$className,
-                    C = className ? cls : Manager.get(className = cls),
-                    proto = C.prototype,
-                    xtypes = proto.xtypes,
-                    xtypesChain = proto.xtypesChain,
-                    xtypesMap = proto.xtypesMap;
-                if (!proto.hasOwnProperty('xtypes')) {
-                    proto.xtypes = xtypes = [];
-                    proto.xtypesChain = xtypesChain = xtypesChain ? xtypesChain.slice(0) : [];
-                    proto.xtypesMap = xtypesMap = Ext.apply({}, xtypesMap);
-                }
-                Manager.addAlias(className, 'widget.' + xtype, true);
-                xtypes.push(xtype);
-                xtypesChain.push(xtype);
-                xtypesMap[xtype] = true;
-            },
-            //TODO consider updating derived class xtypesChain / xtypesMap
-            /**
          * Sets a name reference to a class.
          *
          * @param {String} name
@@ -25254,31 +24213,6 @@ Ext.ClassManager = (function(Class, alias, arraySlice, arrayFrom, global) {
          */
             getByAlias: function(alias) {
                 return Manager.get(Manager.getNameByAlias(alias));
-            },
-            /**
-         * Get a component class name from a config object.
-         * @param {Object} config The config object.
-         * @param {String} [aliasPrefix] A prefix to use when getting
-         * a class name by alias.
-         * @return {Ext.Class} The class.
-         *
-         * @private
-         */
-            getByConfig: function(config, aliasPrefix) {
-                var xclass = config.xclass,
-                    name;
-                if (xclass) {
-                    name = xclass;
-                } else {
-                    name = config.xtype;
-                    if (name) {
-                        aliasPrefix = 'widget.';
-                    } else {
-                        name = config.type;
-                    }
-                    name = Manager.getNameByAlias(aliasPrefix + name);
-                }
-                return Manager.get(name);
             },
             /**
          * Get the name of the class by its reference or its instance. This is
@@ -25387,12 +24321,11 @@ Ext.ClassManager = (function(Class, alias, arraySlice, arrayFrom, global) {
                     uses = data.uses,
                     mixins = data.mixins,
                     mixinsIsArray,
-                    compat = 1,
-                    // default if 'compatibility' is not specified
-                    dependenciesLoaded,
+                    compat = data.compatibility,
+                    depedenciesLoaded,
                     classReady = function() {
                         var cls, dependencies, i, key, temp;
-                        if (!dependenciesLoaded) {
+                        if (!depedenciesLoaded) {
                             dependencies = requires ? requires.slice(0) : [];
                             if (mixins) {
                                 if (!(mixinsIsArray = mixins instanceof Array)) {
@@ -25409,7 +24342,7 @@ Ext.ClassManager = (function(Class, alias, arraySlice, arrayFrom, global) {
                                     }
                                 }
                             }
-                            dependenciesLoaded = true;
+                            depedenciesLoaded = true;
                             if (dependencies.length) {
                                 // Since the override is going to be used (its target class is
                                 // now created), we need to fetch the required classes for the
@@ -25437,7 +24370,7 @@ Ext.ClassManager = (function(Class, alias, arraySlice, arrayFrom, global) {
                         }
                         // The target class and the required classes for this override are
                         // ready, so we can apply the override now:
-                        cls = overriddenClassName.$isClass ? overriddenClassName : me.get(overriddenClassName);
+                        cls = me.get(overriddenClassName);
                         // We don't want to apply these:
                         delete data.override;
                         delete data.compatibility;
@@ -25459,31 +24392,10 @@ Ext.ClassManager = (function(Class, alias, arraySlice, arrayFrom, global) {
                         }
                     };
                 // last but not least!
-                if (className) {
-                    Manager.overrideMap[className] = true;
-                }
-                // If specified, parse strings as versions, but otherwise treat as a
-                // boolean (maybe "compatibility: Ext.isIE8" or something).
-                //
-                if ('compatibility' in data) {
-                    compat = data.compatibility;
-                    if (!compat) {
-                        // Cast '', null, undefined, 0 to false.
-                        compat = false;
-                    } else if (typeof compat === 'number') {
-                        // By virtue of the condition above we must be a nonzero number.
-                        compat = true;
-                    } else if (typeof compat !== 'boolean') {
-                        compat = Ext.checkVersion(compat);
-                    }
-                }
-                if (compat) {
-                    // override the target class right after it's created
-                    if (overriddenClassName.$isClass) {
-                        classReady();
-                    } else {
-                        me.onCreated(classReady, me, overriddenClassName);
-                    }
+                Manager.overrideMap[className] = true;
+                if (!compat || Ext.checkVersion(compat)) {
+                    // Override the target class right after it's created
+                    me.onCreated(classReady, me, overriddenClassName);
                 }
                 me.triggerCreated(className, 2);
                 return me;
@@ -25639,7 +24551,7 @@ Ext.ClassManager = (function(Class, alias, arraySlice, arrayFrom, global) {
      * Overrides members of the specified `target` class.
      * 
      * **NOTE:** the overridden class must have been defined using 
-     * {@link Ext#define Ext.define} in order to use the `override` config.
+     * {@link #define Ext.define} in order to use the `override` config.
      * 
      * Methods defined on the overriding class will not automatically call the methods of 
      * the same name in the ancestor class chain.  To call the parent's method of the 
@@ -26331,7 +25243,8 @@ Ext.ClassManager = (function(Class, alias, arraySlice, arrayFrom, global) {
          */
         undefine: function(className) {
             Ext.classSystemMonitor && Ext.classSystemMonitor(className, 'Ext.ClassManager#undefine', arguments);
-            var classes = Manager.classes;
+            var classes = Manager.classes,
+                parts, partCount, namespace, i;
             delete classes[className];
             delete Manager.existCache[className];
             delete Manager.classState[className];
@@ -26580,13 +25493,13 @@ Ext.ClassManager = (function(Class, alias, arraySlice, arrayFrom, global) {
     // @require Ext.Object
     // @require Ext.Version
     var me = this,
-        browserPrefixes = Ext.Boot.browserPrefixes,
-        browserNames = Ext.Boot.browserNames,
+        browserPrefixes = me.browserPrefixes,
         enginePrefixes = me.enginePrefixes,
-        engineNames = me.engineNames,
         browserMatch = userAgent.match(new RegExp('((?:' + Ext.Object.getValues(browserPrefixes).join(')|(?:') + '))([\\w\\._]+)')),
         engineMatch = userAgent.match(new RegExp('((?:' + Ext.Object.getValues(enginePrefixes).join(')|(?:') + '))([\\w\\._]+)')),
+        browserNames = me.browserNames,
         browserName = browserNames.other,
+        engineNames = me.engineNames,
         engineName = engineNames.other,
         browserVersion = '',
         engineVersion = '',
@@ -26598,55 +25511,6 @@ Ext.ClassManager = (function(Class, alias, arraySlice, arrayFrom, global) {
      * Browser User Agent string.
      */
     me.userAgent = userAgent;
-    /**
-     * A "hybrid" property, can be either accessed as a method call, for example:
-     *
-     *     if (Ext.browser.is('IE')) {
-     *         // ...
-     *     }
-     *
-     * Or as an object with Boolean properties, for example:
-     *
-     *     if (Ext.browser.is.IE) {
-     *         // ...
-     *     }
-     *
-     * Versions can be conveniently checked as well. For example:
-     *
-     *     if (Ext.browser.is.IE10) {
-     *         // Equivalent to (Ext.browser.is.IE && Ext.browser.version.equals(10))
-     *     }
-     *
-     * __Note:__ Only {@link Ext.Version#getMajor major component}  and {@link Ext.Version#getShortVersion simplified}
-     * value of the version are available via direct property checking.
-     *
-     * Supported values are:
-     *
-     * - IE
-     * - Firefox
-     * - Safari
-     * - Chrome
-     * - Opera
-     * - WebKit
-     * - Gecko
-     * - Presto
-     * - Trident
-     * - WebView
-     * - Other
-     *
-     * @param {String} name The OS name to check.
-     * @return {Boolean}
-     */
-    this.is = function(name) {
-        // Since this function reference also acts as a map, we do not want it to be
-        // shared between instances, so it is defined here, not on the prototype.
-        return !!this.is[name];
-    };
-    // Edge has a userAgent with All browsers so we manage it separately
-    // "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.135 Safari/537.36 Edge/12.10240"
-    if (/Edge\//.test(userAgent)) {
-        browserMatch = userAgent.match(/(Edge\/)([\w.]+)/);
-    }
     if (browserMatch) {
         browserName = browserNames[Ext.Object.getKey(browserPrefixes, browserMatch[1])];
         if (browserName === 'Safari' && /^Opera/.test(userAgent)) {
@@ -26802,13 +25666,6 @@ Ext.ClassManager = (function(Class, alias, arraySlice, arrayFrom, global) {
      * @member Ext
      */
     /**
-     * @property isEdge
-     * True if the detected browser is Edge.
-     * @readonly
-     * @type Boolean
-     * @member Ext
-     */
-    /**
      * @property isLinux
      * True if the detected platform is Linux.
      * @readonly
@@ -26914,7 +25771,7 @@ Ext.ClassManager = (function(Class, alias, arraySlice, arrayFrom, global) {
             } else if (mode === 11 || (majorVer === 11 && mode !== 7 && mode !== 8 && mode !== 9 && mode !== 10)) {
                 majorVer = 11;
             }
-            maxIEVersion = Math.max(majorVer, Ext.Boot.maxIEVersion);
+            maxIEVersion = Math.max(majorVer, 11);
             for (i = 7; i <= maxIEVersion; ++i) {
                 prefix = 'isIE' + i;
                 if (majorVer <= i) {
@@ -26965,6 +25822,12 @@ Ext.ClassManager = (function(Class, alias, arraySlice, arrayFrom, global) {
         isWebView = true;
         this.setFlag('PhoneGap');
         this.setFlag('Cordova');
+    } else if (!!window.isNK) {
+        isWebView = true;
+        this.setFlag('Sencha');
+    }
+    if (/(Glass)/i.test(userAgent)) {
+        this.setFlag('GoogleGlass');
     }
     // Check if running in UIWebView
     if (/(iPhone|iPod|iPad).*AppleWebKit(?!.*Safari)(?!.*FBAN)/i.test(userAgent)) {
@@ -26987,6 +25850,19 @@ Ext.ClassManager = (function(Class, alias, arraySlice, arrayFrom, global) {
 };
 Ext.env.Browser.prototype = {
     constructor: Ext.env.Browser,
+    browserNames: {
+        ie: 'IE',
+        firefox: 'Firefox',
+        safari: 'Safari',
+        chrome: 'Chrome',
+        opera: 'Opera',
+        dolfin: 'Dolfin',
+        webosbrowser: 'webOSBrowser',
+        chromeMobile: 'ChromeMobile',
+        chromeiOS: 'ChromeiOS',
+        silk: 'Silk',
+        other: 'Other'
+    },
     engineNames: {
         webkit: 'WebKit',
         gecko: 'Gecko',
@@ -26999,6 +25875,18 @@ Ext.env.Browser.prototype = {
         gecko: 'Gecko/',
         presto: 'Presto/',
         trident: 'Trident/'
+    },
+    browserPrefixes: {
+        ie: 'MSIE ',
+        firefox: 'Firefox/',
+        chrome: 'Chrome/',
+        safari: 'Version/',
+        opera: 'OPR/',
+        dolfin: 'Dolfin/',
+        webosbrowser: 'wOSBrowser/',
+        chromeMobile: 'CrMo/',
+        chromeiOS: 'CriOS/',
+        silk: 'Silk/'
     },
     styleDashPrefixes: {
         WebKit: '-webkit-',
@@ -27022,6 +25910,48 @@ Ext.env.Browser.prototype = {
         Other: ''
     },
     // scope: Ext.env.Browser.prototype
+    /**
+     * A "hybrid" property, can be either accessed as a method call, for example:
+     *
+     *     if (Ext.browser.is('IE')) {
+     *         // ...
+     *     }
+     *
+     * Or as an object with Boolean properties, for example:
+     *
+     *     if (Ext.browser.is.IE) {
+     *         // ...
+     *     }
+     *
+     * Versions can be conveniently checked as well. For example:
+     *
+     *     if (Ext.browser.is.IE10) {
+     *         // Equivalent to (Ext.browser.is.IE && Ext.browser.version.equals(10))
+     *     }
+     *
+     * __Note:__ Only {@link Ext.Version#getMajor major component}  and {@link Ext.Version#getShortVersion simplified}
+     * value of the version are available via direct property checking.
+     *
+     * Supported values are:
+     *
+     * - IE
+     * - Firefox
+     * - Safari
+     * - Chrome
+     * - Opera
+     * - WebKit
+     * - Gecko
+     * - Presto
+     * - Trident
+     * - WebView
+     * - Other
+     *
+     * @param {String} name The OS name to check.
+     * @return {Boolean}
+     */
+    is: function(name) {
+        return !!this.is[name];
+    },
     /**
      * The full name of the current browser.
      * Possible values are:
@@ -27129,8 +26059,6 @@ Ext.env.Browser.prototype = {
 Ext.global.navigator.userAgent));
 
 /**
- * @class Ext.env.OS
- *
  * Provides information about operating system environment.
  *
  * Should not be manually instantiated unless for unit-testing.
@@ -27143,8 +26071,8 @@ Ext.env.OS = function(userAgent, platform, browserScope) {
     // @require Ext.Version
     // @require Ext.env.Browser
     var me = this,
-        names = Ext.Boot.osNames,
-        prefixes = Ext.Boot.osPrefixes,
+        names = me.names,
+        prefixes = me.prefixes,
         name,
         version = '',
         is = me.is,
@@ -27211,6 +26139,34 @@ Ext.env.OS = function(userAgent, platform, browserScope) {
 };
 Ext.env.OS.prototype = {
     constructor: Ext.env.OS,
+    names: {
+        ios: 'iOS',
+        android: 'Android',
+        windowsPhone: 'WindowsPhone',
+        webos: 'webOS',
+        blackberry: 'BlackBerry',
+        rimTablet: 'RIMTablet',
+        mac: 'MacOS',
+        win: 'Windows',
+        tizen: 'Tizen',
+        linux: 'Linux',
+        bada: 'Bada',
+        chrome: 'ChromeOS',
+        other: 'Other'
+    },
+    prefixes: {
+        tizen: '(Tizen )',
+        ios: 'i(?:Pad|Phone|Pod)(?:.*)CPU(?: iPhone)? OS ',
+        android: '(Android |HTC_|Silk/)',
+        // Some HTC devices ship with an OSX userAgent by default,
+        // so we need to add a direct check for HTC_
+        windowsPhone: 'Windows Phone ',
+        blackberry: '(?:BlackBerry|BB)(?:.*)Version/',
+        rimTablet: 'RIM Tablet OS ',
+        webos: '(?:webOS|hpwOS)/',
+        bada: 'Bada/',
+        chrome: 'CrOS '
+    },
     /**
      * A "hybrid" property, can be either accessed as a method call, i.e:
      *
@@ -27554,7 +26510,7 @@ Ext.feature = {
      *
      * Contains information about features supported in the current environment as well
      * as bugs detected.
-     *
+     * 
      * @singleton
      */
     tests: [
@@ -27588,7 +26544,7 @@ Ext.feature = {
         },
         {
             /**
-         * @property CSS3BoxShadow `true` if document environment supports the CSS3
+         * @property CSS3BoxShadow `true` if document environment supports the CSS3 
          * box-shadow style.
          *
          * This property is available at application boot time, before document ready.
@@ -27612,7 +26568,7 @@ Ext.feature = {
         },
         {
             /**
-         * @property ClassList `true` if document environment supports the HTML5
+         * @property ClassList `true` if document environment supports the HTML5 
          * classList API.
          *
          * This property is available at application boot time, before document ready.
@@ -27663,6 +26619,45 @@ Ext.feature = {
                 ret = (element.childNodes.length === 1);
                 element.innerHTML = "";
                 return ret;
+            }
+        },
+        {
+            /**
+         * @property touchScroll
+         * @type {Number}
+         *
+         * This property is used to trigger touch scrolling support via Ext.scroll.TouchScroller.
+         * There are three possible values for this property:
+         *
+         * - `0` - Touch scrolling disabled.
+         *
+         * - `1` - enables partial scroller support.  In this mode the touch scroller
+         * simply controls the scroll positions of naturally overflowing elements.
+         * This mode is typically used on multi-input devices where native scrolling
+         * using the mouse is desired, but native touch-scrolling must be disabled to
+         * avoid cancelling gesture recognition inside of scrollable elements (e.g.
+         * IE10 and up on touch-screen laptops and tablets)
+         *
+         * - `2` - enables full scroller support.  In this mode, scrolling is entirely
+         * "virtual", that is natural browser scrolling of elements is disabled
+         * (overflow: hidden) and the contents of scrollable elements are wrapped in a
+         * "scrollerEl"`.  Scrolling is simulated by translating the scrollerEl using
+         * CSS, and {@link Ext.scroll.Indicator scroll indicators} will be shown while
+         * scrolling since there are no native scrollbars in this mode.
+         *
+         * This property is available at application boot time, before document ready.
+         * @private
+         */
+            name: 'touchScroll',
+            fn: function() {
+                var supports = Ext.supports,
+                    touchScroll = 0;
+                if (navigator.msMaxTouchPoints || (Ext.isWebKit && supports.TouchEvents && Ext.os.is.Desktop)) {
+                    touchScroll = 1;
+                } else if (supports.Touch) {
+                    touchScroll = 2;
+                }
+                return touchScroll;
             }
         },
         {
@@ -27936,7 +26931,7 @@ Ext.feature = {
         },
         {
             /**
-         * @property XHR2 `true` if the browser supports XMLHttpRequest
+         * @property XHR2 `true` if the browser supports XMLHttpRequest 
          *
          * This property is available at application boot time, before document ready.
          * @type {Boolean}
@@ -27949,7 +26944,7 @@ Ext.feature = {
         {
             /**
          * @property XHRUploadProgress `true` if the browser supports XMLHttpRequest
-         * upload progress info
+         * upload progress info 
          *
          * This property is available at application boot time, before document ready.
          * @type {Boolean}
@@ -27974,6 +26969,24 @@ Ext.feature = {
             name: 'NumericInputPlaceHolder',
             fn: function() {
                 return !(Ext.browser.is.AndroidStock4 && Ext.os.version.getMinor() < 2);
+            }
+        },
+        {
+            name: 'ProperHBoxStretching',
+            ready: true,
+            fn: function() {
+                // IE10 currently has a bug in their flexbox row layout. We feature detect the issue here.
+                var bodyElement = document.createElement('div'),
+                    innerElement = bodyElement.appendChild(document.createElement('div')),
+                    contentElement = innerElement.appendChild(document.createElement('div')),
+                    innerWidth;
+                bodyElement.setAttribute('style', 'width: 100px; height: 100px; position: relative;');
+                innerElement.setAttribute('style', 'position: absolute; display: -ms-flexbox; display: -webkit-flex; display: -moz-flexbox; display: flex; -ms-flex-direction: row; -webkit-flex-direction: row; -moz-flex-direction: row; flex-direction: row; min-width: 100%;');
+                contentElement.setAttribute('style', 'width: 200px; height: 50px;');
+                document.body.appendChild(bodyElement);
+                innerWidth = innerElement.offsetWidth;
+                document.body.removeChild(bodyElement);
+                return (innerWidth > 100);
             }
         },
         /**
@@ -28248,14 +27261,9 @@ Ext.feature = {
             fn: function(doc) {
                 var body = doc.body,
                     supports = false,
-                    el = doc.createElement('div'),
+                    el = this.getTestElement(),
                     style = el.style;
                 if (el.getBoundingClientRect) {
-                    // If the document body already has child nodes (text nodes etc) we can end
-                    // up with subpixel rounding errors in IE11 when measuring the height.
-                    // Absolute positioning prevents this.
-                    style.position = 'absolute';
-                    style.top = "0";
                     style.WebkitTransform = style.MozTransform = style.msTransform = style.OTransform = style.transform = 'rotate(90deg)';
                     style.width = '100px';
                     style.height = '30px';
@@ -28397,7 +27405,7 @@ Ext.feature = {
      * The element contains block-level children.  This method tests the effect
      * of padding on scrollWidth when there are no block-level children inside the
      * overflowing element.
-     *
+     * 
      * This method returns true if the browser is affected by this bug.
      *
      * This property is *NOT* available at application boot time. Only after the document ready event.
@@ -28496,10 +27504,10 @@ Ext.feature = {
                 return false;
             }
         },
-        /**
+        /*
      * @property {Boolean} SpecialKeyDownRepeat
      * True if the browser fires the keydown event on specialkey autorepeat
-     *
+     * 
      * note 1: IE fires ONLY the keydown event on specialkey autorepeat
      * note 2: Safari < 3.1, Gecko (Mac/Linux) & Opera fire only the keypress event on
      * specialkey autorepeat (research done by Jan Wolter at
@@ -28512,7 +27520,7 @@ Ext.feature = {
         {
             name: 'SpecialKeyDownRepeat',
             fn: function() {
-                return Ext.isWebKit ? parseInt(navigator.userAgent.match(/AppleWebKit\/(\d+)/)[1], 10) >= 525 : !(!(Ext.isGecko || Ext.isIE) || (Ext.isOpera && Ext.operaVersion < 12));
+                return Ext.isWebKit ? parseInt(navigator.userAgent.match(/AppleWebKit\/(\d+)/)[1], 10) >= 525 : !((Ext.isGecko && !Ext.isWindows) || (Ext.isOpera && Ext.operaVersion < 12));
             }
         },
         /**
@@ -28597,22 +27605,6 @@ Ext.feature = {
             }
         },
         /**
-     * @property {Boolean} AsyncFocusEvents
-     * `true` if the browser fires focus events (focus, blur, focusin, focusout)
-     * asynchronously, i.e. in a separate event loop invocation. This is only true
-     * for all versions Internet Explorer; Microsoft Edge and other browsers fire
-     * focus events synchronously.
-     */
-        {
-            name: 'AsyncFocusEvents',
-            fn: function() {
-                // The sad part is that we can't feature detect this because the focus
-                // event won't be fired when the browser window itself is not focused.
-                // Private shortcut for brevity
-                return Ext.asyncFocus = !!Ext.isIE;
-            }
-        },
-        /**
      * @property {Boolean} HighContrastMode `true` if the browser is currently
      * running in Windows High Contrast accessibility mode.
      *
@@ -28693,76 +27685,6 @@ Ext.feature = {
                 body.removeChild(div);
                 div = img = null;
                 return supports;
-            }
-        },
-        {
-            /**
-         * @property ViewportUnits `true` if the device supports ViewportUnits.
-         * @type {Boolean}
-         *
-         */
-            name: 'ViewportUnits',
-            ready: true,
-            fn: function(doc) {
-                // Even attempting to detect the feature throws a fatal error on IE8
-                if (Ext.isIE8) {
-                    return false;
-                }
-                var body = doc.body,
-                    div = document.createElement('div'),
-                    style = div.currentStyle || div.style,
-                    width, divWidth;
-                body.appendChild(div);
-                Ext.apply(style, {
-                    width: '50vw'
-                });
-                width = parseInt(window.innerWidth / 2, 10);
-                divWidth = parseInt((window.getComputedStyle ? getComputedStyle(div, null) : div.currentStyle).width, 10);
-                body.removeChild(div);
-                div = null;
-                return width === divWidth;
-            }
-        },
-        {
-            name: 'CSSVariables',
-            ready: false,
-            fn: function(doc) {
-                // Legacy browsers do not have this method.
-                if (!window.getComputedStyle) {
-                    return false;
-                }
-                var style = window.getComputedStyle(doc.documentElement);
-                return style.getPropertyValue && !!style.getPropertyValue('--x-supports-variables');
-            }
-        },
-        {
-            /**
-         * @property Selectors2 `true` if the browser supports the CSS selector API level 2.
-         * https://dev.w3.org/2006/webapi/selectors-api2/
-         * @type {Boolean}
-         *
-         */
-            name: 'Selectors2',
-            ready: false,
-            fn: function(doc) {
-                try {
-                    return !!doc.querySelectorAll(':scope');
-                } catch (e) {
-                    return false;
-                }
-            }
-        },
-        {
-            /**
-         * @property CSSScrollSnap
-         * @private
-         * @type {Boolean}
-         */
-            name: 'CSSScrollSnap',
-            ready: false,
-            fn: function(doc) {
-                var style = doc.documentElement.style;
-                return 'scrollSnapType' in style || 'webkitScrollSnapType' in style || 'msScrollSnapType' in style;
             }
         },
         0
@@ -28956,7 +27878,7 @@ Ext.env.Ready = {
     fireReady: function() {
         var me = Ext.env.Ready;
         if (!me.state) {
-            Ext._readyTime = Ext.ticks();
+            Ext._readyTime = Ext.now();
             Ext.isDomReady = true;
             me.state = 1;
             // As soon as we transition to domready, complete the feature detection:
@@ -28986,9 +27908,9 @@ Ext.env.Ready = {
         var me = this;
         if (me.state === 1) {
             me.state = 2;
-            Ext._beforeReadyTime = Ext.ticks();
+            Ext._beforeReadyTime = Ext.now();
             me.invokeAll();
-            Ext._afterReadyTime = Ext.ticks();
+            Ext._afterReadytime = Ext.now();
         }
     },
     /**
@@ -29525,6 +28447,7 @@ Ext.Loader = (new function() {
         readyListeners = [],
         usedClasses = [],
         _requiresMap = {},
+        _missingQueue = {},
         _config = {
             /**
              * @cfg {Boolean} [enabled=true]
@@ -29632,13 +28555,15 @@ Ext.Loader = (new function() {
         /**
          * @private
          */
-        classesLoading: {},
-        missingCount: 0,
-        missingQueue: {},
+        classesLoading: [],
         /**
          * @private
          */
         syncModeEnabled: false,
+        /**
+         * @private
+         */
+        missingQueue: _missingQueue,
         init: function() {
             // initalize the default path of the framework
             var scripts = document.getElementsByTagName('script'),
@@ -29647,7 +28572,7 @@ Ext.Loader = (new function() {
                 meta = Ext._classPathMetadata,
                 microloader = Ext.Microloader,
                 manifest = Ext.manifest,
-                loadOrder, classes, className, idx, baseUrl, loadlen, l, loadItem;
+                loadOrder, baseUrl, loadlen, l, loadItem;
             if (src.indexOf("packages/core/src/") !== -1) {
                 path = path + "../../";
             } else if (src.indexOf("/core/src/class/") !== -1) {
@@ -29671,7 +28596,6 @@ Ext.Loader = (new function() {
                     for (loadlen = loadOrder.length , l = 0; l < loadlen; l++) {
                         loadItem = loadOrder[l];
                         loadItem.path = baseUrl + loadItem.path;
-                        loadItem.canonicalPath = true;
                     }
                 }
             }
@@ -29721,9 +28645,7 @@ Ext.Loader = (new function() {
             return Loader;
         }),
         /**
-         * Get the config value corresponding to the specified name. If no name is given,
-         * will return the config object
-         *
+         * Get the config value corresponding to the specified name. If no name is given, will return the config object
          * @param {String} name The config property name
          * @return {Object}
          */
@@ -29749,7 +28671,7 @@ Ext.Loader = (new function() {
         /**
          * Sets a batch of path entries
          *
-         * @param {Object} paths a set of className: path mappings
+         * @param {Object } paths a set of className: path mappings
          * @return {Ext.Loader} this
          */
         addClassPathMappings: function(paths) {
@@ -29776,8 +28698,7 @@ Ext.Loader = (new function() {
          *
          *     alert(Ext.Loader.getPath('My.awesome.Class')); // alerts '/path/to/My/awesome/Class.js'
          *
-         * Note that the deeper namespace levels, if explicitly set, are always resolved first.
-         * For example:
+         * Note that the deeper namespace levels, if explicitly set, are always resolved first. For example:
          *
          *     Ext.Loader.setPath({
          *         'My': '/path/to/lib',
@@ -29839,19 +28760,18 @@ Ext.Loader = (new function() {
                 }
                 callback = callback.bind(scope || Ext.global);
             }
-            var state = Manager.classState,
-                missingClassNames = [],
-                urls = [],
-                urlByClass = {},
+            var missingClassNames = [],
                 numClasses = classNames.length,
-                url, className, i, numMissing;
+                className, i, numMissing,
+                urls = [],
+                state = Manager.classState;
             for (i = 0; i < numClasses; ++i) {
                 className = Manager.resolveName(classNames[i]);
                 if (!Manager.isCreated(className)) {
                     missingClassNames.push(className);
+                    _missingQueue[className] = Loader.getPath(className);
                     if (!state[className]) {
-                        urlByClass[className] = Loader.getPath(className);
-                        urls.push(urlByClass[className]);
+                        urls.push(_missingQueue[className]);
                     }
                 }
             }
@@ -29860,7 +28780,12 @@ Ext.Loader = (new function() {
             numMissing = missingClassNames.length;
             if (numMissing) {
                 Loader.missingCount += numMissing;
+                Ext.Array.push(Loader.classesLoading, missingClassNames);
                 Manager.onCreated(function() {
+                    Ext.Array.remove(Loader.classesLoading, missingClassNames);
+                    Ext.each(missingClassNames, function(name) {
+                        Ext.Array.remove(Loader.classesLoading, name);
+                    });
                     if (callback) {
                         Ext.callback(callback, scope, arguments);
                     }
@@ -29872,9 +28797,8 @@ Ext.Loader = (new function() {
                 if (urls.length) {
                     Loader.loadScripts({
                         url: urls,
-                        // scope will be this options object so we can pass these along:
-                        _classNames: missingClassNames,
-                        _urlByClass: urlByClass
+                        // scope: this options object so we can pass these along:
+                        _classNames: missingClassNames
                     });
                 } else {
                     // need to call checkReady here, as the _missingCoun
@@ -29924,47 +28848,23 @@ Ext.Loader = (new function() {
         },
         onLoadSuccess: function() {
             var options = this,
-                onLoad = options.onLoad,
-                classNames = options._classNames,
-                urlByClass = options._urlByClass,
-                state = Manager.classState,
-                missingQueue = Loader.missingQueue,
-                className, i, len;
+                onLoad = options.onLoad;
             --Loader.scriptsLoading;
             if (onLoad) {
                 //TODO: need an adapter to convert to v4 onLoad signatures
                 onLoad.call(options.userScope, options);
             }
             // onLoad can cause more loads to start, so it must run first
-            // classNames is the array of *all* classes that load() was asked to load,
-            // including those that might have been already loaded but not yet created.
-            // urlByClass is a map of only those classes that we asked Boot to load.
-            for (i = 0 , len = classNames.length; i < len; i++) {
-                className = classNames[i];
-                // When a script is loaded and executed, we should have Ext.define() called
-                // for at least one of the classes in the list, which will set the state
-                // for that class. That by itself does not mean that the class is available
-                // *now* but it means that ClassManager is tracking it and will fire the
-                // onCreated callback that we set back in load().
-                // However if there is no state for the class, that may mean two things:
-                // either it is not a Ext class, or it is truly missing. In any case we need
-                // to watch for that thing ourselves, which we will do every checkReady().
-                if (!state[className]) {
-                    missingQueue[className] = urlByClass[className];
-                }
-            }
             Loader.checkReady();
         },
-        // TODO: this timing of this needs to be deferred until all classes have had
-        // a chance to be created
+        // TODO: this timing of this needs to be deferred until all classes have had a chance to be created
         reportMissingClasses: function() {
             if (!Loader.syncModeEnabled && !Loader.scriptsLoading && Loader.isLoading && !Loader.hasFileLoadError) {
-                var missingQueue = Loader.missingQueue,
-                    missingClasses = [],
+                var missingClasses = [],
                     missingPaths = [];
-                for (var missingClassName in missingQueue) {
+                for (var missingClassName in _missingQueue) {
                     missingClasses.push(missingClassName);
-                    missingPaths.push(missingQueue[missingClassName]);
+                    missingPaths.push(_missingQueue[missingClassName]);
                 }
                 if (missingClasses.length) {
                     throw new Error("The following classes are not declared even if their files have been " + "loaded: '" + missingClasses.join("', '") + "'. Please check the source code of their " + "corresponding files for possible typos: '" + missingPaths.join("', '"));
@@ -30156,22 +29056,22 @@ Ext.Loader = (new function() {
         /**
          * @private
          */
-        checkMissingQueue: function() {
-            var missingQueue = Loader.missingQueue,
-                newQueue = {},
-                name,
+        flushMissingQueue: function() {
+            var name, val,
+                missingwas = 0,
                 missing = 0;
-            for (name in missingQueue) {
-                // If class state is available for the name, that means ClassManager
-                // is tracking it and will fire callback when it is created.
-                // We only need to track non-class things in the Loader.
-                if (!(Manager.classState[name] || Manager.isCreated(name))) {
-                    newQueue[name] = missingQueue[name];
-                    missing++;
+            for (name in _missingQueue) {
+                missingwas++;
+                val = _missingQueue[name];
+                if (Manager.isCreated(name)) {
+                    delete _missingQueue[name];
+                } else if (Manager.existCache[name] === 2) {
+                    delete _missingQueue[name];
+                } else {
+                    ++missing;
                 }
             }
-            Loader.missingCount = missing;
-            Loader.missingQueue = newQueue;
+            this.missingCount = missing;
         },
         /**
          * @private
@@ -30179,25 +29079,13 @@ Ext.Loader = (new function() {
         checkReady: function() {
             var wasLoading = Loader.isLoading,
                 isLoading;
-            Loader.checkMissingQueue();
+            Loader.flushMissingQueue();
             isLoading = Loader.missingCount + Loader.scriptsLoading;
             if (isLoading && !wasLoading) {
                 Ready.block();
                 Loader.isLoading = !!isLoading;
             } else if (!isLoading && wasLoading) {
                 Loader.triggerReady();
-            }
-            if (!Loader.scriptsLoading && Loader.missingCount) {
-                // Things look bad, but since load requests may come later, defer this
-                // for a bit then check if things are still stuck.
-                Ext.defer(function() {
-                    if (!Loader.scriptsLoading && Loader.missingCount) {
-                        Ext.log.error('[Loader] The following classes failed to load:');
-                        for (var name in Loader.missingQueue) {
-                            Ext.log.error('[Loader] ' + name + ' from ' + Loader.missingQueue[name]);
-                        }
-                    }
-                }, 1000);
             }
         }
     });
@@ -30310,23 +29198,19 @@ Ext.Loader = (new function() {
         if (className) {
             _requiresMap[className] = dependencies;
         }
-        var manifestClasses = Ext.manifest && Ext.manifest.classes,
-            deadlockPath = [],
+        var deadlockPath = [],
             detectDeadlock;
         /*
-         * Automatically detect deadlocks before-hand,
-         * will throw an error with detailed path for ease of debugging. Examples
-         * of deadlock cases:
-         *
-         *  - A extends B, then B extends A
-         *  - A requires B, B requires C, then C requires A
-         *
-         * The detectDeadlock function will recursively transverse till the leaf, hence
-         * it can detect deadlocks no matter how deep the path is. However we don't need
-         * to run this check if the class name is in the manifest: that means Cmd has
-         * already resolved all dependencies for this class with no deadlocks.
-         */
-        if (className && (!manifestClasses || !manifestClasses[className])) {
+        Automatically detect deadlocks before-hand,
+        will throw an error with detailed path for ease of debugging. Examples of deadlock cases:
+
+        - A extends B, then B extends A
+        - A requires B, B requires C, then C requires A
+
+        The detectDeadlock function will recursively transverse till the leaf, hence it can detect deadlocks
+        no matter how deep the path is.
+        */
+        if (className) {
             requiredMap = Loader.requiredByMap || (Loader.requiredByMap = {});
             for (i = 0 , ln = dependencies.length; i < ln; i++) {
                 dependency = dependencies[i];
@@ -30334,17 +29218,12 @@ Ext.Loader = (new function() {
             }
             detectDeadlock = function(cls) {
                 deadlockPath.push(cls);
-                var requires = _requiresMap[cls],
-                    dep, i, ln;
-                if (requires) {
-                    if (Ext.Array.contains(requires, className)) {
-                        Ext.Error.raise("Circular requirement detected! '" + className + "' and '" + deadlockPath[1] + "' mutually require each other. Path: " + deadlockPath.join(' -> ') + " -> " + deadlockPath[0]);
+                if (_requiresMap[cls]) {
+                    if (Ext.Array.contains(_requiresMap[cls], className)) {
+                        Ext.raise("Circular requirement detected! '" + className + "' and '" + deadlockPath[1] + "' mutually require each other. Path: " + deadlockPath.join(' -> ') + " -> " + deadlockPath[0]);
                     }
-                    for (i = 0 , ln = requires.length; i < ln; i++) {
-                        dep = requires[i];
-                        if (!isInHistory[dep]) {
-                            detectDeadlock(requires[i]);
-                        }
+                    for (i = 0 , ln = _requiresMap[cls].length; i < ln; i++) {
+                        detectDeadlock(_requiresMap[cls][i]);
                     }
                 }
             };
@@ -30401,19 +29280,38 @@ Ext.Loader = (new function() {
     Manager.registerPostprocessor('uses', function(name, cls, data) {
         Ext.classSystemMonitor && Ext.classSystemMonitor(cls, 'Ext.Loader#usesPostprocessor', arguments);
         // jshint ignore:line
-        var uses = data.uses,
-            classNames;
-        if (uses) {
-            classNames = Manager.getNamesByExpression(data.uses);
-            Loader.addUsedClasses(classNames);
+        var manifest = Ext.manifest,
+            loadOrder = manifest && manifest.loadOrder,
+            classes = manifest && manifest.classes,
+            uses, clazz, item, len, i, indexMap;
+        if (loadOrder) {
+            clazz = classes[name];
+            if (clazz && !isNaN(i = clazz.idx)) {
+                item = loadOrder[i];
+                uses = item.uses;
+                indexMap = {};
+                for (len = uses.length , i = 0; i < len; i++) {
+                    indexMap[uses[i]] = true;
+                }
+                uses = Ext.Boot.getPathsFromIndexes(indexMap, loadOrder, true);
+                if (uses.length > 0) {
+                    Loader.loadScripts({
+                        url: uses,
+                        sequential: true
+                    });
+                }
+            }
+        }
+        if (data.uses) {
+            uses = data.uses;
+            Loader.addUsedClasses(uses);
         }
     });
     Manager.onCreated(Loader.historyPush);
     Loader.init();
 }());
 //-----------------------------------------------------------------------------
-// Use performance.now when available to keep timestamps consistent.
-Ext._endTime = Ext.ticks();
+Ext._endTime = new Date().getTime();
 // This hook is to allow tools like DynaTrace to deterministically detect the availability
 // of Ext.onReady. Since Loader takes over Ext.onReady this must be done here and not in
 // Ext.env.Ready.
@@ -30421,9 +29319,7 @@ if (Ext._beforereadyhandler) {
     Ext._beforereadyhandler();
 }
 
-/**
- *
- */
+/** */
 Ext.define('Ext.overrides.util.Positionable', {
     override: 'Ext.util.Positionable',
     /**
@@ -30455,7 +29351,7 @@ Ext.define('Ext.overrides.util.Positionable', {
         var me = this,
             scroll = !Ext.isEmpty(monitorScroll),
             action = function() {
-                me.mixins.positionable.alignTo.call(me, anchorToEl, alignment, offsets, animate);
+                me.alignTo(anchorToEl, alignment, offsets, animate);
                 Ext.callback(callback, me);
             },
             anchor = me.getAnchor();
@@ -30487,29 +29383,6 @@ Ext.define('Ext.overrides.util.Positionable', {
             anchor = data._anchor = {};
         }
         return anchor;
-    },
-    alignTo: function(element, position, offsets, /* private (documented in ext) */
-    animate) {
-        var me = this,
-            el = me.el,
-            newMaxHeight, newRegion;
-        // Release any height constraint prior to aligning if we are shrinkwrap height.
-        if (me.isComponent && me.getSizeModel().height.shrinkWrap) {
-            if (me.maxHeight) {
-                me.setMaxHeight(null);
-            }
-            newMaxHeight = true;
-        }
-        newRegion = me.getAlignToRegion(element, position, offsets, me.minHeight || 150);
-        me.setXY([
-            newRegion.x,
-            newRegion.y
-        ], el.anim && !!animate ? el.anim(animate) : false);
-        // Impose calculated height constraint.
-        if (newMaxHeight && (newMaxHeight = newRegion.getHeight()) !== me.getHeight()) {
-            me.setMaxHeight(newMaxHeight);
-        }
-        return me;
     },
     /**
      * @method move
@@ -30581,7 +29454,7 @@ Ext.define('Ext.overrides.util.Positionable', {
 /**
      * @method setX
      * Sets the X position of the DOM element based on page coordinates.
-     * @param {Number} x The X position
+     * @param {Number} The X position
      * @param {Boolean/Object} [animate] True for the default animation, or a standard
      * Element animation config object
      * @return {Ext.util.Positionable} this
@@ -30598,7 +29471,7 @@ Ext.define('Ext.overrides.util.Positionable', {
 /**
      * @method setY
      * Sets the Y position of the DOM element based on page coordinates.
-     * @param {Number} y The Y position
+     * @param {Number} The Y position
      * @param {Boolean/Object} [animate] True for the default animation, or a standard
      * Element animation config object
      * @return {Ext.util.Positionable} this
@@ -31048,8 +29921,7 @@ Ext.define('Ext.overrides.event.publisher.Dom', {
     override: 'Ext.event.publisher.Dom'
 }, function(DomPublisher) {
     if (Ext.isIE9m) {
-        var docElement = document.documentElement,
-            docBody = document.body,
+        var docBody = document.body,
             prototype = DomPublisher.prototype,
             onDirectEvent, onDirectCaptureEvent;
         prototype.target = document;
@@ -31101,47 +29973,33 @@ Ext.define('Ext.overrides.event.publisher.Dom', {
                 if (dom.attachEvent) {
                     dom.attachEvent('on' + eventName, boundFn);
                 } else {
-                    me.callParent([
-                        eventName,
-                        element,
-                        capture
-                    ]);
+                    me.callParent(arguments);
                 }
             },
-            removeDirectListener: function(eventName, element, capture) {
+            removeDirectListener: function(eventName, element) {
                 var dom = element.dom;
                 if (dom.detachEvent) {
                     dom.detachEvent('on' + eventName, this.directBoundListeners[eventName][dom.id]);
                 } else {
-                    this.callParent([
-                        eventName,
-                        element,
-                        capture
-                    ]);
+                    this.callParent(arguments);
                 }
             },
-            doDelegatedEvent: function(e) {
+            doDelegatedEvent: function(e, invokeAfter) {
                 e.target = e.srcElement || window;
                 if (e.type === 'focusin') {
-                    // IE8 sometimes happen to focus <html> element instead of the body
-                    e.relatedTarget = e.fromElement === docBody || e.fromElement === docElement ? null : e.fromElement;
+                    e.relatedTarget = e.fromElement === docBody ? null : e.fromElement;
                 } else if (e.type === 'focusout') {
-                    e.relatedTarget = e.toElement === docBody || e.toElement === docElement ? null : e.toElement;
+                    e.relatedTarget = e.toElement === docBody ? null : e.toElement;
                 }
                 return this.callParent([
-                    e
+                    e,
+                    invokeAfter
                 ]);
             }
         });
         // can't capture any events without addEventListener.  Have to have direct
         // listeners for every event that does not bubble.
         Ext.apply(prototype.directEvents, prototype.captureEvents);
-        // These do not bubble in IE9m so have to attach direct listeners as well.
-        Ext.apply(prototype.directEvents, {
-            change: 1,
-            input: 1,
-            paste: 1
-        });
         prototype.captureEvents = {};
     }
 });
@@ -31248,7 +30106,9 @@ Ext.define('Ext.overrides.dom.Element', (function() {
             TEXTAREA: true
         };
     if (Ext.isIE8) {
-        var garbageBin = DOC.createElement('div'),
+        var removeNode = Ext.removeNode,
+            // save a reference to the removeNode function defined in sencha-core
+            garbageBin = DOC.createElement('div'),
             destroyQueue = [],
             // prevent memory leaks in IE8
             // see http://social.msdn.microsoft.com/Forums/ie/en-US/c76967f0-dcf8-47d0-8984-8fe1282a94f5/ie-appendchildremovechild-memory-problem?forum=iewebdevelopment
@@ -31263,6 +30123,14 @@ Ext.define('Ext.overrides.dom.Element', (function() {
                 garbageBin.innerHTML = '';
                 destroyQueue.length = 0;
             }, 10);
+        Ext.removeNode = function(node) {
+            node = node.dom || node;
+            removeNode(node);
+            destroyQueue[destroyQueue.length] = node;
+            // Will perform extra IE8 cleanup in 10 milliseconds
+            // see http://social.msdn.microsoft.com/Forums/ie/en-US/c76967f0-dcf8-47d0-8984-8fe1282a94f5/ie-appendchildremovechild-memory-problem?forum=iewebdevelopment
+            clearGarbage();
+        };
     }
     return {
         override: 'Ext.dom.Element',
@@ -31280,10 +30148,6 @@ Ext.define('Ext.overrides.dom.Element', (function() {
         _init: function(E) {
             Element = E;
             // now we can poke this into closure scope
-            // We want to expose destroyQueue on the prototype for testing purposes
-            if (WIN.__UNIT_TESTING__) {
-                E.destroyQueue = destroyQueue;
-            }
             // Allow overriding the attribute name and/or selector; this is
             // done only once for performance reasons
             E.tabbableSelector += ',[' + E.tabbableSavedCounterAttribute + ']';
@@ -31305,8 +30169,7 @@ Ext.define('Ext.overrides.dom.Element', (function() {
                 OBJECT: true,
                 SELECT: true,
                 TEXTAREA: true,
-                HTML: Ext.isIE ? true : false,
-                BODY: Ext.isIE ? false : true
+                HTML: Ext.isIE ? true : false
             },
             // <object> element is naturally tabbable only in IE8 and below
             naturallyTabbableTags: {
@@ -32496,6 +31359,42 @@ Ext.define('Ext.overrides.dom.Element', (function() {
             return maskEl;
         },
         /**
+         * Monitors this Element for the mouse leaving. Calls the function after the specified delay only if
+         * the mouse was not moved back into the Element within the delay. If the mouse *was* moved
+         * back in, the function is not called.
+         * @param {Number} delay The delay **in milliseconds** to wait for possible mouse re-entry before calling the handler function.
+         * @param {Function} handler The function to call if the mouse remains outside of this Element for the specified time.
+         * @param {Object} [scope] The scope (`this` reference) in which the handler function executes. Defaults to this Element.
+         * @return {Object} The listeners object which was added to this element so that monitoring can be stopped. Example usage:
+         *
+         *     // Hide the menu if the mouse moves out for 250ms or more
+         *     this.mouseLeaveMonitor = this.menuEl.monitorMouseLeave(250, this.hideMenu, this);
+         *
+         *     ...
+         *     // Remove mouseleave monitor on menu destroy
+         *     this.menuEl.un(this.mouseLeaveMonitor);
+         *
+         */
+        monitorMouseLeave: function(delay, handler, scope) {
+            var me = this,
+                timer,
+                listeners = {
+                    mouseleave: function(e) {
+                        if (Ext.isIE9m) {
+                            e.enableIEAsync();
+                        }
+                        timer = Ext.defer(handler, delay, scope || me, [
+                            e
+                        ]);
+                    },
+                    mouseenter: function() {
+                        clearTimeout(timer);
+                    }
+                };
+            me.on(listeners);
+            return listeners;
+        },
+        /**
          * Fades the element out while slowly expanding it in all directions. When the effect is completed, the element will
          * be hidden (visibility = 'hidden') but block elements will still take up space in the document. Usage:
          *
@@ -32605,7 +31504,7 @@ Ext.define('Ext.overrides.dom.Element', (function() {
          *     Ext.fly('elId').setHeight(150, {
          *         duration : 500, // animation will have a duration of .5 seconds
          *         // will change the content to "finished"
-         *         callback: function(){ this.setHtml("finished"); }
+         *         callback: function(){ this.{@link #setHtml}("finished"); }
          *     });
          *     
          * @param {Number/String} height The new height. This may be one of:
@@ -32679,17 +31578,11 @@ Ext.define('Ext.overrides.dom.Element', (function() {
         /**
          * Updates the innerHTML of this element, optionally searching for and processing scripts.
          * @param {String} html The new HTML
-         * @param {Boolean} [loadScripts] Pass `true` to look for and process scripts.
-         * @param {Function} [callback] For async script loading you can be notified when the update completes.
-         * @param {Object} [scope=`this`] The scope (`this` reference) in which to execute the callback.
-         * 
-         * Also used as the scope for any *inline* script source if the `loadScripts` parameter is `true`.
-         * Scripts with a `src` attribute cannot be executed in this scope.
-         *
-         * Defaults to this Element.
+         * @param {Boolean} [loadScripts] True to look for and process scripts (defaults to false)
+         * @param {Function} [callback] For async script loading you can be notified when the update completes
          * @return {Ext.dom.Element} this
          */
-        setHtml: function(html, loadScripts, callback, scope) {
+        setHtml: function(html, loadScripts, callback) {
             var me = this,
                 id, dom, interval;
             if (!me.dom) {
@@ -32724,14 +31617,11 @@ Ext.define('Ext.overrides.dom.Element', (function() {
                         }
                         hd.appendChild(s);
                     } else if (match[2] && match[2].length > 0) {
-                        if (scope) {
-                            Ext.functionFactory(match[2]).call(scope);
-                        } else {
-                            Ext.globalEval(match[2]);
-                        }
+                        (WIN.execScript || WIN.eval)(match[2]);
                     }
                 }
-                Ext.callback(callback, scope || me);
+                // jshint ignore:line
+                Ext.callback(callback, me);
             }, 20);
             dom.innerHTML = html.replace(replaceScriptTagRe, '');
             return me;
@@ -32939,7 +31829,7 @@ Ext.define('Ext.overrides.dom.Element', (function() {
          *     Ext.fly('elId').setWidth(150, {
          *         duration : 500, // animation will have a duration of .5 seconds
          *         // will change the content to "finished"
-         *         callback: function(){ this.setHtml("finished"); }
+         *         callback: function(){ this.{@link #setHtml}("finished"); }
          *     });
          *     
          * @param {Number/String} width The new width. This may be one of:
@@ -33301,8 +32191,8 @@ Ext.define('Ext.overrides.dom.Element', (function() {
          * @param {Object} options (optional) Object literal with any of the {@link Ext.fx.Anim} config options
          * @return {Ext.dom.Element} The Element
          */
-        slideOut: function(anchor, options) {
-            return this.slideIn(anchor, options, true);
+        slideOut: function(anchor, o) {
+            return this.slideIn(anchor, o, true);
         },
         /**
          * Stops the specified event(s) from bubbling and optionally prevents the default action
@@ -33388,11 +32278,11 @@ Ext.define('Ext.overrides.dom.Element', (function() {
          * @param {Object} options (optional) Object literal with any of the {@link Ext.fx.Anim} config options
          * @return {Ext.dom.Element} The Element
          */
-        switchOff: function(options) {
+        switchOff: function(obj) {
             var me = this,
                 dom = me.dom,
                 beforeAnim;
-            options = Ext.applyIf(options || {}, {
+            obj = Ext.applyIf(obj || {}, {
                 easing: 'ease-in',
                 duration: 500,
                 remove: false,
@@ -33409,8 +32299,8 @@ Ext.define('Ext.overrides.dom.Element', (function() {
                 position = el.getPositioning();
                 keyframe = new Ext.fx.Animator({
                     target: dom,
-                    duration: options.duration,
-                    easing: options.easing,
+                    duration: obj.duration,
+                    easing: obj.easing,
                     keyframes: {
                         33: {
                             opacity: 0.3
@@ -33427,7 +32317,7 @@ Ext.define('Ext.overrides.dom.Element', (function() {
                 });
                 keyframe.on('afteranimate', function() {
                     var el = Ext.fly(dom, '_anim');
-                    if (options.useDisplay) {
+                    if (obj.useDisplay) {
                         el.setDisplayed(false);
                     } else {
                         el.hide();
@@ -33441,19 +32331,19 @@ Ext.define('Ext.overrides.dom.Element', (function() {
             };
             me.animate({
                 // See "A Note About Wrapped Animations" at the top of this class:
-                duration: (Math.max(options.duration, 500) * 2),
+                duration: (Math.max(obj.duration, 500) * 2),
                 listeners: {
                     beforeanimate: {
                         fn: beforeAnim
                     }
                 },
-                callback: options.callback,
-                scope: options.scope
+                callback: obj.callback,
+                scope: obj.scope
             });
             return me;
         },
         /**
-         * @private
+         * @private.
          * Currently used for updating grid cells without modifying DOM structure
          *
          * Synchronizes content of this Element with the content of the passed element.
@@ -34259,66 +33149,6 @@ Ext.define('Ext.overrides.dom.Element', (function() {
             this.removeCls(syncRepaintCls);
         };
     }
-    if (Ext.isIE10m) {
-        Ext.override(Element, {
-            focus: function(defer, dom) {
-                var me = this,
-                    ex;
-                dom = dom || me.dom;
-                if (Number(defer)) {
-                    Ext.defer(me.focus, defer, me, [
-                        null,
-                        dom
-                    ]);
-                } else {
-                    Ext.GlobalEvents.fireEvent('beforefocus', dom);
-                    // IE10m has an acute problem with focusing input elements;
-                    // when the element was just shown and did not have enough
-                    // time to initialize, focusing it might fail. The problem
-                    // is somewhat random in nature; most of the time focusing
-                    // an input element will succeed, failing only occasionally.
-                    // When it fails, the focus will be thrown to the document
-                    // body element, with subsequent focusout/focusin event pair
-                    // on the body, which throws off our focusenter/focusleave
-                    // processing.
-                    // Fortunately for us, when this focus failure happens, the
-                    // resulting focusout event will happen *synchronously*
-                    // unlike the normal focusing events which IE will fire
-                    // asynchronously. Also fortunately for us, in most cases
-                    // trying to focus the given element the second time
-                    // immediately after it failed to focus the first time
-                    // seems to do the trick; however when second focus attempt
-                    // succeeds, it will result in focusout on the body and
-                    // focusin on the given element, which again wreaks havoc
-                    // on our focusenter/focusleave handling.
-                    // The only workable solution we have is to pretend that
-                    // focus never went to the document body and ignore the
-                    // focusout and focusin caused by failed first focus attempt.
-                    // To this end, we fudge the event stream in Focus publisher
-                    // override.
-                    if (dom && (dom.tagName === 'INPUT' || dom.tagname === 'TEXTAREA')) {
-                        Ext.synchronouslyFocusing = document.activeElement;
-                    }
-                    // Also note that trying to focus an unfocusable element
-                    // might throw an exception in IE8. What a cute idea, MS. :(
-                    try {
-                        dom.focus();
-                    } catch (xcpt) {
-                        ex = xcpt;
-                    }
-                    // Ok so now we have this situation when we tried to focus
-                    // the first time but did not succeed. Let's try again but
-                    // not if there was an exception the first time - when the
-                    // "focus failure" happens it does so silently. :(
-                    if (Ext.synchronouslyFocusing && document.activeElement !== dom && !ex) {
-                        dom.focus();
-                    }
-                    Ext.synchronouslyFocusing = null;
-                }
-                return me;
-            }
-        });
-    }
     Ext.apply(Ext, {
         /**
          * `true` to automatically uncache orphaned Ext.Elements periodically. If set to
@@ -34337,6 +33167,22 @@ Ext.define('Ext.overrides.dom.Element', (function() {
          * and {@link Ext.LoadMask LoadMasks}
          */
         useShims: false,
+        /**
+         * @private
+         * Returns an HTML div element into which {@link Ext.container.Container#method-remove removed} components
+         * are placed so that their DOM elements are not garbage collected as detached Dom trees.
+         * @return {Ext.dom.Element}
+         * @member Ext
+         */
+        getDetachedBody: function() {
+            var detachedEl = Ext.detachedBodyEl;
+            if (!detachedEl) {
+                detachedEl = DOC.createElement('div');
+                Ext.detachedBodyEl = detachedEl = new Ext.dom.Fly(detachedEl);
+                detachedEl.isDetachedBody = true;
+            }
+            return detachedEl;
+        },
         getElementById: function(id) {
             var el = DOC.getElementById(id),
                 detachedBodyEl;
@@ -34961,6 +33807,9 @@ Ext.define('Ext.overrides.Widget', {
     config: {
         renderTo: null
     },
+    cachedConfig: {
+        baseCls: Ext.baseCSSPrefix + 'widget'
+    },
     constructor: function(config) {
         var me = this,
             renderTo;
@@ -35107,13 +33956,6 @@ Ext.define('Ext.overrides.Widget', {
     }
 });
 
-Ext.define('Ext.overrides.Progress', {
-    override: 'Ext.Progress',
-    config: {
-        ui: 'default'
-    }
-});
-
 Ext.define('Ext.overrides.app.domain.Component', {
     override: 'Ext.app.domain.Component',
     requires: [
@@ -35197,14 +34039,10 @@ Ext.define('Ext.overrides.app.Application', {
          */
         enableQuickTips: true
     },
-    applyMainView: function(mainView) {
-        var view, proto, config, plugins;
-        if (typeof mainView === 'string') {
-            view = this.getView(mainView);
-        } else {
-            view = Ext.ClassManager.getByConfig(mainView);
-        }
-        proto = view.prototype;
+    applyMainView: function(value) {
+        var view = this.getView(value),
+            proto = view.prototype,
+            config, plugins;
         if (!proto.isViewport) {
             plugins = proto.plugins;
             // Need to copy over any plugins defined on the prototype.
@@ -35353,90 +34191,37 @@ Ext.define('Ext.overrides.dom.Helper', (function() {
 
 Ext.define('Ext.overrides.list.TreeItem', {
     override: 'Ext.list.TreeItem',
-    config: {
-        floated: null
-    },
-    // Implement a setter.
-    // There *is* no "floated" config in Classic.
-    // We're still an inner item, we just get put inside a Container.
-    setFloated: function(floated) {
+    createFloater: function() {
         var me = this,
-            el = me.element,
-            placeholder = me.placeholder,
-            node, wasExpanded;
-        if (me.treeItemFloated !== floated) {
-            if (floated) {
-                placeholder = el.clone(false, true);
-                // shallow, asDom
-                placeholder.id += '-placeholder';
-                // avoid duplicate id
-                me.placeholder = Ext.get(placeholder);
-                me.wasExpanded = me.getExpanded();
-                me.setExpanded(true);
-                el.addCls(me.floatedCls);
-                el.dom.parentNode.insertBefore(placeholder, el.dom);
-                me.floater = me.createFloater();
-            }
-            // toolkit-specific
-            else if (placeholder) {
-                wasExpanded = me.wasExpanded;
-                node = me.getNode();
-                me.setExpanded(wasExpanded);
-                if (!wasExpanded && node.isExpanded()) {
-                    // If we have been floating and expanded a child, we may have been
-                    // expanded as part of the ancestors. Attempt to restore state.
-                    me.preventAnimation = true;
-                    node.collapse();
-                    me.preventAnimation = false;
-                }
-                me.floater.remove(me, false);
-                // don't destroy
-                el.removeCls(me.floatedCls);
-                placeholder.dom.parentNode.insertBefore(el.dom, placeholder.dom);
-                placeholder.destroy();
-                me.floater.destroy();
-                me.placeholder = me.floater = null;
-            }
-            // Use an internal property name. We are NOT really floated
-            me.treeItemFloated = floated;
+            owner = me.getOwner(),
+            ui = owner.getUi(),
+            cls = Ext.baseCSSPrefix + 'treelist',
+            floater;
+        if (ui) {
+            cls += ' ' + cls + '-' + ui;
         }
-    },
-    getFloated: function() {
-        return this.treeItemFloated;
+        me.floater = floater = new Ext.container.Container({
+            cls: cls + ' ' + Ext.baseCSSPrefix + 'treelist-floater',
+            floating: true,
+            width: 200,
+            shadow: false,
+            renderTo: Ext.getBody(),
+            listeners: {
+                element: 'el',
+                click: function(e) {
+                    return owner.onClick(e);
+                }
+            }
+        });
+        floater.add(me);
+        floater.el.alignTo(me.getToolElement(), 'tr?');
+        return floater;
     },
     runAnimation: function(animation) {
         return this.itemContainer.addAnimation(animation);
     },
     stopAnimation: function(animation) {
         animation.jumpToEnd();
-    },
-    privates: {
-        createFloater: function() {
-            var me = this,
-                owner = me.getOwner(),
-                ownerTree = me.up('treelist'),
-                floater,
-                toolElement = me.getToolElement();
-            me.floater = floater = new Ext.container.Container({
-                cls: ownerTree.self.prototype.element.cls + ' ' + ownerTree.uiPrefix + ownerTree.getUi() + ' ' + Ext.baseCSSPrefix + 'treelist-floater',
-                floating: true,
-                // We do not get element resize events on IE8
-                // so fall back to 6.0.1 sizing to 200 wide.
-                width: Ext.isIE8 ? 200 : (ownerTree.expandedWidth - toolElement.getWidth()),
-                shadow: false,
-                renderTo: Ext.getBody(),
-                listeners: {
-                    element: 'el',
-                    click: function(e) {
-                        return owner.onClick(e);
-                    }
-                }
-            });
-            floater.add(me);
-            floater.show();
-            floater.el.alignTo(toolElement, 'tr?');
-            return floater;
-        }
     }
 });
 
@@ -35521,168 +34306,4 @@ Ext.define('Ext.overrides.plugin.Abstract', {
  * @param {Ext.Component} component The owner component attached to the 
  * ViewController
  */
-
-Ext.define(null, {
-    override: 'Ext.event.publisher.Focus',
-    compatibility: Ext.isIE10m,
-    publishDelegatedDomEvent: function(e) {
-        var body = document.body,
-            el = Ext.synchronouslyFocusing;
-        // This horrid hack is necessary to work around the issue with input elements
-        // in IE10m that can fail to focus under certain conditions. See comment in
-        // Ext.dom.Element override.
-        if (el && ((e.type === 'focusout' && (e.srcElement === el || e.srcElement === window) && e.toElement === body) || (e.type === 'focusin' && (e.srcElement === body || e.srcElement === window) && e.fromElement === el && e.toElement === null))) {
-            return;
-        }
-        this.callParent([
-            e
-        ]);
-    }
-});
-
-Ext.define(null, {
-    override: 'Ext.form.field.Checkbox',
-    compatibility: Ext.isIE8,
-    // IE8 does not support change event but it has propertychange which is even better
-    changeEventName: 'propertychange',
-    onChangeEvent: function(e) {
-        // IE8 propertychange fires for *any* property change but we're only interested in checked
-        // We also don't want to react to propertychange fired as the result of assigning
-        // checked property in setRawValue().
-        if (this.duringSetRawValue || e.browserEvent.propertyName !== 'checked') {
-            return;
-        }
-        this.callParent([
-            e
-        ]);
-    },
-    updateCheckedCls: function(checked) {
-        var me = this,
-            displayEl = me.displayEl;
-        me.callParent([
-            checked
-        ]);
-        // IE8 has a bug with font icons and pseudo-elements
-        if (displayEl && checked !== me.lastValue) {
-            displayEl.repaint();
-        }
-    }
-});
-
-Ext.define(null, {
-    override: 'Ext.form.field.Radio',
-    compatibility: Ext.isIE8,
-    getSubTplData: function(fieldData) {
-        var data = this.callParent([
-                fieldData
-            ]);
-        // Rendering a radio button with checked attribute
-        // will have a curious side effect in IE8: the DOM
-        // node will have checked property set to `true` but
-        // radio group (radios with the same name attribute)
-        // will behave as if no radio is checked in the group;
-        // tabbing into the group will select first or last
-        // button instead of the checked one.
-        // So instead of rendering the attribute we will set
-        // checked value in the DOM after rendering. Apparently
-        // such a tiny nudge is enough for the browser to behave.
-        delete data.checked;
-        return data;
-    },
-    afterRender: function() {
-        this.callParent();
-        if (this.checked) {
-            this.inputEl.dom.checked = true;
-        }
-    },
-    onChange: function(newValue, oldValue) {
-        // We don't need to bother updating other radio buttons in IE8
-        // since it will fire propertychange event on any change, not only false -> true.
-        // This is unlike standard compliant browsers, see main class.
-        this.callSuper([
-            newValue,
-            oldValue
-        ]);
-    }
-});
-
-Ext.define(null, {
-    override: 'Ext.scroll.Scroller',
-    compatibility: Ext.isIE8,
-    privates: {
-        // Important note: this code had to be copied as a whole
-        // because the scrollLeft assignment trickery only works
-        // reliably when it is done within the same function context.
-        doScrollTo: function(x, y, animate) {
-            var me = this,
-                element = me.getElement(),
-                maxPosition, dom, to, xInf, yInf;
-            if (element && !element.destroyed) {
-                dom = this.getElement().dom;
-                xInf = (x === Infinity);
-                yInf = (y === Infinity);
-                if (xInf || yInf) {
-                    maxPosition = me.getMaxPosition();
-                    if (xInf) {
-                        x = maxPosition.x;
-                    }
-                    if (yInf) {
-                        y = maxPosition.y;
-                    }
-                }
-                x = me.convertX(x);
-                if (animate) {
-                    to = {};
-                    if (y != null) {
-                        to.scrollTop = y;
-                    }
-                    if (x != null) {
-                        to.scrollLeft = x;
-                    }
-                    element.animate(Ext.mergeIf({
-                        to: {
-                            scrollTop: y,
-                            scrollLeft: x
-                        }
-                    }, animate));
-                } else {
-                    // When we need to assign both scrollTop and scrollLeft,
-                    // IE8 might fire scroll event on the first assignment
-                    // but not on the second; that behavior is unlike the other
-                    // browsers which will wait for the second assignment
-                    // to happen before firing the event. This leads to our
-                    // scrollstart event firing prematurely, when the scrolling
-                    // has not actually finished yet.
-                    // To work around that, we ignore the first event and then
-                    // force another one by assigning scrollLeft the second time.
-                    if (x != null && y != null) {
-                        me.deferDomScroll = true;
-                    }
-                    if (y != null) {
-                        dom.scrollTop = y;
-                    }
-                    if (x != null) {
-                        dom.scrollLeft = x;
-                    }
-                    if (me.deferDomScroll) {
-                        me.deferDomScroll = false;
-                        // Reading the DOM makes sure the second assignment
-                        // will fire the event.
-                        +dom.scrollLeft;
-                        dom.scrollLeft = x;
-                    }
-                }
-                // Our position object will need refreshing before returning.
-                me.positionDirty = true;
-            }
-        },
-        onDomScroll: function() {
-            var me = this;
-            if (me.deferDomScroll) {
-                return;
-            }
-            me.callParent();
-        }
-    }
-});
 

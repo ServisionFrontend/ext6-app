@@ -67,7 +67,7 @@ Ext.define('Ext.util.Renderable', {
     frameElNames: ['TL','TC','TR','ML','MC','MR','BL','BC','BR','Table'],
 
     frameTpl: [
-        '<tpl if="hasTabGuard">{% this.renderTabGuard(out, values, \'before\'); %}</tpl>',
+        '{%this.renderDockedItems(out,values,0);%}',
         '<tpl if="top">',
             '<tpl if="left"><div id="{fgid}TL" data-ref="frameTL" class="{frameCls}-tl {baseCls}-tl {baseCls}-{ui}-tl<tpl for="uiCls"> {parent.baseCls}-{parent.ui}-{.}-tl</tpl>{frameElCls}" role="presentation"></tpl>',
                 '<tpl if="right"><div id="{fgid}TR" data-ref="frameTR" class="{frameCls}-tr {baseCls}-tr {baseCls}-{ui}-tr<tpl for="uiCls"> {parent.baseCls}-{parent.ui}-{.}-tr</tpl>{frameElCls}" role="presentation"></tpl>',
@@ -89,11 +89,11 @@ Ext.define('Ext.util.Renderable', {
                 '<tpl if="right"></div></tpl>',
             '<tpl if="left"></div></tpl>',
         '</tpl>',
-        '<tpl if="hasTabGuard">{% this.renderTabGuard(out, values, \'after\'); %}</tpl>'
+        '{%this.renderDockedItems(out,values,1);%}'
     ],
 
     frameTableTpl: [
-        '<tpl if="hasTabGuard">{% this.renderTabGuard(out, values, \'before\'); %}</tpl>',
+        '{%this.renderDockedItems(out,values,0);%}',
         '<table id="{fgid}Table" data-ref="frameTable" class="{frameCls} ', Ext.baseCSSPrefix + 'table-plain" cellpadding="0" role="presentation">',
             '<tpl if="top">',
                 '<tr role="presentation">',
@@ -117,7 +117,7 @@ Ext.define('Ext.util.Renderable', {
                 '</tr>',
             '</tpl>',
         '</table>',
-        '<tpl if="hasTabGuard">{% this.renderTabGuard(out, values, \'after\'); %}</tpl>'
+        '{%this.renderDockedItems(out,values,1);%}'
     ],
 
     /**
@@ -148,7 +148,7 @@ Ext.define('Ext.util.Renderable', {
      *
      * @private
      * @readonly
-     * @since 6.0.0
+     * @since 5.5.0
      */
     ariaEl: 'el',
 
@@ -383,7 +383,7 @@ Ext.define('Ext.util.Renderable', {
 
         controller = me.controller;
         if (controller && controller.boxReady) {
-            controller.boxReady(me, width, height);
+            controller.boxReady(me);
         }
     },
 
@@ -401,8 +401,7 @@ Ext.define('Ext.util.Renderable', {
         var me = this,
             floating = me.floating,
             layout = me.getComponentLayout(),
-            cls = me.userCls,
-            controller;
+            cls, controller;
 
         me._renderState = 1;
         
@@ -425,10 +424,6 @@ Ext.define('Ext.util.Renderable', {
             // viewmodel. This needs to happen after the beforeRenderConfig block is
             // processed because that is what creates the viewModel.
             me.publishState();
-        }
-
-        if (cls) {
-            me.addCls(cls);
         }
 
         if (floating) {
@@ -626,10 +621,9 @@ Ext.define('Ext.util.Renderable', {
             baseCls: me.baseCls,
             componentCls: me.componentCls,
             frame: me.frame,
-            hasTabGuard: me.tabGuard,
+            renderScroller: me.touchScroll,
             scrollerCls: me.scrollerCls,
-            childElCls: '', // overridden in RTL
-            ariaEl: me.ariaEl
+            childElCls: '' // overridden in RTL
         }, me.renderData);
         
         // This code is similar (in fact, almost identical) to the one in getElConfig;
@@ -689,25 +683,9 @@ Ext.define('Ext.util.Renderable', {
             y = me.y,
             lastBox = null,
             el = me.el,
-            scroller = me.scrollable,
             width, height;
 
         me.applyRenderSelectors();
-
-        // Update the scroller very early in first layout so that it has the overflow element
-        // before any 'boxready', onResize, or 'resize' code gets to run.
-        if (scroller && scroller.isScroller) {
-            scroller.setElement(me.getOverflowEl());
-
-            // IE browsers don't restore scroll position if the component was scrolled and
-            // then hidden and shown again, so we must do it manually.
-            // See EXTJS-16233.
-            if (Ext.isIE) {
-                me.showListenerIE = Ext.on('show', me.onGlobalShow, me, {
-                    destroyable: true
-                });
-            }
-        }
 
         // Flag set on getRenderTree to flag to the layout's postprocessing routine that
         // the Component is in the process of being rendered and needs postprocessing.
@@ -741,6 +719,13 @@ Ext.define('Ext.util.Renderable', {
                 lastBox = lastBox || {};
                 lastBox.height = height;
             }
+        }
+
+        if (me.touchScroll === 1) {
+            // In browsers that use native browser overflow, but also have a touch screen
+            // we must disable scrolling when triggered by touch so that the scroller
+            // can take over
+            me.getOverflowEl().disableTouchScroll();
         }
 
         me.lastBox = el.lastBox = lastBox;
@@ -965,20 +950,23 @@ Ext.define('Ext.util.Renderable', {
                 }
             }
         },
-        
-        doRenderFramingTabGuard: function(out, renderData, position) {
+
+        doRenderFramingDockedItems: function (out, renderData, after) {
             // Careful! This method is bolted on to the frameTpl so all we get for context is
             // the renderData! The "this" pointer is the frameTpl instance!
-            
-            // Container layout implements doRenderTabGuard(), *not* Component itself!
-            var layout = renderData.$comp.layout;
-            
-            // The "renderData" property is placed in scope for the renderTpl, but we don't
-            // want to render tab guards at that level in addition to the framing level:
-            renderData.renderData.$skipTabGuards = true;
-            
-            if (layout && layout.doRenderTabGuard) {
-                layout.doRenderTabGuard.call(this, out, renderData, position);
+
+            var me = renderData.$comp;
+
+            // Most components don't have dockedItems, so check for doRenderDockedItems on the
+            // component (also, don't do this if the component is already rendered):
+            if (!me.rendered && me.doRenderDockedItems) {
+                // The "renderData" property is placed in scope for the renderTpl, but we don't
+                // want to render docked items at that level in addition to the framing level:
+                renderData.renderData.$skipDockedItems = true;
+
+                // doRenderDockedItems requires the $comp property on renderData, but this is
+                // set on the frameTpl's renderData as well:
+                me.doRenderDockedItems.call(this, out, renderData, after);
             }
         },
 
@@ -1164,7 +1152,6 @@ Ext.define('Ext.util.Renderable', {
                 frameCls:     me.frameCls,
                 frameBodyCls: me.layoutTargetCls || '',
                 baseCls:      me.baseCls,
-                hasTabGuard:  me.tabGuard,
                 top:          !!frameInfo.top,
                 left:         !!frameInfo.left,
                 right:        !!frameInfo.right,
@@ -1345,7 +1332,8 @@ Ext.define('Ext.util.Renderable', {
                 overflowStyle = me.getOverflowStyle(),
                 scrollFlags = me.scrollFlags,
                 overflowEl = me.getOverflowEl(),
-                hasOverflow = (scrollFlags.y || scrollFlags.x);
+                hasOverflow = (scrollFlags.y || scrollFlags.x),
+                touchScroll = me.touchScroll = (hasOverflow && Ext.supports.touchScroll);
 
             // Not rendered, or the targetEl has been configured as a string, wait until the call from finishRender
             if (!hasOverflow || !overflowEl || !overflowEl.isElement) {
@@ -1354,7 +1342,33 @@ Ext.define('Ext.util.Renderable', {
 
             me.overflowInited = true;
 
-            overflowEl.setStyle(overflowStyle);
+            if (touchScroll === 2) {
+                // only touchScroll === 2 gets overflow:hidden, touchScroll === 1 means that
+                // we use native scrolling but control scroll position using the touch scroller
+                overflowEl.setStyle('overflow', 'hidden');
+            } else {
+                overflowEl.setStyle(overflowStyle);
+            }
+        },
+
+        doRenderPadding: function(out, renderData) {
+            // Careful! This method is bolted on to the renderTpl so all we get for context is
+            // the renderData! The "this" pointer is the renderTpl instance!
+
+            // Some browsers lose the right and/or bottom padding of an element when it has
+            // overflow.  Normally we don't worry about correcting this bug for plain vanilla
+            // Ext.Component instances since all the content is visible, and it is just padding
+            // that is lost.  However when a touch scroller is used, this bug can cause some
+            // of the actual content to be obscured due to the way the scroller measures the
+            // size of the content.  Fortunately there is an easy fix - since we shrinkwrap the
+            // contents in a scroller element, we can just apply the padding to that element
+            // instead of the overflowing element.
+
+            var me = renderData.$comp;
+
+            if (me.touchScroll) {
+                out.push('padding:', me.unitizeBox(me.padding));
+            }
         },
 
         // Create the framingTpl from the string.
@@ -1391,11 +1405,12 @@ Ext.define('Ext.util.Renderable', {
          */
         setupFramingTpl: function(frameTpl) {
             frameTpl.applyRenderTpl = this.doApplyRenderTpl;
-            frameTpl.renderTabGuard = this.doRenderFramingTabGuard;
+            frameTpl.renderDockedItems = this.doRenderFramingDockedItems;
         },
 
         setupRenderTpl: function (renderTpl) {
             renderTpl.renderBody = renderTpl.renderContent = this.doRenderContent;
+            renderTpl.renderPadding = this.doRenderPadding;
         },
 
         /**

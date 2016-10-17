@@ -4,22 +4,22 @@
  * Sencha Cmd when upgrading.
  */
 Ext.application({
-	name: 'Ext6App',
+	name: 'App',
 
-	extend: 'Ext6App.Application',
+	extend: 'App.Application',
 
 	requires: [
-		'Ext6App.*'
+		'App.*'
 	],
 
 	// The name of the initial view to create. With the classic toolkit this class
 	// will gain a "viewport" plugin if it does not extend Ext.Viewport. With the
 	// modern toolkit, the main view will be added to the Viewport.
 	//
-	mainView: 'Ext6App.view.main.Main'
+	mainView: 'App.view.main.Main'
 
 	//-------------------------------------------------------------------------
-	// Most customizations should be made to Ext6App.Application. If you need to
+	// Most customizations should be made to App.Application. If you need to
 	// customize this file, doing so below this section reduces the likelihood
 	// of merge conflicts when upgrading to new versions of Sencha Cmd.
 	//-------------------------------------------------------------------------

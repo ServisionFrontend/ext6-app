@@ -2,17 +2,17 @@
  * @class Ext.field.Spinner
  */
 
-.x-spinnerfield {
+.x-spinner {
     &.x-item-disabled {
-        .x-input:before,
-        .x-spinnerfield-button {
+        .x-field-input:before,
+        .x-spinner-button {
             color: $field-disabled-color !important;
             border-color: $field-disabled-border-color !important;
             background-color: $field-disabled-background-color !important;
         }
     }
 
-    .x-spinnerfield-button {
+    .x-spinner-button {
         position: relative;
         font-size: 0px;
         text-indent: -1000px;
@@ -34,7 +34,7 @@
         }
     }
 
-    .x-spinnerfield-button-down:before {
+    .x-spinner-button-down:before {
         content: '_';
     }
 
@@ -54,11 +54,11 @@
 }
 
 .x-ie {
-    .x-spinnerfield-button:before {
+    .x-spinner-button:before {
         line-height: 27px !important;
     }
 
-    .x-spinnerfield .x-input .x-input-el:disabled {
+    .x-spinner .x-field-input .x-input-el:disabled {
         color: $field-color;
     }
 }

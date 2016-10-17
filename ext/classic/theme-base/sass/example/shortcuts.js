@@ -8,7 +8,7 @@
 Ext.theme.addShortcuts({
     'tooltip': [{
         setup: function(component, ct) {
-            component.render(ct);
+            component.render(Ext.getBody());
             component.showBy(ct);
             ct.setHeight(component.getHeight());
             ct.el.dom.appendChild(component.el.dom);

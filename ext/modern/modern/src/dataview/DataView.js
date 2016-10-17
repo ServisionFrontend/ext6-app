@@ -220,7 +220,7 @@ Ext.define('Ext.dataview.DataView', {
 
     /**
      * @event select
-     * @preventable
+     * @preventable doItemSelect
      * Fires whenever an item is selected
      * @param {Ext.dataview.DataView} this
      * @param {Ext.data.Model} record The record associated to the item
@@ -228,7 +228,7 @@ Ext.define('Ext.dataview.DataView', {
 
     /**
      * @event deselect
-     * @preventable
+     * @preventable doItemDeselect
      * Fires whenever an item is deselected
      * @param {Ext.dataview.DataView} this
      * @param {Ext.data.Model} record The record associated to the item
@@ -237,7 +237,7 @@ Ext.define('Ext.dataview.DataView', {
 
     /**
      * @event refresh
-     * @preventable
+     * @preventable doRefresh
      * Fires whenever the DataView is refreshed
      * @param {Ext.dataview.DataView} this
      */
@@ -470,7 +470,6 @@ Ext.define('Ext.dataview.DataView', {
         refresh: 'refresh',
         add: 'onStoreAdd',
         remove: 'onStoreRemove',
-        clear: 'onStoreClear',
         update: 'onStoreUpdate'
     },
 
@@ -482,8 +481,8 @@ Ext.define('Ext.dataview.DataView', {
 
         me.on(me.getTriggerCtEvent(), me.onContainerTrigger, me);
 
-        container = me.container = me.add(new Ext.dataview[me.getUseComponents() ? 'component' : 'element'].Container({
-            baseCls: me.getBaseCls()
+        container = me.container = this.add(new Ext.dataview[me.getUseComponents() ? 'component' : 'element'].Container({
+            baseCls: this.getBaseCls()
         }));
         container.dataview = me;
 
@@ -524,18 +523,17 @@ Ext.define('Ext.dataview.DataView', {
     },
 
     updateInline: function(newInline, oldInline) {
-        var me = this,
-            baseCls = me.getBaseCls();
-
+        var baseCls = this.getBaseCls();
         if (oldInline) {
-            me.removeCls([baseCls + '-inlineblock', baseCls + '-nowrap']);
+            this.removeCls([baseCls + '-inlineblock', baseCls + '-nowrap']);
         }
         if (newInline) {
-            me.addCls(baseCls + '-inlineblock');
+            this.addCls(baseCls + '-inlineblock');
             if (Ext.isObject(newInline) && newInline.wrap === false) {
-                me.addCls(baseCls + '-nowrap');
-            } else {
-                me.removeCls(baseCls + '-nowrap');
+                this.addCls(baseCls + '-nowrap');
+            }
+            else {
+                this.removeCls(baseCls + '-nowrap');
             }
         }
     },
@@ -565,8 +563,8 @@ Ext.define('Ext.dataview.DataView', {
     },
 
     // apply to the selection model to maintain visual UI cues
-    onItemTrigger: function(me, index, target, record, e) {
-        if (!e.stopSelection && !this.destroyed) {
+    onItemTrigger: function(me, index) {
+        if (!this.destroyed) {
             this.selectWithEvent(this.getStore().getAt(index));
         }
     },
@@ -834,17 +832,15 @@ Ext.define('Ext.dataview.DataView', {
     },
 
     onBeforeLoad: function() {
-        var me = this,
-            loadingText = me.getLoadingText();
-            
-        if (loadingText && me.isPainted()) {
-            me.setMasked({
+        var loadingText = this.getLoadingText();
+        if (loadingText && this.isPainted()) {
+            this.setMasked({
                 xtype: 'loadmask',
                 message: loadingText
             });
         }
 
-        me.hideEmptyText();
+        this.hideEmptyText();
     },
 
     updateEmptyText: function(newEmptyText, oldEmptyText) {
@@ -893,7 +889,7 @@ Ext.define('Ext.dataview.DataView', {
             }
             return;
         }
-        if (me.initialized && container) {
+        if (container) {
             me.fireAction('refresh', [me], 'doRefresh');
         }
     },
@@ -931,8 +927,7 @@ Ext.define('Ext.dataview.DataView', {
      * @return {Ext.dom.Element[]/Ext.dataview.component.DataItem[]} Array of Items.
      */
     getViewItems: function() {
-        var container = this.container;
-        return container ? container.getViewItems() : [];
+        return this.container.getViewItems();
     },
 
     doRefresh: function(me) {
@@ -1025,7 +1020,6 @@ Ext.define('Ext.dataview.DataView', {
     },
 
     /**
-     * @method
      * @private
      * @param {Ext.data.Store} store
      * @param {Ext.util.Grouper} grouper
@@ -1033,7 +1027,6 @@ Ext.define('Ext.dataview.DataView', {
     onStoreGroupChange: Ext.emptyFn,
 
     /**
-     * @method
      * @private
      * @param {Ext.data.Store} store
      * @param {Array} records

@@ -160,6 +160,8 @@ Ext.define('Ext.Toolbar', {
          *         ]
          *     });
          *
+         * See the [layouts guide](#!/guides/layouts) for more information
+         *
          * __Note:__ If you set the {@link #docked} configuration to `left` or `right`, the default layout will change from the
          * `hbox` to a `vbox`.
          *
@@ -193,7 +195,7 @@ Ext.define('Ext.Toolbar', {
         if (typeof title == 'string') {
             title = {
                 title: title,
-                centered : true
+                centered : Ext.theme.is.Tizen ? false : true
             };
         }
 
@@ -263,17 +265,6 @@ Ext.define('Ext.Toolbar', {
         }
 
         this.callParent([item, index]);
-    },
-
-    factoryItem: function (config) {
-        if (config === '->') {
-            config = {
-                xtype: 'component',
-                flex: 1
-            };
-        }
-
-        return this.callParent([ config ]);
     }
 });
 

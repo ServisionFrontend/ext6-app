@@ -49,13 +49,3 @@
     cursor: pointer;
     position: absolute;
 }
-
-.#{$prefix}tagfield-arialist {
-    list-style-type: none;
-    position: absolute;
-    clip: rect(0, 0, 0, 0);
-}
-
-.#{$prefix}tagfield-arialist-item {
-    list-style-type: none;
-}

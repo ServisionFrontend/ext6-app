@@ -43,8 +43,7 @@ Ext.define('Ext.view.NodeCache', {
             key;
 
         if (me.count && removeDom) {
-            // Some browsers throw error if Range used on detached DOM
-            if (range && Ext.getBody().contains(elements[0])) {
+            if (range) {
                 range.setStartBefore(elements[me.startIndex]);
                 range.setEndAfter(elements[me.endIndex]);
                 range.deleteContents();
@@ -92,7 +91,7 @@ Ext.define('Ext.view.NodeCache', {
         // If not inserting into empty cache, validate, and possibly shuffle.
         if (me.count) {
             //<debug>
-            if (insertPoint > me.endIndex + 1 || insertPoint + nodes.length < me.startIndex) {
+            if (insertPoint > me.endIndex + 1 || insertPoint + nodes.length - 1 < me.startIndex) {
                 Ext.raise('Discontiguous range would result from inserting ' + nodes.length + ' nodes at ' + insertPoint);
             }
             //</debug>
@@ -387,19 +386,23 @@ Ext.define('Ext.view.NodeCache', {
             elements = me.elements,
             recCount = newRecords.length,
             nodeContainer = view.getNodeContainer(),
+            fireItemRemove = view.hasListeners.itemremove,
+            fireItemAdd = view.hasListeners.itemadd,
             range = me.statics().range,
             i, el, removeEnd, children, result,
             removeStart, removedRecords, removedItems;
 
-        if (!(newRecords.length || removeCount)) {
+        if (!newRecords.length) {
             return;
         }
 
         // Scrolling up (content moved down - new content needed at top, remove from bottom)
         if (direction === -1) {
             if (removeCount) {
-                removedRecords = [];
-                removedItems = [];
+                if (fireItemRemove) {
+                    removedRecords = [];
+                    removedItems = [];
+                }
                 removeStart = (me.endIndex - removeCount) + 1;
                 if (range) {
                     range.setStartBefore(elements[removeStart]);
@@ -408,19 +411,23 @@ Ext.define('Ext.view.NodeCache', {
                     for (i = removeStart; i <= me.endIndex; i++) {
                         el = elements[i];
                         delete elements[i];
-                        removedRecords.push(store.getByInternalId(el.getAttribute('data-recordId')));
-                        removedItems.push(el);
+                        if (fireItemRemove) {
+                            removedRecords.push(store.getByInternalId(el.getAttribute('data-recordId')));
+                            removedItems.push(el);
+                        }
                     }
                 } else {
                     for (i = removeStart; i <= me.endIndex; i++) {
                         el = elements[i];
                         delete elements[i];
                         Ext.removeNode(el);
-                        removedRecords.push(store.getByInternalId(el.getAttribute('data-recordId')));
-                        removedItems.push(el);
+                        if (fireItemRemove) {
+                            removedRecords.push(store.getByInternalId(el.getAttribute('data-recordId')));
+                            removedItems.push(el);
+                        }
                     }
                 }
-                view.fireItemMutationEvent('itemremove', removedRecords, removeStart, removedItems, view);
+                view.fireEvent('itemremove', removedRecords, removeStart, removedItems, view);
                 me.endIndex -= removeCount;
             }
 
@@ -437,15 +444,19 @@ Ext.define('Ext.view.NodeCache', {
                 nodeContainer.insertBefore(result.fragment, nodeContainer.firstChild);
 
                 // pass the new DOM to any interested parties
-                view.fireItemMutationEvent('itemadd', newRecords, me.startIndex, children, view);
+                if (fireItemAdd) {
+                    view.fireEvent('itemadd', newRecords, me.startIndex, children);
+                }
             }
         }
 
         // Scrolling down (content moved up - new content needed at bottom, remove from top)
         else {
             if (removeCount) {
-                removedRecords = [];
-                removedItems = [];
+                if (fireItemRemove) {
+                    removedRecords = [];
+                    removedItems = [];
+                }
                 removeEnd = me.startIndex + removeCount;
                 if (range) {
                     range.setStartBefore(elements[me.startIndex]);
@@ -454,19 +465,23 @@ Ext.define('Ext.view.NodeCache', {
                     for (i = me.startIndex; i < removeEnd; i++) {
                         el = elements[i];
                         delete elements[i];
-                        removedRecords.push(store.getByInternalId(el.getAttribute('data-recordId')));
-                        removedItems.push(el);
+                        if (fireItemRemove) {
+                            removedRecords.push(store.getByInternalId(el.getAttribute('data-recordId')));
+                            removedItems.push(el);
+                        }
                     }
                 } else {
                     for (i = me.startIndex; i < removeEnd; i++) {
                         el = elements[i];
                         delete elements[i];
                         Ext.removeNode(el);
-                        removedRecords.push(store.getByInternalId(el.getAttribute('data-recordId')));
-                        removedItems.push(el);
+                        if (fireItemRemove) {
+                            removedRecords.push(store.getByInternalId(el.getAttribute('data-recordId')));
+                            removedItems.push(el);
+                        }
                     }
                 }
-                view.fireItemMutationEvent('itemremove', removedRecords, me.startIndex, removedItems, view);
+                view.fireEvent('itemremove', removedRecords, me.startIndex, removedItems, view);
                 me.startIndex = removeEnd;
             }
 
@@ -480,7 +495,9 @@ Ext.define('Ext.view.NodeCache', {
             nodeContainer.appendChild(result.fragment);
 
             // pass the new DOM to any interested parties
-            view.fireItemMutationEvent('itemadd', newRecords, me.endIndex + 1, children, view);
+            if (fireItemAdd) {
+                view.fireEvent('itemadd', newRecords, me.endIndex + 1, children);
+            }
         }
         // Keep count consistent.
         me.count = me.endIndex - me.startIndex + 1;

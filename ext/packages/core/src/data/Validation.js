@@ -39,7 +39,6 @@ Ext.define('Ext.data.Validation', {
          * @since 5.0.0
          */
         this.record = record;
-        this.isBase = record.self === Ext.data.Model;
 
         // We need to remove the id property from our data as that is not meaningful for
         // a Validation pseudo-record.
@@ -73,12 +72,6 @@ Ext.define('Ext.data.Validation', {
      * @since 5.0.0
      */
     refresh: function (force) {
-        // If it's an Ext.data.Model instance directly, we can't
-        // validate it because there can be no fields/validators.
-        if (this.isBase) {
-            return;
-        }
-
         var me = this,
             data = me.data,
             record = me.record,
@@ -110,7 +103,7 @@ Ext.define('Ext.data.Validation', {
                 }
 
                 if (field.validate !== Ext.emptyFn) {
-                    msg = field.validate(val, sep, null, record);
+                    msg = field.validate(val, sep);
                     if (msg !== true) {
                         error = msg || defaultMessage;
                     }

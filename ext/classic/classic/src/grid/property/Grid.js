@@ -247,12 +247,11 @@ Ext.define('Ext.grid.property.Grid', {
      * @param {Object} oldValue The original property value prior to editing
      */
 
-    initComponent: function() {
-        var me = this,
-            // selectOnFocus: true results in weird exceptions thrown when tabbing
-            // between cell editors in IE and there's no known cure at the moment
-            selectOnFocus = !Ext.isIE,
-            view;
+    /**
+     * @private
+     */
+    initComponent : function() {
+        var me = this;
 
         me.source = me.source || {};
         me.addCls(me.gridCls);
@@ -293,38 +292,19 @@ Ext.define('Ext.grid.property.Grid', {
         me.columns = new Ext.grid.property.HeaderContainer(me, me.store);
 
         me.callParent();
-        
-        var view = me.getView();
-        
+
         // Inject a custom implementation of walkCells which only goes up or down
-        view.walkCells = me.walkCells;
-        
-        // Inject a custom implementation that only allows focusing value column
-        view.getDefaultFocusPosition = me.getDefaultFocusPosition;
+        me.getView().walkCells = this.walkCells;
 
         // Set up our default editor set for the 4 atomic data types
         me.editors = {
-            'date': new Ext.grid.CellEditor({
-                field: new Ext.form.field.Date({
-                    selectOnFocus: selectOnFocus
-                })
-            }),
-            'string': new Ext.grid.CellEditor({
-                field: new Ext.form.field.Text({
-                    selectOnFocus: selectOnFocus
-                })
-            }),
-            'number': new Ext.grid.CellEditor({
-                field: new Ext.form.field.Number({
-                    selectOnFocus: selectOnFocus
-                })
-            }),
-            'boolean': new Ext.grid.CellEditor({
-                field: new Ext.form.field.ComboBox({
-                    editable: false,
-                    store: [[ true, me.headerCt.trueText ], [false, me.headerCt.falseText ]]
-                })
-            })
+            'date'    : new Ext.grid.CellEditor({ field: new Ext.form.field.Date({selectOnFocus: true})}),
+            'string'  : new Ext.grid.CellEditor({ field: new Ext.form.field.Text({selectOnFocus: true})}),
+            'number'  : new Ext.grid.CellEditor({ field: new Ext.form.field.Number({selectOnFocus: true})}),
+            'boolean' : new Ext.grid.CellEditor({ field: new Ext.form.field.ComboBox({
+                editable: false,
+                store: [[ true, me.headerCt.trueText ], [false, me.headerCt.falseText ]]
+            })})
         };
 
         // Track changes to the data so we can fire our events.
@@ -462,15 +442,6 @@ Ext.define('Ext.grid.property.Grid', {
         pos.colIdx = valueColumn.getVisibleIndex();
         return pos;
     },
-    
-    getDefaultFocusPosition: function() {
-        var view = this, // NOT grid!
-            focusPosition;
-        
-        focusPosition = new Ext.grid.CellContext(view).setColumn(1);
-        
-        return focusPosition;
-    },
 
     /**
      * @private
@@ -482,8 +453,7 @@ Ext.define('Ext.grid.property.Grid', {
             val = record.get(me.valueField),
             editor = me.getConfigProp(propName, 'editor'),
             type = me.getConfigProp(propName, 'type'),
-            editors = me.editors,
-            field;
+            editors = me.editors;
 
         // A custom editor was found. If not already wrapped with a CellEditor, wrap it, and stash it back
         // If it's not even a Field, just a config object, instantiate it before wrapping it.
@@ -520,27 +490,9 @@ Ext.define('Ext.grid.property.Grid', {
             editor = editors.string;
         }
 
-        field = editor.field;
-
-        if (field && field.ui === 'default' && !field.hasOwnProperty('ui')) {
-            field.ui = me.editingPlugin.defaultFieldUI;
-        }
-
         // Give the editor a unique ID because the CellEditing plugin caches them
         editor.editorId = propName;
         editor.field.column = me.valueColumn;
-        
-        if (propName) {
-            propName = Ext.String.htmlEncode(propName);
-            
-            if (field.rendered) {
-                field.inputEl.dom.setAttribute('aria-label', propName);
-            }
-            else {
-                field.ariaLabel = propName;
-            }
-        }
-        
         return editor;
     },
 

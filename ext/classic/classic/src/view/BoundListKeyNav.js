@@ -102,15 +102,11 @@ Ext.define('Ext.view.BoundListKeyNav', {
     onItemMouseDown: function(view, record, item, index, event) {
         this.callParent([view, record, item, index, event]);
         
-        if (event.pointerType === 'mouse') {
-            // Stop the mousedown from blurring the input field
-            // We can't do this for touch events otherwise scrolling
-            // won't work.
-            event.preventDefault();
-        }
+        // Stop the mousedown from blurring the input field
+        event.preventDefault();
     },
 
-    onKeyUp: function(e) {
+    onKeyUp: function() {
         var me = this,
             boundList = me.view,
             allItems = boundList.all,
@@ -119,9 +115,6 @@ Ext.define('Ext.view.BoundListKeyNav', {
             newItemIdx = oldItemIdx > 0 ? oldItemIdx - 1 : allItems.getCount() - 1; //wraps around
 
         me.setPosition(newItemIdx);
-
-        // Stop this from moving the cursor in the field
-        e.preventDefault();
     },
 
     onKeyDown: function(e) {
@@ -133,9 +126,6 @@ Ext.define('Ext.view.BoundListKeyNav', {
             newItemIdx = oldItemIdx < allItems.getCount() - 1 ? oldItemIdx + 1 : 0; //wraps around
 
         me.setPosition(newItemIdx);
-
-        // Stop this from moving the cursor in the field
-        e.preventDefault();
     },
 
     onKeyLeft: Ext.returnTrue,
@@ -178,11 +168,7 @@ Ext.define('Ext.view.BoundListKeyNav', {
         }
 
         // Stop propagation of the ENTER keydown event so that any Editor which owns the field
-        // does not completeEdit, but we also need to still fire the specialkey event for ENTER, 
-        // so lets add fromBoundList to eOpts, and this will be handled by CellEditor#onSpecialKey.
-        field.fireEvent('specialkey', field, e, {
-            fromBoundList: true
-        });
+        // does not completeEdit.
         return false;
     },
 

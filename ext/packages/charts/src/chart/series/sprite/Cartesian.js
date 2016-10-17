@@ -69,7 +69,7 @@ Ext.define('Ext.chart.series.sprite.Cartesian', {
             updaters: {
                 dataX: function (attr) {
                     this.processDataX();
-                    this.scheduleUpdater(attr, 'dataY', ['dataY']);
+                    this.scheduleUpdaters(attr, {dataY: ['dataY']});
                 },
 
                 dataY: function () {
@@ -171,7 +171,6 @@ Ext.define('Ext.chart.series.sprite.Cartesian', {
     },
 
     /**
-     * @method
      * Render the given visible clip range.
      * @param {Ext.draw.Surface} surface
      * @param {Ext.draw.engine.Canvas/Ext.draw.engine.SvgContext} ctx

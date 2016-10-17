@@ -7,7 +7,10 @@
 Ext.define('Ext.draw.engine.Svg', {
     extend: 'Ext.draw.Surface',
     requires: ['Ext.draw.engine.SvgContext'],
-    isSVG: true,
+
+    statics: {
+        BBoxTextCache: {}
+    },
 
     config: {
         /**
@@ -17,6 +20,7 @@ Ext.define('Ext.draw.engine.Svg', {
     },
 
     getElementConfig: function () {
+        //TODO:ps In the Ext world, use renderTpl to create the children
         return {
             reference: 'element',
             style: {
@@ -49,10 +53,10 @@ Ext.define('Ext.draw.engine.Svg', {
         var me = this;
         me.callParent([config]);
         me.mainGroup = me.createSvgNode("g");
-        me.defsElement = me.createSvgNode("defs");
+        me.defElement = me.createSvgNode("defs");
         // me.svgElement is assigned in element creation of Ext.Component.
         me.svgElement.appendChild(me.mainGroup);
-        me.svgElement.appendChild(me.defsElement);
+        me.svgElement.appendChild(me.defElement);
         me.ctx = new Ext.draw.engine.SvgContext(me);
     },
 
@@ -68,8 +72,7 @@ Ext.define('Ext.draw.engine.Svg', {
 
     /**
      * @private
-     * Returns the SVG DOM element at the given position.
-     * If it does not already exist or is a different element tag,
+     * Returns the SVG DOM element at the given position. If it does not already exist or is a different element tag
      * it will be created and inserted into the DOM.
      * @param {Ext.dom.Element} group The parent DOM element.
      * @param {String} tag The SVG element tag.
@@ -77,29 +80,23 @@ Ext.define('Ext.draw.engine.Svg', {
      * @return {Ext.dom.Element} The SVG element.
      */
     getSvgElement: function (group, tag, position) {
-        var childNodes = group.dom.childNodes,
-            length = childNodes.length,
-            element;
-
-        if (position < length) {
-            element = childNodes[position];
+        var element;
+        if (group.dom.childNodes.length > position) {
+            element = group.dom.childNodes[position];
             if (element.tagName === tag) {
                 return Ext.get(element);
             } else {
                 Ext.destroy(element);
             }
-        } else if (position > length) {
-            Ext.raise("Invalid position.");
         }
 
         element = Ext.get(this.createSvgNode(tag));
         if (position === 0) {
             group.insertFirst(element);
         } else {
-            element.insertAfter(Ext.fly(childNodes[position - 1]));
+            element.insertAfter(Ext.fly(group.dom.childNodes[position - 1]));
         }
         element.cache = {};
-
         return element;
     },
 
@@ -129,7 +126,7 @@ Ext.define('Ext.draw.engine.Svg', {
      * @return {Ext.dom.Element} The reference element.
      */
     getNextDef: function (tagName) {
-        return this.getSvgElement(this.defsElement, tagName, this.defsPosition++);
+        return this.getSvgElement(this.defElement, tagName, this.defPosition++);
     },
 
     /**
@@ -145,19 +142,7 @@ Ext.define('Ext.draw.engine.Svg', {
      */
     clear: function () {
         this.ctx.clear();
-        this.removeSurplusDefs();
-        this.defsPosition = 0;
-    },
-
-    removeSurplusDefs: function () {
-        var defsElement = this.defsElement,
-            defs = defsElement.dom.childNodes,
-            ln = defs.length,
-            i;
-
-        for (i = ln - 1; i > this.defsPosition; i--) {
-            defsElement.removeChild(defs[i]);
-        }
+        this.defPosition = 0;
     },
 
     /**
@@ -167,25 +152,11 @@ Ext.define('Ext.draw.engine.Svg', {
         var me = this,
             rect = me.getRect(),
             ctx = me.ctx;
-
-        // This check is simplistic, but should result in a better performance
-        // compared to !sprite.isVisible() when most surface sprites are visible.
-        if (sprite.attr.hidden || sprite.attr.globalAlpha === 0) {
-            // Create an empty group for each hidden sprite,
-            // so that when these sprites do become visible,
-            // they don't need groups to be created and don't
-            // mess up the previous order of elements in the
-            // document, i.e. sprites rendered in the next
-            // frame reuse the same elements they used in the
-            // previous frame.
+        if (sprite.attr.hidden || sprite.attr.opacity === 0) {
             ctx.save();
             ctx.restore();
             return;
         }
-
-        // Each sprite is rendered in its own group ('g' element),
-        // returned by the `ctx.save` method.
-        // Essentially, the group _is_ the sprite.
         sprite.element = ctx.save();
         sprite.preRender(this);
         sprite.useAttributes(ctx, rect);
@@ -196,14 +167,12 @@ Ext.define('Ext.draw.engine.Svg', {
         ctx.restore();
     },
 
-    /**
-     * @private
-     */
-    toSVG: function (size, surfaces) {
-        var className = Ext.getClassName(this),
-            svg, surface, rect, i;
+    flatten: function (size, surfaces) {
+        var svg = '<?xml version="1.0" standalone="yes"?>',
+            className = Ext.getClassName(this),
+            surface, rect, i;
 
-        svg = '<svg version="1.1" baseProfile="full" xmlns="http://www.w3.org/2000/svg"' +
+        svg += '<svg version="1.1" baseProfile="full" xmlns="http://www.w3.org/2000/svg"' +
             ' width="' + size.width + '"' +
             ' height="' + size.height + '">';
 
@@ -218,15 +187,6 @@ Ext.define('Ext.draw.engine.Svg', {
             svg += '</g>';
         }
         svg += '</svg>';
-
-        return svg;
-    },
-
-    flatten: function (size, surfaces) {
-        var svg = '<?xml version="1.0" standalone="yes"?>';
-
-        svg += this.toSVG(size, surfaces);
-
         return {
             data: 'data:image/svg+xml;utf8,' + encodeURIComponent(svg),
             type: 'svg'
@@ -268,22 +228,21 @@ Ext.define('Ext.draw.engine.Svg', {
      */
     destroy: function () {
         var me = this;
-
         me.ctx.destroy();
         me.mainGroup.destroy();
-        me.defsElement.destroy();
-
         delete me.mainGroup;
-        delete me.defsElement;
         delete me.ctx;
-
         me.callParent();
     },
 
     remove: function (sprite, destroySprite) {
         if (sprite && sprite.element) {
-            // If sprite has an associated SVG element, remove it from the surface.
-            sprite.element.destroy();
+            //if sprite has an associated svg element remove it from the surface
+            if (this.ctx) {
+                this.ctx.removeElement(sprite.element);
+            } else {
+                sprite.element.destroy();
+            }
             sprite.element = null;
         }
         this.callParent(arguments);

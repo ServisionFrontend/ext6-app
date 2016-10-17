@@ -108,9 +108,6 @@
  * is the only dependency. This means that "firstName" will only need to be recalculated
  * when "name" is modified.
  *
- * **Note:** Fields used by the calculate method must be explicitly defined in the
- * {@link Ext.data.Model#cfg-fields #fields} of the model.
- *
  * ### Using `convert`
  *
  * Following is the equivalent technique using `{@link #cfg-convert convert}`
@@ -343,12 +340,9 @@ Ext.define('Ext.data.field.Field', {
      * The only advantage of a `calculate` method over a `convert` method is automatic
      * determination of `depends`.
      * 
-     * **Note:** The use of calculate and {@link #method-convert} are exclusive.  The 
-     * calculate method will override the convert method if both are configured.
+     * **Note:** The use of calculate and {@link #convert} are exclusive.  The calculate 
+     * method will override the convert method if both are configured.
      * 
-     * **Note:** Fields used by the calculate method must be explicitly defined in the
-     * {@link Ext.data.Model#cfg-fields #fields} of the model.
-     *
      * @param {Object} data An object with all values for each field in the parent 
      * model.  See {@link Ext.data.Model#getData getData}.
      * @return {Mixed} value The value of the calculated field
@@ -797,7 +791,7 @@ Ext.define('Ext.data.field.Field', {
         }
     },
 
-    argumentNamesRe: /^function\s*\(\s*([^,\)\s]+)/,
+    argumentNamesRe: /^function\s+\(\s*([^,\)\s]+)/,
     calculateRe: /[^\.a-z0-9_]([a-z_][a-z_0-9]*)\.([a-z_][a-z_0-9]*)/gi,
 
     constructor: function (config) {
@@ -1059,7 +1053,7 @@ Ext.define('Ext.data.field.Field', {
      * @template
      * @since 5.0.0
      */
-    validate: function(value, separator, errors, record) {
+    validate: function(value, separator, errors) {
         var me = this,
             ret = '',
             result, validator, validators, length, i;
@@ -1072,7 +1066,7 @@ Ext.define('Ext.data.field.Field', {
 
         for (i = 0, length = validators.length; i < length; ++i) {
             validator = validators[i];
-            result = validator.validate(value, record); 
+            result = validator.validate(value); // we have no record to pass
 
             if (result !== true) {
                 result = result || me.defaultInvalidMessage;

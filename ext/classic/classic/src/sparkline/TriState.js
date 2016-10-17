@@ -90,7 +90,6 @@ Ext.define('Ext.sparkline.TriState', {
                 me.colorMapByValue = new Ext.sparkline.RangeMap(colorMap);
             }
         }
-        me.applyConfigChange();
         return colorMap;
     },
 
@@ -98,7 +97,6 @@ Ext.define('Ext.sparkline.TriState', {
     applyValues: function(newValues) {
         newValues = Ext.Array.map(Ext.Array.from(newValues), Number);
         this.disabled = !(newValues && newValues.length);
-        this.applyConfigChange();
         return newValues;
     },
 

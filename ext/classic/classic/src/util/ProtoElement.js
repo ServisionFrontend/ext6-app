@@ -156,7 +156,9 @@ Ext.define('Ext.util.ProtoElement', function () {
         },
 
         /**
-         * @inheritdoc Ext.dom.Element#method-setStyle
+         * Adds styles to the element.
+         * @param {String/Object} prop The style property to be set, or an object of multiple styles.
+         * @param {String} [value] The value to apply to the given property.
          * @return {Ext.util.ProtoElement} this
          */
         setStyle: function (prop, value) {

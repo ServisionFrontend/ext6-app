@@ -6,6 +6,10 @@ Ext.define('Ext.event.gesture.LongPress', {
 
     priority: 400,
 
+    inheritableStatics: {
+        DURATION_NOT_ENOUGH: 'Duration Not Enough'
+    },
+
     config: {
         moveDistance: 8,
         minDuration: 1000
@@ -28,79 +32,66 @@ Ext.define('Ext.event.gesture.LongPress', {
      * @inheritdoc Ext.dom.Element#longpress
      */
 
+    fireLongPress: function(e) {
+        this.fire('longpress', e, {
+            touch: e.changedTouches[0],
+            duration: this.getMinDuration()
+        });
+
+        this.isLongPress = true;
+    },
+
     onTouchStart: function(e) {
-        var me = this,
-            ret = me.callParent([e]);
-
-        if (ret !== false) {
-            me.startPoint = e.changedTouches[0].point;
-            me.setLongPressTimer(e);
+        if (this.callParent(arguments) === false) {
+            return false;
         }
+        this.startPoint = e.changedTouches[0].point;
 
-        return ret;
+        this.isLongPress = false;
+
+        this.setLongPressTimer(e);
     },
 
     setLongPressTimer: function(e) {
         var me = this;
 
-        me.timer = Ext.defer(me.fireLongPress, me.getMinDuration(), me, [e]);
+        me.timer = Ext.defer(function() {
+            me.fireLongPress(e);
+        }, me.getMinDuration());
     },
 
     onTouchMove: function(e) {
-        var me = this,
-            point = e.changedTouches[0].point,
-            scale = Ext.Element.getViewportScale(),
-            // account for scale so that move distance is actual screen pixels, not page pixels
-            distance = Math.round(Math.abs(point.getDistanceTo(me.startPoint) * scale));
-
-        if (distance >= me.getMoveDistance()) {
-            return me.cancel(e);
+        var point = e.changedTouches[0].point;
+        if (Math.abs(point.getDistanceTo(this.startPoint)) >= this.getMoveDistance()) {
+            return this.fail(this.self.TOUCH_MOVED);
         }
     },
 
+    onTouchEnd: function() {
+        if (!this.isLongPress) {
+            return this.fail(this.self.DURATION_NOT_ENOUGH);
+        }
+    },
+
+    fail: function() {
+        clearTimeout(this.timer);
+
+        return this.callParent(arguments);
+    },
+
     reset: function() {
-        var me = this;
-
-        clearTimeout(me.timer);
-
-        me.timer = me.startPoint = null;
-
-        return me.callParent();
+        this.isLongPress = this.startPoint = null;
     },
 
-    fireLongPress: function(e) {
-        var me = this,
-            info = {
-                touch: e.changedTouches[0],
-                duration: me.getMinDuration(),
-                startDrag: me.startDrag
-            };
+    fire: function(eventName) {
+        if (eventName === 'longpress') {
+            var args = Array.prototype.slice.call(arguments);
+            args[0] = 'taphold';
 
-        this.fire('taphold', e, info);
-        this.fire('longpress', e, info);
+            this.fire.apply(this, args);
+        }
 
-        this.reset();
-    },
-
-    /**
-     * @member Ext.event.Event
-     * @method startDrag
-     *
-     * Initiates a drag gesture in response to this event
-     *
-     * Only available when `type` is `'longpress'`.  When invoked a dragstart event
-     * will be immediately fired at the coordinates of the longpress event.  Thereafter
-     * drag events will fire in response to movement on the screen without regard
-     * to the distance moved.
-     */
-    startDrag: function() {
-        // the longpress event object is decorated with this function, the scope object
-        // here is the event object, not the recognizer
-        var dragRecognizer = Ext.event.gesture.Drag.instance,
-            touchStartEvent = this.parentEvent;
-
-        dragRecognizer.doDragStart(touchStartEvent, true);
-        Ext.event.publisher.Gesture.instance.claimRecognizer(dragRecognizer, touchStartEvent);
+        return this.callParent(arguments);
     }
 }, function(LongPress) {
     var gestures = Ext.manifest.gestures;

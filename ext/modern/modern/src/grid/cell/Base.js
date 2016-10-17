@@ -12,7 +12,7 @@ Ext.define('Ext.grid.cell.Base', {
          * @cfg {"left"/"center"/"right"} align
          * The value for the `text-align` of the cell content.
          */
-        align: null,
+        align: 'left',
 
         /**
          * @cfg {String} cls
@@ -32,40 +32,7 @@ Ext.define('Ext.grid.cell.Base', {
          * An arbitrary CSS class to add to the cell's inner element (the element that
          * typically contains the cell's text).
          */
-        innerCls: null,
-
-        /**
-         * @cfg {String/Object} innerStyle
-         * Additional CSS styles that will be rendered into the cell's inner element (the element
-         * that typically contains the cell's text).
-         *
-         * You can pass either a string syntax:
-         *
-         *     innerStyle: 'background:red'
-         *
-         * Or by using an object:
-         *
-         *     innerStyle: {
-         *         background: 'red'
-         *     }
-         *
-         * When using the object syntax, you can define CSS Properties by using a string:
-         *
-         *     innerStyle: {
-         *         'border-left': '1px solid red'
-         *     }
-         *
-         * Although the object syntax is much easier to read, we suggest you to use the
-         * string syntax for better performance.
-         */
-        innerStyle: null,
-
-        /**
-         * @cfg {String} cellCls
-         *
-         * @protected
-         */
-        cellCls: null
+        innerCls: null
     },
 
     config: {
@@ -102,12 +69,7 @@ Ext.define('Ext.grid.cell.Base', {
 
     defaultBindProperty: 'value',
 
-    cellSelector: '.' + Ext.baseCSSPrefix + 'grid-cell',
     hiddenCls: Ext.baseCSSPrefix + 'grid-cell-hidden',
-
-    getComputedWidth: function() {
-        return this.getHidden() ? 0 : this.getWidth();
-    },
 
     updateAlign: function(align, oldAlign) {
         var prefix  = Ext.baseCSSPrefix + 'grid-cell-align-';
@@ -119,18 +81,10 @@ Ext.define('Ext.grid.cell.Base', {
         this.element.replaceCls(oldCls, cls);
     },
 
-    updateCellCls: function(cls, oldCls) {
-        this.element.replaceCls(oldCls, cls);
-    },
-
     updateInnerCls: function(cellCls, oldCellCls) {
         if (cellCls || oldCellCls) {
             this.innerElement.replaceCls(oldCellCls, cellCls);
         }
-    },
-
-    updateInnerStyle: function(style){
-        this.innerElement.applyStyles(style);
     },
 
     updateColumn: function(column) {
@@ -147,13 +101,8 @@ Ext.define('Ext.grid.cell.Base', {
 
     updateRecord: function(record) {
         var dataIndex = this.dataIndex;
-
-        if (record) {
-            if (dataIndex) {
-                this.setValue(record.get(dataIndex));
-            } else {
-                this.setValue();
-            }
+        if (record && dataIndex) {
+            this.setValue(record.get(dataIndex));
         }
     },
 

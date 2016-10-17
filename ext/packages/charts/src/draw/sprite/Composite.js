@@ -14,10 +14,10 @@ Ext.define('Ext.draw.sprite.Composite', {
         sprites: []
     },
 
-    constructor: function (config) {
+    constructor: function () {
         this.sprites = [];
-        this.map = {};
-        this.callParent([config]);
+        this.sprites.map = {};
+        this.callParent(arguments);
     },
 
     /**
@@ -30,64 +30,26 @@ Ext.define('Ext.draw.sprite.Composite', {
         }
         if (!sprite.isSprite) {
             sprite = Ext.create('sprite.' + sprite.type, sprite);
+            sprite.setParent(this);
+            sprite.setSurface(this.getSurface());
         }
-        sprite.setParent(this);
-        sprite.setSurface(this.getSurface());
-
         var me = this,
             attr = me.attr,
             oldTransformations = sprite.applyTransformations;
 
-        sprite.applyTransformations = function (force) {
+        sprite.applyTransformations = function () {
             if (sprite.attr.dirtyTransform) {
                 attr.dirtyTransform = true;
                 attr.bbox.plain.dirty = true;
                 attr.bbox.transform.dirty = true;
             }
-            oldTransformations.call(sprite, force);
+            oldTransformations.call(sprite);
         };
-
         me.sprites.push(sprite);
-        me.map[sprite.id] = sprite.getId();
+        me.sprites.map[sprite.id] = sprite.getId();
         attr.bbox.plain.dirty = true;
         attr.bbox.transform.dirty = true;
-
         return sprite;
-    },
-
-    removeSprite: function (sprite, isDestroy) {
-        var me = this,
-            id, isOwnSprite;
-
-        if (sprite) {
-            if (sprite.charAt) { // is String
-                sprite = me.map[sprite];
-            }
-            if (!sprite || !sprite.isSprite) {
-                return null;
-            }
-            if (sprite.isDestroyed || sprite.isDestroying) {
-                return sprite;
-            }
-            id = sprite.getId();
-            isOwnSprite = me.map[id];
-            delete me.map[id];
-
-            if (isDestroy) {
-                sprite.destroy();
-            }
-            if (!isOwnSprite) {
-                return sprite;
-            }
-            sprite.setParent(null);
-            sprite.setSurface(null);
-            Ext.Array.remove(me.sprites, sprite);
-
-            me.dirtyZIndex = true;
-            me.setDirty(true);
-        }
-
-        return sprite || null;
     },
 
     updateSurface: function (surface) {
@@ -145,40 +107,17 @@ Ext.define('Ext.draw.sprite.Composite', {
         plain.height = bottom - top;
     },
 
-    isVisible: function () {
-        // Override the abstract Sprite's method.
-        // Composite uses a simpler check, because it has no fill or stroke
-        // style of its own, it just houses other sprites.
-        var attr = this.attr,
-            parent = this.getParent(),
-            hasParent = parent && (parent.isSurface || parent.isVisible()),
-            isSeen = hasParent && !attr.hidden && attr.globalAlpha;
-
-        return !!isSeen;
-    },
-
     /**
      * Renders all sprites contained in the composite to the surface.
      */
     render: function (surface, ctx, rect) {
-        var me = this,
-            attr = me.attr,
-            mat = me.attr.matrix,
-            sprites = me.sprites,
-            ln = sprites.length,
-            i = 0;
+        var mat = this.attr.matrix,
+            i, ln;
 
         mat.toContext(ctx);
-        for (; i < ln; i++) {
-            surface.renderSprite(sprites[i], rect);
+        for (i = 0, ln = this.sprites.length; i < ln; i++) {
+            surface.renderSprite(this.sprites[i], rect);
         }
-        //<debug>
-        var debug = attr.debug || me.statics().debug || Ext.draw.sprite.Sprite.debug;
-        if (debug) {
-            attr.inverseMatrix.toContext(ctx);
-            debug.bbox && me.renderBBox(surface, ctx);
-        }
-        //</debug>
     },
 
     destroy: function () {

@@ -1,6 +1,10 @@
 describe("Ext.form.field.TextArea", function() {
     var component, makeComponent;
     
+    function expectAria(attr, value) {
+        jasmine.expectAriaAttr(component, attr, value);
+    }
+    
     beforeEach(function() {
         makeComponent = function(config) {
             config = config || {};
@@ -127,11 +131,11 @@ describe("Ext.form.field.TextArea", function() {
         
         describe("ARIA attributes", function() {
             it("should have textbox role", function() {
-                expect(component).toHaveAttr('role', 'textbox');
+                expectAria('role', 'textbox');
             });
             
             it("should have aria-multiline attribute", function() {
-                expect(component).toHaveAttr('aria-multiline', 'true');
+                expectAria('aria-multiline', 'true');
             });
         });
         
@@ -183,8 +187,8 @@ describe("Ext.form.field.TextArea", function() {
         });
     });
 
-    // TODO: https://sencha.jira.com/browse/EXTJS-18488
-    (Ext.isIE8 ? xdescribe : describe)("autoSize method and grow configs", function() {
+
+    describe("autoSize method and grow configs", function() {
         function makeLines(n) {
             var out = [],
                 i;
@@ -257,7 +261,7 @@ describe("Ext.form.field.TextArea", function() {
         });
 
         describe("with a fixed height", function() {
-            it("should have no effect on a configured height", function() {
+            it("should have no affect on a configured height", function() {
                 makeComponent({
                     renderTo: Ext.getBody(),
                     grow: true,
@@ -269,7 +273,7 @@ describe("Ext.form.field.TextArea", function() {
                 expect(component.getHeight()).toBe(150);
             });
 
-            it("should have no effect on a calculated height", function() {
+            it("should have no affect on a calculated height", function() {
                 makeComponent({
                     grow: true,
                     growMin: 100,
@@ -579,8 +583,7 @@ describe("Ext.form.field.TextArea", function() {
                     describe(labelAlign + " label", function() {
                         var leftLabel = (labelAlign === 'left');
 
-                        // TODO: EXTJS-12634
-                        (Ext.isIE8 ? xit : it)("should layout", function() {
+                        it("should layout", function() {
                             create({
                                 labelAlign: labelAlign
                             });
@@ -617,8 +620,7 @@ describe("Ext.form.field.TextArea", function() {
                             expect(component.errorWrapEl).toBeNull();
                         });
 
-                        // TODO: EXTJS-12634
-                        (Ext.isIE8 ? xit : it)("should layout with side error", function() {
+                        it("should layout with side error", function() {
                             create({
                                 labelAlign: labelAlign,
                                 msgTarget: 'side'
@@ -669,8 +671,7 @@ describe("Ext.form.field.TextArea", function() {
                             });
                         });
 
-                        // TODO: EXTJS-12634
-                        (Ext.isIE8 ? xit : it)("should layout with hidden side error", function() {
+                        it("should layout with hidden side error", function() {
                             create({
                                 labelAlign: labelAlign,
                                 msgTarget: 'side'
@@ -721,7 +722,7 @@ describe("Ext.form.field.TextArea", function() {
                             });
                         });
 
-                        // TODO: EXTJS-12634
+                        // TODO: EXTJSIV-12634
                         (Ext.isIE10m && !shrinkHeight ? xit : it)("should layout with under error", function() {
                             create({
                                 labelAlign: labelAlign,
@@ -773,8 +774,7 @@ describe("Ext.form.field.TextArea", function() {
                             });
                         });
 
-                        // TODO: EXTJS-12634
-                        (Ext.isIE8 ? xit : it)("should layout with hidden label", function() {
+                        it("should layout with hidden label", function() {
                             create({
                                 labelAlign: labelAlign,
                                 hideLabel: true
@@ -798,8 +798,7 @@ describe("Ext.form.field.TextArea", function() {
                             expect(component.errorWrapEl).toBeNull();
                         });
 
-                        // TODO: EXTJS-12634
-                        (Ext.isIE8 ? xit : it)("should layout with hidden label and side error", function() {
+                        it("should layout with hidden label and side error", function() {
                             create({
                                 labelAlign: labelAlign,
                                 hideLabel: true,
@@ -843,8 +842,7 @@ describe("Ext.form.field.TextArea", function() {
                             });
                         });
 
-                        // TODO: EXTJS-12634
-                        (Ext.isIE8 ? xit : it)("should layout with hidden label and hidden side error", function() {
+                        it("should layout with hidden label and hidden side error", function() {
                             create({
                                 labelAlign: labelAlign,
                                 hideLabel: true,
@@ -888,7 +886,7 @@ describe("Ext.form.field.TextArea", function() {
                             });
                         });
 
-                        // TODO: EXTJS-12634
+                        // TODO: EXTJSIV-12634
                         (Ext.isIE10m && !shrinkHeight ? xit : it)("should layout with hidden label and under error", function() {
                             create({
                                 labelAlign: labelAlign,
@@ -938,7 +936,7 @@ describe("Ext.form.field.TextArea", function() {
                 makeSideLabelSuite('left'); // labelAlign: 'left'
                 makeSideLabelSuite('right'); // labelAlign: 'right'
 
-                // TODO: EXTJS-12634
+                // TODO: EXTJSIV-12634
                 (Ext.isIE10m && !shrinkHeight ? xdescribe : describe)("top label", function() {
                     it("should layout", function() {
                         create({
@@ -1307,24 +1305,5 @@ describe("Ext.form.field.TextArea", function() {
         makeLayoutSuite(3, false); // shrinkWrap both
         makeLayoutSuite(3, true); // shrinkWrap both, autoFitErrors
     });
-    
-    describe("keyboard interaction", function() {
-        it("should stop event propagation on Enter key", function() {
-            makeComponent();
-            
-            var spy = spyOn(component, 'fireKey').andCallThrough();
-            
-            component.render(Ext.getBody());
-            
-            pressKey(component, 'enter');
-            
-            waitForSpy(spy);
-            
-            runs(function() {
-                var args = spy.mostRecentCall.args;
-                
-                expect(args[0].stopped).toBe(true);
-            });
-        });
-    });
+
 });

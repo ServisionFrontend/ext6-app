@@ -1,10 +1,10 @@
-Ext.define('Ext6App.view.main.Main', {
+Ext.define('App.view.main.Main', {
 	extend: 'Ext.container.Viewport',
 
 	requires: [
 		'Ext.button.Segmented',
 		'Ext.list.Tree',
-		'Ext6App.view.main.MainContainerWrap'
+		'App.view.main.MainContainerWrap'
 	],
 	controller: 'main',
 	viewModel: 'main',
@@ -44,7 +44,7 @@ Ext.define('Ext6App.view.main.Main', {
 			reference: 'navigationTreeList',
 			itemId: 'navigationTreeList',
 			ui: 'navigation',
-			store: Ext.create('Ext6App.store.NavigationTree'),
+			store: Ext.create('App.store.NavigationTree'),
 			width: 250,
 			expanderFirst: false,
 			expanderOnly: false,

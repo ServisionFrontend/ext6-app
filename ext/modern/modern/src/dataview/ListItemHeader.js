@@ -1,6 +1,5 @@
 /**
- * @private
- * To be made a sample
+ * @private - To be made a sample
  */
 Ext.define('Ext.dataview.ListItemHeader', {
     extend: 'Ext.Component',

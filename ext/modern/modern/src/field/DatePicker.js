@@ -119,12 +119,15 @@ Ext.define('Ext.field.DatePicker', {
      */
 
     config: {
+        ui: 'select',
+
         /**
          * @cfg {Object/Ext.picker.Date} picker
          * An object that is used when creating the internal {@link Ext.picker.Date} component or a direct instance of {@link Ext.picker.Date}.
          * @accessor
          */
         picker: true,
+
 
         /**
          * @cfg {Object/Date} value
@@ -149,8 +152,6 @@ Ext.define('Ext.field.DatePicker', {
          */
         dateFormat: ''
     },
-
-    classCls: Ext.baseCSSPrefix + 'datepickerfield',
 
     applyValue: function(value, oldValue) {
         if (!Ext.isDate(value)) {

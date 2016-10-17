@@ -29,13 +29,6 @@
  *         renderTo: Ext.getBody()
  *     });
  *
- * ## Using a glyph
- *
- *     var glyphImage = Ext.create('Ext.Img', {
- *         glyph: 'xf015@FontAwesome',     // the "home" icon
- *         renderTo: Ext.getBody()
- *     });
- *
  * ## Image Dimensions
  *
  * You should include height and width dimensions for any image owned by a parent 
@@ -45,28 +38,16 @@
 Ext.define('Ext.Img', {
     extend: 'Ext.Component',
     alias: ['widget.image', 'widget.imagecomponent'],
-    requires: [
-        'Ext.Glyph'
-    ],
 
     autoEl: 'img',
 
     baseCls: Ext.baseCSSPrefix + 'img',
 
-    config: {
-        /**
-         * @cfg {String} src The source of this image. See {@link Ext#resolveResource} for
-         * details on locating application resources.
-         * @accessor
-         */
-        src: null,
-
-        /**
-         * @cfg {Number/String} glyph
-         * @inheritdoc Ext.panel.Header#glyph
-         */
-        glyph: null
-    },
+    /**
+     * @cfg {String} src
+     * The image src.
+     */
+    src: '',
 
     /**
      * @cfg {String} alt
@@ -98,34 +79,44 @@ Ext.define('Ext.Img', {
     
     maskOnDisable: false,
 
-    applySrc: function (src) {
-        return src && Ext.resolveResource(src);
+    initComponent: function() {
+        if (this.glyph) {
+            this.autoEl = 'div';
+        }
+        this.callParent();
     },
 
     getElConfig: function() {
         var me = this,
             autoEl = me.autoEl,
             config = me.callParent(),
+            glyphFontFamily = Ext._glyphFontFamily,
             glyph = me.glyph,
-            img;
+            img, glyphParts;
 
-        // We were configured with a glyph, then this is a div with a single char content
-        if (glyph) {
-            config.tag = 'div';
-            config.html = glyph.character;
-            config.style = config.style || {};
-            config.style.fontFamily = glyph.fontFamily;
+        // It is sometimes helpful (like in a panel header icon) to have the img wrapped
+        // by a div. If our autoEl is not 'img' then we just add an img child to the el.
+        if (autoEl === 'img' || (Ext.isObject(autoEl) && autoEl.tag === 'img')) {
+            img = config;
+        }
+        else if (me.glyph) {
+            if (typeof glyph === 'string') {
+                glyphParts = glyph.split('@');
+                glyph = glyphParts[0];
+                glyphFontFamily = glyphParts[1] || glyphFontFamily;
+            }
+            
+            config.html = '&#' + glyph + ';';
+            
+            if (glyphFontFamily) {
+                config.style = config.style || {};
+                config.style.fontFamily = glyphFontFamily;
+            }
             
             // A glyph is a graphic which is not an <img> tag so it should have
             // the corresponding role for Accessibility interface to recognize
             config.role = 'img';
         }
-        // The default; an img element
-        else if (autoEl === 'img' || (Ext.isObject(autoEl) && autoEl.tag === 'img')) {
-            img = config;
-        }
-        // It is sometimes helpful (like in a panel header icon) to have the img wrapped
-        // by a div. If our autoEl is not 'img' then we just add an img child to the el.
         else {
             config.cn = [img = {
                 tag: 'img',
@@ -189,89 +180,48 @@ Ext.define('Ext.Img', {
         if (imgEl && me.el !== imgEl) {
             imgEl.destroy();
         }
-        me.imgEl = null;
-        me.callParent();
-    },
-
-    getTitle: function () {
-        return this.title;
+        this.imgEl = null;
+        this.callParent();
     },
 
     /**
-     * Updates the {@link #title} of the image.
-     * @param {String} title
+     * Updates the {@link #src} of the image.
+     * @param {String} src
      */
-    setTitle: function (title) {
+    setSrc: function(src) {
         var me = this,
             imgEl = me.imgEl;
 
-        me.title = title || '';
-
-        if (imgEl) {
-            imgEl.dom.title = title || '';
-        }
-    },
-
-    afterComponentLayout: function(width, height, oldWidth, oldHeight) {
-        var heightModel = this.getSizeModel().height,
-            h;
-                
-        // If we have our height set, then size the glyph as requested to make image scalable.
-        if ((heightModel.calculated || heightModel.configured) && height && this.glyph) {
-            h = height + 'px';
-            this.setStyle({
-                'line-height': h,
-                'font-size': h
-            });
-        }
-        this.callParent([width, height, oldWidth, oldHeight]);
-    },
-
-    getAlt: function () {
-        return this.alt;
-    },
-
-    /**
-     * Updates the {@link #alt} of the image.
-     * @param {String} alt
-     */
-    setAlt: function (alt) {
-        var me = this,
-            imgEl = me.imgEl;
-
-        me.alt = alt || '';
-
-        if (imgEl) {
-            imgEl.dom.alt = alt || '';
-        }
-    },
-
-    updateSrc: function (src) {
-        var imgEl = this.imgEl;
+        me.src = src;
 
         if (imgEl) {
             imgEl.dom.src = src || Ext.BLANK_IMAGE_URL;
         }
     },
 
-    applyGlyph: function(glyph, oldGlyph) {
-        if (glyph) {
-            if (!glyph.isGlyph) {
-                glyph = new Ext.Glyph(glyph);
-            }
-            if (glyph.isEqual(oldGlyph)) {
-                glyph = undefined;
-            }
-        }
-        return glyph;
-    },
+    /**
+     * Updates the {@link #glyph} of the image.
+     * @param {Number/String} glyph
+     */
+    setGlyph: function(glyph) {
+        var me = this,
+            glyphFontFamily = Ext._glyphFontFamily,
+            old = me.glyph,
+            el = me.el,
+            glyphParts;
 
-    updateGlyph: function(glyph, oldGlyph) {
-        var el = this.el;
+        me.glyph = glyph;
+        if (me.rendered && glyph !== old) {
+            if (typeof glyph === 'string') {
+                glyphParts = glyph.split('@');
+                glyph = glyphParts[0];
+                glyphFontFamily = glyphParts[1] || glyphFontFamily;
+            }
 
-        if (el) {
-            el.dom.innerHTML = glyph.character;
-            el.setStyle(glyph.getStyle());
+            el.dom.innerHTML = '&#' + glyph + ';';
+            if (glyphFontFamily) {
+                el.setStyle('font-family', glyphFontFamily);
+            }
         }
     }
 });

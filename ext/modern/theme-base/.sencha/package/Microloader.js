@@ -8,8 +8,7 @@ var Ext = Ext || window['Ext'] || {};
 
 //<editor-fold desc="Microloader">
 /**
- * @class Ext.Microloader
- * @private
+ * @Class Ext.Microloader
  * @singleton
  */
 Ext.Microloader = Ext.Microloader || (function () {
@@ -25,7 +24,6 @@ Ext.Microloader = Ext.Microloader || (function () {
         _privatePrefix = '_ext:' + location.pathname,
 
         /**
-         * @method getStorageKey
          * The Following combination is used to create isolated local storage keys
          * '_ext' is used to scope all the local storage keys that we internally by Ext
          * 'location.pathname' is used to force each assets to cache by an absolute URL (/build/MyApp) (dev vs prod)
@@ -74,7 +72,7 @@ Ext.Microloader = Ext.Microloader || (function () {
                 }
             },
             /**
-             * @private
+             * private
              */
             retrieveAsset: function (key) {
                 try {
@@ -273,7 +271,7 @@ Ext.Microloader = Ext.Microloader || (function () {
 
         /**
          * Microloader
-         * @type {Array}
+         *  @type {Array}
          * @private
          */
         var _listeners = [],
@@ -303,13 +301,6 @@ Ext.Microloader = Ext.Microloader || (function () {
                         readyHandler();
                     }
                 };
-            },
-
-            applyCacheBuster: function(url) {
-                var tstamp = new Date().getTime(),
-                    sep = url.indexOf('?') === -1 ? '?' : '&';
-                url = url + sep + "_dc=" + tstamp;
-                return url;
             },
 
             run: function() {
@@ -342,7 +333,7 @@ Ext.Microloader = Ext.Microloader || (function () {
 
                     // Manifest is not in local storage. Fetch it from the server
                     } else {
-                        Boot.fetch(Microloader.applyCacheBuster(url), function (result) {
+                        Boot.fetch(url, function (result) {
                             //<debug>
                                 _debug("Manifest file was not found in Local Storage, loading: " + url);
                             //</debug>
@@ -372,6 +363,7 @@ Ext.Microloader = Ext.Microloader || (function () {
             },
 
             /**
+             *
              * @param {Manifest} manifest
              */
             load: function (manifest) {
@@ -407,7 +399,6 @@ Ext.Microloader = Ext.Microloader || (function () {
                             }
                         }
                         Microloader.urls.push(asset.assetConfig.path);
-                        Boot.assetConfig[asset.assetConfig.path] = Boot.apply({type: asset.type}, asset.assetConfig);
                     }
                 }
 
@@ -588,7 +579,7 @@ Ext.Microloader = Ext.Microloader || (function () {
                 //<debug>
                     _debug("Checking for updates at: " + Microloader.manifest.url);
                 //</debug>
-                Boot.fetch(Microloader.applyCacheBuster(Microloader.manifest.url), Microloader.onUpdatedManifestLoaded);
+                Boot.fetch(Microloader.manifest.url, Microloader.onUpdatedManifestLoaded);
             },
 
             onAppCacheError: function(e) {

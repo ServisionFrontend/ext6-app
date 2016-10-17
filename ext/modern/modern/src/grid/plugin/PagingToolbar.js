@@ -36,10 +36,9 @@ Ext.define('Ext.grid.plugin.PagingToolbar', {
                 xtype: 'component',
                 role: 'totalpages',
                 width: 50,
-                tpl: '&#160;/ {totalPages}'
+                tpl: '&nbsp;/ {totalPages}'
             }, {
                 xtype: 'singlesliderfield',
-                liveUpdate: true,
                 value: 1,
                 flex: 1,
                 minValue: 1,
@@ -92,7 +91,6 @@ Ext.define('Ext.grid.plugin.PagingToolbar', {
                 add: 'onTotalCountChange',
                 remove: 'onTotalCountChange',
                 refresh: 'onTotalCountChange',
-                clear: 'onTotalCountChange',
                 scope: me
             });
 

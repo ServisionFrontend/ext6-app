@@ -98,15 +98,13 @@ Ext.define('Ext.grid.property.HeaderContainer', {
             result = val;
 
         if (renderer) {
-            return Ext.callback(renderer, null, arguments, 0, me);
+            return renderer.apply(me, arguments);
         }
-
         if (Ext.isDate(val)) {
             result = me.renderDate(val);
         } else if (Ext.isBoolean(val)) {
             result = me.renderBool(val);
         }
-
         return Ext.util.Format.htmlEncode(result);
     },
 

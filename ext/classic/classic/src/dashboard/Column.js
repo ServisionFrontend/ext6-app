@@ -28,7 +28,6 @@ Ext.define('Ext.dashboard.Column', {
             ownerCt = me.ownerCt,
             remainingSiblings,
             numRemaining,
-            columnWidth,
             totalColumnWidth = 0,
             i;
 
@@ -55,8 +54,7 @@ Ext.define('Ext.dashboard.Column', {
                         totalColumnWidth += remainingSiblings[i].columnWidth || 0;
                     }
                     for (i = 0; i < numRemaining; i++) {
-                        columnWidth = remainingSiblings[i].columnWidth;
-                        remainingSiblings[i].columnWidth = Math.floor(columnWidth / totalColumnWidth * 100) / 100;
+                        remainingSiblings[i].columnWidth = remainingSiblings[i].columnWidth / totalColumnWidth;
                     }
                 }
 

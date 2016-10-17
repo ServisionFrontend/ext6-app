@@ -1,11 +1,21 @@
 describe("Ext.viewport.Default", function() {
-    var addWindowListenerSpy,
+    var initialHeight = 600,
+        initialWidth = 300,
+        addWindowListenerSpy,
         Viewport = Ext.viewport.Default;
 
     Viewport.override({
         addWindowListener: function() {
             if (!addWindowListenerSpy) return this.callOverridden(arguments);
             addWindowListenerSpy.apply(this, arguments);
+        },
+
+        getWindowWidth: function() {
+            return initialWidth;
+        },
+
+        getWindowHeight: function() {
+            return initialHeight;
         },
 
         getWindowOrientation: function() {
@@ -89,6 +99,53 @@ describe("Ext.viewport.Default", function() {
 
                 expect(viewport.fireEvent).not.toHaveBeenCalled();
             });
+
+            it("should fire a 'resize' event and pass the width and height as arguments if the size changes", function(){
+                // both width and height must change, and the actual calculated orientation
+                // much also change between portrait and landscape
+                var newHeight = initialWidth,
+                    newWidth = initialHeight;
+
+                spyOn(viewport, 'getWindowHeight').andReturn(newHeight);
+                spyOn(viewport, 'getWindowWidth').andReturn(newWidth);
+                spyOn(viewport, 'fireEvent');
+
+                viewport.onResize();
+
+                expect(viewport.fireEvent).toHaveBeenCalledWith(
+                    'orientationchange',
+                    viewport, 'landscape',
+                    newWidth,
+                    newHeight);
+            });
+
+            it("should invoke fireOrientationChangeEvent() if width is greater than height", function(){
+                var newHeight = 300,
+                    newWidth = 600;
+
+                spyOn(viewport, 'getWindowHeight').andReturn(newHeight);
+                spyOn(viewport, 'getWindowWidth').andReturn(newWidth);
+
+                spyOn(viewport, 'fireOrientationChangeEvent');
+
+                viewport.onResize();
+
+                expect(viewport.fireOrientationChangeEvent).toHaveBeenCalled();
+            });
+
+            it("should NOT invoke onOrientationChange() if width is still smaller than height", function(){
+                var newHeight = 600,
+                    newWidth = 599;
+
+                spyOn(viewport, 'getWindowHeight').andReturn(newHeight);
+                spyOn(viewport, 'getWindowWidth').andReturn(newWidth);
+
+                spyOn(viewport, 'fireOrientationChangeEvent');
+
+                viewport.onResize();
+
+                expect(viewport.fireOrientationChangeEvent).not.toHaveBeenCalled();
+            });
         });
 
         describe("determineOrientation()", function(){
@@ -108,36 +165,33 @@ describe("Ext.viewport.Default", function() {
                 it("should return viewport.PORTRAIT if orientation equals 0", function(){
                     spyOn(viewport, 'getWindowOrientation').andReturn(0);
 
-                    var orientation = viewport.determineOrientation();
-                    expect(orientation).toBe(viewport.PORTRAIT);
+                    viewport.determineOrientation();
+
+                    expect(viewport.determineOrientation()).toBe(viewport.PORTRAIT);
                 });
 
                 it("should return viewport.PORTRAIT if orientation equals 180", function(){
                     spyOn(viewport, 'getWindowOrientation').andReturn(180);
 
-                    var orientation = viewport.determineOrientation();
-                    expect(orientation).toBe(viewport.PORTRAIT);
+                    viewport.determineOrientation();
+
+                    expect(viewport.determineOrientation()).toBe(viewport.PORTRAIT);
                 });
 
                 it("should return viewport.LANDSCAPE if orientation equals 90", function(){
                     spyOn(viewport, 'getWindowOrientation').andReturn(90);
 
-                    var orientation = viewport.determineOrientation();
-                    expect(orientation).toBe(viewport.LANDSCAPE);
-                });
+                    viewport.determineOrientation();
 
-                it("should return viewport.LANDSCAPE if orientation equals -90", function(){
-                    spyOn(viewport, 'getWindowOrientation').andReturn(-90);
-
-                    var orientation = viewport.determineOrientation();
-                    expect(orientation).toBe(viewport.LANDSCAPE);
+                    expect(viewport.determineOrientation()).toBe(viewport.LANDSCAPE);
                 });
 
                 it("should return viewport.LANDSCAPE if orientation equals 270", function(){
                     spyOn(viewport, 'getWindowOrientation').andReturn(270);
 
-                    var orientation = viewport.determineOrientation();
-                    expect(orientation).toBe(viewport.LANDSCAPE);
+                    viewport.determineOrientation();
+
+                    expect(viewport.determineOrientation()).toBe(viewport.LANDSCAPE);
                 });
             });
 
@@ -146,9 +200,35 @@ describe("Ext.viewport.Default", function() {
                     spyOn(viewport, 'supportsOrientation').andReturn(false);
                 });
 
-                it("should return a value other then null", function(){
-                    var orientation = viewport.determineOrientation();
-                    expect(orientation).not.toBeNull();
+                it("should invoke getWindowWidth() and getWindowHeight()", function(){
+                    spyOn(viewport, 'getWindowWidth');
+                    spyOn(viewport, 'getWindowHeight');
+
+                    viewport.determineOrientation();
+
+                    expect(viewport.getWindowWidth).toHaveBeenCalled();
+                    expect(viewport.getWindowHeight).toHaveBeenCalled();
+                });
+
+                it("should return viewport.PORTRAIT if height is 600 and width is 400", function(){
+                    spyOn(viewport, 'getWindowHeight').andReturn(600);
+                    spyOn(viewport, 'getWindowWidth').andReturn(400);
+
+                    expect(viewport.determineOrientation()).toBe(viewport.PORTRAIT);
+                });
+
+                it("should return viewport.PORTRAIT if height is 600 and width is 600 (equivalent)", function(){
+                    spyOn(viewport, 'getWindowHeight').andReturn(600);
+                    spyOn(viewport, 'getWindowWidth').andReturn(600);
+
+                    expect(viewport.determineOrientation()).toBe(viewport.PORTRAIT);
+                });
+
+                it("should return viewport.LANDSCAPE if height is 400 and width is 600", function(){
+                    spyOn(viewport, 'getWindowHeight').andReturn(400);
+                    spyOn(viewport, 'getWindowWidth').andReturn(600);
+
+                    expect(viewport.determineOrientation()).toBe(viewport.LANDSCAPE);
                 });
             });
         });
@@ -173,17 +253,14 @@ describe("Ext.viewport.Default", function() {
             it("should fire an 'orientationchange' event and pass the new orientation, width and height as arguments, if the orientation did change", function(){
                 var newOrientation = viewport.LANDSCAPE;
 
-                viewport.setWidth(100);
-                viewport.setHeight(200);
-                viewport.setOrientation(viewport.PORTRAIT);
-
                 spyOn(viewport, 'determineOrientation').andReturn(newOrientation);
                 spyOn(viewport, 'fireEvent');
 
                 viewport.onOrientationChange();
 
-                expect(viewport.fireEvent).toHaveBeenCalledWith('orientationchange', viewport, newOrientation, 100, 200);
+                expect(viewport.fireEvent).toHaveBeenCalledWith('orientationchange', viewport, newOrientation, viewport.windowWidth, viewport.windowHeight);
             });
         });
     });
+
 });

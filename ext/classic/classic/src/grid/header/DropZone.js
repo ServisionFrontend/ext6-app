@@ -256,7 +256,7 @@ Ext.define('Ext.grid.header.DropZone', {
             // The HeaderContainer translates this to visible columns for informing the view and firing events.
             visibleColumnManager = me.headerCt.visibleColumnManager,
             visibleFromIdx = visibleColumnManager.getHeaderIndex(dragHeader),
-            visibleToIdx, colsToMove, scrollerOwner, savedWidth;
+            visibleToIdx, colsToMove, moveMethod, scrollerOwner, savedWidth;
 
         // If we are dragging in between two HeaderContainers that have had the lockable mixin injected we will lock/unlock
         // headers in between sections, and then continue with another execution of onNodeDrop to ensure the header is
@@ -330,9 +330,11 @@ Ext.define('Ext.grid.header.DropZone', {
             // component rather than trying to pass indices, which is too ambiguous and could refer to any
             // collection at any level of (grouped) header containers.
             if (dropPosition === 'before') {
-                toCt.moveBefore(dragHeader, targetHeader);
+                targetHeader.insertNestedHeader(dragHeader);
             } else {
-                toCt.moveAfter(dragHeader, targetHeader);
+                // Capitalize the first letter. This will call either ct.moveAfter() or ct.moveBefore().
+                moveMethod = 'move' + dropPosition.charAt(0).toUpperCase() + dropPosition.substr(1);
+                toCt[moveMethod](dragHeader, targetHeader);
             }
 
             // ***Move the view data columns***

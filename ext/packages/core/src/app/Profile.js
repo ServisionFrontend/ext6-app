@@ -64,9 +64,9 @@
  * 
  */
 Ext.define('Ext.app.Profile', {
-    mixins: [
-        'Ext.mixin.Observable'
-    ],
+    mixins: {
+        observable: "Ext.mixin.Observable"
+    },
 
     /**
      * @property {Boolean}
@@ -74,24 +74,24 @@ Ext.define('Ext.app.Profile', {
      */
     isProfile: true,
 
-    /**
-     * @cfg {String} [namespace]
-     * The namespace that this Profile's classes can be found in. Defaults to the lowercase
-     * Profile {@link #name}, for example a Profile called MyApp.profile.Phone will by default have a 'phone'
-     * namespace, which means that this Profile's additional models, stores, views and controllers will be loaded
-     * from the MyApp.model.phone.*, MyApp.store.phone.*, MyApp.view.phone.* and MyApp.controller.phone.* namespaces
-     * respectively.
-     * @accessor
-     */
-
-    /**
-     * @cfg {String} [name]
-     * The name of this Profile. Defaults to the last section of the class name (e.g. a profile
-     * called MyApp.profile.Phone will default the name to 'Phone').
-     * @accessor
-     */
-
     config: {
+        /**
+         * @cfg {String} namespace The namespace that this Profile's classes can be found in. Defaults to the lowercased
+         * Profile {@link #name}, for example a Profile called MyApp.profile.Phone will by default have a 'phone'
+         * namespace, which means that this Profile's additional models, stores, views and controllers will be loaded
+         * from the MyApp.model.phone.*, MyApp.store.phone.*, MyApp.view.phone.* and MyApp.controller.phone.* namespaces
+         * respectively.
+         * @accessor
+         */
+        namespace: 'auto',
+
+        /**
+         * @cfg {String} name The name of this Profile. Defaults to the last section of the class name (e.g. a profile
+         * called MyApp.profile.Phone will default the name to 'Phone').
+         * @accessor
+         */
+        name: 'auto',
+
         /**
          * @cfg {String} mainView
          */
@@ -101,9 +101,8 @@ Ext.define('Ext.app.Profile', {
         },
 
         /**
-         * @cfg {Ext.app.Application} application
-         * The {@link Ext.app.Application Application} instance to which this Profile is
-         * bound. This is set automatically.
+         * @cfg {Ext.app.Application} application The {@link Ext.app.Application Application} instance that this
+         * Profile is bound to. This is set automatically.
          * @accessor
          * @readonly
          */
@@ -111,11 +110,8 @@ Ext.define('Ext.app.Profile', {
 
         // @cmd-auto-dependency {aliasPrefix: "controller.", profile: true, blame: "all"}
         /**
-         * @cfg {String[]} controllers
-         * Any additional {@link Ext.app.Controller Controllers} to load for this profile.
-         * Note that each item here will be prepended with the Profile namespace when loaded.
-         *
-         * Example usage:
+         * @cfg {Array} controllers Any additional {@link Ext.app.Controller Controllers} to load for this
+         * profile. Note that each item here will be prepended with the Profile namespace when loaded. Example usage:
          *
          *     controllers: [
          *         'Users',
@@ -129,11 +125,8 @@ Ext.define('Ext.app.Profile', {
 
         // @cmd-auto-dependency {aliasPrefix : "model.", profile: true, blame: "all"}
         /**
-         * @cfg {String[]} models
-         * Any additional {@link Ext.app.Application#models Models} to load for this profile.
-         * Note that each item here will be prepended with the Profile namespace when loaded.
-         *
-         * Example usage:
+         * @cfg {Array} models Any additional {@link Ext.app.Application#models Models} to load for this profile. Note
+         * that each item here will be prepended with the Profile namespace when loaded. Example usage:
          *
          *     models: [
          *         'Group',
@@ -145,59 +138,25 @@ Ext.define('Ext.app.Profile', {
          */
         models: [],
 
-        // @cmd-auto-dependency {aliasPrefix: "view.", profile: true, isKeyedObject:true, blame: "all" }
+        // @cmd-auto-dependency {aliasPrefix: "view.", profile: true, blame: "all"}
         /**
-         * @cfg {Object/String[]} views
-         * This config allows the active profile to define a set of `xtypes` and map them
-         * to desired classes and default configurations. Normally an `xtype` is statically
-         * declared by a {@link Ext.Component component} in its class definition. This
-         * mechanism allows the active profile to control a set of these types.
-         *
-         * Example:
-         *
-         *      views: {
-         *          // The "main" xtype maps to MyApp.view.tablet.Main
-         *          //
-         *          main: 'MyApp.view.tablet.Main',
-         *
-         *          // The "inbox" xtype maps to a subclass of MyApp.view.Inbox (created
-         *          // by this mechanism) that sets the "mode" config to "compact".
-         *          //
-         *          inbox: {
-         *              xclass: 'MyApp.view.Inbox',
-         *              mode: 'compact'
-         *          }
-         *      }
-         *
-         * Note that class names used in this form must be full class names, unlike the
-         * historical usage of `views`. Further, these views cannot be accessed using the
-         * `getView` method but rather via their assigned `xtype`.
-         *
-         * The historical usage of this config is enabled when an array is passed. In this
-         * case, these are simply additional {@link Ext.app.Application#views views} to
-         * load for this profile. Note that each item here will be prepended with the
-         * Profile namespace when loaded.
-         *
-         * Example usage:
+         * @cfg {Array} views Any additional {@link Ext.app.Application#views views} to load for this profile. Note
+         * that each item here will be prepended with the Profile namespace when loaded. Example usage:
          *
          *     views: [
          *         'Main',
          *         'MyApp.view.Login'
          *     ]
          *
-         * This will load *MyApp.view.tablet.Main* and *MyApp.view.Login*. While supported,
-         * this usage is discouraged in favor of `xtype` mapping.
+         * This will load *MyApp.view.tablet.Main* and *MyApp.view.Login*.
          * @accessor
          */
         views: [],
 
         // @cmd-auto-dependency {aliasPrefix: "store.", profile: true, blame: "all"}
         /**
-         * @cfg {String[]} stores
-         * Any additional {@link Ext.app.Application#stores Stores} to load for this profile.
-         * Note that each item here will be prepended with the Profile namespace when loaded.
-         *
-         * Example usage:
+         * @cfg {Array} stores Any additional {@link Ext.app.Application#stores Stores} to load for this profile. Note
+         * that each item here will be prepended with the Profile namespace when loaded. Example usage:
          *
          *     stores: [
          *         'Users',
@@ -213,7 +172,7 @@ Ext.define('Ext.app.Profile', {
     /**
      * Creates a new Profile instance
      */
-    constructor: function (config) {
+    constructor: function(config) {
         this.initConfig(config);
 
         this.mixins.observable.constructor.apply(this, arguments);
@@ -225,26 +184,8 @@ Ext.define('Ext.app.Profile', {
      * (the default implementation just returns false).
      * @return {Boolean} True if this Profile should be activated on the device it is running on, false otherwise
      */
-    isActive: function () {
+    isActive: function() {
         return false;
-    },
-
-    /**
-     * This method is called once the profile is determined to be the active profile. This
-     * initialization is performed before controllers are initialized and therefore also
-     * before launch.
-     * @protected
-     * @since 6.0.1
-     */
-    init: function () {
-        var views = this.getViews(),
-            xtype;
-
-        if (views && !(views instanceof Array)) {
-            for (xtype in views) {
-                Ext.ClassManager.setXType(views[xtype], xtype);
-            }
-        }
     },
 
     /**
@@ -259,92 +200,85 @@ Ext.define('Ext.app.Profile', {
      */
     launch: Ext.emptyFn,
 
-    onClassExtended: function (cls, data, hooks) {
+    /**
+     * @private
+     */
+    applyNamespace: function(name) {
+        if (name == 'auto') {
+            name = this.getName();
+        }
+
+        return name.toLowerCase();
+    },
+
+    /**
+     * @private
+     */
+    applyName: function(name) {
+        if (name == 'auto') {
+            var pieces = this.$className.split('.');
+            name = pieces[pieces.length - 1];
+        }
+
+        return name;
+    },
+    onClassExtended: function(cls, data, hooks) {
         var onBeforeClassCreated = hooks.onBeforeCreated;
 
         hooks.onBeforeCreated = function(cls, data) {
             var Controller = Ext.app.Controller,
-                className = cls.$className,
                 requires = [],
                 proto = cls.prototype,
-                views = data.views,
-                name, namespace;
-
-            // Process name and namespace configs here since we need to use the namespace
-            // in the dependency calculation
-            name = data.name;
-            if (name) {
-                delete data.name;
-            } else {
-                name = className.split('.');
-                name = name[name.length - 1];
-            }
-            cls._name = name;
-
-            cls._namespace = name = (data.namespace || name).toLowerCase();
-            delete data.namespace;
+                namespace;
 
             namespace = Controller.resolveNamespace(cls, data);
 
-            Controller.processDependencies(proto, requires, namespace, 'model', data.models, name);
-            Controller.processDependencies(proto, requires, namespace, 'store', data.stores, name);
-            Controller.processDependencies(proto, requires, namespace, 'controller', data.controllers, name);
-
-            if (views) {
-                if (views instanceof Array) {
-                    Controller.processDependencies(proto, requires, namespace, 'view', views, name);
-                } else {
-                    Ext.app.Profile.processViews(className, views, requires);
-                }
-            }
+            Controller.processDependencies(proto, requires, namespace, 'model', data.models);
+            Controller.processDependencies(proto, requires, namespace, 'view', data.views);
+            Controller.processDependencies(proto, requires, namespace, 'store', data.stores);
+            Controller.processDependencies(proto, requires, namespace, 'controller', data.controllers);
 
             Ext.require(requires, Ext.Function.pass(onBeforeClassCreated, arguments, this));
         };
     },
 
-    getName: function () {
-        // This used to be a Config but is now processed in onClassExtended so we provide
-        // the getter for compat.
-        return this.self._name;
-    },
+    /**
+     * @private
+     * Computes the full class names of any specified model, view, controller and store dependencies, returns them in
+     * an object map for easy loading
+     */
+    getDependencies: function() {
+        var allClasses = [],
+            appName = this.getApplication().getName(),
+            namespace = this.getNamespace(),
+            map = {
+                model: this.getModels(),
+                view: this.getViews(),
+                controller: this.getControllers(),
+                store: this.getStores()
+            },
+            classType, classNames;
 
-    getNamespace: function () {
-        // This used to be a Config but is now processed in onClassExtended so we provide
-        // the getter for compat.
-        return this.self._namespace;
-    },
+        for (classType in map) {
+            classNames = [];
 
-    privates: {
-        statics: {
-            processViews: function (className, views, requires) {
-                var body, cls, s, xtype;
-
-                for (xtype in views) {
-                    cls = views[xtype];
-
-                    if (typeof cls !== 'string') {
-                        s = cls.xclass;
-
-                        //<debug>
-                        if (!s) {
-                            Ext.raise('Views must specify an xclass');
-                        }
-                        //</debug>
-
-                        body = Ext.apply({
-                            extend: s
-                        }, cls);
-
-                        delete body.xclass;
-
-                        // Class names will be App.profile.Tablet$inbox for example
-                        Ext.define(views[xtype] = className + '$' + xtype, body);
-                        cls = s;
+            Ext.each(map[classType], function(className) {
+                if (Ext.isString(className)) {
+                    //we check name === appName to allow MyApp.profile.MyApp to exist
+                    if (Ext.isString(className) && (Ext.ClassManager.getPrefix(className) === "" || className === appName)) {
+                        className = appName + '.' + classType + '.' + namespace + '.' + className;
                     }
 
-                    requires.push(cls);
+                    classNames.push(className);
+                    allClasses.push(className);
                 }
-            }
+            }, this);
+
+            map[classType] = classNames;
         }
+
+        map.all = allClasses;
+
+        return map;
     }
 });

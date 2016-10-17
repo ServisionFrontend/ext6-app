@@ -2,7 +2,7 @@
  * @class Ext.field.Radio
  */
 
-.x-radiofield .x-input-mask {
+.x-field-radio .x-field-mask {
 	&::before,
 	&::after {
 		@include border-radius(10px);
@@ -18,13 +18,13 @@
     }
 }
 
-.x-radiofield .x-input-el:checked + .x-input-mask::after {
+.x-field-radio .x-input-el:checked + .x-field-mask::after {
     background: $base-color;
     @include box-shadow(0 0 3px 2px rgba($base-color, .6));
 }
 
 .x-item-disabled {
-    &.x-radiofield .x-input-el:checked + .x-input-mask::after {
+    &.x-field-radio .x-input-el:checked + .x-field-mask::after {
         text-shadow: none;
         background: $foreground-color;
         @include box-shadow(none);

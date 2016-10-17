@@ -64,12 +64,12 @@ Ext.define('Ext.util.PositionMap', {
             indices = adjustments.indices,
             heights = adjustments.heights,
             map = this.map,
-            ln = indices && indices.length,
+            ln = indices.length,
             minimumHeight = this.getMinimumHeight(),
             difference = 0,
             i, j, height, index, nextIndex, currentHeight;
 
-        if (!ln) {
+        if (!adjustments.indices.length) {
             return false;
         }
 

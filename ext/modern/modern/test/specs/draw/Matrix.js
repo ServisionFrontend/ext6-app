@@ -1,4 +1,4 @@
-describe('Modern Ext.draw.Matrix', function () {
+describe('Ext.draw.Matrix', function () {
     it('Matrix creation', function () {
         var matrix = Ext.create("Ext.draw.Matrix", 1, 2, 3, 4, 5, 6);
         expect(matrix.getXX()).toEqual(1);

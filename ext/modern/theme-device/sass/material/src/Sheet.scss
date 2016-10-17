@@ -1,7 +1,0 @@
-@if ($include-material) {
-  #{$material-selector} {
-    .#{$prefix}sheet-action {
-      @include css-color-variable('background-color-md', 'background-color');
-    }
-  }
-}

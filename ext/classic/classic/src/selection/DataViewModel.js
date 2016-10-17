@@ -1,7 +1,5 @@
 /**
- * The DataViewModel selection model implements item-based selection for Ext.view.View. 
- * DataViewModel is the default dataview selection model and generally will not need to 
- * be specified.
+ * @private
  */
 Ext.define('Ext.selection.DataViewModel', {
     extend: 'Ext.selection.Model',
@@ -15,9 +13,8 @@ Ext.define('Ext.selection.DataViewModel', {
     /**
      * @cfg {Boolean} [enableKeyNav=true]
      *
-     * @deprecated 5.1.0 Keyboard navigation is a function of the view's 
-     * {@link Ext.view.NavigationModel navigation model}, and is enabled for 
-     * accessibility purposes.
+     * @deprecated 5.1.0 Keyboard navigation is a function of the view's {@link Ext.view.NavigationModel navigation model},
+     * and is enabled for accessibilty purposes.
      */
 
     /**
@@ -26,7 +23,7 @@ Ext.define('Ext.selection.DataViewModel', {
      * deselection is cancelled.
      * @param {Ext.selection.DataViewModel} this
      * @param {Ext.data.Model} record The deselected record.
-     * @param {Number} index The index within the store of the deselected record.
+     * @param {Number} The index within the store of the deselected record.
      */
 
     /**
@@ -35,7 +32,7 @@ Ext.define('Ext.selection.DataViewModel', {
      * selection is cancelled.
      * @param {Ext.selection.DataViewModel} this
      * @param {Ext.data.Model} record The selected record.
-     * @param {Number} index The index within the store of the selected record.
+     * @param {Number} The index within the store of the selected record.
      */
 
     /**
@@ -50,7 +47,7 @@ Ext.define('Ext.selection.DataViewModel', {
      * Fired after a record is selected
      * @param {Ext.selection.DataViewModel} this
      * @param  {Ext.data.Model} record The selected record.
-     * @param {Number} index The index within the store of the selected record.
+     * @param {Number} The index within the store of the selected record.
      */
 
     bindComponent: function(view) {

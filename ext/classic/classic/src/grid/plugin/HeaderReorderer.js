@@ -27,7 +27,7 @@ Ext.define('Ext.grid.plugin.HeaderReorderer', {
         me.callParent();
     },
 
-    onHeaderCtRender: function(headerCt) {
+    onHeaderCtRender: function() {
         var me = this;
         
         me.dragZone = new Ext.grid.header.DragZone(me.headerCt);
@@ -35,8 +35,6 @@ Ext.define('Ext.grid.plugin.HeaderReorderer', {
         if (me.disabled) {
             me.dragZone.disable();
         }
-
-        headerCt.setTouchAction({ panX: false });
     },
     
     enable: function() {

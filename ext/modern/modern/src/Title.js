@@ -11,7 +11,7 @@ Ext.define('Ext.Title', {
          * @cfg
          * @inheritdoc
          */
-        baseCls: Ext.baseCSSPrefix + 'title',
+        baseCls: 'x-title',
 
         /**
          * @cfg {String} title The title text

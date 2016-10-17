@@ -42,7 +42,6 @@ Ext.define('Ext.data.SortTypes', {
     singleton: true,
 
     /**
-     * @method
      * Default sort that does nothing
      * @param {Object} s The value being converted
      * @return {Object} The comparison value
@@ -51,13 +50,15 @@ Ext.define('Ext.data.SortTypes', {
 
     /**
      * The regular expression used to strip commas
-     * @property {RegExp}
+     * @type {RegExp}
+     * @property
      */
     stripCommasRe: /,/g,
 
     /**
      * The regular expression used to strip tags
-     * @property {RegExp}
+     * @type {RegExp}
+     * @property
      */
     stripTagsRE: /<\/?[^>]+>/gi,
 

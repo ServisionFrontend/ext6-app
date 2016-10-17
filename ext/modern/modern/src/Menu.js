@@ -6,26 +6,24 @@
  *
  *      @example preview
  *      var menu = Ext.create('Ext.Menu', {
- *          items: [{
- *              text: 'Settings',
- *              iconCls: 'settings'
- *          }, {
- *              text: 'New Item',
- *              iconCls: 'compose'
- *          }, {
- *              text: 'Star',
- *              iconCls: 'star'
- *          }]
- *      });
- *
- *      Ext.Viewport.add({
- *          xtype: 'panel',
- *          html: 'Main View Content'
+ *          items: [
+ *              {
+ *                  text: 'Settings',
+ *                  iconCls: 'settings'
+ *              },
+ *              {
+ *                  text: 'New Item',
+ *                  iconCls: 'compose'
+ *              },
+ *              {
+ *                  text: 'Star',
+ *                  iconCls: 'star'
+ *              }
+ *          ]
  *      });
  *
  *      Ext.Viewport.setMenu(menu, {
  *          side: 'left',
- *          // omitting the reveal config defaults the animation to 'cover'
  *          reveal: true
  *      });
  *
@@ -119,21 +117,6 @@ Ext.define('Ext.Menu', {
         }
     },
 
-    floated: true,
-
-    hide: function() {
-        var me = this,
-            parent = me.parent;
-
-        if (parent && parent.isViewport && me.$side && !me.viewportIsHiding) {
-            me.viewportIsHiding = true;
-            parent.hideMenu(me.$side, true);
-        } else {
-            me.viewportIsHiding = false;
-            me.callParent();
-        }
-    },
-
     constructor: function() {
         this.config.translatable.translationMethod = 'csstransform';
         this.callParent(arguments);
@@ -153,16 +136,21 @@ Ext.define('Ext.Menu', {
     },
 
     updateHideOnMaskTap : function(hide) {
-        if (!this.isFloated()) {
-            var mask = this.getModal();
+        var mask = this.getModal();
 
-            if (mask) {
-                mask[hide ? 'on' : 'un']('tap', this.onMaskTap, this);
-            }
+        if (mask) {
+            mask[hide ? 'on' : 'un'].call(mask, 'tap', function() {
+                Ext.Viewport.hideMenu(this.$side);
+            }, this);
         }
     },
 
-    onMaskTap: function() {
-        Ext.Viewport.hideMenu(this.$side);
+    /**
+     * Only fire the hide event if it is initialized
+     */
+    updateHidden: function() {
+        if (this.initialized) {
+            this.callParent(arguments);
+        }
     }
 });

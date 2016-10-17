@@ -143,7 +143,7 @@ return {
          * @private
          */
         is: function (value) {
-            return value != null && (typeof value === 'object' || Ext.isFunction(value)) &&
+            return (Ext.isObject(value) || Ext.isFunction(value)) &&
                 Ext.isFunction(value.then);
         },
 

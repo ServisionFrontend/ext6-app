@@ -84,7 +84,7 @@ describe("Ext.window.Toast", function() {
         });
         
         it("should dismiss toast", function() {
-            fireMouseEvent(Ext.getBody(), 'click', 0, 0);
+            fireMouseEvent(Ext.getDoc(), 'click', 0, 0);
             
             waitForSpy(destroySpy, 'destroy spy', 100);
             
@@ -143,6 +143,7 @@ describe("Ext.window.Toast", function() {
                 width: 300,
                 x: 10,
                 y: 10,
+                defaultFocus: 'field1',
                 items: [{
                     xtype: 'textfield',
                     id: 'field1'
@@ -150,14 +151,12 @@ describe("Ext.window.Toast", function() {
                     xtype: 'textfield',
                     id: 'field2'
                 }]
-            });
-            
+            }).show();
+        
             field1 = win.down('#field1');
             field2 = win.down('#field2');
-            
-            win.show();
-            
-            focusAndWait(field1);
+        
+            waitForFocus(field1, 'field1 inputEl initial focus');
         });
     
         // https://sencha.jira.com/browse/EXTJS-15357

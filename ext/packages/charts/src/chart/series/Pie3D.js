@@ -246,7 +246,7 @@ Ext.define('Ext.chart.series.Pie3D', {
         }
 
         for (i = 0; i < spriteCount; i++) {
-            sprites[i].setAnimation(animation);
+            sprites[i].fx.setConfig(animation);
         }
 
         for (i = 0; i < recordCount; i++) {
@@ -262,7 +262,7 @@ Ext.define('Ext.chart.series.Pie3D', {
         }
 
         for (i *= spritesPerSlice; i < spriteCount; i++) {
-            sprites[i].setAnimation(animation);
+            sprites[i].fx.setConfig(animation);
             sprites[i].setAttributes({
                 startAngle: twoPi,
                 endAngle: twoPi,
@@ -378,7 +378,7 @@ Ext.define('Ext.chart.series.Pie3D', {
                 for (j = 0; j < sliceSprites.length; j++) {
                     sprite = sliceSprites[j];
                     if (animation) {
-                        sprite.setAnimation(animation);
+                        sprite.fx.setConfig(animation);
                     }
                     sprite.setAttributes(sliceAttributes);
                 }

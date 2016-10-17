@@ -107,58 +107,55 @@ Ext.define('Ext.grid.locking.HeaderContainer', {
     },
 
     // Lockable uses its headerCt to apply column state
-    applyColumnsState: function (columnsState, storeState) {
+    applyColumnsState: function (columns) {
         var me             = this,
             lockedGrid     = me.lockable.lockedGrid,
             lockedHeaderCt = lockedGrid.headerCt,
             normalHeaderCt = me.lockable.normalGrid.headerCt,
-            columns        = lockedHeaderCt.items.items.concat(normalHeaderCt.items.items),
+            lockedCols     = Ext.Array.toValueMap(lockedHeaderCt.items.items, 'stateId'),
+            normalCols     = Ext.Array.toValueMap(normalHeaderCt.items.items, 'stateId'),
+            locked         = [],
+            normal         = [],
+            lockedWidth    = 1,
             length         = columns.length,
-            i, column,
-            switchSides,
-            colState,
-            lockedCount;
+            i, existing,
+            lockedDefault,
+            col;
 
-        // Loop through the column set, applying state from the columnsState object.
-        // Columns which have their "locked" property changed must be added to the appropriate
-        // headerCt.
         for (i = 0; i < length; i++) {
-            column = columns[i];
-            colState = columnsState[column.getStateId()];
-            if (colState) {
+            col = columns[i];
 
-                // See if the state being applied needs to cause column movement
-                // Coerce possibly absent locked config to boolean.
-                switchSides = colState.locked != null && Boolean(column.locked) !== colState.locked;
+            lockedDefault = lockedCols[col.id];
+            existing = lockedDefault || normalCols[col.id];
 
-                if (column.applyColumnState) {
-                    column.applyColumnState(colState, storeState);
+            if (existing) {
+                if (existing.applyColumnState) {
+                    existing.applyColumnState(col);
                 }
-
-                // If the column state means it has to change sides
-                // move the column to the other side
-                if (switchSides) {
-                    (column.locked ? lockedHeaderCt : normalHeaderCt).add(column);
+                if (existing.locked === undefined) {
+                    existing.locked = !!lockedDefault;
+                }
+                if (existing.locked) {
+                    locked.push(existing);
+                    if (!existing.hidden && typeof existing.width === 'number') {
+                        lockedWidth += existing.width;
+                    }
+                } else {
+                    normal.push(existing);
                 }
             }
         }
-        lockedCount = lockedHeaderCt.items.items.length;
 
-        // We must now restore state in each side's HeaderContainer.
-        // This means passing the state down into each side's applyColumnState
-        // to get sortable, hidden and width states restored.
-        // We must ensure that the index on the normal side is zero based.
-        for (i = 0; i < length; i++) {
-            column = columns[i];
-            colState = columnsState[column.getStateId()];
-            if (colState && !column.locked) {
-                colState.index -= lockedCount;
-            }
+        // state and config must have the same columns (compare counts for now):
+        if (locked.length + normal.length === lockedHeaderCt.items.getCount() + normalHeaderCt.items.getCount()) {
+            lockedHeaderCt.removeAll(false);
+            normalHeaderCt.removeAll(false);
+
+            lockedHeaderCt.add(locked);
+            normalHeaderCt.add(normal);
+
+            lockedGrid.setWidth(lockedWidth);
         }
-
-        // Each side must apply individual column's state
-        lockedHeaderCt.applyColumnsState(columnsState, storeState);
-        normalHeaderCt.applyColumnsState(columnsState, storeState);
     },
 
     disable: function() {

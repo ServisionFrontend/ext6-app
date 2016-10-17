@@ -1,4 +1,4 @@
-Ext.define('Ext6App.store.NavigationTree', {
+Ext.define('App.store.NavigationTree', {
 	extend: 'Ext.data.TreeStore',
 
 	storeId: 'NavigationTree',

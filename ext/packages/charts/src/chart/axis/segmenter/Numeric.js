@@ -18,8 +18,7 @@ Ext.define('Ext.chart.axis.segmenter.Numeric', {
     },
 
     align: function (value, step, unit) {
-        var scaledStep = unit.scale * step;
-        return Math.floor(value / scaledStep) * scaledStep;
+        return Math.floor(value / (unit.scale * step)) * unit.scale * step;
     },
 
     add: function (value, step, unit) {
@@ -61,26 +60,17 @@ Ext.define('Ext.chart.axis.segmenter.Numeric', {
      * @return {Object} return.unit The unit.
      */
 
-    leadingZeros: function (n) {
-        // For example:
-        // leadingZeros(0.2) is 1,
-        // leadingZeros(-0.01) is 2.
-        return -Math.floor(Ext.Number.log10(Math.abs(n)));
-    },
-
     exactStep: function (min, estStepSize) {
-        var stepZeros = this.leadingZeros(estStepSize),
-            scale = Math.pow(10, stepZeros);
+        var order = Math.floor(Math.log(estStepSize) * Math.LOG10E),
+            scale = Math.pow(10, order);
 
         return {
             unit: {
                 // add one decimal point if estStepSize is not a multiple of scale
-                fixes: stepZeros + (estStepSize % scale === 0 ? 0 : 1),
-                // Swap scale & step, if the estStepSize < 1,
-                // or 'diff' method will give us rounding errors.
-                scale: estStepSize < 1 ? estStepSize : 1
+                fixes: -order + (estStepSize % scale === 0 ? 0 : 1),
+                scale: 1
             },
-            step: estStepSize < 1 ? 1 : estStepSize
+            step: estStepSize
         }
     },
 

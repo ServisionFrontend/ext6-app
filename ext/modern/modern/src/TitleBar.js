@@ -195,7 +195,6 @@ Ext.define('Ext.TitleBar', {
         me.leftBox = me.add({
             xtype: 'container',
             style: 'position: relative',
-            cls: Ext.baseCSSPrefix + 'toolbar-left',
             layout: {
                 type: 'hbox',
                 align: 'center'
@@ -209,7 +208,6 @@ Ext.define('Ext.TitleBar', {
         me.spacer = me.add({
             xtype: 'component',
             style: 'position: relative',
-            cls: Ext.baseCSSPrefix + 'toolbar-center',
             flex: 1,
             listeners: {
                 resize: 'refreshTitlePosition',
@@ -220,7 +218,6 @@ Ext.define('Ext.TitleBar', {
         me.rightBox = me.add({
             xtype: 'container',
             style: 'position: relative',
-            cls: Ext.baseCSSPrefix + 'toolbar-right',
             layout: {
                 type: 'hbox',
                 align: 'center'

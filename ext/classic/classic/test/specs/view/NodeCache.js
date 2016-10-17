@@ -1,20 +1,8 @@
 describe("Ext.view.NodeCache", function () {
 
-    var grid, store, view, rows,
-        synchronousLoad = true,
-        proxyStoreLoad = Ext.data.ProxyStore.prototype.load,
-        loadStore = function() {
-            proxyStoreLoad.apply(this, arguments);
-            if (synchronousLoad) {
-                this.flushLoad.apply(this, arguments);
-            }
-            return this;
-        };
+    var grid, store, view, rows;
 
     beforeEach(function () {
-        // Override so that we can control asynchronous loading
-        Ext.data.ProxyStore.prototype.load = loadStore;
-
         store = Ext.create('Ext.data.Store', {
             fields      : ['name'],
             autoDestroy : true,
@@ -54,9 +42,6 @@ describe("Ext.view.NodeCache", function () {
     });
 
     afterEach(function () {
-        // Undo the overrides.
-        Ext.data.ProxyStore.prototype.load = proxyStoreLoad;
-
         grid.destroy();
     });
 

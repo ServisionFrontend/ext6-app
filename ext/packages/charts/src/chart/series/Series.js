@@ -51,7 +51,7 @@ Ext.define('Ext.chart.series.Series', {
 
     requires: [
         'Ext.chart.Markers',
-        'Ext.chart.sprite.Label',
+        'Ext.chart.label.Label',
         'Ext.tip.ToolTip'
     ],
 
@@ -194,8 +194,6 @@ Ext.define('Ext.chart.series.Series', {
         /**
          * @cfg {String|String[]} title
          * The human-readable name of the series (displayed in the legend).
-         * If the series is stacked (has multiple components in it) this
-         * should be an array, where each string corresponds to a stacked component.
          */
         title: null,
 
@@ -289,7 +287,6 @@ Ext.define('Ext.chart.series.Series', {
          * strokes. Set it to false if you want to use the same color as the fill color.
          * Alternatively, you can set it to a number between 0 and 1 to control how much darker
          * the strokes should be.
-         * Note: this should be initial config and cannot be changed later on.
          */
         useDarkerStrokeColor: true,
 
@@ -413,34 +410,29 @@ Ext.define('Ext.chart.series.Series', {
 
         /**
          * @protected
-         * @cfg {Object} itemInstancing
-         * The sprite template used to create sprite instances in the series.
+         * @cfg {Object} itemInstancing The sprite template used to create sprite instances in the series.
          */
         itemInstancing: null,
 
         /**
-         * @cfg {Object} background
-         * Sets the background of the surface the series is attached.
+         * @cfg {Object} background Sets the background of the surface the series is attached.
          */
         background: null,
 
         /**
-         * @cfg {Object} highlightItem
-         * The item currently highlighted in the series.
+         * @cfg {Object} highlightItem The item currently highlighted in the series.
          */
         highlightItem: null,
 
         /**
          * @protected
-         * @cfg {Ext.draw.Surface} surface
-         * The chart surface used to render series sprites.
+         * @cfg {Object} surface The surface that the series is attached.
          */
         surface: null,
 
         /**
          * @protected
-         * @cfg {Object} overlaySurface
-         * The surface used to render series labels.
+         * @cfg {Object} overlaySurface The surface that series markers are attached.
          */
         overlaySurface: null,
 
@@ -483,43 +475,20 @@ Ext.define('Ext.chart.series.Series', {
 
         /**
          * @cfg {Object} tooltip
-         * Add tooltips to the visualization's markers. The config options for the 
-         * tooltip are the same configuration used with {@link Ext.tip.ToolTip} plus a 
-         * `renderer` config option and a `scope` for the renderer. For example:
+         * Add tooltips to the visualization's markers. The options for the tooltip are the
+         * same configuration used with {@link Ext.tip.ToolTip}. For example:
          *
          *     tooltip: {
          *       trackMouse: true,
          *       width: 140,
          *       height: 28,
-         *       renderer: function (toolTip, record, ctx) {
-         *           toolTip.setHtml(record.get('name') + ': ' + record.get('data1') + ' views');
+         *       renderer: function (storeItem, item) {
+         *           this.setHtml(storeItem.get('name') + ': ' + storeItem.get('data1') + ' views');
          *       }
          *     }
          *
          * Note that tooltips are shown for series markers and won't work
          * if the {@link #marker} is not configured.
-         * @cfg {Object} tooltip.scope The scope to use when the renderer function is 
-         * called.  Defaults to the Series instance.
-         * @cfg {Function} tooltip.renderer An 'interceptor' method which can be used to 
-         * modify the tooltip attributes before it is shown.  The renderer function is 
-         * passed the following params:
-         * @cfg {Ext.tip.ToolTip} tooltip.renderer.toolTip The tooltip instance
-         * @cfg {Ext.data.Model} tooltip.renderer.record The record instance for the 
-         * chart item (sprite) currently targeted by the tooltip.
-         * @cfg {Object} tooltip.renderer.ctx A data object with values relating to the 
-         * currently targeted chart sprite
-         * @cfg {String} tooltip.renderer.ctx.category The type of sprite passed to the 
-         * renderer function (will be "items", "markers", or "labels" depending on the 
-         * target sprite of the tooltip)
-         * @cfg {String} tooltip.renderer.ctx.field The {@link #yField} for the series
-         * @cfg {Number} tooltip.renderer.ctx.index The target sprite's index within the 
-         * series' items
-         * @cfg {Ext.data.Model} tooltip.renderer.ctx.record The record instance for the 
-         * chart item (sprite) currently targeted by the tooltip.
-         * @cfg {Ext.chart.series.Series} tooltip.renderer.ctx.series The series instance 
-         * containing the tooltip's target sprite
-         * @cfg {Ext.draw.sprite.Sprite} tooltip.renderer.ctx.sprite The sprite (item) 
-         * target of the tooltip
          */
         tooltip: null
     },
@@ -537,14 +506,6 @@ Ext.define('Ext.chart.series.Series', {
     themeColorCount: function() {
         return 1;
     },
-
-    /**
-     * @private
-     * @property
-     * Series, where the number of sprites (an so unique colors they require)
-     * depends on the number of records in the store should set this to 'true'.
-     */
-    isStoreDependantColorCount: false,
 
     /**
      * @private
@@ -605,11 +566,10 @@ Ext.define('Ext.chart.series.Series', {
         var series = chart.getSeries(),
             seriesIndex = Ext.Array.indexOf(series, me),
             legendStore = chart.getLegendStore(),
-            itemCount = legendStore.getCount(),
             yField = me.getYField(),
             i, item, title, ln;
 
-        if (itemCount && seriesIndex !== -1) {
+        if (legendStore.getCount() && seriesIndex !== -1) {
             ln = yField ? Math.min(newTitle.length, yField.length) : newTitle.length;
             for (i = 0; i < ln; i++) {
                 title = newTitle[i];
@@ -618,8 +578,6 @@ Ext.define('Ext.chart.series.Series', {
                     item.set('name', title);
                 }
             }
-            // Remove unused records.
-            legendStore.removeAt(i, itemCount);
         }
     },
 
@@ -745,8 +703,6 @@ Ext.define('Ext.chart.series.Series', {
     },
 
     lookupViewModel: function (skipThis) {
-        // Override the Bindable's method to redirect view model
-        // lookup to the chart.
         var chart = this.getChart();
         return chart ? chart.lookupViewModel(skipThis) : null;
     },
@@ -758,7 +714,8 @@ Ext.define('Ext.chart.series.Series', {
             constrainPosition: true,
             shrinkWrapDock: true,
             autoHide: true,
-            mouseOffset: [10, 10]
+            offsetX: 10,
+            offsetY: 10
         }, tooltip);
 
         return Ext.create(config);
@@ -793,34 +750,43 @@ Ext.define('Ext.chart.series.Series', {
         }
     },
 
-    showTooltip: function (item, event) {
+    showTooltip: function (item, xy) {
         var me = this,
-            tooltip = me.getTooltip();
+            tooltip = me.getTooltip(),
+            sprite, surface, surfaceEl,
+            pos, point,
+            bbox, x, y,
+            config,
+            isRtl;
 
         if (!tooltip) {
             return;
         }
         clearTimeout(me.tooltipTimeout);
-
-        // If trackMouse is set, a ToolTip shows by its pointerEvent.
-        // A Tooltip aligning to an element uses a currentTarget flyweight
-        // which may be pointed at any element.
-        // It aligns using the component level defaultAlign config.
-        tooltip.pointerEvent = event;
-        tooltip.currentTarget.attach((item.sprite.length ? item.sprite[0] : item.sprite).getSurface().el.dom);
-
+        config = tooltip.config;
+        if (tooltip.trackMouse) {
+            xy[0] += config.offsetX;
+            xy[1] += config.offsetY;
+        } else {
+            sprite = item.sprite;
+            surface = sprite.getSurface();
+            surfaceEl = Ext.get(surface.getId());
+            if (surfaceEl) {
+                bbox = item.series.getBBoxForItem(item);
+                x = bbox.x + bbox.width / 2;
+                y = bbox.y + bbox.height / 2;
+                point = surface.matrix.transformPoint([x, y]);
+                pos = surfaceEl.getXY();
+                isRtl = surface.getInherited().rtl;
+                x = isRtl ? pos[0] + surfaceEl.getWidth() - point[0] : pos[0] + point[0];
+                y = pos[1] + point[1];
+                xy = [x, y];
+            }
+        }
         Ext.callback(tooltip.renderer, tooltip.scope,
             [tooltip, item.record, item], 0, me);
 
-        if (tooltip.isVisible()) {
-            // After show handling repositions according
-            // to configuration. trackMouse uses the pointerEvent
-            // If aligning to an element, it uses a currentTarget
-            // flyweight which may be attached to any DOM element.
-            tooltip.handleAfterShow();
-        } else {
-            tooltip.show();
-        }
+        tooltip.show(xy);
     },
 
     hideTooltip: function (item) {
@@ -999,17 +965,14 @@ Ext.define('Ext.chart.series.Series', {
     },
 
     processData: function () {
-        var me = this;
-
-        if (me.isProcessingData || !me.getStore()) {
+        if (!this.getStore()) {
             return;
         }
 
-        var directions = this.directions,
+        var me = this,
+            directions = this.directions,
             i, ln = directions.length,
             direction, axis;
-
-        me.isProcessingData = true;
 
         for (i = 0; i < ln; i++) {
             direction = directions[i];
@@ -1023,8 +986,6 @@ Ext.define('Ext.chart.series.Series', {
             }
         }
         me.updateLabelData();
-
-        me.isProcessingData = false;
     },
 
     applyBackground: function (background) {
@@ -1166,26 +1127,11 @@ Ext.define('Ext.chart.series.Series', {
     applyLabel: function (newLabel, oldLabel) {
         if (!oldLabel) {
             oldLabel = new Ext.chart.Markers({zIndex: 10});
-            oldLabel.setTemplate(new Ext.chart.sprite.Label(newLabel));
+            oldLabel.setTemplate(new Ext.chart.label.Label(newLabel));
         } else {
             oldLabel.getTemplate().setAttributes(newLabel);
-            if (newLabel && newLabel.display) {
-                oldLabel.setAttributes({
-                    hidden: newLabel.display === 'none'
-                });
-            }
-            oldLabel.setDirty(true); // inform the label about the template change
-            this.updateLabel(); // won't be called automatically in this case
         }
         return oldLabel;
-    },
-
-    updateLabel: function () {
-        var chart = this.getChart();
-
-        if (chart && !chart.isInitializing) {
-            chart.redraw();
-        }
     },
 
     createItemInstancingSprite: function (sprite, itemInstancing) {
@@ -1235,25 +1181,12 @@ Ext.define('Ext.chart.series.Series', {
         }
     },
 
-    updateShowMarkers: function (showMarkers) {
-        var sprites = this.getSprites(),
-            sprite = sprites && sprites[0],
-            markers = sprite && sprite.getMarker('markers');
-
-        if (markers) {
-            markers.getTemplate().setAttributes({
-                hidden: !showMarkers
-            });
-        }
-    },
-
     createSprite: function () {
         var me = this,
             surface = me.getSurface(),
             itemInstancing = me.getItemInstancing(),
             sprite = surface.add(me.getDefaultSpriteConfig()),
-            marker = me.getMarker(),
-            markers, markersTpl;
+            marker, config;
 
         sprite.setAttributes(me.getStyle());
         sprite.setSeries(me);
@@ -1263,21 +1196,21 @@ Ext.define('Ext.chart.series.Series', {
         }
 
         if (sprite.bindMarker) {
-            if (marker) {
-                markers = new Ext.chart.Markers();
-                markersTpl = Ext.Object.merge({}, marker);
+            if (me.getShowMarkers() && me.getMarker()) {
+                marker = new Ext.chart.Markers();
+                config = Ext.Object.chain(me.getMarker());
                 if (me.getHighlight()) {
-                    markersTpl.highlight = me.getHighlight();
-                    markersTpl.modifiers = ['highlight'];
+                    config.highlight = me.getHighlight();
+                    config.modifiers = ['highlight'];
                 }
-                markers.setTemplate(markersTpl);
-                markers.getTemplate().fx.setCustomDurations({
+                marker.setTemplate(config);
+                marker.getTemplate().fx.setCustomDurations({
                     translationX: 0,
                     translationY: 0
                 });
-                sprite.dataMarker = markers;
-                sprite.bindMarker('markers', markers);
-                me.getOverlaySurface().add(markers);
+                sprite.dataMarker = marker;
+                sprite.bindMarker('markers', marker);
+                me.getOverlaySurface().add(marker);
             }
             if (me.getLabel().getTemplate().getField()) {
                 sprite.bindMarker('labels', me.getLabel());
@@ -1297,7 +1230,6 @@ Ext.define('Ext.chart.series.Series', {
     },
 
     /**
-     * @method
      * Returns sprites the are used to draw this series.
      */
     getSprites: Ext.emptyFn,
@@ -1431,7 +1363,6 @@ Ext.define('Ext.chart.series.Series', {
         var me = this;
 
         if (Ext.isArray(me.getHidden())) {
-            // Multi-sprite series like Pie and StackedCartesian.
             me.getHidden()[index] = value;
             me.updateHidden(me.getHidden());
             me.updateLegendStore(value, index);
@@ -1445,7 +1376,6 @@ Ext.define('Ext.chart.series.Series', {
             darker = me.getUseDarkerStrokeColor(),
             darkerRatio = (Ext.isNumber(darker) ? darker : me.darkerStrokeRatio),
             strokeColors;
-
         if (darker) {
             strokeColors = Ext.Array.map(colors, function (color) {
                 color = Ext.isString(color) ? color : color.stops[0].color;
@@ -1542,9 +1472,6 @@ Ext.define('Ext.chart.series.Series', {
             sprites = me.sprites,
             itemInstancing = me.getItemInstancing(),
             i = 0, ln = sprites && sprites.length,
-            // 'showMarkers' updater calls 'series.getSprites()',
-            // which we don't want to call here.
-            showMarkers = me.getConfig('showMarkers', true),
             markerCfg = me.getMarker(),
             style;
 
@@ -1625,14 +1552,7 @@ Ext.define('Ext.chart.series.Series', {
         style = me.getStyle();
         themeStyle = (theme && theme.style) || {};
 
-        // 'series.updateHidden()' will update 'series.subStyle.hidden' config
-        // with the value of the 'series.hidden' config.
-        // But we also need to account for 'series.showMarkers' config
-        // to determine whether the markers should be hidden or not.
         subStyle = me.styleDataForIndex(me.getSubStyle(), i);
-        if (subStyle.hasOwnProperty('hidden')) {
-            subStyle.hidden = subStyle.hidden || !this.getConfig('showMarkers', true);
-        }
         themeSubStyle = me.styleDataForIndex((theme && theme.subStyle), i);
 
         markerStyle = me.getMarker();
@@ -1671,7 +1591,6 @@ Ext.define('Ext.chart.series.Series', {
     },
 
     /**
-     * @method
      * For a given x/y point relative to the main rect, find a corresponding item from this
      * series, if any.
      * @param {Number} x
@@ -1732,9 +1651,9 @@ Ext.define('Ext.chart.series.Series', {
         this.fireEvent('animationend', this, sprite);
     },
 
+    // Override the Observable's method to redirect listener scope
+    // resolution to the chart.
     resolveListenerScope: function (defaultScope) {
-        // Override the Observable's method to redirect listener scope
-        // resolution to the chart.
         var me = this,
             namedScope = Ext._namedScopes[defaultScope],
             chart = me.getChart(),
@@ -1764,7 +1683,7 @@ Ext.define('Ext.chart.series.Series', {
      *
      * The information consists:
      * @param {String} target.name
-     * @param {String} target.mark
+     * @param {String} target.markColor
      * @param {Boolean} target.disabled
      * @param {String} target.series
      * @param {Number} target.index

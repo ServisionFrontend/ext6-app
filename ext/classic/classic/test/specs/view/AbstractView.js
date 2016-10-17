@@ -1,16 +1,5 @@
-/* global Ext, expect, jasmine */
-
 describe("Ext.view.AbstractView", function(){
-    var store, view,
-        synchronousLoad = true,
-        proxyStoreLoad = Ext.data.ProxyStore.prototype.load,
-        loadStore = function() {
-            proxyStoreLoad.apply(this, arguments);
-            if (synchronousLoad) {
-                this.flushLoad.apply(this, arguments);
-            }
-            return this;
-        };
+    var store, view;
     
     function makeView(cfg) {
         cfg = Ext.apply({
@@ -26,20 +15,14 @@ describe("Ext.view.AbstractView", function(){
         
         return view = new Ext.view.AbstractView(cfg);
     }
-
+    
     beforeEach(function() {
-        // Override so that we can control asynchronous loading
-        Ext.data.ProxyStore.prototype.load = loadStore;
-
         store = new Ext.data.Store({
             fields: ['field']
         });
     });
-
+    
     afterEach(function() {
-        // Undo the overrides.
-        Ext.data.ProxyStore.prototype.load = proxyStoreLoad;
-
         if (view) {
             view.destroy();
         }
@@ -137,43 +120,23 @@ describe("Ext.view.AbstractView", function(){
     
     describe("events", function(){
         it("should fire itemadd when adding an item to an empty view", function(){
-            var itemAddSpy = jasmine.createSpy(),
-                newRec;
+            var fired = false;
             
-            view = new Ext.view.AbstractView({
+            var c = new Ext.view.AbstractView({
                 itemTpl: '{field}',
                 store: store,
                 renderTo: Ext.getBody(),
                 listeners: {
-                    itemadd: itemAddSpy
+                    itemadd: function() {
+                        fired = true;
+                    }
                 }
             });
-            newRec = store.add({
+            store.add({
                 field: 'a'
-            })[0];
-            expect(itemAddSpy.callCount).toBe(1);
-            expect(Ext.Array.slice(itemAddSpy.mostRecentCall.args, 0, 4)).toEqual([[newRec], store.getCount() - 1, [view.getNode(newRec)], view]);
-        });
-
-        it("should fire itemremove when removing an item from the view", function(){
-            var itemRemoveSpy = jasmine.createSpy(),
-                newRec = store.add({
-                    field: 'a'
-                })[0],
-                item0;
-            
-            view = new Ext.view.AbstractView({
-                itemTpl: '{field}',
-                store: store,
-                renderTo: Ext.getBody(),
-                listeners: {
-                    itemremove: itemRemoveSpy
-                }
             });
-            item0 = view.getNode(0);
-            store.removeAt(0);
-            expect(itemRemoveSpy.callCount).toBe(1);
-            expect(Ext.Array.slice(itemRemoveSpy.mostRecentCall.args, 0, 4)).toEqual([[], 0, [item0], view]);
+            expect(fired).toBe(true);
+            c.destroy();
         });
 
         it("should fire focuschange when changing focus in a view", function(){
@@ -202,13 +165,21 @@ describe("Ext.view.AbstractView", function(){
     });
     
     describe("ARIA", function() {
+        function expectAria(attr, value) {
+            jasmine.expectAriaAttr(view, attr, value);
+        }
+        
+        function expectNoAria(attr) {
+            jasmine.expectNoAriaAttr(view, attr);
+        }
+        
         describe("role", function() {
             beforeEach(function() {
                 makeView();
             });
             
             it("should have listbox role", function() {
-                expect(view).toHaveAttr('role', 'listbox');
+                expectAria('role', 'listbox');
             });
         });
         
@@ -216,24 +187,32 @@ describe("Ext.view.AbstractView", function(){
             it("should not be set when mode == SINGLE", function() {
                 makeView({ singleSelect: true });
                 
-                expect(view).not.toHaveAttr('aria-multiselectable');
+                expectNoAria('aria-multiselectable');
             });
             
             it("should be set to true when mode == SIMPLE", function() {
                 makeView({ simpleSelect: true });
                 
-                expect(view).toHaveAttr('aria-multiselectable', 'true');
+                expectAria('aria-multiselectable', 'true');
             });
             
             it("should be set to true when mode == MULTI", function() {
                 makeView({ multiSelect: true });
                 
-                expect(view).toHaveAttr('aria-multiselectable', 'true');
+                expectAria('aria-multiselectable', 'true');
             });
         });
         
         describe("item attributes", function() {
             var node, selModel;
+            
+            function expectAria(attr, value) {
+                jasmine.expectAriaAttr(node, attr, value);
+            }
+            
+            function expectNoAria(attr) {
+                jasmine.expectNoAriaAttr(node, attr);
+            }
             
             beforeEach(function() {
                 makeView({
@@ -253,26 +232,26 @@ describe("Ext.view.AbstractView", function(){
             
             describe("role", function() {
                 it("should have option role", function() {
-                    expect(node).toHaveAttr('role', 'option');
+                    expectAria('role', 'option');
                 });
             });
             
             describe("aria-selected", function() {
                 it("should not set aria-selected when rendering", function() {
-                    expect(node).not.toHaveAttr('aria-selected');
+                    expectNoAria('aria-selected');
                 });
                 
                 it("should set aria-selected to true when selected", function() {
                     selModel.select(0);
                     
-                    expect(node).toHaveAttr('aria-selected', 'true');
+                    expectAria('aria-selected', 'true');
                 });
                 
-                it("should set aria-selected to false when deselected", function() {
+                it("should remove aria-selected when deselected", function() {
                     selModel.select(0);
                     selModel.deselectAll();
                     
-                    expect(node).toHaveAttr('aria-selected', 'false');
+                    expectNoAria('aria-selected');
                 });
             });
         });

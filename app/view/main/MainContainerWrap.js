@@ -1,4 +1,4 @@
-Ext.define('Ext6App.view.main.MainContainerWrap', {
+Ext.define('App.view.main.MainContainerWrap', {
 	extend: 'Ext.container.Container',
 	xtype: 'maincontainerwrap',
 

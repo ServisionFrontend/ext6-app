@@ -168,19 +168,6 @@ describe("Ext.direct.PollingProvider", function() {
             });
         });
         
-        it("should pass headers if they are set", function() {
-            provider.headers = { blerg: 'zingbong' };
-            provider.runPoll();
-            
-            expect(Ext.Ajax.request).toHaveBeenCalledWith({
-                url: '/foo',
-                params: { foo: 'bar' },
-                scope: provider,
-                callback: provider.onData,
-                headers: { blerg: 'zingbong' }
-            });
-        });
-        
         it("should fire 'poll' event", function() {
             var handler = jasmine.createSpy('poll handler');
             
@@ -320,7 +307,7 @@ describe("Ext.direct.PollingProvider", function() {
             provider.on('data', handler);
         });
         
-        it("fires exception Event object via data event when poll is unsuccessful", function() {
+        it("fires exception when poll is unsuccessful", function() {
             provider.onData({}, false, { foo: 'bar' });
             
             var args = handler.argsForCall[0],
@@ -334,31 +321,17 @@ describe("Ext.direct.PollingProvider", function() {
             expect(args[1]).toEqual(ex);
         });
         
-        describe("empty event set", function() {
-            beforeEach(function() {
-                spyOn(provider, 'createEvents').andCallThrough();
-            });
+        it("doesn't fire 'data' event when dataset is empty", function() {
+            spyOn(provider, 'createEvents').andCallThrough();
             
-            it("doesn't fire 'data' event when dataset is empty", function() {
-                provider.onData({}, true, {});
-                
-                expect(provider.createEvents).toHaveBeenCalled();
-                // AND
-                expect(handler).not.toHaveBeenCalled();
-            });
+            provider.onData({}, true, {});
             
-            it("doesn't fire exception event", function() {
-                var exceptionHandler = jasmine.createSpy('exception event');
-                
-                provider.on('exception', exceptionHandler);
-                
-                provider.onData({}, true, {});
-                
-                expect(exceptionHandler).not.toHaveBeenCalled();
-            });
+            expect(provider.createEvents).toHaveBeenCalled();
+            // AND
+            expect(handler).not.toHaveBeenCalled();
         });
         
-        describe("non-empty event set", function() {
+        it("fires 'data' event when dataset contains events", function() {
             var Event = Ext.direct.Event,
                 eventData = [{
                     type: 'event',
@@ -376,48 +349,29 @@ describe("Ext.direct.PollingProvider", function() {
                     type: 'event',
                     name: 'qux',
                     data: 'plugh'
-                }];
-            
-            it("fires 'data' event when dataset contains events", function() {
-                var events, result;
+                }],
+                events, result;
 
-                provider.onData({}, true, { responseText: Ext.encode(eventData) });
-                
-                events = Ext.Array.map(eventData, function(i) {
-                    return new Event(i);
-                });
-                
-                result = Ext.Array.map(handler.argsForCall, function(i) {
-                    return i[1];
-                });
-                
-                expect(result).toEqual(events);
+            provider.onData({}, true, { responseText: Ext.encode(eventData) });
+            
+            events = Ext.Array.map(eventData, function(i) {
+                return new Event(i);
             });
             
-            it("doesn't fire exception event", function() {
-                var exceptionHandler = jasmine.createSpy('exception event');
-                
-                provider.on('exception', exceptionHandler);
-                
-                provider.onData({}, true, { responseText: Ext.encode(eventData) });
-                
-                expect(exceptionHandler).not.toHaveBeenCalled();
+            result = Ext.Array.map(handler.argsForCall, function(i) {
+                return i[1];
             });
+            
+            expect(result).toEqual(events);
         });
     });
     
     describe("Ajax errors", function() {
-        var handler, exceptionHandler;
+        var handler;
         
         beforeEach(function() {
-            handler = jasmine.createSpy('data event');
-            exceptionHandler = jasmine.createSpy('exception event');
-            
+            handler = jasmine.createSpy('data handler');
             provider.on('data', handler);
-            provider.on('exception', exceptionHandler);
-
-            // Suppress console error and dump
-            spyOn(Ext, 'log');
         });
         
         it("doesn't break on undefined response", function() {
@@ -444,107 +398,57 @@ describe("Ext.direct.PollingProvider", function() {
             expect(handler).not.toHaveBeenCalled();
         });
         
-        describe("garbled json response", function() {
-            beforeEach(function() {
-                provider.onData({}, true, { responseText: 'invalid json' });
-            });
+        it("raises exception on garbled json response", function() {
+            // Suppress console error and dump
+            spyOn(Ext, 'log');
             
-            it("fires data event with Exception object", function() {
-                var args = handler.argsForCall[0][1],
-                    xcpt = {
-                        code: args.code,
-                        message: args.message
-                    };
-                
-                expect(xcpt).toEqual({
-                    code: Ext.direct.Manager.exceptions.PARSE,
-                    message: "Error parsing json response: \n\n Ext.JSON.decode(): You're trying to decode an invalid JSON String: invalid json"
-                });
-            });
+            provider.onData({}, true, { responseText: 'invalid json' });
             
-            it("fires exception event with Exception object", function() {
-                var args = exceptionHandler.argsForCall[0][1],
-                    xcpt = {
-                        code: args.code,
-                        message: args.message
-                    };
-                
-                expect(xcpt).toEqual({
-                    code: Ext.direct.Manager.exceptions.PARSE,
-                    message: "Error parsing json response: \n\n Ext.JSON.decode(): You're trying to decode an invalid JSON String: invalid json"
-                });
+            var args = handler.argsForCall[0][1],
+                xcpt = {
+                    code: args.code,
+                    message: args.message
+                };
+            
+            expect(xcpt).toEqual({
+                code: Ext.direct.Manager.exceptions.PARSE,
+                message: "Error parsing json response: \n\n Ext.JSON.decode(): You're trying to decode an invalid JSON String: invalid json"
             });
         });
         
-        describe("invalid payload data", function() {
-            beforeEach(function() {
-                provider.onData({}, true, { responseText: Ext.JSON.encode({ foo: 'bar' }) });
-            });
+        it("raises exception on invalid payload data", function() {
+            provider.onData({}, true, { responseText: Ext.JSON.encode({ foo: 'bar' }) });
             
-            it("fires data event with Exception object", function() {
-                var args = handler.argsForCall[0][1],
-                    xcpt = {
-                        code: args.code,
-                        message: args.message
-                    };
-                
-                expect(xcpt).toEqual({
-                    code: Ext.direct.Manager.exceptions.DATA,
-                    message: 'Invalid data: event type is not specified'
-                });
-            });
+            var args = handler.argsForCall[0][1],
+                xcpt = {
+                    code: args.code,
+                    message: args.message
+                };
             
-            it("fires exception event with Exception object", function() {
-                var args = exceptionHandler.argsForCall[0][1],
-                    xcpt = {
-                        code: args.code,
-                        message: args.message
-                    };
-                
-                expect(xcpt).toEqual({
-                    code: Ext.direct.Manager.exceptions.DATA,
-                    message: 'Invalid data: event type is not specified'
-                });
+            expect(xcpt).toEqual({
+                code: Ext.direct.Manager.exceptions.DATA,
+                message: 'Invalid data: event type is not specified'
             });
         });
         
-        describe("server returned exception", function() {
-            var ex, data;
-            
-            beforeEach(function() {
-                ex = {
+        it("lets returned exception pass through", function() {
+            var ex = {
                     type: 'exception',
                     message: 'Fubar'
-                };
-                
+                },
                 data = Ext.JSON.encode(ex);
-                
-                provider.onData({}, true, { responseText: data });
-            });
             
-            it("fires data event with passed Exception object", function() {
-                var args = handler.argsForCall[0][1],
-                    xcpt = {
-                        type: args.type,
-                        message: args.message
-                    };
-                
-                expect(handler.argsForCall.length).toBe(1);
-                // AND
-                expect(xcpt).toEqual(ex);
-            });
-
-            it("fires exception event with passed Exception object", function() {
-                var args = exceptionHandler.argsForCall[0][1],
-                    xcpt = {
-                        type: args.type,
-                        message: args.message
-                    };
-                
-                expect(exceptionHandler.argsForCall.length).toBe(1);
-                // AND
-                expect(xcpt).toEqual(ex);
-            });
+            provider.onData({}, true, { responseText: data });
+            
+            var args = handler.argsForCall[0][1],
+                xcpt = {
+                    type: args.type,
+                    message: args.message
+                };
+            
+            expect(handler.argsForCall.length).toBe(1);
+            // AND
+            expect(xcpt).toEqual(ex);
         });
     });
     

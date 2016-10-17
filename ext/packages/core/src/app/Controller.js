@@ -16,7 +16,7 @@
  * called before the {@link Ext.app.Application Application}'s launch function is executed. 
  * This creates an area you can run code prior to Viewport creation.
  *
- * The controller's {@link #method-control} function
+ * The controller's {@link #control} function
  * makes it easy to listen to events on your view classes and take some action with a 
  * handler function. Let's update our Users controller to tell us when the panel is 
  * rendered:
@@ -53,12 +53,12 @@
  * In Ext JS 4.2, we introduced the concept of event domains. In terms of MVC, an event 
  * domain is one or more base classes that fire events to which a Controller wants to 
  * listen. Besides Component event domain that encompass {@link Ext.Component}-descended 
- * Views, Controllers now can listen to events from data Stores, Ext Direct Providers, 
+ * Views, Controllers now can listen to events from data Stores, Ext.Direct Providers, 
  * other Controllers, and Ext.GlobalEvents. This feature provides a way to communicate 
  * between parts of the whole application without the need to bind controllers together 
  * tightly, and allows to develop and test application parts in isolation.
  *
- * See usage examples in {@link #method-listen} method documentation.
+ * See usage examples in {@link #listen} method documentation.
  *
  * ## Using refs
  *
@@ -259,7 +259,7 @@ Ext.define('Ext.app.Controller', {
          *
          * @private
          */
-        processDependencies: function(cls, requires, namespace, kind, names, profileName) {
+        processDependencies: function(cls, requires, namespace, kind, names) {
             if (!names || !names.length) {
                 return;
             }
@@ -274,9 +274,8 @@ Ext.define('Ext.app.Controller', {
 
             for (j = 0, subLn = names.length; j < subLn; j++) {
                 name = names[j];
-                o = me.getFullName(name, kind, namespace, profileName);
-                // Update the name in the array to be the absolute name
-                names[j] = absoluteName = o.absoluteName;
+                o = me.getFullName(name, kind, namespace);
+                absoluteName = o.absoluteName;
                 shortName = o.shortName;
 
                 requires.push(absoluteName);
@@ -302,7 +301,7 @@ Ext.define('Ext.app.Controller', {
             }
         },
 
-        getFullName: function(name, kind, namespace, profileName) {
+        getFullName: function(name, kind, namespace) {
             var shortName = name,
                 sep, absoluteName;
 
@@ -332,8 +331,8 @@ Ext.define('Ext.app.Controller', {
             else if (name.indexOf('.') > 0 && (Ext.ClassManager.isCreated(name) ||
                      this.hasRegisteredPrefix(name))) {
                 absoluteName = name;
-                shortName = name.replace(namespace + '.' + kind + '.', '');
-            } else {
+            }
+            else {
                 //<debug>
                 if (!namespace) {
                     Ext.log.warn("Cannot find namespace for " + kind + " " + name + ", " +
@@ -342,8 +341,7 @@ Ext.define('Ext.app.Controller', {
                 //</debug>
 
                 if (namespace) {
-                    absoluteName = namespace + '.' + kind + '.' +
-                                    (profileName ? profileName + '.' + name : name);
+                    absoluteName = namespace + '.' + kind + '.' + name;
                     shortName    = name;
                 }
                 else {
@@ -376,7 +374,7 @@ Ext.define('Ext.app.Controller', {
      *          models: ['User', 'Vehicle']
      *      });
      *
-     * This is equivalent to:
+     * This is equivalent of:
      *
      *      Ext.define("MyApp.controller.Foo", {
      *          extend: "Ext.app.Controller",
@@ -391,10 +389,6 @@ Ext.define('Ext.app.Controller', {
      *          }
      *      });
      *
-     * **Note:** If the model has a different namespace than that of the 
-     * application you will need to specify the full class name as well as define a path 
-     * in the {@link Ext.Loader#cfg-paths Loader's paths} config or 
-     * {@link Ext.Loader#method-setPath setPath} method.
      */
     models: null,
 
@@ -409,7 +403,7 @@ Ext.define('Ext.app.Controller', {
      *          views: ['List', 'Detail']
      *      });
      *
-     * This is equivalent to:
+     * This is equivalent of:
      *
      *      Ext.define("MyApp.controller.Foo", {
      *          extend: "Ext.app.Controller",
@@ -423,11 +417,6 @@ Ext.define('Ext.app.Controller', {
      *              return this.getView("Detail");
      *          }
      *      });
-     * 
-     * **Note:** If the view has a different namespace than that of the 
-     * application you will need to specify the full class name as well as define a path 
-     * in the {@link Ext.Loader#cfg-paths Loader's paths} config or 
-     * {@link Ext.Loader#method-setPath setPath} method.
      */
     views: null,
 
@@ -460,11 +449,6 @@ Ext.define('Ext.app.Controller', {
      *              return this.getStore("Vehicles");
      *          }
      *      });
-     * 
-     * **Note:** If the store has a different namespace than that of the 
-     * application you will need to specify the full class name as well as define a path 
-     * in the {@link Ext.Loader#cfg-paths Loader's paths} config or 
-     * {@link Ext.Loader#method-setPath setPath} method.
      */
     stores: null,
 
@@ -480,52 +464,55 @@ Ext.define('Ext.app.Controller', {
         application: null,
         
         /**
-         * @cfg {Object/Object[]} refs
+         * @cfg {Object[]} refs
          * @accessor
          *
-         * The refs config creates a getter method on the controller that internally 
-         * uses Ext.ComponentQuery to fetch the component instance using the configured 
-         * selector.  The following example will add the `getList` method to 
-         * the controller and will return the first component in the application 
-         * hierarchy with an xtype of "grid".  By default, *undefined* will be returned 
-         * when the query does not locate the target component.
+         * You can specify refs with either an Object or an Array:
          *
-         *     Ext.define('MyApp.controller.Foo', {
-         *         extend: 'Ext.app.Controller',
-         *         
-         *         refs: [{
-         *             ref: 'list',
-         *             selector: 'grid'
-         *         }]
-         *     });
+         *      Ext.define('MyApp.controller.Foo', {
+         *          extend: 'Ext.app.Controller',
          *
-         * The following fields may be used in the ref definition:
+         *          config: {
+         *              refs: {
+         *                  list: 'grid',
+         *                  user: {
+         *                      autoCreate: true,
+         *                      selector: 'form',
+         *                      xtype: 'form'
+         *                  }
+         *              }
+         *          }
+         *      });
+         *
+         * This will add the `getList` and `getUser` methods to the controller which will internally use
+         * Ext.ComponentQuery to reference the resolved component.
+         *
+         *      Ext.define('MyApp.controller.Foo', {
+         *          extend: 'Ext.app.Controller',
+         *
+         *          config : {
+         *              refs: [{
+         *                  ref: 'list',
+         *                  selector: 'grid'
+         *              }]
+         *          }
+         *      });
+         *
+         * This will add method `getList` to the controller which will internally use
+         * Ext.ComponentQuery to reference the grid component on page.
+         *
+         * The recommended way to use refs is within the config object but legacy means of specifying
+         * refs as a sibling of the config object is still supported.
+         *
+         * The following fields can be used in ref definition:
          *
          * - `ref` - name of the reference.
          * - `selector` - Ext.ComponentQuery selector to access the component.
-         * - `autoCreate` - True to create the component automatically if not found on 
-         * page.
-         * - `forceCreate` - True to force the creation of the component every time 
-         * reference is accessed (when `get<REFNAME>` is called).
-         * - `xtype` - Used to create the component by its xtype with `autoCreate` or 
-         * `forceCreate`. If you don't provide `xtype`, an Ext.Component instance will 
-         * be created.
-         * 
-         * The following example will create a `getList` and `getUser` method on the 
-         * controller.
-         * 
-         *     Ext.define('MyApp.controller.Foo', {
-         *         extend: 'Ext.app.Controller',
-         *     
-         *         refs: [{
-         *             list: 'grid',
-         *             user: {
-         *                 autoCreate: true,
-         *                 selector: 'form',
-         *                 xtype: 'form'
-         *             }
-         *         }]
-         *     });
+         * - `autoCreate` - True to create the component automatically if not found on page.
+         * - `forceCreate` - Forces the creation of the component every time reference is accessed
+         *   (when `get<REFNAME>` is called).
+         * - `xtype` - Used to create component by its xtype with autoCreate or forceCreate. If
+         *   you don't provide xtype, an Ext.Component instance will be created.
          */
         refs: null,
 
@@ -569,7 +556,7 @@ Ext.define('Ext.app.Controller', {
      */
     constructor: function(config) {
         this.initAutoGetters();
-        this.callParent([config]);
+        this.callParent(arguments);
     },
 
     /**
@@ -658,10 +645,6 @@ Ext.define('Ext.app.Controller', {
         return refMap;
     },
 
-    applyId: function(id) {
-        return id || Ext.app.Controller.getFullName(this.$className, 'controller', this.$namespace).shortName;
-    },
-
     applyRefs: function(refs) {
         return this.normalizeRefs(Ext.clone(refs));
     },
@@ -714,8 +697,6 @@ Ext.define('Ext.app.Controller', {
     },
 
     /**
-     * @method
-     *
      * A template method that is called when your application boots. It is called before the
      * {@link Ext.app.Application Application}'s launch function is executed so gives a hook point
      * to run any code before your Viewport is created.
@@ -727,8 +708,6 @@ Ext.define('Ext.app.Controller', {
     init: Ext.emptyFn,
 
     /**
-     * @method
-     *
      * A template method like {@link #init}, but called after the viewport is created.
      * This is called after the {@link Ext.app.Application#launch launch} method of Application
      * is executed.
@@ -822,7 +801,7 @@ Ext.define('Ext.app.Controller', {
             }
             
             if (cached) {
-                cached.on('destroy', function() {
+                cached.on('beforedestroy', function() {
                     refCache[ref] = null;
                 });
             }
@@ -936,12 +915,15 @@ Ext.define('Ext.app.Controller', {
         return name && Ext.ClassManager.get(name.absoluteName);
     },
 
-    /**
-     * @inheritdoc
-     * @param destroyRefs (private)
-     * @param fromApp (private)
-     */
-    destroy: function(destroyRefs, fromApp) {
+    ensureId: function() {
+        var id = this.getId();
+            
+        if (!id) {
+            this.setId(this.getModuleClassName(this.$className, 'controller'));
+        }    
+    },
+    
+    destroy: function(destroyRefs, /* private */ fromApp) {
         var me = this,
             app = me.application,
             refCache, ref;

@@ -31,6 +31,11 @@
     }
 }
 
+.x-picker-slot .x-scroll-view {
+    z-index: 2;
+    position: relative;
+}
+
 .x-picker-mask {
     position: absolute;
     top: 0;

@@ -1,5 +1,3 @@
-/* global expect, Ext, jasmine */
-
 describe("Ext.button.Cycle", function() {
     var button;
 
@@ -8,9 +6,8 @@ describe("Ext.button.Cycle", function() {
     }
 
     function makeButton (config) {
-        // ARIA errors and warnings are expected
+        // ARIA errors are expected
         spyOn(Ext.log, 'error');
-        spyOn(Ext.log, 'warn');
         
         button = new Ext.button.Cycle(Ext.apply({
             text: 'Button',
@@ -18,15 +15,15 @@ describe("Ext.button.Cycle", function() {
                 items: [{
                     text: 'Foo',
                     iconCls: 'iconFoo',
-                    glyph: '100@FooFont'
+                    glyph: 'glyphFoo'
                 }, {
                     text: 'Bar',
                     iconCls: 'iconBar',
-                    glyph: '200@BarFont'
+                    glyph: 'glyphBar'
                 }, {
                     text: 'Baz',
                     iconCls: 'iconBaz',
-                    glyph: '300@BazFont'
+                    glyph: 'glyphBaz'
                 }]
             }
         }, config));
@@ -215,22 +212,22 @@ describe("Ext.button.Cycle", function() {
     describe("forceGlyph", function() {
         it("should show the active item glyph by default", function() {
             makeButton();
-            expect(button.glyph.isEqual(Ext.Glyph.fly('100@FooFont'))).toBe(true);
+            expect(button.glyph).toBe('glyphFoo');
         });
 
         it("should update the glyph when the active item changes", function() {
             makeButton();
             button.setActiveItem(1);
-            expect(button.glyph.isEqual(Ext.Glyph.fly('200@BarFont'))).toBe(true);
+            expect(button.glyph).toBe('glyphBar');
         });
 
         it("should use the forceIcon if specified", function() {
             makeButton({
-                forceGlyph: '400@ForceFont'
+                forceGlyph: 'glyphForce'
             });
-            expect(button.glyph.isEqual(Ext.Glyph.fly('400@ForceFont'))).toBe(true);
+            expect(button.glyph).toBe('glyphForce');
             button.setActiveItem(1);
-            expect(button.glyph.isEqual(Ext.Glyph.fly('400@ForceFont'))).toBe(true);
+            expect(button.glyph).toBe('glyphForce');
         });
     });
 });

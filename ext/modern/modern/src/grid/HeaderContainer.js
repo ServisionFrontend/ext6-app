@@ -10,24 +10,14 @@ Ext.define('Ext.grid.HeaderContainer', {
     config: {
         baseCls: Ext.baseCSSPrefix + 'grid-header-container',
         docked: 'top',
+        translationMethod: 'auto',
         defaultType: 'column',
-        layout: {
-            type: 'hbox',
-            align: 'stretch'
-        },
 
         /**
          * @private
          * Set this to `false` to disable sorting via tap on all column headers
          */
-        sortable: true,
-
-        scrollable: {
-            x: false,
-            y: false
-        },
-
-        grid: null
+        sortable: true
     },
 
     initialize: function() {
@@ -48,7 +38,6 @@ Ext.define('Ext.grid.HeaderContainer', {
         });
 
         me.on({
-            tap: 'onGroupTap',
             show: 'onGroupShow',
             hide: 'onGroupHide',
             add: 'onColumnAdd',
@@ -64,14 +53,10 @@ Ext.define('Ext.grid.HeaderContainer', {
             remove: 'onColumnRemove',
             scope: me
         });
-    },
 
-    factoryItem: function (item) {
-        // If the columns contains a columns config, then create a HeaderGroup
-        if (item.columns) {
-            return Ext.factory(item, Ext.grid.HeaderGroup);
+        if (Ext.browser.getPreferredTranslationMethod({translationMethod: this.getTranslationMethod()}) == 'scrollposition') {
+            me.innerElement.setLeft(500000);
         }
-        return this.callParent([item]);
     },
 
     getColumns: function() {
@@ -80,51 +65,33 @@ Ext.define('Ext.grid.HeaderContainer', {
 
     getAbsoluteColumnIndex: function(column) {
         var items = this.getInnerItems(),
-            ret = this.getBottomColumnIndex(items, column);
-
-        return ret.found ? ret.index : items.length;
-    },
-
-    getBottomColumnIndex: function(items, column){
-        var i = 0,
             ln = items.length,
-            ret = {
-                found: false,
-                index: 0
-            },
-            innerIndex, item, retV;
+            index = 0,
+            innerIndex, i, item;
 
-        while (!ret.found && i < ln) {
+        for (i = 0; i < ln; i++) {
             item = items[i];
 
             if (item === column) {
-                ret.found = true;
+                return index;
             }
             else if (item.isHeaderGroup) {
                 innerIndex = item.innerIndexOf(column);
                 if (innerIndex !== -1) {
-                    ret.index += innerIndex;
-                    ret.found = true;
+                    index += innerIndex;
+                    return index;
                 }
                 else {
-                    retV = this.getBottomColumnIndex(item.getInnerItems(), column);
-                    ret.index += retV.index;
-                    ret.found = retV.found;
+                    index += item.getInnerItems().length;
                 }
             }
             else {
-                ret.index++;
+                index += 1;
             }
-            i++;
         }
-        return ret;
     },
 
     onColumnAdd: function(parent, column) {
-        this.doColumnAdd(column, null);
-    },
-
-    doColumnAdd: function(column, group){
         var me = this,
             columns = me.columns,
             columnIndex = me.getAbsoluteColumnIndex(column),
@@ -134,11 +101,12 @@ Ext.define('Ext.grid.HeaderContainer', {
             groupColumns = column.getItems().items;
 
             for (i = 0, ln = groupColumns.length; i < ln; i++) {
-                me.doColumnAdd(groupColumns[i], column);
+                columns.splice(columnIndex + i, 0, groupColumns[i]);
+                me.fireEvent('columnadd', me, groupColumns[i], column);
             }
         } else {
             columns.splice(columnIndex, 0, column);
-            me.fireEvent('columnadd', me, column, group);
+            me.fireEvent('columnadd', me, column, null);
         }
     },
 
@@ -147,7 +115,7 @@ Ext.define('Ext.grid.HeaderContainer', {
             columns = me.columns,
             columnIndex = me.getAbsoluteColumnIndex(column),
             groupColumns, ln, i, groupColumn,
-            after, oldIndex, fromIdx, toIdx;
+            after, fromIdx, toIdx;
 
         if (column.isHeaderGroup) {
             groupColumns = column.getItems().items;
@@ -162,18 +130,18 @@ Ext.define('Ext.grid.HeaderContainer', {
 
                 // Treat the moves as sequential
                 if (after) {
-                    // |  Group   | c | d     ->     | c | d |   Group   |
+                    // |  Group   | c | d     ->     | c | d |   Group   | 
                     //    a   b                                  a   b
-                    //
+                    //    
                     // We need to fire:
                     // a from 0 -> 3, since b is still in place
                     // b from 0 -> 3, to account for a still in place
                     toIdx = columnIndex + ln - 1;
                     fromIdx = oldIndex;
                 } else {
-                    // | c | d |   Group   |      ->     |  Group   | c | d
+                    // | c | d |   Group   |      ->     |  Group   | c | d 
                     //             a   b                    a   b
-                    //
+                    //    
                     // We need to fire:
                     // a from 2 -> 0
                     // b from 2 -> 1, to account for a moving
@@ -198,7 +166,8 @@ Ext.define('Ext.grid.HeaderContainer', {
                 i;
 
             for (i = 0; i < ln; i++) {
-                this.onColumnRemove(column, columns[i]);
+                Ext.Array.remove(this.columns, columns[i]);
+                this.fireEvent('columnremove', this, columns[i]);
             }
         } else {
             Ext.Array.remove(this.columns, column);
@@ -249,12 +218,8 @@ Ext.define('Ext.grid.HeaderContainer', {
         }
     },
 
-    onGroupTap: function(column) {
-        this.fireEvent('headergrouptap', this, column);
-    },
-
-    onColumnResize: function(column, width, oldWidth) {
-        this.fireEvent('columnresize', this, column, width, oldWidth);
+    onColumnResize: function(column, width) {
+        this.fireEvent('columnresize', this, column, width);
     },
 
     onColumnSort: function(column, direction, newDirection) {
@@ -264,29 +229,13 @@ Ext.define('Ext.grid.HeaderContainer', {
     },
 
     scrollTo: function(x) {
-        this.getScrollable().scrollTo(x);
-    },
-
-    updateGrid: function(grid) {
-        this.parent = grid;
-    },
-
-    destroy: function() {
-        this.setGrid(null);
-        this.callParent();
-    },
-
-    privates: {
-        setScrollbarSpacer: function(scrollbarSize) {
-            var me = this,
-                spacerEl = me.spacerEl;
-
-            if (!spacerEl) {
-                spacerEl = me.spacerEl = Ext.dom.Element.create();
-            }
-
-            me.innerElement.appendChild(spacerEl); // spacer element must always be the last child
-            spacerEl.setStyle('min-width', scrollbarSize + 'px');
+        switch (Ext.browser.getPreferredTranslationMethod({translationMethod: this.getTranslationMethod()})) {
+            case 'scrollposition':
+                this.renderElement.dom.scrollLeft = 500000 + x;
+                break;
+            case 'csstransform':
+                this.innerElement.translate(-x, 0);
+                break;
         }
     }
 });

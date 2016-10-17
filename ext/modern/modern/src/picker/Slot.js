@@ -111,8 +111,13 @@ Ext.define('Ext.picker.Slot', {
          */
         scrollable: {
             x: false,
-            y: true,
-            scrollbars: false
+            indicators: false,
+            momentumEasing: {
+                minVelocity: 2
+            },
+            slotSnapEasing: {
+                duration: 100
+            }
         },
 
         /**
@@ -122,15 +127,24 @@ Ext.define('Ext.picker.Slot', {
         verticallyCenterItems: true
     },
 
-    snapSelector: '.' + Ext.baseCSSPrefix + 'dataview-item',
+    constructor: function() {
+        /**
+         * @property selectedIndex
+         * @type Number
+         * The current `selectedIndex` of the picker slot.
+         * @private
+         */
+        this.selectedIndex = 0;
 
-    /**
-     * @property selectedIndex
-     * @type Number
-     * The current `selectedIndex` of the picker slot.
-     * @private
-     */
-    selectedIndex: 0,
+        /**
+         * @property picker
+         * @type Ext.picker.Picker
+         * A reference to the owner Picker.
+         * @private
+         */
+
+        this.callParent(arguments);
+    },
 
     /**
      * Sets the title for this dataview by creating element.
@@ -229,16 +243,7 @@ Ext.define('Ext.picker.Slot', {
         this.on({
             scope: this,
             painted: 'onPainted',
-            itemtap: 'doItemTap',
-            resize: {
-                fn: 'onResize',
-                single: true
-            }
-        });
-
-        this.picker.on({
-            scope: this,
-            beforehiddenchange: 'onBeforeHiddenChange'
+            itemtap: 'doItemTap'
         });
 
         this.element.on({
@@ -261,25 +266,6 @@ Ext.define('Ext.picker.Slot', {
     },
 
     /**
-     * @private
-     */
-    onResize: function() {
-        var value = this.getValue();
-        if (value) {
-            this.doSetValue(value);
-        }
-    },
-
-    /**
-     * @private
-     */
-    onBeforeHiddenChange: function (picker, hidden) {
-        if (!hidden) {
-            this.doSetValue(this.getValue());   
-        }        
-    },
-
-    /**
      * Returns an instance of the owner picker.
      * @return {Object}
      * @private
@@ -296,7 +282,7 @@ Ext.define('Ext.picker.Slot', {
      * @private
      */
     setupBar: function() {
-        if (!this.isPainted()) {
+        if (!this.rendered) {
             //if the component isnt rendered yet, there is no point in calculating the padding just eyt
             return;
         }
@@ -310,7 +296,7 @@ Ext.define('Ext.picker.Slot', {
             title = this.getTitle(),
             scroller = this.getScrollable(),
             titleHeight = 0,
-            barHeight, offset;
+            barHeight, padding;
 
         barHeight = bar.dom.getBoundingClientRect().height;
 
@@ -318,25 +304,17 @@ Ext.define('Ext.picker.Slot', {
             titleHeight = title.element.getHeight();
         }
 
-        offset = Math.ceil((element.getHeight() - titleHeight - barHeight) / 2);
+        padding = Math.ceil((element.getHeight() - titleHeight - barHeight) / 2);
 
         if (this.getVerticallyCenterItems()) {
             innerElement.setStyle({
-                padding: offset + 'px 0 ' + offset + 'px'
+                padding: padding + 'px 0 ' + padding + 'px'
             });
         }
 
-        scroller.setSnapOffset({
-            y: offset
-        });
-
-        scroller.setSnapSelector(this.snapSelector);
-
-        scroller.setMsSnapInterval({
-            y: barHeight
-        });
-
-        this.doSetValue(value);
+        scroller.refresh();
+        scroller.setSlotSnapSize(barHeight);
+        this.setValue(value);
     },
 
     /**
@@ -407,7 +385,7 @@ Ext.define('Ext.picker.Slot', {
             return;
         }
 
-        if (!useDom) {
+        if (!this.rendered || !useDom) {
             return this._value;
         }
 
@@ -440,35 +418,33 @@ Ext.define('Ext.picker.Slot', {
     },
 
     doSetValue: function(value, animated) {
-        var me = this,
-            store = me.getStore(),
-            viewItems = me.getViewItems(),
-            valueField = me.getValueField(),
-            hasSelection = true,
+        if (!this.rendered) {
+            //we don't want to call this until the slot has been rendered
+            this._value = value;
+            return;
+        }
+
+        var store = this.getStore(),
+            viewItems = this.getViewItems(),
+            valueField = this.getValueField(),
             index, item;
 
         index = store.findExact(valueField, value);
 
-        if (index === -1) {
-            hasSelection = false;
+        if (index == -1) {
             index = 0;
         }
 
         item = Ext.get(viewItems[index]);
 
-        me.selectedIndex = index;
-
+        this.selectedIndex = index;
         if (item) {
-            me.scrollToItem(item, (animated) ? {
+            this.scrollToItem(item, (animated) ? {
                 duration: 100
             } : false);
-
-            if (hasSelection) {
-                // only set selection if an item is actually selected
-                me.select(me.selectedIndex);
-            }            
+            this.select(this.selectedIndex);
         }
 
-        me._value = value;
+        this._value = value;
     }
 });

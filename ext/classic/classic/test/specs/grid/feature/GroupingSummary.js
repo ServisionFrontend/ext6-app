@@ -1,14 +1,5 @@
 describe('Ext.grid.feature.GroupingSummary', function () {
-    var data, grid, store, groupingSummary, columns, params, selector,
-        synchronousLoad = true,
-        proxyStoreLoad = Ext.data.ProxyStore.prototype.load,
-        loadStore = function() {
-            proxyStoreLoad.apply(this, arguments);
-            if (synchronousLoad) {
-                this.flushLoad.apply(this, arguments);
-            }
-            return this;
-        };
+    var data, grid, store, groupingSummary, columns, params, selector;
 
     function createGrid(gridCfg, groupingSummaryCfg, columns, storeCfg) {
         data = [{
@@ -58,7 +49,6 @@ describe('Ext.grid.feature.GroupingSummary', function () {
         if (!storeCfg.grouper && !storeCfg.hasOwnProperty('groupField')) {
             storeCfg.groupField = 'subject';
         }
-
         store = new Ext.data.Store(storeCfg);
 
         groupingSummary = new Ext.grid.feature.GroupingSummary(Ext.apply({
@@ -112,29 +102,7 @@ describe('Ext.grid.feature.GroupingSummary', function () {
         selector = groupingSummary.summaryRowSelector;
     }
 
-    function expectData(fields, expected) {
-        var groupInfo = groupingSummary.getMetaGroup(store.getGroups().getAt(0)),
-            record = groupInfo.aggregateRecord;
-
-        expect(record.get(fields[0])).toBe(expected[0]);
-        expect(record.get(fields[1])).toBe(expected[1]);
-    }
-
-    function expectSummaryRow(view) {
-        var summaryRow = grid.view.body.down('.x-grid-row-summary', true);
-
-        expect((summaryRow.textContent || summaryRow.innerText).replace(/\s/g, '')).toBe(view);
-    }
-
-    beforeEach(function() {
-        // Override so that we can control asynchronous loading
-        Ext.data.ProxyStore.prototype.load = loadStore;
-    });
-
-    afterEach(function() {
-        // Undo the overrides.
-        Ext.data.ProxyStore.prototype.load = proxyStoreLoad;
-
+    afterEach(function () {
         grid.destroy();
         grid = store = groupingSummary = columns = params = null;
         Ext.undefine('spec.GroupingSummary');
@@ -325,69 +293,6 @@ describe('Ext.grid.feature.GroupingSummary', function () {
         });
     });
 
-    describe('reconfiguring', function () {
-        beforeEach(function () {
-            createGrid();
-        });
-
-        describe('new store', function () {
-            it('should update the summary row', function () {
-                store = new Ext.data.Store({
-                    model: 'spec.GroupingSummary',
-                    groupField: 'subject',
-                    data: [{
-                        student: 'Student 1',
-                        subject: 'Math',
-                        mark: 84,
-                        allowance: 15.50
-                    },{
-                        student: 'Student 2',
-                        subject: 'Science',
-                        mark: 68,
-                        allowance: 1.55
-                    }],
-                    autoDestroy: true
-                });
-
-                grid.reconfigure(store);
-
-                expectData(
-                    ['mark', 'noDataIndexColumn'],
-                    [84, 15.50]
-                );
-
-                expectSummaryRow('1student84$15.50');
-            });
-        });
-
-        describe('new columns', function () {
-            it('should update the summary row', function () {
-                grid.reconfigure(null, [{
-                    itemId: 'studentColumn',
-                    dataIndex: 'student',
-                    text: 'Name',
-                    summaryType: 'count',
-                    summaryRenderer: function (value, summaryData, field, metaData) {
-                        params = arguments;
-                        return Ext.String.format('{0} student{1}', value, value !== 1 ? 's' : '');
-                    }
-                }, {
-                    itemId: 'allowance',
-                    dataIndex: 'allowance',
-                    text: 'Allowance',
-                    summaryType: 'average'
-                }]);
-
-                expectData(
-                    ['student', 'allowance'],
-                    [2, 58.125]
-                );
-
-                expectSummaryRow('2students58.125');
-            });
-        });
-    });
-
     describe("loading the store", function() {
         beforeEach(function() {
             MockAjaxManager.addMethods();
@@ -555,4 +460,3 @@ describe('Ext.grid.feature.GroupingSummary', function () {
         });
     });
 });
-

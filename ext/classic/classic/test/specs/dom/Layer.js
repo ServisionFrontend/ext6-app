@@ -8,6 +8,7 @@ describe("Ext.dom.Layer", function() {
     it("should create a div by default", function() {
         layer = new Ext.dom.Layer();
 
+        expect(layer.dom instanceof HTMLElement).toBe(true);
         expect(layer.dom.tagName).toBe('DIV');
     });
 

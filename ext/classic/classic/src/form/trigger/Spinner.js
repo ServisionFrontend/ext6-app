@@ -20,13 +20,13 @@ Ext.define('Ext.form.trigger.Spinner', {
     /**
      * @cfg {Function/String} [upHandler=undefined]
      * The handler for the 'up' button
-     * @controllable
+     * @declarativeHandler
      */
 
     /**
      * @cfg {Function/String} [downHandler=undefined]
      * The handler for the 'down' button
-     * @controllable
+     * @declarativeHandler
      */
 
     /**

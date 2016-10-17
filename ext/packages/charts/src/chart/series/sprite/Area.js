@@ -24,8 +24,6 @@ Ext.define('Ext.chart.series.sprite.Area', {
 
     renderClipped: function (surface, ctx, clip) {
         var me = this,
-            store = me.getStore(),
-            series = me.getSeries(),
             attr = me.attr,
             dataX = attr.dataX,
             dataY = attr.dataY,
@@ -41,12 +39,7 @@ Ext.define('Ext.chart.series.sprite.Area', {
             min = Math.min(clip[0], clip[2]),
             max = Math.max(clip[0], clip[2]),
             start = Math.max(0, this.binarySearch(min)),
-            end = Math.min(dataX.length - 1, this.binarySearch(max) + 1),
-            renderer = attr.renderer,
-            rendererData = {
-                store: store
-            },
-            rendererConfig, rendererChanges;
+            end = Math.min(dataX.length - 1, this.binarySearch(max) + 1);
 
         ctx.beginPath();
         startX = dataX[start] * xx + dx;
@@ -108,13 +101,7 @@ Ext.define('Ext.chart.series.sprite.Area', {
                 ctx.lineTo(x, lastY = y);
                 markerCfg.translationX = surfaceMatrix.x(x, y);
                 markerCfg.translationY = surfaceMatrix.y(x, y);
-                if (renderer) {
-                    // callback(fn, scope, args, delay, caller)
-                    rendererChanges = Ext.callback(renderer, null,
-                        [me, markerCfg, rendererData, i], 0, series);
-                    Ext.apply(markerCfg, rendererChanges);
-                }
-                me.putMarker('markers', markerCfg, i, !renderer);
+                me.putMarker('markers', markerCfg, i, !attr.renderer);
             }
         } else {
             for (i = start; i <= end; i++) {
@@ -123,12 +110,7 @@ Ext.define('Ext.chart.series.sprite.Area', {
                 ctx.lineTo(x, y);
                 markerCfg.translationX = surfaceMatrix.x(x, y);
                 markerCfg.translationY = surfaceMatrix.y(x, y);
-                if (renderer) {
-                    rendererChanges = Ext.callback(renderer, null,
-                        [me, markerCfg, rendererData, i], 0, series);
-                    Ext.apply(markerCfg, rendererChanges);
-                }
-                me.putMarker('markers', markerCfg, i, !renderer);
+                me.putMarker('markers', markerCfg, i, !attr.renderer);
             }
         }
 
@@ -137,5 +119,4 @@ Ext.define('Ext.chart.series.sprite.Area', {
         }
         ctx.stroke();
     }
-
 });

@@ -176,6 +176,11 @@ Ext.define('Ext.data.proxy.Proxy', {
             } else {
                 reader.setModel(model);
             }
+
+            // TODO: an event here?
+            if (reader.onMetaChange) {
+                 reader.onMetaChange = Ext.Function.createSequence(reader.onMetaChange, me.onMetaChange, me);
+            }
         }
     },
 
@@ -410,7 +415,5 @@ Ext.define('Ext.data.proxy.Proxy', {
         }
         
         this.pendingOperations = null;
-        
-        this.callParent();
     }
 });

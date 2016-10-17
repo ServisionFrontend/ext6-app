@@ -53,6 +53,12 @@ Ext.define('Ext.field.Hidden', {
         },
 
         /**
+         * @cfg
+         * @inheritdoc
+         */
+        ui: 'hidden',
+
+        /**
          * @cfg hidden
          * @hide
          */
@@ -63,7 +69,5 @@ Ext.define('Ext.field.Hidden', {
          * @hide
          */
         tabIndex: -1
-    },
-
-    classCls: Ext.baseCSSPrefix + 'hiddenfield'
+    }
 });

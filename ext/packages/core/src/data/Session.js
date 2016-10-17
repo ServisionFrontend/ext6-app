@@ -163,7 +163,7 @@ Ext.define('Ext.data.Session', {
             }
         }
 
-        me.identifierCache = me.recordCreator = me.matrices = me.data = null;
+        me.recordCreator = me.matrices = me.data = null;
         me.setSchema(null);
         me.callParent();
     },
@@ -208,7 +208,6 @@ Ext.define('Ext.data.Session', {
      */
     commit: function() {
         var data = this.data,
-            matrices = this.matrices,
             entityName, entities, id, record;
 
         for (entityName in data) {
@@ -219,10 +218,6 @@ Ext.define('Ext.data.Session', {
                     record.commit();
                 }
             }
-        }
-
-        for (id in matrices) {
-            matrices[id].commit();
         }
     },
 
@@ -289,10 +284,7 @@ Ext.define('Ext.data.Session', {
      * 
      * See also {@link #peekRecord}.
      *
-     * @param {String/Ext.Class/Ext.data.Model} type The `entityName` or the actual class of record to create.
-     * This may also be a record instance, where the type and id will be inferred from the record. If the record is
-     * not attached to a session, it will be adopted. If it exists in a parent, an appropriate copy will be made as
-     * described.
+     * @param {String/Ext.Class} type The `entityName` or the actual class of record to create.
      * @param {Object} id The id of the record.
      * @param {Boolean/Object} [autoLoad=true] `false` to prevent the record from being loaded if
      * it does not exist. If this parameter is an object, it will be passed to the {@link Ext.data.Model#load} call.
@@ -300,15 +292,8 @@ Ext.define('Ext.data.Session', {
      */
     getRecord: function(type, id, autoLoad) {
         var me = this,
-            wasInstance = type.isModel,
-            record, Model, parent, parentRec;
-
-        if (wasInstance) {
-            wasInstance = type;
-            id = type.id;
-            type = type.self;
-        }
-        record = me.peekRecord(type, id);
+            record = me.peekRecord(type, id),
+            Model, parent, parentRec;
 
         if (!record) {
             Model = type.$isClass ? type : me.getSchema().getEntity(type);
@@ -316,27 +301,13 @@ Ext.define('Ext.data.Session', {
             if (parent) {
                 parentRec = parent.peekRecord(Model, id);
             }
-            if (parentRec) {
-                if (parentRec.isLoading()) {
-                    // If the parent is loading, it's as though it doesn't have
-                    // the record, so we can't copy it, but we don't want to
-                    // adopt it either.
-                    wasInstance = false;
-                } else {
-                    record = parentRec.copy(undefined, me);
-                    record.$source = parentRec;
-                }
-            }
-
-            if (!record) {
-                if (wasInstance) {
-                    record = wasInstance;
-                    me.adopt(record);
-                } else {
-                    record = Model.createWithId(id, null, me);
-                    if (autoLoad !== false) {
-                        record.load(Ext.isObject(autoLoad) ? autoLoad : undefined);
-                    }
+            if (parentRec && !parentRec.isLoading()) {
+                record = parentRec.copy(undefined, me);
+                record.$source = parentRec;
+            } else {
+                record = Model.createWithId(id, null, me);
+                if (autoLoad !== false) {
+                    record.load(Ext.isObject(autoLoad) ? autoLoad : undefined);
                 }
             }
         }
@@ -773,13 +744,13 @@ Ext.define('Ext.data.Session', {
             } else {
                 cache = this.identifierCache;
                 identifier = entityType.identifier;
-                key = identifier.getId() || entityType.entityName;
+                key = identifier.id || entityType.entityName;
                 ret = cache[key];
 
                 if (!ret) {
                     if (identifier.clone) {
                         ret = identifier.clone({
-                            id: null
+                            cache: cache
                         });
                     } else {
                         ret = identifier;
@@ -823,7 +794,6 @@ Ext.define('Ext.data.Session', {
 
         onIdChanged: function (record, oldId, newId) {
             var me = this,
-                matrices = me.matrices,
                 entityName = record.entityName,
                 id = record.id,
                 bucket = me.data[entityName],
@@ -831,7 +801,7 @@ Ext.define('Ext.data.Session', {
                 associations = record.associations,
                 refs = entry.refs,
                 setNoRefs = me._setNoRefs,
-                association, fieldName, matrix, refId, role, roleName, roleRefs, key;
+                association, fieldName, matrix, refId, role, roleName, roleRefs, store;
 
             //<debug>
             if (bucket[newId]) {
@@ -843,8 +813,17 @@ Ext.define('Ext.data.Session', {
             delete bucket[oldId];
             bucket[newId] = entry;
 
-            for (key in matrices) {
-                matrices[key].updateId(record, oldId, newId);
+            for (roleName in associations) {
+                role = associations[roleName];
+                if (role.isMany) {
+                    store = role.getAssociatedItem(record);
+                    if (store) {
+                        matrix = store.matrix;
+                        if (matrix) {
+                            matrix.changeId(newId);
+                        }
+                    }
+                }
             }
 
             if (refs) {
@@ -853,7 +832,9 @@ Ext.define('Ext.data.Session', {
                     role = associations[roleName];
                     association = role.association;
 
-                    if (!association.isManyToMany) {
+                    if (association.isManyToMany) {
+                        // TODO
+                    } else {
                         fieldName = association.field.name;
 
                         for (refId in roleRefs) {

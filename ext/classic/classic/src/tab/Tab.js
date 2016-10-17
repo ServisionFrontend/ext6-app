@@ -51,13 +51,11 @@ Ext.define('Ext.tab.Tab', {
 
     //<locale>
     /**
-     * @cfg {String} [closeText="removable"]
+     * @cfg {String} closeText
      * The accessible text label for the close button link to be announced by screen readers
-     * when the tab is focused. This text does not appear visually and is only used when
-     * {@link #cfg-closable} is `true`.
+     * when the tab is focused. Only used when {@link #cfg-closable} = true.
      */
-    // The wording is chosen to be less confusing to blind users.
-    closeText: 'removable',
+    closeText: 'Close Tab',
     //</locale>
 
     /**
@@ -106,8 +104,7 @@ Ext.define('Ext.tab.Tab', {
     ariaRole: 'tab',
     tabIndex: -1,
     
-    keyMap: {
-        scope: 'this',
+    keyHandlers: {
         DELETE: 'onDeleteKey'
     },
 
@@ -169,23 +166,7 @@ Ext.define('Ext.tab.Tab', {
 
     initComponent: function() {
         var me = this;
-        
-        // Although WAI-ARIA spec has a provision for deleting tab panels,
-        // according to accessibility experts at University of Washington
-        // closable tab panels can be very confusing to vision impaired users.
-        // On top of that there are some technical issues with screen readers
-        // not recognizing the changed number of open tabs, so it is better
-        // to avoid closable tabs in accessible applications.
-        //<debug>
-        if (me.closable) {
-            Ext.ariaWarn(me,
-                "Closable tabs can be confusing to users relying on Assistive Technologies " +
-                "such as Screen Readers, and are not recommended in accessible applications. " +
-                "Please consider setting " + me.title + " tab (" + me.id + ") to closable: false."
-            );
-        }
-        //</debug>
-        
+
         if (me.card) {
             me.setCard(me.card);
         }

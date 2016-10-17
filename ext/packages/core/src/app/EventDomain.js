@@ -33,6 +33,7 @@
  * or '*' wildcard for any Provider. This domain is optional and will be loaded only if
  * {@link Ext.direct.Manager} singleton is required in your application.
  */
+
 Ext.define('Ext.app.EventDomain', {
     requires: [
         'Ext.util.Event'

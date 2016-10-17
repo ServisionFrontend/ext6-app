@@ -24,7 +24,7 @@
 
 .x-toolbar-inner {
     .x-field {
-        .x-field-body {
+        .x-component-outer {
             @include st-box-flex(1);
         }
     }

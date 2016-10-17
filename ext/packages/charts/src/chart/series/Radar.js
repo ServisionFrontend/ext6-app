@@ -76,8 +76,6 @@ Ext.define('Ext.chart.series.Radar', {
         return 1;
     },
 
-    isStoreDependantColorCount: false,
-
     themeMarkerCount: function() {
         return 1;
     },
@@ -197,9 +195,9 @@ Ext.define('Ext.chart.series.Radar', {
         if (animation) {
             marker = sprite.getMarker('markers');
             if (marker) {
-                marker.getTemplate().setAnimation(animation);
+                marker.getTemplate().fx.setConfig(animation);
             }
-            sprite.setAnimation(animation);
+            sprite.fx.setConfig(animation);
         }
         return me.sprites;
     },

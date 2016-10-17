@@ -147,72 +147,72 @@ Ext.define('Ext.form.Panel', {
     
     basicFormConfigs: [
         /**
-         * @cfg api
+         * @cfg
          * @inheritdoc Ext.form.Basic#api
          */
         'api', 
         /**
-         * @cfg baseParams
+         * @cfg
          * @inheritdoc Ext.form.Basic#baseParams
          */
         'baseParams', 
         /**
-         * @cfg errorReader
+         * @cfg
          * @inheritdoc Ext.form.Basic#errorReader
          */
         'errorReader', 
         /**
-         * @cfg jsonSubmit
+         * @cfg
          * @inheritdoc Ext.form.Basic#jsonSubmit
          */
         'jsonSubmit',
         /**
-         * @cfg method
+         * @cfg
          * @inheritdoc Ext.form.Basic#method
          */
         'method', 
         /**
-         * @cfg paramOrder
+         * @cfg
          * @inheritdoc Ext.form.Basic#paramOrder
          */
         'paramOrder',
         /**
-         * @cfg paramsAsHash
+         * @cfg
          * @inheritdoc Ext.form.Basic#paramsAsHash
          */
         'paramsAsHash',
         /**
-         * @cfg reader
+         * @cfg
          * @inheritdoc Ext.form.Basic#reader
          */
         'reader',
         /**
-         * @cfg standardSubmit
+         * @cfg
          * @inheritdoc Ext.form.Basic#standardSubmit
          */
         'standardSubmit',
         /**
-         * @cfg timeout
+         * @cfg
          * @inheritdoc Ext.form.Basic#timeout
          */
         'timeout',
         /**
-         * @cfg trackResetOnLoad
+         * @cfg
          * @inheritdoc Ext.form.Basic#trackResetOnLoad
          */
         'trackResetOnLoad',
         /**
-         * @cfg url
+         * @cfg
          * @inheritdoc Ext.form.Basic#url
          */
         'url',
         /**
-         * @cfg waitMsgTarget
+         * @cfg
          * @inheritdoc Ext.form.Basic#waitMsgTarget
          */
         'waitMsgTarget',
         /**
-         * @cfg waitTitle
+         * @cfg
          * @inheritdoc Ext.form.Basic#waitTitle
          */
         'waitTitle'
@@ -365,8 +365,8 @@ Ext.define('Ext.form.Panel', {
      *
      * @inheritdoc Ext.form.Basic#reset
      */
-    reset: function(resetRecord) {
-        return this.form.reset(resetRecord);
+    reset: function() {
+        this.form.reset();
     },
     
     /**

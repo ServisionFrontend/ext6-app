@@ -97,7 +97,6 @@
  */
 Ext.define('Ext.sparkline.Base', {
     extend: 'Ext.Widget',
-    xtype: 'sparkline',
     requires: [
         'Ext.XTemplate',
         'Ext.sparkline.CanvasCanvas',
@@ -197,35 +196,18 @@ Ext.define('Ext.sparkline.Base', {
     redrawQueue: {},
 
     inheritableStatics: {
-        /**
-         * @private
-         * @static
-         * @inheritable
-         */
         sparkLineTipClass: Ext.baseCSSPrefix + 'sparkline-tip-target',
 
-        /**
-         * @private
-         * @static
-         * @inheritable
-         */
         onClassCreated: function(cls) {
-            var configApplier = cls.prototype.applyConfigChange,
-                proto = cls.prototype,
+            var proto = cls.prototype,
                 configs = cls.getConfigurator().configs,
-                config,
-                applierName;
+                config;
 
             // Set up an applier for all local configs which kicks off a request to redraw on the next animation frame
             for (config in configs) {
                 // tipTpl not included in this scheme
                 if (config !== 'tipTpl') {
-                    applierName = Ext.Config.get(config).names.apply;
-                    if (proto[applierName]) {
-                        proto[applierName] = Ext.Function.createSequence(proto[applierName], configApplier);
-                    } else {
-                        proto[applierName] = configApplier;
-                    }
+                    proto[Ext.Config.get(config).names.apply] = proto.applyConfigChange;
                 }
             }    
         }
@@ -327,6 +309,8 @@ Ext.define('Ext.sparkline.Base', {
         me.width = width;
         if (me.height == null) {
             me.setHeight(parseInt(me.measurer.getCachedStyle(dom.parentNode, 'line-height'), 10));
+        } else {
+            me.redrawQueue[me.getId()] = me;
         }
     },
 
@@ -336,6 +320,7 @@ Ext.define('Ext.sparkline.Base', {
         me.callParent([height, oldHeight]);
         me.canvas.setHeight(height);
         me.height = height;
+        me.redrawQueue[me.getId()] = me;
     },
 
     updateValues: function(values) {
@@ -345,7 +330,7 @@ Ext.define('Ext.sparkline.Base', {
     redraw: function() {
         var me = this;
 
-        if (!me.destroyed && me.getValues()) {
+        if (me.getValues()) {
             me.onUpdate();
             me.canvas.onOwnerUpdate();
             me.renderGraph();
@@ -393,10 +378,8 @@ Ext.define('Ext.sparkline.Base', {
             offset = me.canvas.el.getXY();
             region = me.getRegion(me.currentPageXY[0] - offset[0], me.currentPageXY[1] - offset[1]);
 
-            if (region != null && region < values.length) {
-                if (!me.disableHighlight) {
-                    me.renderHighlight(region);
-                }
+            if (region != null && !me.disableHighlight) {
+                me.renderHighlight(region);
                 tooltipHTML = me.getRegionTooltip(region);
             }
             me.fireEvent('sparklineregionchange', me);
@@ -419,13 +402,12 @@ Ext.define('Ext.sparkline.Base', {
         }
     },
 
-    /**
-     * @method
+    /*
      * Return a region id for a given x/y co-ordinate
      */
     getRegion: Ext.emptyFn,
 
-    /**
+    /*
      * Fetch the HTML to display as a tooltip
      */
     getRegionTooltip: function(region) {

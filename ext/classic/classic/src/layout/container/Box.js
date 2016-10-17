@@ -169,6 +169,16 @@ Ext.define('Ext.layout.container.Box', {
         alignRoundingMethod: 'round'
     },
 
+    /**
+     * @cfg {Number} flex
+     * This configuration option is to be applied to **child items** of the container
+     * managed by this layout. Each child item with a flex property will be flexed
+     * (horizontally in `hbox`, vertically in `vbox`) according to each item's
+     * **relative** flex value compared to the sum of all items with a flex value
+     * specified. Any child items that have either a `flex = 0` or `flex = undefined`
+     * will not be 'flexed' (the initial size will not be changed).
+     */
+
     itemCls: Ext.baseCSSPrefix + 'box-item',
     targetCls: Ext.baseCSSPrefix + 'box-layout-ct',
     targetElCls: Ext.baseCSSPrefix + 'box-target',
@@ -207,7 +217,7 @@ Ext.define('Ext.layout.container.Box', {
         var me = this,
             type;
 
-        me.callParent([config]);
+        me.callParent(arguments);
 
         me.setVertical(me.vertical);
 
@@ -381,7 +391,9 @@ Ext.define('Ext.layout.container.Box', {
             smp = owner.stretchMaxPartner,
             style = me.innerCt.dom.style,
             names = me.names,
-            overflowHandler = me.overflowHandler;
+            overflowHandler = me.overflowHandler,
+            scrollable = owner.getScrollable(),
+            scrollPos;
 
         ownerContext.boxNames = names;
 
@@ -398,14 +410,22 @@ Ext.define('Ext.layout.container.Box', {
 
         ownerContext.stretchMaxPartner = smp && ownerContext.context.getCmp(smp);
 
-        me.callParent([ownerContext]);
+        me.callParent(arguments);
 
         ownerContext.innerCtContext = ownerContext.getEl('innerCt', me);
         ownerContext.targetElContext = ownerContext.getEl('targetEl', me);
-        ownerContext.ownerScrollable = owner.getScrollable();
+
+        ownerContext.ownerScrollable = scrollable = owner.getScrollable();
+        if (scrollable) {
+            // If we have a scrollable, save the positions regardless of whether we can scroll in that direction
+            // since the scrollable may be configured with x: false, y: false, which means it can only be
+            // controlled programmatically
+            ownerContext.scrollRestore = scrollable.getPosition();
+        }
 
         // Don't allow sizes burned on to the innerCt to influence measurements.
-        style.width = style.height = '';
+        style.width = '';
+        style.height = '';
     },
 
     beginLayoutCycle: function (ownerContext, firstCycle) {
@@ -426,7 +446,7 @@ Ext.define('Ext.layout.container.Box', {
             overflowHandler.beginLayoutCycle(ownerContext, firstCycle);
         }
 
-        me.callParent([ownerContext, firstCycle]);
+        me.callParent(arguments);
 
         // Cache several of our string concat/compare results (since width/heightModel can
         // change if we are invalidated, we cannot do this in beginLayout)
@@ -543,10 +563,8 @@ Ext.define('Ext.layout.container.Box', {
                     totalFlex += flex;
                     flexedItems.push(childContext);
                     minWidth += child[minWidthName] || 0;
-                }
-                // a %age width. Note that we are testing the value that is
-                // assigned to match.
-                else if ((match = percentageRe.exec(child[names.width]))) {
+                } else { // a %age width...
+                    match = percentageRe.exec(child[names.width]);
                     childContext.percentageParallel = parseFloat(match[1]) / 100;
                     ++percentageWidths;
                 }
@@ -721,7 +739,7 @@ Ext.define('Ext.layout.container.Box', {
                 childContext = childItems[i];
                 if (childContext.percentageParallel) {
                     childWidth = Math.ceil(percentageSpace * childContext.percentageParallel);
-                    childWidth = childContext[setWidthName](childWidth);
+                    childWidth = childContext.setWidth(childWidth);
                     nonFlexWidth += childWidth;
                 }
             }
@@ -887,7 +905,7 @@ Ext.define('Ext.layout.container.Box', {
                         continue;
                     } else {
                         childHeight = percentagePerpendicular * availHeight - childMargins;
-                        childHeight = childContext[setHeightName](childHeight);
+                        childHeight = childContext[names.setHeight](childHeight);
                     }
                 }
                 
@@ -992,7 +1010,7 @@ Ext.define('Ext.layout.container.Box', {
                 if (heightShrinkWrap && percentagePerpendicular) {
                     childMargins = childContext.marginInfo || childContext.getMarginInfo();
                     childHeight = percentagePerpendicular * height - childMargins[heightName];
-                    childHeight = childContext[setHeightName](childHeight);
+                    childHeight = childContext.setHeight(childHeight);
                 }
 
                 if (isCenter) {
@@ -1115,10 +1133,12 @@ Ext.define('Ext.layout.container.Box', {
 
     completeLayout: function(ownerContext) {
         var me = this,
+            names = ownerContext.boxNames,
             invalidateScrollX = ownerContext.invalidateScrollX,
             invalidateScrollY = ownerContext.invalidateScrollY,
             overflowHandler = me.overflowHandler,
-            dom, el, overflowX, overflowY, styles;
+            scrollRestore = ownerContext.scrollRestore,
+            dom, el, overflowX, overflowY, styles, scroll, scrollable;
 
         if (overflowHandler) {
             overflowHandler.completeLayout(ownerContext);
@@ -1165,6 +1185,9 @@ Ext.define('Ext.layout.container.Box', {
                 }
             }
         }
+        if (scrollRestore) {
+            ownerContext.ownerScrollable.scrollTo(scrollRestore.x, scrollRestore.y);
+        }
     },
 
     finishedLayout: function(ownerContext) {
@@ -1173,7 +1196,7 @@ Ext.define('Ext.layout.container.Box', {
         if (overflowHandler) {
             overflowHandler.finishedLayout(ownerContext);
         }
-        this.callParent([ownerContext]);
+        this.callParent(arguments);
     },
 
     getLayoutItems: function() {
@@ -1247,6 +1270,10 @@ Ext.define('Ext.layout.container.Box', {
         }
 
         return items;
+    },
+
+    getScrollerEl: function() {
+        return this.innerCt;
     },
 
     /**
@@ -1340,7 +1367,7 @@ Ext.define('Ext.layout.container.Box', {
             // Buttons will gain a split param
             split = me.enableSplitters && item.split && !item.isButton;
 
-        me.callParent([item, index]);
+        me.callParent(arguments);
 
         if (split) {
             if (split === true) {
@@ -1369,7 +1396,7 @@ Ext.define('Ext.layout.container.Box', {
             overflowHandler = me.overflowHandler,
             el;
             
-        me.callParent([comp, isDestroying]);
+        me.callParent(arguments);
 
         if (splitter && owner.contains(splitter)) {
             owner.doRemove(splitter, true);

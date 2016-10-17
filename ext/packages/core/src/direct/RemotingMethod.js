@@ -13,7 +13,6 @@ Ext.define('Ext.direct.RemotingMethod', {
             name, pLen, p, param;
 
         me.name = config.name;
-        me.disableBatching = config.batched != null ? !config.batched : false;
         
         if (config.formHandler) {
             me.formHandler = config.formHandler;
@@ -53,7 +52,7 @@ Ext.define('Ext.direct.RemotingMethod', {
                 //<debug>
                 if (len === 0) {
                     Ext.raise('metadata.len cannot be 0 ' +
-                                    'for Ext Direct method ' + me.name);
+                                    'for Ext.Direct method ' + me.name);
                 }
                 //</debug>
                 
@@ -74,7 +73,7 @@ Ext.define('Ext.direct.RemotingMethod', {
             //<debug>
             else {
                 Ext.raise('metadata is neither named nor ordered ' +
-                                'for Ext Direct method ' + me.name);
+                                'for Ext.Direct method ' + me.name);
             }
             //</debug>
             
@@ -103,7 +102,8 @@ Ext.define('Ext.direct.RemotingMethod', {
                         args.push(params[paramOrder[i]]);
                     }
                 }
-                else {
+                else if (paramsAsHash) {
+                    // If paramsAsHash was specified, add all the params as a single object argument.
                     args.push(params);
                 }
             }
@@ -184,11 +184,11 @@ Ext.define('Ext.direct.RemotingMethod', {
                 //<debug>
                 if (!Ext.isArray(options.metadata)) {
                     Ext.raise('options.metadata is not an Array ' +
-                                    'for Ext Direct method ' + me.name);
+                                    'for Ext.Direct method ' + me.name);
                 }
                 else if (options.metadata.length < me.metadata.len) {
                     Ext.raise('Not enough parameters in options.metadata ' +
-                                    'for Ext Direct method ' + me.name);
+                                    'for Ext.Direct method ' + me.name);
                 }
                 //</debug>
                 
@@ -198,7 +198,7 @@ Ext.define('Ext.direct.RemotingMethod', {
                 //<debug>
                 if (!Ext.isObject(options.metadata)) {
                     Ext.raise('options.metadata is not an Object ' +
-                                    'for Ext Direct method ' + me.name);
+                                    'for Ext.Direct method ' + me.name);
                 }
                 //</debug>
 
@@ -216,7 +216,7 @@ Ext.define('Ext.direct.RemotingMethod', {
                 for (name in me.metadata.params) {
                     if (!metadata.hasOwnProperty(name)) {
                         Ext.raise('Named parameter ' + name + ' is missing ' +
-                                        'in options.metadata for Ext Direct method ' +
+                                        'in options.metadata for Ext.Direct method ' +
                                         me.name);
                     }
                 }

@@ -43,7 +43,6 @@ Ext.define('Ext.dashboard.Dashboard', {
         /**
          * @cfg {Number} maxColumns
          * The maximum number of visible columns.
-         * @accessor
          */
         maxColumns: 4
     },

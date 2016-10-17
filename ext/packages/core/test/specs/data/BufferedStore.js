@@ -1,14 +1,5 @@
-describe("Ext.data.BufferedStore", function() {
-    var bufferedStore, captured,
-        synchronousLoad = true,
-        bufferedStoreLoad = Ext.data.BufferedStore.prototype.load,
-        loadStore = function() {
-            bufferedStoreLoad.apply(this, arguments);
-            if (synchronousLoad) {
-                this.flushLoad.apply(this, arguments);
-            }
-            return this;
-        };
+describe('Ext.data.BufferedStore', function() {
+    var bufferedStore, captured;
 
     function getData(start, limit) {
         var end = start + limit,
@@ -66,9 +57,6 @@ describe("Ext.data.BufferedStore", function() {
     }
 
     beforeEach(function() {
-        // Override so that we can control asynchronous loading
-        Ext.data.BufferedStore.prototype.load = loadStore;
-
         Ext.define('spec.ForumThread', {
             extend: 'Ext.data.Model',
             fields: [
@@ -91,9 +79,6 @@ describe("Ext.data.BufferedStore", function() {
     });
     
     afterEach(function(){
-        // Undo the overrides.
-        Ext.data.BufferedStore.prototype.load = bufferedStoreLoad;
-
         MockAjaxManager.removeMethods();
         bufferedStore.destroy();
         captured = bufferedStore = null;
@@ -101,7 +86,7 @@ describe("Ext.data.BufferedStore", function() {
         Ext.undefine('spec.ForumThread');
     });
 
-    it("should be able to lookup a record by its internalId", function() {
+    it('should be able to lookup a record by its internalId', function() {
         createStore();
         bufferedStore.loadPage(1);
         satisfyRequests();
@@ -112,16 +97,7 @@ describe("Ext.data.BufferedStore", function() {
         expect(bufferedStore.getByInternalId(String(rec0.internalId))).toBe(rec0);
     });
 
-    it("should return undefined when the internalId does not exist", function() {
-        createStore();
-        bufferedStore.loadPage(1);
-        satisfyRequests();
-
-        // Looking up nonexistent internalId should return undefined
-        expect(bufferedStore.getByInternalId('DefinitelyDoesntExist')).toBeUndefined();
-    });
-
-    it("should be able to start from any page", function() {
+    it('should be able to start from any page', function() {
         createStore();
         bufferedStore.loadPage(10);
 
@@ -136,7 +112,7 @@ describe("Ext.data.BufferedStore", function() {
         expect(page10[99].get('title')).toBe('Title1000');
     });
 
-    it("should be able to find records in a buffered store", function() {
+    it('should be able to find records in a buffered store', function() {
         createStore();
         bufferedStore.load();
 
@@ -151,7 +127,19 @@ describe("Ext.data.BufferedStore", function() {
         expect(bufferedStore.find('title', 'title10')).toBe(9);
     });
 
-    it("should load the store when filtered", function() {
+    it("should clear the data when calling sort with parameters when remote sorting", function() {
+        createStore();
+        bufferedStore.load();
+
+        satisfyRequests();
+
+        bufferedStore.sort();
+        expect(bufferedStore.data.getCount()).toBe(0);
+        satisfyRequests();
+        expect(bufferedStore.data.getCount()).toBe(300);
+    });
+
+    it('should load the store when filtered', function() {
         var spy = jasmine.createSpy();
 
         createStore({
@@ -164,84 +152,40 @@ describe("Ext.data.BufferedStore", function() {
         bufferedStore.filter('title', 'panel');
         satisfyRequests();
         expect(spy).toHaveBeenCalled();
-    });
+   });
 
-    describe("sorting", function() {
-        it("should clear the data when calling sort with parameters when remote sorting", function() {
-            createStore();
-            bufferedStore.load();
+    it('should load the store when sorted', function() {
+         var spy = jasmine.createSpy();
 
-            satisfyRequests();
-
-            bufferedStore.sort();
-            expect(bufferedStore.data.getCount()).toBe(0);
-            satisfyRequests();
-            expect(bufferedStore.data.getCount()).toBe(300);
+        createStore({
+            listeners: {
+                load: spy
+            }
         });
 
-        it("should call the beforesort event", function() {
-            var spy = jasmine.createSpy();
+        // Sorter mutation shuold trigger a load
+        bufferedStore.sort('title', 'ASC');
+        satisfyRequests();
+        expect(spy).toHaveBeenCalled();
+   });
 
-            createStore({
-                listeners: {
-                    beforesort: spy
-                }
-            });
-
-            // Sorter mutation shuold trigger a load
-            bufferedStore.sort('title', 'ASC');
-            satisfyRequests();
-            expect(spy).toHaveBeenCalled();
+    it("should update the sorters when sorting by an existing key", function() {
+        createStore({
+            sorters: [{
+                property: 'title'
+            }]
         });
 
-        it("should load the store when sorted", function() {
-            var spy = jasmine.createSpy();
-
-            createStore({
-                listeners: {
-                    load: spy
-                }
-            });
-
-            // Sorter mutation shuold trigger a load
-            bufferedStore.sort('title', 'ASC');
-            satisfyRequests();
-            expect(spy).toHaveBeenCalled();
-        });
-
-        it("should update the sorters when sorting by an existing key", function() {
-            createStore({
-                sorters: [{
-                    property: 'title'
-                }]
-            });
-
-            bufferedStore.sort('title', 'DESC');
-            var sorter = bufferedStore.getSorters().getAt(0);
-            expect(sorter.getProperty()).toBe('title');
-            expect(sorter.getDirection()).toBe('DESC');
-        });
-
-        it('should only make one network request', function () {
-            var spy = jasmine.createSpy();
-
-            createStore({
-                listeners: {
-                    load: spy
-                }
-            });
-
-            bufferedStore.filter('username', 'germanicus');
-            satisfyRequests();
-
-            expect(spy.callCount).toBe(1);
-        });
+        bufferedStore.sort('title', 'DESC');
+        var sorter = bufferedStore.getSorters().getAt(0);
+        expect(sorter.getProperty()).toBe('title');
+        expect(sorter.getDirection()).toBe('DESC');
     });
 
     // Test for https://sencha.jira.com/browse/EXTJSIV-10338
     // purgePageCount ensured that the viewSize could never be satisfied
     // by small pages because they would keep being pruned.
-    it("should load the requested range when the pageSize is small", function() {
+    it('should load the requested range when the pageSize is small', function() {
         var spy = jasmine.createSpy();
         createStore({
             pageSize: 5,
@@ -260,7 +204,7 @@ describe("Ext.data.BufferedStore", function() {
         function doTest(records, status, str) {
             var success = status >= 500;
 
-            it("should pass the records loaded, the operation & success=" + success + " to the callback, " + str, function () {
+            it('should pass the records loaded, the operation & success=' + success + ' to the callback, ' + str, function () {
                 var spy = jasmine.createSpy(),
                     args;
 
@@ -302,8 +246,8 @@ describe("Ext.data.BufferedStore", function() {
         doTest([], 200, 'no records');
         doTest([], 500, 'no records');
 
-        describe("should assign dataset index numbers to the records in the Store dependent upon configured pageSize", function () {
-            it("should not exceed 100 records", function () {
+        describe('should assign dataset index numbers to the records in the Store dependent upon configured pageSize', function () {
+            it('should not exceed 100 records', function () {
                 createStore();
 
                 var spy = jasmine.createSpy();
@@ -320,7 +264,7 @@ describe("Ext.data.BufferedStore", function() {
                 expect(spy.mostRecentCall.args[0].length).toBe(100);
             });
 
-            it("should not exceed 50 records", function () {
+            it('should not exceed 50 records', function () {
                 createStore({
                     pageSize: 50
                 });
@@ -341,7 +285,7 @@ describe("Ext.data.BufferedStore", function() {
         });
     });
 
-    describe("reload", function () {
+    describe('reload', function () {
 
         describe("beforeload event", function() {
             it("should not clear the total count or data if beforeload returns false", function() {
@@ -358,7 +302,7 @@ describe("Ext.data.BufferedStore", function() {
             });
         });
 
-        it("should not increase the number of pages when reloading", function () {
+        it('should not increase the number of pages when reloading', function () {
             var refreshed = 0,
                 count;
 
@@ -470,8 +414,8 @@ describe("Ext.data.BufferedStore", function() {
         });
     });
 
-    describe("pruning", function() {
-        it("should prune least recently used pages as new ones are added above the purgePageCount", function() {
+    describe('pruning', function() {
+        it('should prune least recently used pages as new ones are added above the purgePageCount', function() {
             var keys;
 
             // Keep it simple
@@ -526,6 +470,23 @@ describe("Ext.data.BufferedStore", function() {
 
             // The indexMap must contain only the keys to the records that are now there.
             expect(Ext.Object.getKeys(bufferedStore.getData().indexMap)).toEqual(keys);
+        });
+    });
+
+    describe('remoteSort', function () {
+        it('should only make one network request', function () {
+            var spy = jasmine.createSpy();
+
+            createStore({
+                listeners: {
+                    load: spy
+                }
+            });
+
+            bufferedStore.filter('username', 'germanicus');
+            satisfyRequests();
+
+            expect(spy.callCount).toBe(1);
         });
     });
 });

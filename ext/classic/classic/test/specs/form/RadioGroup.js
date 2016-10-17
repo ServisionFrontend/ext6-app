@@ -109,6 +109,10 @@ describe("Ext.form.RadioGroup", function() {
     });
     
     describe("ARIA", function() {
+        function expectAria(attr, value) {
+            jasmine.expectAriaAttr(group, attr, value);
+        }
+        
         beforeEach(function() {
             makeGroup([{
                 name: 'foo'
@@ -127,16 +131,24 @@ describe("Ext.form.RadioGroup", function() {
         
         describe("attributes", function() {
             it("should have radiogroup role", function() {
-                expect(group).toHaveAttr('role', 'radiogroup');
+                expectAria('role', 'radiogroup');
             });
             
             it("should have aria-invalid", function() {
-                expect(group).toHaveAttr('aria-invalid', 'false');
+                expectAria('aria-invalid', 'false');
+            });
+            
+            it("should have aria-owns", function() {
+                var foo = group.down('[name=foo]').inputEl,
+                    bar = group.down('[name=bar]').inputEl,
+                    baz = group.down('[name=baz]').inputEl;
+                
+                expectAria('aria-owns', [foo.id, bar.id, baz.id].join(' '));
             });
             
             describe("aria-required", function() {
                 it("should be false when allowBlank", function() {
-                    expect(group).toHaveAttr('aria-required', 'false');
+                    expectAria('aria-required', 'false');
                 });
                 
                 it("should be true when !allowBlank", function() {
@@ -165,13 +177,13 @@ describe("Ext.form.RadioGroup", function() {
                 });
                 
                 it("should set aria-invalid to tru in markInvalid", function() {
-                    expect(group).toHaveAttr('aria-invalid', 'true');
+                    expectAria('aria-invalid', 'true');
                 });
                 
                 it("should set aria-invalid to false in clearInvalid", function() {
                     group.clearInvalid();
                     
-                    expect(group).toHaveAttr('aria-invalid', 'false');
+                    expectAria('aria-invalid', 'false');
                 });
             });
         });

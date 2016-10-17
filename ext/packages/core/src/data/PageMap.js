@@ -209,7 +209,7 @@ Ext.define('Ext.data.PageMap', {
 
     getByInternalId: function(internalId) {
         var index = this.indexMap[internalId];
-        if (index != null) {
+        if (index !== -1) {
             return this.getAt(index);
         }
     },

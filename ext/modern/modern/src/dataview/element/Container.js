@@ -187,7 +187,10 @@ Ext.define('Ext.dataview.element.Container', {
             index    = store.indexOf(record),
             data     = dataview.prepareData(record.getData(true), index, record);
 
-        item.innerHTML = this.renderItemTpl(index, data, store);
+        data.xcount = store.getCount();
+        data.xindex = typeof data.xindex === 'number' ? data.xindex : index;
+
+        item.innerHTML = dataview.getItemTpl().apply(data);
     },
 
     addListItem: function(index, record) {
@@ -200,7 +203,10 @@ Ext.define('Ext.dataview.element.Container', {
             ln         = childNodes.length,
             wrapElement;
 
-        wrapElement = Ext.Element.create(this.getItemElementConfig(index, data, store));
+        data.xcount = typeof data.xcount === 'number' ? data.xcount : store.getCount();
+        data.xindex = typeof data.xindex === 'number' ? data.xindex : index;
+
+        wrapElement = Ext.Element.create(this.getItemElementConfig(index, data));
 
         if (!ln || index == ln) {
             wrapElement.appendTo(element);
@@ -209,7 +215,7 @@ Ext.define('Ext.dataview.element.Container', {
         }
     },
 
-    getItemElementConfig: function (index, data, store) {
+    getItemElementConfig: function(index, data) {
         var dataview = this.dataview,
             itemCls = dataview.getItemCls(),
             cls = dataview.getBaseCls() + '-item';
@@ -217,25 +223,10 @@ Ext.define('Ext.dataview.element.Container', {
         if (itemCls) {
             cls += ' ' + itemCls;
         }
-
         return {
             cls: cls,
-            html: this.renderItemTpl(index, data, store)
+            html: dataview.getItemTpl().apply(data)
         };
-    },
-
-    renderItemTpl: function (index, data, store) {
-        var dataview = this.dataview,
-            itemTpl = dataview.getItemTpl(),
-            parent;
-
-        store = store || dataview.getStore();
-        parent = store.getData().items;
-
-        data.xcount = typeof data.xcount === 'number' ? data.xcount : store.getCount();
-        data.xindex = typeof data.xindex === 'number' ? data.xindex : index;
-
-        return itemTpl.apply(data, parent, index+1, parent.length);
     },
 
     doRemoveItemCls: function(cls) {

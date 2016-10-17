@@ -139,8 +139,7 @@ Ext.define('Ext.form.FieldAncestor', {
     },
 
     /**
-     * @private
-     * Initialize the {@link #fieldDefaults} object
+     * @private Initialize the {@link #fieldDefaults} object
      */
     initFieldDefaults: function() {
         if (!this.fieldDefaults) {
@@ -149,8 +148,7 @@ Ext.define('Ext.form.FieldAncestor', {
     },
 
     /**
-     * @private
-     * Handle bubbled validitychange events from descendants; invoke the aggregated event and method
+     * @private Handle bubbled validitychange events from descendants; invoke the aggregated event and method
      */
     handleFieldValidityChange: function(field, isValid) {
         var me = this;
@@ -161,8 +159,7 @@ Ext.define('Ext.form.FieldAncestor', {
     },
 
     /**
-     * @private
-     * Handle bubbled errorchange events from descendants; invoke the aggregated event and method
+     * @private Handle bubbled errorchange events from descendants; invoke the aggregated event and method
      */
     handleFieldErrorChange: function(labelable, activeError) {
         var me = this;
@@ -173,7 +170,6 @@ Ext.define('Ext.form.FieldAncestor', {
     },
 
     /**
-     * @method
      * Fired when the validity of any field within the container changes.
      * @param {Ext.form.field.Field} field The sub-field whose validity changed
      * @param {Boolean} valid The new validity state
@@ -182,7 +178,6 @@ Ext.define('Ext.form.FieldAncestor', {
     onFieldValidityChange: Ext.emptyFn,
 
     /**
-     * @method
      * Fired when the error message of any field within the container changes.
      * @param {Ext.form.Labelable} field The sub-field whose active error changed
      * @param {String} error The new active error message

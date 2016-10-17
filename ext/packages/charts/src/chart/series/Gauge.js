@@ -198,7 +198,6 @@ Ext.define('Ext.chart.series.Gauge', {
         var me = this,
             store = me.getStore(),
             count = store && store.getCount() || 0;
-
         return count + (me.getNeedle() ? 0 : 1);
 
     },
@@ -315,7 +314,7 @@ Ext.define('Ext.chart.series.Gauge', {
             angle = me.valueToAngle(value),
             sprites = me.getSprites();
 
-        sprites[0].getRendererData().value = value;
+        sprites[0].rendererData.value = value;
         sprites[0].setAttributes({
             startAngle: (needle ? angle : 0),
             endAngle: angle
@@ -449,7 +448,7 @@ Ext.define('Ext.chart.series.Gauge', {
                                 // In fact, all the style properties from the needle and sectors should go to the series subStyle.
 
         if (sprites && sprites.length) {
-            sprites[0].setAnimation(animation);
+            sprites[0].fx.setConfig(animation);
             return sprites;
         }
 
@@ -466,8 +465,8 @@ Ext.define('Ext.chart.series.Gauge', {
         sprite.setAttributes({
             zIndex: 10
         }, true);
-        sprite.setRendererData(rendererData);
-        sprite.setRendererIndex(spriteIndex++);
+        sprite.rendererData = rendererData;
+        sprite.rendererIndex = spriteIndex++;
         lineWidths.push(me.getNeedleWidth());
 
         // Create background sprite(s)
@@ -485,8 +484,8 @@ Ext.define('Ext.chart.series.Gauge', {
             };
             Ext.apply(attr, sectors[i].style);
             sprite = me.createSprite();
-            sprite.setRendererData(rendererData);
-            sprite.setRendererIndex(spriteIndex++);
+            sprite.rendererData = rendererData;
+            sprite.rendererIndex = spriteIndex++;
             sprite.setAttributes(attr, true);
             lineWidths.push(attr.lineWidth);
         }

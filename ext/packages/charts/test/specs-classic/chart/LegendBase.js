@@ -1,5 +1,5 @@
-describe('Ext.chart.legend.LegendBase', function() {
+describe('Ext.chart.LegendBase', function() {
     it('is defined', function() {
-        expect(Ext.chart.legend.LegendBase).toBeDefined();
+        expect(Ext.chart.LegendBase).toBeDefined();
     });
 });

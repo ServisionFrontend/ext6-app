@@ -79,13 +79,11 @@ Ext.define('Ext.fx.layout.card.Style', {
     },
 
     onActiveItemChange: function(cardLayout, newItem, oldItem, controller) {
-        var inElement, outElement,
-            inAnimation, outAnimation;
+        var inAnimation = this.getInAnimation(),
+            outAnimation = this.getOutAnimation(),
+            inElement, outElement;
 
         if (newItem && oldItem && oldItem.isPainted()) {
-            inAnimation = this.getInAnimation();
-            outAnimation = this.getOutAnimation();
-            
             inElement = newItem.renderElement;
             outElement = oldItem.renderElement;
 

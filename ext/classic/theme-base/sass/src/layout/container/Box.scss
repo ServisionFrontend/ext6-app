@@ -1,5 +1,6 @@
 .#{$prefix}box-layout-ct {
     overflow: hidden;
+    position: relative;
 }
 
 .#{$prefix}box-target {
@@ -17,9 +18,7 @@
     top: 0;
     left: 0;
     // If we don't give the element a height, it does not always participate in the scrollWidth.
-    // Firefox crushes display:table descendants if we explicitly squeeze down to 1px high,
-    // so use min-height instead of height.
-    min-height: 1px;
+    height: 1px;
 }
 
 @if $include-rtl {

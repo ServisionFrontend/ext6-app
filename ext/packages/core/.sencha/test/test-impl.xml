@@ -23,8 +23,7 @@ this file in most cases.
 
         <property name="environment.dir" value="${package.dir}"/>
         <property name="cmd-test.specs.dir" value="${environment.dir}/test/specs"/>
-        <property name="cmd-test.specs.test-json" value="${cmd-test.specs.dir}/../test.json"/>
-        <available file="${cmd-test.specs.test-json}" property="cmd-test.available"/>
+        <property name="cmd-test.specs.test-json" value="${cmd-test.specs.dir}/test.json"/>
     </target>
     <target name="-after-test-init"/>
     <target name="test-init"
@@ -68,11 +67,10 @@ this file in most cases.
 
 
     <target name="-before-test-bootstrap"/>
-    <target name="-test-bootstrap" if="${cmd-test.available}">
+    <target name="-test-bootstrap">
         <local name="local.runner.dir"/>
         <local name="console.runner.dir"/>
         <local name="specfiles.list"/>
-        <local name="specfiles.start-test"/>
         <local name="base.path"/>
 
         <property name="local.runner.dir" value="${environment.dir}/test/local"/>
@@ -97,9 +95,9 @@ this file in most cases.
 <![CDATA[
 Ext.Boot.loadSync([
     "../bootstrap-files.js",
-    "../bootstrap-data.js"
+    "../bootstrap-data.js",
+    "../bootstrap-launch.js"
 ]);
-Ext.Boot.load("../bootstrap-launch.js");
 ]]>
          </x-bootstrap>
 
@@ -111,8 +109,6 @@ Ext.Boot.load("../bootstrap-launch.js");
             <attribute name="base"/>
             <attribute name="property"/>
             <attribute name="configprop"/>
-            <attribute name="startscriptprop"/>
-            <attribute name="startscriptpath"/>
             <script src="${cmd.dir}/ant/ant-util.js"/>
             <![CDATA[
                     importPackage(com.sencha.util);
@@ -122,7 +118,7 @@ Ext.Boot.load("../bootstrap-launch.js");
                     propName = attributes.get("property") + '',
                     basePath = attributes.get("base") + '',
                     configPropName = attributes.get("configprop"),
-                    config = readConfig(joinPath(specDir, '../test.json')),
+                    config = readConfig(joinPath(specDir, 'test.json')),
                     getScriptFiles = function(path, basePath) {
                         var converted = [],
                             files = FileUtil.getAllFilesByExtension(path, ".js"),
@@ -137,28 +133,11 @@ Ext.Boot.load("../bootstrap-launch.js");
                         }
                         return converted;
                     },
-                    shuffle = function(input, factor) {
-                        if (!factor)
-                            return input;
-                            
-                        var i, f,
-                            reverse = factor < 0,
-                            output = [];
-                        factor = Math.abs(factor);
-                        for (f = 0; f < factor; f++) {
-                            for (i = f; i < input.length; i = i + factor) {
-                                output.push(input[i]);
-                            }
-                        }
-                        return reverse ? output.reverse() : output;
-                    },
-                    files = config[configPropName].src || [],
-                    shuffleFactor = config[configPropName].shuffle || 0, 
+                    files = config[configPropName] || [],
                     len = files.length, file, f,
                     relPath,
-                    converted = [],
-                    shuffled = [];
-                    
+                    converted = [];
+
                     for(f = 0; f < len; f++) {
                         file = files[f];
                         if(!PathUtil.isAbsolute(file)) {
@@ -167,52 +146,22 @@ Ext.Boot.load("../bootstrap-launch.js");
                         file = PathUtil.getCanonicalPath(file);
                         converted = converted.concat(getScriptFiles(file, basePath));
                     }
-
-                    // FileUtil.getAllFilesByExtension returns files in a different order
-                    // depending on OS.  This sort ensures the files are always ordered the same.
-                    converted.sort(function(a, b) {
-                        return (a < b) ? -1 : (a > b) ? 1 : 0
-                    });
-                    shuffled = shuffle(converted, shuffleFactor);
-                    project.setNewProperty(propName, StringUtil.join(shuffled, ',\n'));
-                    
-                    var frameworkDir = project.getProperty('framework.dir'),
-                        startScriptProp = attributes.get('startscriptprop'),
-                        startScriptPath = attributes.get('startscriptpath');
-                    
-                    relPath = PathUtil.getRelativePath(basePath, frameworkDir + '/' + startScriptPath);
-                    relPath = PathUtil.convertPathCharsToUnix(relPath);
-                    
-                    project.setNewProperty(startScriptProp, relPath);
+                    project.setNewProperty(propName, StringUtil.join(converted, ',\n'));
                 ]]>
         </x-script-def>
-        
-        <!-- startscriptpath is relative to framework root -->
-        <x-load-specs base="${local.runner.dir}" property="specfiles.list" configprop="specs"
-                      startscriptprop="specfiles.start-test"
-                      startscriptpath="test/shared/start-tests.js"/>
-        
-        <echo file="${local.runner.dir}/${bootstrap.specs.file}">
-<![CDATA[
-(function() {
-    var url = [
+        <x-load-specs base="${local.runner.dir}" property="specfiles.list" configprop="specs"/>
+<echo file="${local.runner.dir}/${bootstrap.specs.file}"><![CDATA[
+Ext.Boot.load({
+    charset: "UTF-8",
+    url: [
 ${specfiles.list}
-        ];
-
-    if (window.Cmd) {
-        url = Cmd.status.getCurrentChunk(url);
+    ],
+    success: function() {
+        Ext.Boot.load('../start-tests.js');
     }
-    
-    Ext.Boot.load({
-        charset: "UTF-8",
-        url: url,
-        success: function() {
-            Ext.Boot.load("${specfiles.start-test}");
-        }
-    });
-})();
+});
 ]]>
-        </echo>
+</echo>
     </target>
     <target name="-after-test-bootstrap"/>
     <target name="test-bootstrap"

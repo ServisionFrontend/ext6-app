@@ -1,14 +1,5 @@
-/**
- * An abstract class for fields that have a single trigger which opens a "picker" popup 
- * above the field. It provides a base implementation for toggling the picker's 
- * visibility when the trigger is tapped.
- *
- * You would not normally use this class directly, but instead use it as the parent 
- * class for a specific picker field implementation.
- */
 Ext.define('Ext.field.Picker', {
     extend: 'Ext.field.Text',
-    xtype: 'pickerfield',
 
     config: {
 
@@ -39,14 +30,12 @@ Ext.define('Ext.field.Picker', {
         /**
          * @cfg {Object} defaultPhonePickerConfig
          * The default configuration for the picker component when you are on a phone.
-         * @private
          */
         defaultPhonePickerConfig: null,
 
         /**
          * @cfg {Object} defaultTabletPickerConfig
          * The default configuration for the picker component when you are on a tablet.
-         * @private
          */
         defaultTabletPickerConfig: null,
 
@@ -57,8 +46,6 @@ Ext.define('Ext.field.Picker', {
          */
         pickerSlotAlign: 'center'
     },
-
-    classCls: Ext.baseCSSPrefix + 'pickerfield',
 
     /**
      * @private

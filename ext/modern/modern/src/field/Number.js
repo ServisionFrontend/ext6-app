@@ -87,7 +87,13 @@ Ext.define('Ext.field.Number', {
          */
         component: {
             type: 'number'
-        }
+        },
+
+        /**
+         * @cfg
+         * @inheritdoc
+         */
+        ui: 'number'
     },
 
     proxyConfig: {
@@ -110,8 +116,6 @@ Ext.define('Ext.field.Number', {
          */
         stepValue: null
     },
-
-    classCls: Ext.baseCSSPrefix + 'numberfield',
 
     applyPlaceHolder: function(value) {
         // Android 4.1 & lower require a hack for placeholder text in number fields when using the Stock Browser

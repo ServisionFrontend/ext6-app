@@ -55,14 +55,7 @@ Ext.define('Ext.view.View', {
     inputTagRe: /^textarea$|^input$/i,
     keyEventRe: /^key/,
 
-    manageLayoutScroll: false,
-
     inheritableStatics: {
-        /**
-         * @private
-         * @static
-         * @inheritable
-         */
         EventMap: {
             longpress: 'LongPress',
             mousedown: 'MouseDown',
@@ -79,11 +72,6 @@ Ext.define('Ext.view.View', {
             keypress: 'KeyPress',
             focus: 'Focus'
         },
-        /**
-         * @private
-         * @static
-         * @inheritable
-         */
         TouchEventMap: {
             touchstart: 'mousedown',
             touchend: 'mouseup',
@@ -94,9 +82,7 @@ Ext.define('Ext.view.View', {
 
     /**
      * @event beforeitemmousedown
-     * @preventable
-     * Fires before the mousedown event on an item is processed. Return false to cancel 
-     * the default action.
+     * Fires before the mousedown event on an item is processed. Returns false to cancel the default action.
      * @param {Ext.view.View} this
      * @param {Ext.data.Model} record The record that belongs to the item
      * @param {HTMLElement} item The item's element
@@ -106,148 +92,192 @@ Ext.define('Ext.view.View', {
 
     /**
      * @event beforeitemmouseup
-     * @preventable
-     * Fires before the mouseup event on an item is processed. Return false to cancel 
-     * the default action.
-     * @inheritdoc #beforeitemmousedown
+     * Fires before the mouseup event on an item is processed. Returns false to cancel the default action.
+     * @param {Ext.view.View} this
+     * @param {Ext.data.Model} record The record that belongs to the item
+     * @param {HTMLElement} item The item's element
+     * @param {Number} index The item's index
+     * @param {Ext.event.Event} e The raw event object
      */
 
     /**
      * @event beforeitemmouseenter
-     * @preventable
-     * Fires before the mouseenter event on an item is processed. Return false to cancel 
-     * the default action.
-     * @inheritdoc #beforeitemmousedown
+     * Fires before the mouseenter event on an item is processed. Returns false to cancel the default action.
+     * @param {Ext.view.View} this
+     * @param {Ext.data.Model} record The record that belongs to the item
+     * @param {HTMLElement} item The item's element
+     * @param {Number} index The item's index
+     * @param {Ext.event.Event} e The raw event object
      */
 
     /**
      * @event beforeitemmouseleave
-     * @preventable
-     * Fires before the mouseleave event on an item is processed. Return false to cancel 
-     * the default action.
-     * @inheritdoc #beforeitemmousedown
+     * Fires before the mouseleave event on an item is processed. Returns false to cancel the default action.
+     * @param {Ext.view.View} this
+     * @param {Ext.data.Model} record The record that belongs to the item
+     * @param {HTMLElement} item The item's element
+     * @param {Number} index The item's index
+     * @param {Ext.event.Event} e The raw event object
      */
 
     /**
      * @event beforeitemclick
-     * @preventable
-     * Fires before the click event on an item is processed. Return false to cancel the 
-     * default action.
-     * @inheritdoc #beforeitemmousedown
+     * Fires before the click event on an item is processed. Returns false to cancel the default action.
+     * @param {Ext.view.View} this
+     * @param {Ext.data.Model} record The record that belongs to the item
+     * @param {HTMLElement} item The item's element
+     * @param {Number} index The item's index
+     * @param {Ext.event.Event} e The raw event object
      */
 
     /**
      * @event beforeitemdblclick
-     * @preventable
-     * Fires before the dblclick event on an item is processed. Return false to cancel 
-     * the default action.
-     * @inheritdoc #beforeitemmousedown
+     * Fires before the dblclick event on an item is processed. Returns false to cancel the default action.
+     * @param {Ext.view.View} this
+     * @param {Ext.data.Model} record The record that belongs to the item
+     * @param {HTMLElement} item The item's element
+     * @param {Number} index The item's index
+     * @param {Ext.event.Event} e The raw event object
      */
 
     /**
      * @event beforeitemcontextmenu
-     * @preventable
-     * Fires before the contextmenu event on an item is processed. Return false to 
-     * cancel the default action.
-     * @inheritdoc #beforeitemmousedown
-     */
-    
-    /**
-     * @event beforeitemlongpress
-     * @preventable
-     * Fires before the longpress event on an item is processed. Return false to 
-     * cancel the default action.
-     * @inheritdoc #beforeitemmousedown
+     * Fires before the contextmenu event on an item is processed. Returns false to cancel the default action.
+     * @param {Ext.view.View} this
+     * @param {Ext.data.Model} record The record that belongs to the item
+     * @param {HTMLElement} item The item's element
+     * @param {Number} index The item's index
+     * @param {Ext.event.Event} e The raw event object
      */
 
     /**
      * @event beforeitemkeydown
-     * @preventable
-     * Fires before the keydown event on an item is processed. Return false to cancel 
-     * the default action.
-     * @inheritdoc #beforeitemmousedown
+     * Fires before the keydown event on an item is processed. Returns false to cancel the default action.
+     * @param {Ext.view.View} this
+     * @param {Ext.data.Model} record The record that belongs to the item
+     * @param {HTMLElement} item The item's element
+     * @param {Number} index The item's index
+     * @param {Ext.event.Event} e The raw event object. Use {@link Ext.event.Event#getKey getKey()} to retrieve the key that was pressed.
      */
 
     /**
      * @event beforeitemkeyup
-     * @preventable
-     * Fires before the keyup event on an item is processed. Return false to cancel the 
-     * default action.
-     * @inheritdoc #beforeitemmousedown
+     * Fires before the keyup event on an item is processed. Returns false to cancel the default action.
+     * @param {Ext.view.View} this
+     * @param {Ext.data.Model} record The record that belongs to the item
+     * @param {HTMLElement} item The item's element
+     * @param {Number} index The item's index
+     * @param {Ext.event.Event} e The raw event object. Use {@link Ext.event.Event#getKey getKey()} to retrieve the key that was pressed.
      */
 
     /**
      * @event beforeitemkeypress
-     * @preventable
-     * Fires before the keypress event on an item is processed. Return false to cancel 
-     * the default action.
-     * @inheritdoc #beforeitemmousedown
+     * Fires before the keypress event on an item is processed. Returns false to cancel the default action.
+     * @param {Ext.view.View} this
+     * @param {Ext.data.Model} record The record that belongs to the item
+     * @param {HTMLElement} item The item's element
+     * @param {Number} index The item's index
+     * @param {Ext.event.Event} e The raw event object. Use {@link Ext.event.Event#getKey getKey()} to retrieve the key that was pressed.
      */
 
     /**
      * @event itemmousedown
      * Fires when there is a mouse down on an item
-     * @inheritdoc #beforeitemmousedown
+     * @param {Ext.view.View} this
+     * @param {Ext.data.Model} record The record that belongs to the item
+     * @param {HTMLElement} item The item's element
+     * @param {Number} index The item's index
+     * @param {Ext.event.Event} e The raw event object
      */
 
     /**
      * @event itemmouseup
      * Fires when there is a mouse up on an item
-     * @inheritdoc #beforeitemmousedown
+     * @param {Ext.view.View} this
+     * @param {Ext.data.Model} record The record that belongs to the item
+     * @param {HTMLElement} item The item's element
+     * @param {Number} index The item's index
+     * @param {Ext.event.Event} e The raw event object
      */
 
     /**
      * @event itemmouseenter
      * Fires when the mouse enters an item.
-     * @inheritdoc #beforeitemmousedown
+     * @param {Ext.view.View} this
+     * @param {Ext.data.Model} record The record that belongs to the item
+     * @param {HTMLElement} item The item's element
+     * @param {Number} index The item's index
+     * @param {Ext.event.Event} e The raw event object
      */
 
     /**
      * @event itemmouseleave
      * Fires when the mouse leaves an item.
-     * @inheritdoc #beforeitemmousedown
+     * @param {Ext.view.View} this
+     * @param {Ext.data.Model} record The record that belongs to the item
+     * @param {HTMLElement} item The item's element
+     * @param {Number} index The item's index
+     * @param {Ext.event.Event} e The raw event object
      */
 
     /**
      * @event itemclick
      * Fires when an item is clicked.
-     * @inheritdoc #beforeitemmousedown
+     * @param {Ext.view.View} this
+     * @param {Ext.data.Model} record The record that belongs to the item
+     * @param {HTMLElement} item The item's element
+     * @param {Number} index The item's index
+     * @param {Ext.event.Event} e The raw event object
      */
 
     /**
      * @event itemdblclick
      * Fires when an item is double clicked.
-     * @inheritdoc #beforeitemmousedown
+     * @param {Ext.view.View} this
+     * @param {Ext.data.Model} record The record that belongs to the item
+     * @param {HTMLElement} item The item's element
+     * @param {Number} index The item's index
+     * @param {Ext.event.Event} e The raw event object
      */
 
     /**
      * @event itemcontextmenu
      * Fires when an item is right clicked.
-     * @inheritdoc #beforeitemmousedown
-     */
-    
-    /**
-     * @event itemlongpress
-     * Fires on a longpress event on an item.
-     * @inheritdoc #beforeitemmousedown
+     * @param {Ext.view.View} this
+     * @param {Ext.data.Model} record The record that belongs to the item
+     * @param {HTMLElement} item The item's element
+     * @param {Number} index The item's index
+     * @param {Ext.event.Event} e The raw event object
      */
 
     /**
      * @event itemkeydown
      * Fires when a key is pressed down while an item is currently selected.
-     * @inheritdoc #beforeitemmousedown
+     * @param {Ext.view.View} this
+     * @param {Ext.data.Model} record The record that belongs to the item
+     * @param {HTMLElement} item The item's element
+     * @param {Number} index The item's index
+     * @param {Ext.event.Event} e The raw event object. Use {@link Ext.event.Event#getKey getKey()} to retrieve the key that was pressed.
      */
 
     /**
      * @event itemkeyup
      * Fires when a key is released while an item is currently selected.
-     * @inheritdoc #beforeitemmousedown
+     * @param {Ext.view.View} this
+     * @param {Ext.data.Model} record The record that belongs to the item
+     * @param {HTMLElement} item The item's element
+     * @param {Number} index The item's index
+     * @param {Ext.event.Event} e The raw event object. Use {@link Ext.event.Event#getKey getKey()} to retrieve the key that was pressed.
      */
 
     /**
      * @event itemkeypress
      * Fires when a key is pressed while an item is currently selected.
-     * @inheritdoc #beforeitemmousedown
+     * @param {Ext.view.View} this
+     * @param {Ext.data.Model} record The record that belongs to the item
+     * @param {HTMLElement} item The item's element
+     * @param {Number} index The item's index
+     * @param {Ext.event.Event} e The raw event object. Use {@link Ext.event.Event#getKey getKey()} to retrieve the key that was pressed.
      */
 
     /**
@@ -512,13 +542,7 @@ Ext.define('Ext.view.View', {
     handleEvent: function(e) {
         var me = this,
             isKeyEvent = me.keyEventRe.test(e.type);
-        
-        // We need to know if the event target is an input field to block
-        // drag n' drop plugin(s) from stopping pointer events as this makes
-        // input fields unfocusable and unselectable. We also need to know
-        // this for key events to prevent scrolling, see below.
-        e.isInputFieldEvent = Ext.fly(e.target).isInputField();
-        
+
         e.view = me;
 
         // Find the item from the event target.
@@ -535,7 +559,7 @@ Ext.define('Ext.view.View', {
         // that can cause View element scroll unless the event is from an input field.
         // We MUST prevent browser's default action on SPACE which is to focus the event's target element.
         // Focusing causes the browser to attempt to scroll the element into view.
-        if (isKeyEvent && !e.isInputFieldEvent) {
+        if (isKeyEvent && !Ext.fly(e.target).isInputField()) {
             if (e.getKey() === e.SPACE || e.isNavKeyPress(true)) {
                 e.preventDefault();
             }
@@ -774,7 +798,7 @@ Ext.define('Ext.view.View', {
      */
     focusNode: function(rec){
         var me          = this,
-            node        = Ext.fly(me.getNode(rec)),
+            node        = me.getNode(rec),
             el          = me.el,
             adjustmentY = 0,
             adjustmentX = 0,
@@ -785,38 +809,63 @@ Ext.define('Ext.view.View', {
         // DOM client dimensions
         elRegion.bottom = elRegion.top + el.dom.clientHeight;
         elRegion.right = elRegion.left + el.dom.clientWidth;
-        
         if (node) {
-            nodeRegion = node.getRegion();
-            
+            nodeRegion = Ext.fly(node).getRegion();
             // node is above
             if (nodeRegion.top < elRegion.top) {
                 adjustmentY = nodeRegion.top - elRegion.top;
-            }
             // node is below
-            else if (nodeRegion.bottom > elRegion.bottom) {
+            } else if (nodeRegion.bottom > elRegion.bottom) {
                 adjustmentY = nodeRegion.bottom - elRegion.bottom;
             }
 
             // node is left
             if (nodeRegion.left < elRegion.left) {
                 adjustmentX = nodeRegion.left - elRegion.left;
-            }
             // node is right
-            else if (nodeRegion.right > elRegion.right) {
+            } else if (nodeRegion.right > elRegion.right) {
                 adjustmentX = nodeRegion.right - elRegion.right;
             }
 
             if (adjustmentX || adjustmentY) {
                 me.scrollBy(adjustmentX, adjustmentY, false);
             }
-            
+
             // Poke on a tabIndex to make the node focusable.
-            node.set({
+            Ext.fly(node).set({
                 tabIndex: -1
             });
 
             node.focus();
+        }
+    },
+
+    bindStore: function (store, initial, propertyName) {
+        // There could be different data sources (store or dataSource), so figure that out here.
+        var me = this,
+            dataSource = me[propertyName],
+            selModel = me.getSelectionModel();
+
+        // Note that configured features with stores will already have been processed by this point,
+        // so let's not do it again when coming online!
+        if (dataSource && dataSource.isFeatureStore && me.rendered) {
+            selModel.bindStore(dataSource.store);
+            selModel.bindComponent(me);
+            // Feature stores will call their own implementation of .bindStore().
+            //
+            // The passed 'store' function arg will be one of two types depending on the caller.
+            //    1. regular data store
+            //    2. grid feature store (data store is bound to it in featureStore.store).
+            if (store.isFeatureStore) {
+                // The store listeners need to be bound to the feature store.
+                me.bindStoreListeners(store);
+                // Pass in the regular data store.
+                dataSource.bindStore(dataSource.store);
+            } else {
+                dataSource.bindStore(store);
+            }
+        } else {
+            me.callParent([store, initial, propertyName]);
         }
     },
 
@@ -834,4 +883,3 @@ Ext.define('Ext.view.View', {
         //</feature>
     }
 });
-

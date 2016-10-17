@@ -5,24 +5,6 @@
 // Private variables
 $form-clear-size: 2.2em;
 
-@mixin checkmark($color: $ios7-blue) {
-  @extend .x-checkmark-base;
-  color: $color;
-}
-
-.x-checkmark-base {
-  position: absolute;
-  top: 0;
-  right: 12px;
-  bottom: 0;
-  content: '3';
-  // TODO: Use FontAwesome
-  font-family: 'Pictos';
-  font-size: 1.3em;
-  text-align: right;
-  line-height: 2.1em;
-}
-
 .x-field {
 	min-height: $form-field-height;
 	background: #fff;
@@ -32,7 +14,7 @@ $form-clear-size: 2.2em;
 	}
 }
 
-.x-input {
+.x-field-input {
 	.x-clear-icon {
 		background: get-image-url('clear_icon') no-repeat;
 		background-position: center center;
@@ -50,7 +32,7 @@ $form-clear-size: 2.2em;
 }
 
 .x-field-clearable {
-	.x-input {
+	.x-field-input {
 		padding-right: $form-clear-size;
 	}
 }
@@ -68,7 +50,7 @@ $form-clear-size: 2.2em;
 }
 
 .x-item-disabled {
-	.x-field-label,
+	.x-form-label,
 	input,
 	.x-input-el,
 	.x-spinner-body,
@@ -80,11 +62,11 @@ $form-clear-size: 2.2em;
 	}
 }
 
-.x-item-disabled .x-field-label {
+.x-item-disabled .x-form-label {
 	color: #aaa;
 }
 
-.x-item-disabled .x-field-label:after {
+.x-item-disabled .x-form-label:after {
 	color: #666 !important;
 }
 
@@ -92,7 +74,7 @@ $form-clear-size: 2.2em;
 	.x-field {
 		background: transparent;
 
-		.x-field-body {
+		.x-component-outer {
 			padding: .4em .6em 0;
 		}
 
@@ -103,12 +85,12 @@ $form-clear-size: 2.2em;
 		}
 	}
 
-	.x-input {
+	.x-field-input {
 		position: relative;
 		background: #fff;
 	}
 
-	.x-field-clearable .x-input {
+	.x-field-clearable .x-field-input {
 		padding-right: 0;
 	}
 

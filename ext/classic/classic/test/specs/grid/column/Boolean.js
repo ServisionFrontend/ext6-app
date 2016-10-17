@@ -88,16 +88,11 @@ describe("Ext.grid.column.Boolean", function() {
                 trueText: '<div class="foo">isTrue</div>',
                 falseText: '<div class="bar">isFalse</div>'
             });
-            
             store.first().set('field', true);
-            
-            var text = getCellText(0, 0).replace(/\"/g, '').toLowerCase();
-            expect(text).toBe('<div class=foo>istrue</div>');
-            
+            expect(getCellText(0, 0)).toBe('<div class="foo">isTrue</div>');
             store.first().set('field', false);
-            
-            text = getCellText(0, 0).replace(/\"/g, '').toLowerCase();
-            expect(text).toBe('<div class=bar>isfalse</div>');
+            expect(getCellText(0, 0)).toBe('<div class="bar">isFalse</div>');
         });
     })
+    
 });

@@ -29,7 +29,7 @@ Ext.define('Ext.app.BaseController', {
          * 
          * @accessor
          */
-        id: undefined,
+        id: null,
        
         /**
          * @cfg {Object} control
@@ -77,7 +77,7 @@ Ext.define('Ext.app.BaseController', {
          * {@link Ext.app.domain.Controller Controller} domain can be used to listen to events 
          * fired by other Controllers, {@link Ext.app.domain.Store Store} domain gives access to 
          * Store events, and {@link Ext.app.domain.Direct Direct} domain can be used with 
-         * Ext Direct Providers to listen to their events.
+         * Ext.Direct Providers to listen to their events.
          *
          * To listen to "bar" events fired by a controller with id="foo":
          *
@@ -312,10 +312,8 @@ Ext.define('Ext.app.BaseController', {
 
         //need to have eventbus property set before we initialize the config
         me.mixins.observable.constructor.call(me, config);
-    },
-
-    updateId: function(id) {
-        this.id = id;
+        // Assuming we haven't set this in updateControl or updateListen, force it here
+        me.ensureId();
     },
 
     applyListen: function(listen) {
@@ -339,7 +337,7 @@ Ext.define('Ext.app.BaseController', {
      * @private
      */
     updateControl: function(control) {
-        this.getId();
+        this.ensureId();
         if (control) {
             this.control(control);
         }
@@ -350,7 +348,7 @@ Ext.define('Ext.app.BaseController', {
      * @private
      */
     updateListen: function(listen) {
-        this.getId();
+        this.ensureId();
         if (listen) {
             this.listen(listen);
         }
@@ -455,7 +453,7 @@ Ext.define('Ext.app.BaseController', {
      * {@link Ext.GlobalEvents} Observable instance, {@link Ext.app.domain.Controller Controller}
      * domain can be used to listen to events fired by other Controllers,
      * {@link Ext.app.domain.Store Store} domain gives access to Store events, and
-     * {@link Ext.app.domain.Direct Direct} domain can be used with Ext Direct Providers
+     * {@link Ext.app.domain.Direct Direct} domain can be used with Ext.Direct Providers
      * to listen to their events.
      * 
      * To listen to "bar" events fired by a controller with id="foo":
@@ -604,17 +602,18 @@ Ext.define('Ext.app.BaseController', {
         if (token.isModel) {
             token = token.toUrl();
         }
+        if (!force) {
+            var currentToken = Ext.util.History.getToken();
 
-        var isCurrent = Ext.util.History.getToken() === token,
-            ret = false;
-
-        if (!isCurrent) {
-            ret = true;
-            Ext.util.History.add(token);
-        } else if (force) {
-            ret = true;
+            if (currentToken === token) {
+                return false;
+            }
+        } else {
             Ext.app.route.Router.onStateChange(token);
         }
-        return ret;
+
+        Ext.util.History.add(token);
+
+        return true;
     }
 });

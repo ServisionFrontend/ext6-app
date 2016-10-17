@@ -48,7 +48,7 @@
         "pkgName": "theme-base",
         "pkgType": "theme",
         "senchadir": ".sencha",
-        "touchRelPath": "../../../${touch.dir}"
+        "touchRelPath": "../../../touch"
       }
     },
     "sass/etc/all.scss": {
@@ -59,7 +59,7 @@
         "pkgName": "theme-base",
         "pkgType": "theme",
         "senchadir": ".sencha",
-        "touchRelPath": "../../../${touch.dir}"
+        "touchRelPath": "../../../touch"
       }
     },
     "sass/example/custom.js": {
@@ -70,7 +70,7 @@
         "pkgName": "theme-base",
         "pkgType": "theme",
         "senchadir": ".sencha",
-        "touchRelPath": "../../../${touch.dir}"
+        "touchRelPath": "../../../touch"
       }
     },
     "sass/example/theme.html": {
@@ -81,7 +81,7 @@
         "pkgName": "theme-base",
         "pkgType": "theme",
         "senchadir": ".sencha",
-        "touchRelPath": "../../../${touch.dir}"
+        "touchRelPath": "../../../touch"
       }
     },
     ".sencha/package/build.properties": {
@@ -92,7 +92,7 @@
         "pkgName": "theme-base",
         "pkgType": "theme",
         "senchadir": ".sencha",
-        "touchRelPath": "../../../${touch.dir}"
+        "touchRelPath": "../../../touch"
       }
     },
     ".sencha/package/sencha.cfg": {
@@ -103,7 +103,7 @@
         "pkgName": "theme-base",
         "pkgType": "theme",
         "senchadir": ".sencha",
-        "touchRelPath": "../../../${touch.dir}"
+        "touchRelPath": "../../../touch"
       }
     },
     ".sencha/package/testing.properties": {
@@ -114,7 +114,7 @@
         "pkgName": "theme-base",
         "pkgType": "theme",
         "senchadir": ".sencha",
-        "touchRelPath": "../../../${touch.dir}"
+        "touchRelPath": "../../../touch"
       }
     },
     "sass/example/fashion.html": {
@@ -125,7 +125,7 @@
         "pkgName": "theme-base",
         "pkgType": "theme",
         "senchadir": ".sencha",
-        "touchRelPath": "../../../${touch.dir}"
+        "touchRelPath": "../../../touch"
       }
     }
   }

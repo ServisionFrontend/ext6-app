@@ -112,6 +112,10 @@ Ext.define('Ext.layout.container.Center', {
         return me.sizePolicies[mode];
     },
 
+    isItemBoxParent: function (itemContext) {
+        return true;
+    },
+
     isItemShrinkWrap: function(item) {
         return true;
     },

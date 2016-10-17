@@ -26,9 +26,7 @@ Ext.define('Ext.slider.Thumb', {
          */
         draggable: {
             direction: 'horizontal'
-        },
-
-        touchAction: { panX: false }
+        }
     },
 
     // Strange issue where the thumbs translation value is not being set when it is not visible. Happens when the thumb 

@@ -60,47 +60,49 @@ Ext.define('Ext.layout.container.Absolute', {
     targetCls: Ext.baseCSSPrefix + 'abs-layout-ct',
     itemCls: Ext.baseCSSPrefix + 'abs-layout-item',
 
+    /**
+     * @cfg {Boolean} ignoreOnContentChange
+     * True indicates that changes to one item in this layout do not effect the layout in
+     * general. This may need to be set to false if the component is
+     * {@link Ext.Component#scrollable scrollable}.
+     */
+    ignoreOnContentChange: true,
+
     type: 'absolute',
 
     /**
      * @private
      */
-    adjustWidthAnchor: function(width, childContext) {
+    adjustWidthAnchor: function(value, childContext) {
         var padding = this.targetPadding,
             x = childContext.getStyle('left');
 
-        return width - x + padding.left;
+        return value - x + padding.left;
     },
 
     /**
      * @private
      */
-    adjustHeightAnchor: function(height, childContext) {
+    adjustHeightAnchor: function(value, childContext) {
         var padding = this.targetPadding,
             y = childContext.getStyle('top');
 
-        return height - y + padding.top;
+        return value - y + padding.top;
+    },
+
+    isItemLayoutRoot: function (item) {
+        return this.ignoreOnContentChange || this.callParent(arguments);
     },
 
     isItemShrinkWrap: function (item) {
         return true;
     },
 
-    onContentChange: function (comp, context) {
-        var ret = false;
-        // In a vast majority of cases we don't need to run the layout
-        // when the content changes.
-        if (comp.anchor && context && context.show) {
-            ret = this.callParent([comp, context]);
-        }
-        return ret;
-    },
-
     beginLayout: function (ownerContext) {
         var me = this,
             target = me.getTarget();
 
-        me.callParent([ownerContext]);
+        me.callParent(arguments);
 
         // Do not set position: relative; when the absolute layout target is the body
         if (target.dom !== document.body) {
@@ -112,6 +114,13 @@ Ext.define('Ext.layout.container.Absolute', {
 
     isItemBoxParent: function (itemContext) {
         return true;
+    },
+
+    onContentChange: function () {
+        if (this.ignoreOnContentChange) {
+            return false;
+        }
+        return this.callParent(arguments);
     },
 
     calculateContentSize: function (ownerContext, dimensions) {
@@ -173,6 +182,13 @@ Ext.define('Ext.layout.container.Absolute', {
             if (calcHeight && !ownerContext.setContentHeight(contentHeight + targetPadding.height)) {
                 me.done = false;
             }
+
+            /* add a '/' to turn on this log ('//* enables, '/*' disables)
+            if (me.done) {
+                var el = ownerContext.targetContext.el.dom;
+                Ext.log(this.owner.id, '.contentSize: ', contentWidth, 'x', contentHeight,
+                    ' => scrollSize: ', el.scrollWidth, 'x', el.scrollHeight);
+            }/**/
         }
     }
 });

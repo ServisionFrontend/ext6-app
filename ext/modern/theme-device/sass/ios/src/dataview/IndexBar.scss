@@ -1,7 +1,0 @@
-@if ($include-ios) {
-  #{$ios-selector} {
-    .#{$prefix}indexbar-vertical {
-      color: $primary-color-ios
-    }
-  }
-}

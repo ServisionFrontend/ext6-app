@@ -1,5 +1,4 @@
 /**
- * @protected
  * Simple wrapper class that represents a set of records returned by a Proxy.
  */
 Ext.define('Ext.data.ResultSet', {
@@ -49,13 +48,7 @@ Ext.define('Ext.data.ResultSet', {
          * @cfg {String} message
          * The message that was read in from the data
          */
-        message: null,
-
-        /**
-         * @cfg {Object} metadata
-         * The metadata object from a server sourced JSON data packet.
-         */
-        metadata: null
+        message: null
     },
 
     /**

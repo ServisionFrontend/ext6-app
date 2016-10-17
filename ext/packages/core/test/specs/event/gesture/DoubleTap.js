@@ -10,7 +10,6 @@
         moveDistance = recognizer.getMoveDistance(),
         tapDistance = recognizer.getTapDistance(),
         maxDuration = 130,
-        offset = 60,
         originalMaxDuration, targetEl, singleTapHandler, doubleTapHandler, e;
 
     function start(cfg) {
@@ -58,7 +57,7 @@
             start({ id: 1, x: 10, y: 10 });
             end({ id: 1, x: 10, y: 10 });
         });
-        waits(maxDuration - offset);
+        waits(maxDuration - 30);
         runs(function() {
             start({ id: 1, x: 10, y: 10 });
             end({ id: 1, x: 10, y: 10 });
@@ -107,7 +106,7 @@
             move({ id: 1, x: 10, y: 10 + moveDistance });
             end({ id: 1, x: 10, y: 10 + moveDistance });
         });
-        waits(maxDuration - offset);
+        waits(maxDuration - 30);
         runs(function() {
             start({ id: 1, x: 10, y: 10 });
             end({ id: 1, x: 10, y: 10 });
@@ -141,37 +140,10 @@
             move({ id: 1, x: 9 + moveDistance, y: 10 });
             end({ id: 1, x: 9 + moveDistance, y: 10 });
         });
-        waits(maxDuration - offset);
+        waits(maxDuration - 30);
         runs(function() {
             start({ id: 1, x: 10, y: 10 });
             end({ id: 1, x: 11, y: 11 });
-        });
-        waitsForAnimation();
-        runs(function() {
-            expect(doubleTapHandler).toHaveBeenCalled();
-        });
-    });
-
-    it("should fire a doubletap if done after a touchend is vetoed", function() {
-        targetEl.on('touchend', function(e) {
-            e.stopEvent();
-        }, null, {single: true});
-
-        runs(function() {
-            start({ id: 1, x: 400, y: 10 });
-            end({ id: 1, x: 400, y: 10 });
-        });
-        waits(maxDuration + 100);
-        runs(function() {
-            expect(doubleTapHandler).not.toHaveBeenCalled();
-            start({ id: 2, x: 10, y: 10 });
-            end({ id: 2, x: 10, y: 10 });
-        });
-        waits(maxDuration - 60);
-        runs(function() {
-            expect(doubleTapHandler).not.toHaveBeenCalled();
-            start({ id: 3, x: 10, y: 10 });
-            end({ id: 3, x: 10, y: 10 });
         });
         waitsForAnimation();
         runs(function() {
@@ -184,7 +156,7 @@
             start({ id: 1, x: 10, y: 10 });
             end({ id: 1, x: 10, y: 10 });
         });
-        waits(maxDuration - offset);
+        waits(maxDuration - 30);
         runs(function() {
             start({ id: 1, x: 10 + tapDistance, y: 10 });
             end({ id: 1, x: 10 + tapDistance, y: 10 });
@@ -200,7 +172,7 @@
             start({ id: 1, x: 10, y: 10 });
             end({ id: 1, x: 10, y: 10 });
         });
-        waits(maxDuration - offset);
+        waits(maxDuration - 30);
         runs(function() {
             start({ id: 1, x: 11 + tapDistance, y: 10 });
             end({ id: 1, x: 11 + tapDistance, y: 10 });
@@ -233,7 +205,7 @@
                 start({ id: 1, x: 10, y: 10 });
                 cancel({ id: 1, x: 10, y: 10 });
             });
-            waits(maxDuration - offset);
+            waits(maxDuration - 30);
             runs(function() {
                 start({ id: 1, x: 10, y: 10 });
                 end({ id: 1, x: 10, y: 10 });
@@ -249,7 +221,7 @@
                 start({ id: 1, x: 10, y: 10 });
                 end({ id: 1, x: 10, y: 10 });
             });
-            waits(maxDuration - offset);
+            waits(maxDuration - 30);
             runs(function() {
                 start({ id: 1, x: 10, y: 10 });
                 cancel({ id: 1, x: 10, y: 10 });

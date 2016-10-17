@@ -49,8 +49,7 @@ Ext.define('Ext.draw.TextMeasurer', {
     },
 
     /**
-     * @private
-     * Measure the size of a text with specific font by using DOM to measure it.
+     * @private Measure the size of a text with specific font by using DOM to measure it.
      * Could be very expensive therefore should be used lazily.
      * @param {String} text
      * @param {String} font

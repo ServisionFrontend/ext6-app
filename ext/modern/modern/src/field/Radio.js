@@ -49,12 +49,17 @@ Ext.define('Ext.field.Radio', {
          * @cfg
          * @inheritdoc
          */
+        ui: 'radio',
+
+        /**
+         * @cfg
+         * @inheritdoc
+         */
         component: {
-            xtype: 'radioinput'
+            type: 'radio',
+            cls: Ext.baseCSSPrefix + 'input-radio'
         }
     },
-
-    classCls: Ext.baseCSSPrefix + 'radiofield',
 
     getValue: function() {
         return this._value === undefined ? null : this._value;

@@ -11,7 +11,7 @@
  * - String:
  *
  *       var t = new Ext.Template("<div>Hello {0}.</div>");
- *       t.append('some-element', ['foo']);
+ *       t.{@link #append}('some-element', ['foo']);
  *
  * - Array:
  *
@@ -22,8 +22,8 @@
  *               '<span class="{cls}">{name:trim} {value:ellipsis(10)}</span>',
  *           '</div>',
  *       ]);
- *       t.compile();
- *       t.append('some-element', {id: 'myid', cls: 'myclass', name: 'foo', value: 'bar'});
+ *       t.{@link #compile}();
+ *       t.{@link #append}('some-element', {id: 'myid', cls: 'myclass', name: 'foo', value: 'bar'});
  *
  * # Multiple arguments: String, Object, Array, ...
  *
@@ -114,6 +114,9 @@ Ext.define('Ext.Template', {
             buffer.push(html);
         }
 
+        /**
+         * @private
+         */
         me.html = buffer.join('');
     },
 
@@ -446,7 +449,6 @@ Ext.define('Ext.Template', {
      * @inheritdoc Ext.String#format
      * @member Ext.util.Format
      */
-
     /**
      * Allows you to define a tokenized string and pass an arbitrary number of arguments to replace the tokens.  Each
      * token must be unique, and must increment in the format {0}, {1}, etc.  Example usage:

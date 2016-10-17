@@ -3,7 +3,7 @@
  */
 
 // Label
-.x-field-label {
+.x-form-label {
     color: $foreground-color;
     padding: 0 10px 10px 0;
 
@@ -14,7 +14,7 @@
 }
 
 // Clear icon
-.x-input {
+.x-field-input {
     .x-clear-icon {
         top: 0;
         right: 0;
@@ -47,7 +47,7 @@
 }
 
 .x-field-clearable {
-    .x-input {
+    .x-field-input {
         padding-right: 0;
     }
 }

@@ -25,12 +25,6 @@ Ext.define('Ext.chart.Markers', {
         this.revisions = {};
     },
 
-    destroy: function () {
-        this.categories = null;
-        this.revisions = null;
-        this.callParent();
-    },
-
     getMarkerFor: function (category, index) {
         if (category in this.categories) {
             var categoryInstances = this.categories[category];
@@ -100,32 +94,29 @@ Ext.define('Ext.chart.Markers', {
 
     getBBox: function () { return null; },
 
-    render: function (surface, ctx, rect) {
+    render: function (surface, ctx, clipRect) {
         var me = this,
-            surfaceRect = surface.getRect(),
             revisions = me.revisions,
             mat = me.attr.matrix,
             template = me.getTemplate(),
             templateAttr = template.attr,
-            ln = me.instances.length,
-            instance, i;
+            instance, i, ln;
 
         mat.toContext(ctx);
-        template.preRender(surface, ctx, rect);
-        template.useAttributes(ctx, surfaceRect);
+        template.preRender(surface, ctx, clipRect);
+        template.useAttributes(ctx, clipRect);
 
-        for (i = 0; i < ln; i++) {
+        for (i = 0, ln = me.instances.length; i < ln; i++) {
             instance = me.get(i);
             if (instance.hidden || instance.revision !== revisions[instance.category]) {
                 continue;
             }
             ctx.save();
             template.attr = instance;
-            template.useAttributes(ctx, surfaceRect);
-            template.render(surface, ctx, rect);
+            template.useAttributes(ctx, clipRect);
+            template.render(surface, ctx, clipRect);
             ctx.restore();
         }
-
         template.attr = templateAttr;
     }
 });

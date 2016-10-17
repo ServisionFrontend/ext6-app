@@ -57,9 +57,7 @@ Ext.define('Ext.field.Email', {
          * @inheritdoc
          */
         autoCapitalize: false
-    },
-
-    classCls: Ext.baseCSSPrefix + 'emailfield'
+    }
 });
 
 

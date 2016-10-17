@@ -3,7 +3,7 @@
  */
 Ext.define('Ext.field.Input', {
     extend: 'Ext.Component',
-    xtype: 'input',
+    xtype : 'input',
 
     /**
      * @event clearicontap
@@ -14,7 +14,7 @@ Ext.define('Ext.field.Input', {
 
     /**
      * @event masktap
-     * @preventable
+     * @preventable doMaskTap
      * Fires whenever a mask is tapped.
      * @param {Ext.field.Input} this
      * @param {Ext.event.Event} e The event object.
@@ -22,14 +22,14 @@ Ext.define('Ext.field.Input', {
 
     /**
      * @event focus
-     * @preventable
+     * @preventable doFocus
      * Fires whenever the input get focus.
      * @param {Ext.event.Event} e The event object.
      */
 
     /**
      * @event blur
-     * @preventable
+     * @preventable doBlur
      * Fires whenever the input loses focus.
      * @param {Ext.event.Event} e The event object.
      */
@@ -66,6 +66,23 @@ Ext.define('Ext.field.Input', {
 
     cachedConfig: {
         /**
+         * @cfg {String} cls The `className` to be applied to this input.
+         * @accessor
+         */
+        cls: Ext.baseCSSPrefix + 'form-field',
+
+        /**
+         * @cfg {String} focusCls The CSS class to use when the field receives focus.
+         * @accessor
+         */
+        focusCls: Ext.baseCSSPrefix + 'field-focus',
+
+        /**
+         * @private
+         */
+        maskCls: Ext.baseCSSPrefix + 'field-mask',
+
+        /**
           * @cfg {String/Boolean} useMask
          * `true` to use a mask on this field, or `auto` to automatically select when you should use it.
          * @private
@@ -89,6 +106,12 @@ Ext.define('Ext.field.Input', {
     },
 
     config: {
+        /**
+         * @cfg
+         * @inheritdoc
+         */
+        baseCls: Ext.baseCSSPrefix + 'field-input',
+
         /**
          * @cfg {String} name The field's HTML name attribute.
          * __Note:__ This property must be set if this field is to be automatically included with
@@ -233,10 +256,6 @@ Ext.define('Ext.field.Input', {
         fastFocus: false
     },
 
-    classCls: Ext.baseCSSPrefix + 'input',
-    maskCls: Ext.baseCSSPrefix + 'input-mask',
-    baseInputCls: Ext.baseCSSPrefix + 'input-el',
-
     /**
      * @cfg {String/Number} originalValue The original value when the input is rendered.
      * @private
@@ -246,24 +265,14 @@ Ext.define('Ext.field.Input', {
      * @private
      */
     getTemplate: function() {
-        var me = this,
-            inputCls = me.inputCls,
-            inputClassList = [me.baseInputCls],
-            items;
-
-        if (inputCls) {
-            inputClassList.push(inputCls);
-        }
-
-        items = [
+        var items = [
             {
                 reference: 'input',
-                tag: me.tag,
-                classList: inputClassList
+                tag: this.tag
             },
             {
                 reference: 'mask',
-                cls: me.maskCls
+                classList: [this.config.maskCls]
             },
             {
                 reference: 'clearIcon',
@@ -387,10 +396,21 @@ Ext.define('Ext.field.Input', {
     },
 
     /**
+     * Updates the {@link #cls} configuration.
+     */
+    updateCls: function(newCls, oldCls) {
+        this.input.addCls(Ext.baseCSSPrefix + 'input-el');
+        this.input.replaceCls(oldCls, newCls);
+    },
+
+    /**
      * Updates the type attribute with the {@link #type} configuration.
      * @private
      */
     updateType: function(newType, oldType) {
+        var prefix = Ext.baseCSSPrefix + 'input-';
+
+        this.input.replaceCls(prefix + oldType, prefix + newType);
         this.updateFieldAttribute('type', newType);
     },
 
@@ -428,21 +448,11 @@ Ext.define('Ext.field.Input', {
      * @private
      */
     updateValue: function(newValue) {
-        var input = this.input,
-            validity = input.dom.validity,
-            field = input.parent('.x-field');
+        var input = this.input;
 
-        // We need to check the values due to odd issues on mobile devices with autocomplete
-        // Even though the value is equal setting it causes autocomplete to insert text that is wrong
-        // https://sencha.jira.com/browse/EXTJS-18840
-        if (input && input.dom.value !== newValue) {
+        if (input) {
             input.dom.value = newValue;
         }
-
-        if(field && validity) {
-            field.toggleCls(Ext.baseCSSPrefix + 'field-invalid', !validity.valid);
-        }
-
     },
 
     setValue: function(newValue) {

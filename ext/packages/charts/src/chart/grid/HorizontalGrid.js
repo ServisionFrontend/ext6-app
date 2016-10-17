@@ -27,18 +27,18 @@ Ext.define('Ext.chart.grid.HorizontalGrid', {
         }
     },
 
-    render: function (surface, ctx, rect) {
+    render: function (surface, ctx, clipRect) {
         var attr = this.attr,
             y = surface.roundPixel(attr.y),
             halfLineWidth = ctx.lineWidth * 0.5;
 
         ctx.beginPath();
-        ctx.rect(rect[0] - surface.matrix.getDX(), y + halfLineWidth, +rect[2], attr.height);
+        ctx.rect(clipRect[0] - surface.matrix.getDX(), y + halfLineWidth, +clipRect[2], attr.height);
         ctx.fill();
 
         ctx.beginPath();
-        ctx.moveTo(rect[0] - surface.matrix.getDX(), y + halfLineWidth);
-        ctx.lineTo(rect[0] + rect[2] - surface.matrix.getDX(), y + halfLineWidth);
+        ctx.moveTo(clipRect[0] - surface.matrix.getDX(), y + halfLineWidth);
+        ctx.lineTo(clipRect[0] + clipRect[2] - surface.matrix.getDX(), y + halfLineWidth);
         ctx.stroke();
     }
 });

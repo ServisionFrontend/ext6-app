@@ -32,15 +32,7 @@ Ext.define('Ext.chart.interactions.Abstract', {
         /**
          * @cfg {Boolean} enabled 'true' if the interaction is enabled.
          */
-        enabled: true,
-
-        /**
-         * @cfg {String/String[]/Object}
-         * touch-action to apply to the chart when this interaction is in use.
-         *
-         * See {@link Ext.Component#touchAction} for more details.
-         */
-        touchAction: null
+        enabled: true
     },
 
     /**
@@ -69,9 +61,14 @@ Ext.define('Ext.chart.interactions.Abstract', {
         me.mixins.observable.constructor.call(me, config);
     },
 
+    /**
+     * @protected
+     * A method to be implemented by subclasses where all event attachment should occur.
+     */
+    initialize: Ext.emptyFn,
+
     updateChart: function (newChart, oldChart) {
-        var me = this,
-            touchAction;
+        var me = this;
 
         if (oldChart === newChart) {
             return;
@@ -83,12 +80,6 @@ Ext.define('Ext.chart.interactions.Abstract', {
         if (newChart) {
             newChart.register(me);
             me.addChartListener();
-
-            touchAction = me.getTouchAction();
-
-            if (touchAction) {
-                newChart.setTouchAction(touchAction);
-            }
         }
     },
 
@@ -106,15 +97,13 @@ Ext.define('Ext.chart.interactions.Abstract', {
     },
 
     /**
-     * @method
      * @protected
      * Placeholder method.
      */
     onGesture: Ext.emptyFn,
 
     /**
-     * @protected
-     * Find and return a single series item corresponding to the given event,
+     * @protected Find and return a single series item corresponding to the given event,
      * or null if no matching item is found.
      * @param {Event} e
      * @return {Object} the item object or null if none found.
@@ -128,8 +117,7 @@ Ext.define('Ext.chart.interactions.Abstract', {
     },
 
     /**
-     * @protected
-     * Find and return all series items corresponding to the given event.
+     * @protected Find and return all series items corresponding to the given event.
      * @param {Event} e
      * @return {Array} array of matching item objects
      */
@@ -223,6 +211,15 @@ Ext.define('Ext.chart.interactions.Abstract', {
         var chart = this.getChart();
         return chart.lockedEvents || (chart.lockedEvents = {});
     },
+
+    isMultiTouch: function () {
+        if (Ext.browser.is.IE10) {
+            return true;
+        }
+        return !Ext.os.is.Desktop;
+    },
+
+    initializeDefaults: Ext.emptyFn,
 
     doSync: function () {
         var me = this,

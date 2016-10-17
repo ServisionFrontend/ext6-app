@@ -106,14 +106,4 @@ Ext.define('Ext.TaskQueue', {
             this.request(request);
         }
     }
-
-    //<debug>
-    ,privates: {
-        flush: function() {
-            while (this.readQueue.length || this.writeQueue.length) {
-                this.run();
-            }
-        }
-    }
-    //</debug>
 });

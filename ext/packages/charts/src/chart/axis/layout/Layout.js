@@ -91,7 +91,6 @@ Ext.define('Ext.chart.axis.layout.Layout', {
     },
 
     /**
-     * @method
      * Snaps the data bound to the axis to meaningful tick marks.
      * @param {Object} context
      * @param {Number} min

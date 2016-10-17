@@ -47,20 +47,10 @@
  */
 Ext.define('Ext.form.CheckboxGroup', {
     extend:'Ext.form.FieldContainer',
-    xtype: 'checkboxgroup',
-
-    /**
-     * @property {Boolean} isCheckboxGroup
-     * The value `true` to identify an object as an instance of this or derived class.
-     * @readonly
-     * @since 6.2.0
-     */
-    isCheckboxGroup: true,
-
     mixins: {
         field: 'Ext.form.field.Field'
     },
-    
+    alias: 'widget.checkboxgroup',
     requires: [
         'Ext.layout.container.CheckboxGroup',
         'Ext.form.field.Checkbox',
@@ -117,9 +107,10 @@ Ext.define('Ext.form.CheckboxGroup', {
     blankText : "You must select at least one item in this group",
     //</locale>
 
+    /**
+     * @private
+     */
     defaultType : 'checkboxfield',
-
-    defaultBindProperty: 'value',
 
     /**
      * @private
@@ -131,16 +122,15 @@ Ext.define('Ext.form.CheckboxGroup', {
      */
     extraFieldBodyCls: Ext.baseCSSPrefix + 'form-checkboxgroup-body',
 
+    /**
+     * @private
+     */
     layout: 'checkboxgroup',
 
     componentCls: Ext.baseCSSPrefix + 'form-checkboxgroup',
     
     ariaRole: 'group',
     ariaEl: 'containerEl',
-
-    // containerEl is a div, it cannot be referenced by a <label for="...">
-    // We set aria-labelledby on the containerEl instead
-    skipLabelForAttribute: true,
     
     // Checkbox and radio groups start as valid
     ariaRenderAttributes: {
@@ -168,9 +158,14 @@ Ext.define('Ext.form.CheckboxGroup', {
         ariaAttr = data.ariaAttributes;
         
         if (ariaAttr) {
-            if (!ariaAttr['aria-labelledby']) {
-                ariaAttr['aria-labelledby'] = me.id + '-labelTextEl';
+            boxes = me.getBoxes();
+            ids = [];
+            
+            for (i = 0, len = boxes.length; i < len; i++) {
+                ids.push(boxes[i].id + '-inputEl');
             }
+            
+            ariaAttr['aria-owns'] = ids.join(' ');
         }
         
         return data;
@@ -204,7 +199,7 @@ Ext.define('Ext.form.CheckboxGroup', {
         if (field.isCheckbox) {
             // Checkboxes and especially Radio buttons MUST have similar name
             // if they belong to a group but also must allow explicit override.
-            if (field.name == null) {
+            if (!field.name) {
                 field.name = me.name;
             }
             

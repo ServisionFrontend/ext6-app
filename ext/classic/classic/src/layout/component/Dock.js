@@ -1288,10 +1288,6 @@ Ext.define('Ext.layout.component.Dock', {
             ownerContext.bodyContext.redo();
         } 
     },
-    
-    getRenderTarget: function() {
-        return this.owner.bodyWrap;
-    },
 
     /**
      * @private
@@ -1319,15 +1315,10 @@ Ext.define('Ext.layout.component.Dock', {
     renderItems: function (items, target) {
         var me = this,
             owner = me.owner,
-            dockedItemIds = {},
+            dockedItems = owner.dockedItems,
             dockedItemCount = items.length,
-            bodyDom = owner.body.dom,
-            bodyWrapDom = owner.bodyWrap.dom,
-            hasFrame = !!owner.frameSize,
-            bodyContainer = owner.bodyContainer,
-            childNodes, childNodeCount, hasDockedToEl, item, dom, elFound, gap,
-            bodyBaseIndex, bodyDockIndex, wrapBaseIndex, wrapDockIndex, i,
-            insertPosition, insertTarget;
+            bodyEl = owner.body,
+            baseIndex, childNodes, childNodeCount, dom, gap, i, item, position;
 
         // TODO: This is affected if users provide custom weight values to their
         // docked items, which puts it out of (t,l,r,b) order. Avoiding a second
@@ -1336,157 +1327,58 @@ Ext.define('Ext.layout.component.Dock', {
         // also for getRefItems() to return a logical ordering (CQ, et al).
 
         if (dockedItemCount) {
-
-            // Build a correct map of docked item ids to match with the ID of found DOM elements.
-            // The "map" property of the dockedItems Collection uses the *itemId* as the key, so 
-            // that will never match, and will cause isValidParent to return false, resulting in DOM motion.
-            for (i = 0; i < dockedItemCount; i++) {
-                item = items[i];
-                dockedItemIds[item.id] = item;
-                
-                if (item.dockToEl) {
-                    hasDockedToEl = true;
-                }
-            }
-
             childNodes = me.getRenderTarget().dom.childNodes;
             childNodeCount = childNodes.length;
+            dockedItems = dockedItems.map; // MixedCollection's map by id
             gap = 0;
 
-            // Our childNodes may contain non-item elements as well as the bodyEl. We
+            // Our childNodes will contain non-item elements as well as the bodyEl. We
             // want to find the bodyEl's index and count the number of dockedItems that
             // are already rendered before it.
             //
             for (i = 0; i < childNodeCount; ++i) {
                 dom = childNodes[i];
-                
-                // Regardless of whether framing is used, bodyEl will be contained
-                // in the bodyWrap element.
-                elFound = dom === bodyDom;
-                
-                if (elFound) {
+
+                if (dom === bodyEl.dom) {
                     // We want top/left dockedItems to be inserted before the body, so
                     // use the bodyEl's index as the base.
-                    bodyBaseIndex = i;
+                    baseIndex = i;
                     break;
                 }
 
-                if (dockedItemIds[dom.id]) {
+                if (dockedItems[dom.id]) {
                     ++gap;
                 }
             }
-            
-            //<debug>
-            if (!elFound) {
-                Ext.log.error('Dock layout error for ' + owner.id + ': bodyEl not found!');
-            }
-            //</debug>
 
             // Subtract the number of rendered dockedItems from the bodyEl's index to get
             // the actual base.
             //
-            bodyBaseIndex -= gap;
+            baseIndex -= gap;
 
-            // If we have any items docked to the main el (presently Panel header only),
-            // we want to find bodyWrap element base index the same way as we did for
-            // the body element.
-            //
-            if (hasDockedToEl) {
-                elFound = false;
-                gap = 0;
-                
-                childNodes = owner.el.dom.childNodes;
-                childNodeCount = childNodes.length;
-                
-                for (i = 0; i < childNodeCount; i++) {
-                    dom = childNodes[i];
-                    
-                    // When extra framing elements are used, bodyWrap will be contained
-                    // in the frameBody, which in turn might be contained in other
-                    // framing elements.
-                    if (hasFrame) {
-                        elFound = dom === bodyWrapDom || dom === bodyContainer;
-                        
-                        // Cache the found body container to speed up subsequent layouts
-                        if (!elFound && Ext.fly(dom).contains(bodyWrapDom)) {
-                            elFound = true;
-                            owner.bodyContainer = dom;
-                        }
-                    }
-                    else {
-                        elFound = dom === bodyWrapDom;
-                    }
-                    
-                    if (elFound) {
-                        wrapBaseIndex = i;
-                        break;
-                    }
-                    
-                    if (dockedItemIds[dom.id]) {
-                        ++gap;
-                    }
-                }
-
-                //<debug>
-                if (!elFound) {
-                    Ext.log.error('Dock layout error for ' + owner.id + ': bodyWrapEl not found!');
-                }
-                //</debug>
-                
-                // We need to adjust wrapBaseIndex the same way as bodyBaseIndex above,
-                // because docked-to-el header may already exist when this method is called.
-                wrapBaseIndex -= gap;
-            }
-            
-            bodyDockIndex = wrapDockIndex = 0;
-            
             // Finally loop over the dockedItems again and ensure that the top/left and
             // bottom/right items are at the proper DOM offset, immediately surrounding
-            // the bodyEl or bodyWrap if they're docked to the main el.
-            // Presently only Panel header does that.
+            // the bodyEl.
             //
-            for (i = 0; i < dockedItemCount; i++) {
+            for (i = 0; i < dockedItemCount; ++i) {
                 item = items[i];
-                
-                // Header is rendered to the el instead of bodyWrap
-                if (item.dockToEl) {
-                    insertTarget = owner.el;
-                    insertPosition = wrapBaseIndex + wrapDockIndex++;
-                    
-                    if (item.dock === 'right' || item.dock === 'bottom') {
-                        insertPosition++; // skip over the bodyWrap
-                        
-                        // frameBody consists of 3 elements, wrapBaseIndex points
-                        // to the middle one. Skip the bottom one, too.
-                        if (hasFrame) {
-                            insertPosition++;
-                        }
-                    }
-                    else if (hasFrame && insertPosition > 0) {
-                        // Skip top frameBody element
-                        insertPosition--;
-                    }
-                }
-                else {
-                    insertTarget = target;
-                    insertPosition = bodyBaseIndex + bodyDockIndex++;
-                    
-                    if (item.dock === 'right' || item.dock === 'bottom') {
-                        insertPosition++; // skip over the bodyEl or frameBody
-                    }
+
+                position = baseIndex + i;
+                if (item.dock === 'right' || item.dock === 'bottom') {
+                    ++position; // skip over the bodyEl
                 }
 
                 // Same logic as Layout.renderItems()
                 if (!item.rendered) {
-                    me.renderItem(item, insertTarget, insertPosition);
+                    me.renderItem(item, target, position);
                 }
-                else if (!me.isValidParent(item, insertTarget, insertPosition)) {
-                    me.moveItem(item, insertTarget, insertPosition);
+                else if (!me.isValidParent(item, target, position)) {
+                    me.moveItem(item, target, position);
                 }
             }
         }
     },
-    
+
     undoLayout: function(ownerContext) {
         var me = this,
             owner = me.owner;
@@ -1505,7 +1397,7 @@ Ext.define('Ext.layout.component.Dock', {
             // Remove the collapsed class now, before layout calculations are done.
             owner.addClsWithUI(owner.collapsedCls);
             ownerContext.bodyContext.undo();
-        }
+        } 
     },
 
     sizePolicy: {
@@ -1619,7 +1511,6 @@ Ext.define('Ext.layout.component.Dock', {
      * indicates the position of the docked item. We use the itemCls (x-docked) as a prefix.
      * An example of a class added to a dock: right item is x-docked-right
      * @param {Ext.Component} item The item we are configuring
-     * @param pos
      */
     configureItem : function(item, pos) {
         this.callParent(arguments);

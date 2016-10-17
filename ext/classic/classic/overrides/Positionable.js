@@ -1,6 +1,4 @@
-/**
- *
- */
+/** */
 Ext.define('Ext.overrides.util.Positionable', {
     override: 'Ext.util.Positionable',
 
@@ -34,7 +32,7 @@ Ext.define('Ext.overrides.util.Positionable', {
         var me = this,
             scroll = !Ext.isEmpty(monitorScroll),
             action = function() {
-                me.mixins.positionable.alignTo.call(me, anchorToEl, alignment, offsets, animate);
+                me.alignTo(anchorToEl, alignment, offsets, animate);
                 Ext.callback(callback, me);
             },
             anchor = me.getAnchor();
@@ -72,30 +70,6 @@ Ext.define('Ext.overrides.util.Positionable', {
         return anchor;
     },
 
-    alignTo: function(element, position, offsets, /* private (documented in ext) */ animate) {
-        var me = this,
-            el = me.el,
-            newMaxHeight,
-            newRegion;
-
-        // Release any height constraint prior to aligning if we are shrinkwrap height.
-        if (me.isComponent && me.getSizeModel().height.shrinkWrap) {
-            if (me.maxHeight) {
-                me.setMaxHeight(null);
-            }
-            newMaxHeight = true;
-        }
-
-        newRegion = me.getAlignToRegion(element, position, offsets, me.minHeight || 150);
-        me.setXY([newRegion.x, newRegion.y], el.anim && !!animate ? el.anim(animate) : false);
-
-        // Impose calculated height constraint.
-        if (newMaxHeight && (newMaxHeight = newRegion.getHeight()) !== me.getHeight()) {
-            me.setMaxHeight(newMaxHeight);
-        }
-        return me;
-    },
-    
     /**
      * @method move
      * Move the element relative to its current position.
@@ -167,7 +141,7 @@ Ext.define('Ext.overrides.util.Positionable', {
     /**
      * @method setX
      * Sets the X position of the DOM element based on page coordinates.
-     * @param {Number} x The X position
+     * @param {Number} The X position
      * @param {Boolean/Object} [animate] True for the default animation, or a standard
      * Element animation config object
      * @return {Ext.util.Positionable} this
@@ -186,7 +160,7 @@ Ext.define('Ext.overrides.util.Positionable', {
     /**
      * @method setY
      * Sets the Y position of the DOM element based on page coordinates.
-     * @param {Number} y The Y position
+     * @param {Number} The Y position
      * @param {Boolean/Object} [animate] True for the default animation, or a standard
      * Element animation config object
      * @return {Ext.util.Positionable} this

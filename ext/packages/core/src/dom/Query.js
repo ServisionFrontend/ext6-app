@@ -847,12 +847,12 @@ Ext.define('Ext.dom.Query', function() {
             }
 
             n = query(root);
-            return DQ.getNodeValue(n[0] || n, defaultValue);
+            return DQ.getNodeValue(n[0] ? n[0] : n);
         },
 
         /**
          * Get the text value for a node, optionally replacing null with the defaultValue.
-         * @param {Object} node The node
+         * @param {Object} The node
          * @param {String} [defaultValue] When specified, this is return as empty value.
          * @return {String} The value
          */
@@ -865,17 +865,8 @@ Ext.define('Ext.dom.Query', function() {
                 node.normalize();
             }
 
-            var firstChild = node && node.firstChild,
-                v = firstChild ? firstChild.nodeValue : null;
-
-            // If we have a defaultValue, and v is null, undefined or '', use that
-            // value instead.
-            //
-            if (defaultValue !== undefined && (v == null || v === '')) {
-                v = defaultValue;
-            }
-
-            return v;
+            var v = (node && node.firstChild ? node.firstChild.nodeValue : null);
+            return ((v === null || v === undefined || v === '') ? defaultValue : v);
         },
 
         /**

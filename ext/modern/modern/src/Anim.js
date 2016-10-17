@@ -31,6 +31,7 @@
  *
  * @singleton
  */
+
 Ext.define('Ext.Anim', {
     isAnim: true,
 

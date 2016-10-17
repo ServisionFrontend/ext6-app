@@ -339,7 +339,6 @@ Ext.define('Ext.data.flash.BinaryXhr', {
     },
 
     /**
-     * @method
      * As in XMLHttpRequest.
      */
     onreadystatechange: Ext.emptyFn,

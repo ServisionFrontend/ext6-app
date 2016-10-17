@@ -1,4 +1,4 @@
-describe('Ext.chart.AbstractChart.classic', function () {
+describe('Ext.chart.AbstractChart', function () {
     var chart, store;
 
     var Model = Ext.define(null, {

@@ -1,26 +1,26 @@
-.x-desktop.x-windows.x-chrome .x-spinnerfield {
-	.x-spinnerfield-button-down {
+.x-desktop.x-windows.x-chrome .x-spinner {
+	.x-spinner-button-down {
 		line-height: .7em;
 	}
 
-	.x-spinnerfield-button-up {
+	.x-spinner-button-up {
 		line-height: .85em;
 	}
 }
 
-.x-spinnerfield {
-	.x-spinnerfield-button {
+.x-spinner {
+	.x-spinner-button {
 		margin-top: .25em;
 		margin-bottom: .25em;
 		width: 2em;
 
 		border: 2px solid #fff !important;
 
-		&.x-spinnerfield-button-down {
+		&.x-spinner-button-down {
 			background-color: $ios7-red;
 		}
 
-		&.x-spinnerfield-button-up {
+		&.x-spinner-button-up {
 			background-color: $ios7-green;
 		}
 
@@ -45,12 +45,12 @@
 			-webkit-text-fill-color: #B3B3B3;
 		}
 
-		.x-spinnerfield-button {
-			&.x-spinnerfield-button-down {
+		.x-spinner-button {
+			&.x-spinner-button-down {
 				background-color: lighten($ios7-red, 20%);
 			}
 
-			&.x-spinnerfield-button-up {
+			&.x-spinner-button-up {
 				background-color: lighten($ios7-green, 20%);
 			}
 		}

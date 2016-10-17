@@ -28,16 +28,14 @@ Ext.define('Ext.event.gesture.Recognizer', {
      * - Ext.event.gesture.Tap: 200
      * - Ext.event.gesture.DoubleTap: 300
      * - Ext.event.gesture.LongPress: 400
-     * - Ext.event.gesture.EdgeSwipe: 500
-     * - Ext.event.gesture.Swipe: 600
-     * - Ext.event.gesture.Pinch: 700
-     * - Ext.event.gesture.Rotate: 800
+     * - Ext.event.gesture.Swipe: 500
+     * - Ext.event.gesture.Pinch: 600
+     * - Ext.event.gesture.Rotate: 700
+     * - Ext.event.gesture.EdgeSwipe: 800
      */
     priority: 0,
 
     handledEvents: [],
-
-    isStarted: false,
 
     config: {
         onRecognized: Ext.emptyFn,
@@ -57,33 +55,26 @@ Ext.define('Ext.event.gesture.Recognizer', {
 
     onTouchMove: Ext.emptyFn,
 
-    onTouchEnd: function() {
-        return this.reset();
-    },
+    onTouchEnd: Ext.emptyFn,
 
-    onTouchCancel: function(e) {
-        return this.cancel(e);
+    onTouchCancel: Ext.emptyFn,
+
+    fail: function() {
+        return false;
     },
 
     fire: function() {
         this.getOnRecognized().apply(this.getCallbackScope(), arguments);
     },
 
-    cancel: function(e) {
-        if (this.isStarted) {
-            // If the recognizer is started, that is to say, it has already begun publishing
-            // events for the current gesture, then we need to make sure it fires a "cancel"
-            // event (implementation determined by subclasses).
-            this.onCancel(e);
+    reset: Ext.emptyFn,
+
+    debugHooks: {
+        $enabled: false,  // Disable by default
+
+        fail: function(msg) {
+            Ext.log.info(this.$className + ' Gesture Failed: ' + msg);
+            return false;
         }
-
-        return this.reset();
-    },
-
-    onCancel: Ext.emptyFn,
-
-    reset: function() {
-        this.isStarted = false;
-        return false;
     }
 });

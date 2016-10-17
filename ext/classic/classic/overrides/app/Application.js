@@ -24,15 +24,10 @@ Ext.define('Ext.overrides.app.Application', {
         enableQuickTips: true
     },
 
-    applyMainView: function(mainView) {
-        var view, proto, config, plugins;
-
-        if (typeof mainView === 'string') {
-            view = this.getView(mainView);
-        } else {
-            view = Ext.ClassManager.getByConfig(mainView);
-        }
-        proto = view.prototype;
+    applyMainView: function(value) {
+        var view = this.getView(value),
+            proto = view.prototype,
+            config, plugins;
 
         if (!proto.isViewport) {
             plugins = proto.plugins;

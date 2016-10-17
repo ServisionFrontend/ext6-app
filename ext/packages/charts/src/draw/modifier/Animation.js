@@ -3,42 +3,13 @@
  *
  * Sencha Charts allow users to use transitional animation on sprites. Simply set the duration
  * and easing in the animation modifier, then all the changes to the sprites will be animated.
- * 
- *     @example
- *     var drawCt = Ext.create({
- *         xtype: 'draw',
- *         renderTo: document.body,
- *         width: 400,
- *         height: 400,
- *         sprites: [{
- *             type: 'rect',
- *             x: 50,
- *             y: 50,
- *             width: 100,
- *             height: 100,
- *             fillStyle: '#1F6D91'
- *         }]
- *     });
- *     
- *     var rect = drawCt.getSurface().getItems()[0];
- *     
- *     rect.setAnimation({
- *         duration: 1000,
- *         easing: 'elasticOut'
- *     });
- *     
- *     Ext.defer(function () {
- *         rect.setAttributes({
- *             width: 250
- *         });
- *     }, 500);
  *
  * Also, you can use different durations and easing functions on different attributes by using
  * {@link #customDurations} and {@link #customEasings}.
  *
  * By default, an animation modifier will be created during the initialization of a sprite.
- * You can get the animation modifier of a sprite via its 
- * {@link Ext.draw.sprite.Sprite#method-getAnimation getAnimation} method.
+ * You can get the animation modifier of a sprite via `sprite.fx`.
+ *
  */
 Ext.define('Ext.draw.modifier.Animation', {
     requires: [
@@ -87,7 +58,12 @@ Ext.define('Ext.draw.modifier.Animation', {
          *         'cx,cy': 1000
          *     }
          */
-        customDurations: {}
+        customDurations: {},
+
+        /**
+         * @deprecated Use {@link #customDurations} instead.
+         */
+        customDuration: null
     },
 
     constructor: function (config) {
@@ -99,6 +75,9 @@ Ext.define('Ext.draw.modifier.Animation', {
         me.callParent([config]);
     },
 
+    /**
+     * @inheritdoc
+     */
     prepareAttributes: function (attr) {
         if (!attr.hasOwnProperty('timers')) {
             attr.animating = false;
@@ -111,8 +90,8 @@ Ext.define('Ext.draw.modifier.Animation', {
             attr.animationOriginal = Ext.Object.chain(attr);
             attr.animationOriginal.prototype = attr;
         }
-        if (this._lower) {
-            this._lower.prepareAttributes(attr.animationOriginal);
+        if (this._previous) {
+            this._previous.prepareAttributes(attr.animationOriginal);
         }
     },
 
@@ -203,6 +182,21 @@ Ext.define('Ext.draw.modifier.Animation', {
     },
 
     /**
+     * @private
+     * @deprecated
+     * @since 5.0.1.
+     */
+    applyCustomDuration: function (newDuration, oldDuration) {
+        if (newDuration) {
+            this.getCustomDurations();
+            this.setCustomDurations(newDuration);
+            //<debug>
+            Ext.log.warn("'customDuration' config is deprecated. Use 'customDurations' config instead.");
+            //</debug>
+        }
+    },
+
+    /**
      * Set special duration on the given attributes. E.g.:
      *
      *     rectSprite.fx.setDurationOn('height', 2000);
@@ -285,7 +279,8 @@ Ext.define('Ext.draw.modifier.Animation', {
             ignite = false,
             timer, name, newValue, startValue, parser, easing, duration;
 
-        if (!any) { // If there is no animation enabled.
+        if (!any) {
+            // If there is no animation enabled
             // When applying changes to attributes, simply stop current animation
             // and set the value.
             for (name in changes) {
@@ -298,7 +293,8 @@ Ext.define('Ext.draw.modifier.Animation', {
                 delete timers[name];
             }
             return changes;
-        } else { // If any animation.
+        } else {
+            // If any animation
             for (name in changes) {
                 newValue = changes[name];
                 startValue = attr[name];
@@ -379,7 +375,7 @@ Ext.define('Ext.draw.modifier.Animation', {
      * This method will not affect the values of lower layers, but may delete a
      * value from it.
      * @param {Object} attr The source attributes.
-     * @return {Object} The changes to pop up or null.
+     * @return {Object} The changes to pop up.
      */
     updateAttributes: function (attr) {
         if (!attr.animating) {
@@ -394,7 +390,7 @@ Ext.define('Ext.draw.modifier.Animation', {
 
         // If updated in the same frame, return.
         if (attr.lastUpdate === now) {
-            return null;
+            return {};
         }
 
         for (name in timers) {
@@ -423,38 +419,46 @@ Ext.define('Ext.draw.modifier.Animation', {
         return changes;
     },
 
+    /**
+     * @inheritdoc
+     */
     pushDown: function (attr, changes) {
         changes = this.callParent([attr.animationOriginal, changes]);
         return this.setAttrs(attr, changes);
     },
 
+    /**
+     * @inheritdoc
+     */
     popUp: function (attr, changes) {
         attr = attr.prototype;
         changes = this.setAttrs(attr, changes);
-        if (this._upper) {
-            return this._upper.popUp(attr, changes);
+        if (this._next) {
+            return this._next.popUp(attr, changes);
         } else {
             return Ext.apply(attr, changes);
         }
     },
 
-    /**
-     * @private
-     * This is called as an animated object in `Ext.draw.Animator`.
-     */
+    // This is called as an animated object in `Ext.draw.Animator`.
     step: function (frameTime) {
         var me = this,
             pool = me.animatingPool.slice(),
-            ln = pool.length,
-            i = 0,
-            attr, changes;
+            attributes,
+            i, ln;
 
-        for (; i < ln; i++) {
-            attr = pool[i];
-            changes = me.updateAttributes(attr);
+        for (i = 0, ln = pool.length; i < ln; i++) {
+            attributes = pool[i];
+            var changes = this.updateAttributes(attributes),
+                name;
 
-            if (changes && me._upper) {
-                me._upper.popUp(attr, changes);
+            // Looking for anything in changes
+            //noinspection LoopStatementThatDoesntLoopJS
+            for (name in changes) {
+                if (this._next) {
+                    this._next.popUp(attributes, changes);
+                }
+                break;
             }
         }
     },

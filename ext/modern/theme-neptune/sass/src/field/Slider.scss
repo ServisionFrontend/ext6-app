@@ -2,9 +2,9 @@
  * @class Ext.field.Slider
  */
 
-.x-sliderfield {
-    border: $sliderfield-border;
-    .x-field-body {
-        padding: $sliderfield-padding;
+.x-slider-field,
+.x-toggle-field {
+    .x-component-outer {
+        padding: .6em;
     }
 }

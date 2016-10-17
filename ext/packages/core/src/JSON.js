@@ -175,7 +175,7 @@ var me = this,
      *
      * @param {String} s The String to encode
      * @return {String} The string literal to use in a JSON string.
-     * @method encodeString
+     * @method
      */
     me.encodeString = encodeString;
 
@@ -187,7 +187,7 @@ var me = this,
      *
      * @param {Object} o Any javascript value to be converted to its JSON representation
      * @return {String} The JSON representation of the passed value.
-     * @method encodeValue
+     * @method
      */
     me.encodeValue = doEncode;
 
@@ -264,7 +264,10 @@ var me = this,
 
     me.encodeMSDate = encodeMSDate;
 
-    // Alias for backwards compatibility
+    /**
+     * @private
+     * Alias for backwards compatibility
+     */
     if (!Ext.util) {
         Ext.util = {};
     }

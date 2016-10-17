@@ -194,21 +194,11 @@ Ext.define('Ext.fx.runner.CssTransition', {
     },
 
     getTestElement: function() {
-        var me = this,
-            testElement = me.testElement,
-            iframe = me.iframe,
-            iframeDocument, iframeStyle;
+        var testElement = this.testElement,
+            iframe, iframeDocument, iframeStyle;
 
-        if (testElement) {
-            // https://sencha.jira.com/browse/EXTJS-21131
-            // Forward navigation in Chrome 50 navigates iframes, and orphans
-            // the testElement in a detached document. Reconnect it if this has happened.
-            if (testElement.ownerDocument.defaultView !== iframe.contentWindow) {
-                iframe.contentDocument.body.appendChild(testElement);
-                me.testElementComputedStyle = iframeDocument.defaultView.getComputedStyle(testElement);
-            }
-        } else {
-            iframe = me.iframe = document.createElement('iframe');
+        if (!testElement) {
+            iframe = document.createElement('iframe');
             //<debug>
             // Set an attribute that tells the test runner to ignore this node when checking
             // for dom cleanup
@@ -230,10 +220,10 @@ Ext.define('Ext.fx.runner.CssTransition', {
             iframeDocument.writeln('</body>');
             iframeDocument.close();
 
-            me.testElement = testElement = iframeDocument.createElement('div');
+            this.testElement = testElement = iframeDocument.createElement('div');
             testElement.style.setProperty('position', 'absolute', 'important');
             iframeDocument.body.appendChild(testElement);
-            me.testElementComputedStyle = iframeDocument.defaultView.getComputedStyle(testElement);
+            this.testElementComputedStyle = window.getComputedStyle(testElement);
         }
 
         return testElement;
@@ -281,7 +271,7 @@ Ext.define('Ext.fx.runner.CssTransition', {
         for (i = 0,ln = animations.length; i < ln; i++) {
             animation = animations[i];
             animation = Ext.factory(animation, Ext.fx.Animation);
-            me.activeElement = element = animation.getElement();
+            element = animation.getElement();
 
             // Empty function to prevent idleTasks from running while we animate.
             Ext.AnimationQueue.start(Ext.emptyFn, animation);
@@ -290,15 +280,15 @@ Ext.define('Ext.fx.runner.CssTransition', {
 
             elementId = element.getId();
 
-            data[elementId] = data = Ext.merge({}, animation.getData());
+            data = Ext.merge({}, animation.getData());
 
             if (animation.onBeforeStart) {
                 animation.onBeforeStart.call(animation.scope || me, element);
             }
+            animation.fireEvent('animationstart', animation);
+            me.fireEvent('animationstart', me, animation);
 
-            // Allow listeners to mutate animation data
-            animation.fireEvent('animationstart', animation, data);
-            me.fireEvent('animationstart', me, animation, data);
+            data[elementId] = data;
 
             before = data.before;
             from = data.from;
@@ -403,7 +393,6 @@ Ext.define('Ext.fx.runner.CssTransition', {
 
             animation.startTime = Date.now();
         }
-        me.activeElement = null;
 
         message = me.$className;
 
@@ -416,16 +405,14 @@ Ext.define('Ext.fx.runner.CssTransition', {
             }
         };
 
-        if (window.requestAnimationFrame) {
-            window.requestAnimationFrame(function() {
+        if (Ext.browser.is.IE) {
+            Ext.Function.requestAnimationFrame(function() {
                 window.addEventListener('message', doApplyTo, false);
                 window.postMessage(message, '*');
             });
-        }else {
-            Ext.defer(function() {
-                window.addEventListener('message', doApplyTo, false);
-                window.postMessage(message, '*');
-            }, 1);
+        } else {
+            window.addEventListener('message', doApplyTo, false);
+            window.postMessage(message, '*');
         }
     },
 

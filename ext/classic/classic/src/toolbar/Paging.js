@@ -10,15 +10,12 @@
  * paging control. This Component {@link Ext.data.Store#method-load load}s blocks of data into the {@link #store} by passing
  * parameters used for paging criteria.
  *
- * Note: The {@link #store} specified must support paging as defined by `Ext.data.Store`. In particular, this means
- * that `Ext.data.ChainedStore` is not supported.
- *
  * {@img Ext.toolbar.Paging/Ext.toolbar.Paging.png Ext.toolbar.Paging component}
  *
  * Paging Toolbar is typically used as one of the Grid's toolbars:
  *
  *     var itemsPerPage = 2; // set the number of items you want per page
- *
+ * 
  *     Ext.create('Ext.data.Store', {
  *         id: 'simpsonsStore',
  *         autoLoad: false,
@@ -34,7 +31,7 @@
  *             }
  *         }
  *     });
- *
+ * 
  *     // specify segment of data you want to load using params
  *     store.load({
  *         params: {
@@ -42,15 +39,10 @@
  *             limit: itemsPerPage
  *         }
  *     });
- *
+ * 
  *     Ext.create('Ext.grid.Panel', {
  *         title: 'Simpsons',
- *         width: 400,
- *         height: 125,
- *         renderTo: Ext.getBody(),
- *
  *         store: 'simpsonsStore',
- *
  *         columns: [{
  *             text: 'Name',
  *             dataIndex: 'name'
@@ -62,11 +54,15 @@
  *             text: 'Phone',
  *             dataIndex: 'phone'
  *         }],
- *
- *         bbar: {
+ *         width: 400,
+ *         height: 125,
+ *         dockedItems: [{
  *             xtype: 'pagingtoolbar',
+ *             store: 'simpsonsStore', // same store GridPanel is using
+ *             dock: 'bottom',
  *             displayInfo: true
- *         }
+ *         }],
+ *         renderTo: Ext.getBody()
  *     });
  *
  * To use paging, you need to set a pageSize configuration on the Store, and pass the paging requirements to
@@ -85,7 +81,7 @@
  * If using {@link Ext.data.Store#autoLoad store's autoLoad} configuration:
  *
  *     var myStore = Ext.create('Ext.data.Store', {
- *         autoLoad: {start: 0, limit: 25},
+ *         {@link Ext.data.Store#autoLoad autoLoad}: {start: 0, limit: 25},
  *         ...
  *     });
  *
@@ -94,7 +90,7 @@
  *     {
  *         "success": true,
  *         "results": 2000,
- *         "items": [ // ***Note:** this must be an Array
+ *         "rows": [ // ***Note:** this must be an Array
  *             { "id":  1, "name": "Bill", "occupation": "Gardener" },
  *             { "id":  2, "name":  "Ben", "occupation": "Horticulturalist" },
  *             ...
@@ -114,28 +110,22 @@
 Ext.define('Ext.toolbar.Paging', {
     extend: 'Ext.toolbar.Toolbar',
     xtype: 'pagingtoolbar',
-
     alternateClassName: 'Ext.PagingToolbar',
     requires: [
         'Ext.toolbar.TextItem',
         'Ext.form.field.Number'
     ],
-
     mixins: [
         'Ext.util.StoreHolder'
     ],
 
     /**
-     * @cfg {Ext.data.Store/String} store
-     * The data source to which the paging toolbar is bound (must be the same store instance
+     * @cfg {Ext.data.Store/String} store (required)
+     * The data source to which the paging toolbar is bound (must be the same store instance 
      * used in the grid / tree). Acceptable values for this property are:
      *
-     *   - Any {@link Ext.data.Store Store} class or subclass
-     *   - An {@link Ext.data.Store#storeId ID of a store}
-     *
-     * If no `store` is provided, the `store` of the owner component (if there is an
-     * owner and it has a store) is used. The owner store is bound when this component
-     * is rendered.
+     *   - **any {@link Ext.data.Store Store} class / subclass**
+     *   - **an {@link Ext.data.Store#storeId ID of a store}**
      */
 
     /**
@@ -295,9 +285,9 @@ Ext.define('Ext.toolbar.Paging', {
                 scope: me,
                 blur: me.onPagingBlur
             };
-
+        
         inputListeners[Ext.supports.SpecialKeyDownRepeat ? 'keydown' : 'keypress'] = me.onPagingKeyDown;
-
+        
         return [{
             itemId: 'first',
             tooltip: me.firstText,
@@ -337,7 +327,7 @@ Ext.define('Ext.toolbar.Paging', {
         },{
             xtype: 'tbtext',
             itemId: 'afterTextItem',
-            html: Ext.String.format(me.afterPageText, 1)
+            text: Ext.String.format(me.afterPageText, 1)
         },
         '-',
         {
@@ -375,58 +365,34 @@ Ext.define('Ext.toolbar.Paging', {
             pagingItems;
 
         me.bindStore(me.store || 'ext-empty-store', true);
-
-        //<debug>
-        if (me.store && !me.store.nextPage) {
-            Ext.raise('Store is not compatible with this component (does not support paging)');
-        }
-        //</debug>
-
         pagingItems = me.getPagingItems();
-
         if (me.prependButtons) {
             me.items = userItems.concat(pagingItems);
         } else {
             me.items = pagingItems.concat(userItems);
         }
-
         delete me.buttons;
 
         if (me.displayInfo) {
             me.items.push('->');
-            me.items.push({
-                xtype: 'tbtext',
-                itemId: 'displayItem'
-            });
+            me.items.push({xtype: 'tbtext', itemId: 'displayItem'});
         }
 
         me.callParent();
     },
-
+    
     beforeRender: function() {
-        var me = this,
-            store = me.store,
-            ownerCt = me.ownerCt,
-            ownerStore = ownerCt && ownerCt.store;
-
-        me.callParent(arguments);
-
-        if (store.isEmptyStore && ownerStore && store !== ownerStore) {
-            // If we are bound to the "empty-store" and we have an owner with a
-            // real store, switch to that store.
-            me.setStore(ownerStore);
-        }
-
-        me.updateBarInfo();
+        this.callParent(arguments);
+        this.updateBarInfo();  
     },
 
     updateBarInfo: function() {
         var me = this;
         if (!me.store.isLoading()) {
             me.calledInternal = true;
-            me.onLoad();
+            me.onLoad();    
             me.calledInternal = false;
-        }
+        }  
     },
 
     /**
@@ -474,7 +440,7 @@ Ext.define('Ext.toolbar.Paging', {
             pageData = me.getPageData();
             currPage = pageData.currentPage;
             pageCount = pageData.pageCount;
-
+            
              // Check for invalid current page.
             if (currPage > pageCount) {
                 // If the surrent page is beyond the loaded end,
@@ -488,7 +454,7 @@ Ext.define('Ext.toolbar.Paging', {
                 }
                 return;
             }
-
+            
             afterText = Ext.String.format(me.afterPageText, isNaN(pageCount) ? 1 : pageCount);
         } else {
             currPage = 0;
@@ -499,7 +465,7 @@ Ext.define('Ext.toolbar.Paging', {
         Ext.suspendLayouts();
         item = me.child('#afterTextItem');
         if (item) {
-            item.update(afterText);
+            item.setText(afterText);
         }
         item = me.getInputItem();
         if (item) {
@@ -517,7 +483,7 @@ Ext.define('Ext.toolbar.Paging', {
             me.fireEvent('change', me, pageData || me.emptyPageData);
         }
     },
-
+    
     setChildDisabled: function(selector, disabled){
         var item = this.child(selector);
         if (item) {
@@ -528,18 +494,17 @@ Ext.define('Ext.toolbar.Paging', {
     /**
      * @private
      */
-    getPageData: function() {
+    getPageData : function(){
         var store = this.store,
-            totalCount = store.getTotalCount(),
-            pageCount = Math.ceil(totalCount / store.pageSize),
-            toRecord = Math.min(store.currentPage * store.pageSize, totalCount);
-       
+            totalCount = store.getTotalCount();
+
         return {
             total : totalCount,
             currentPage : store.currentPage,
-            pageCount: Ext.Number.isFinite(pageCount) ? pageCount : 1,
+            pageCount: Math.ceil(totalCount / store.pageSize),
             fromRecord: ((store.currentPage - 1) * store.pageSize) + 1,
-            toRecord: toRecord || totalCount
+            toRecord: Math.min(store.currentPage * store.pageSize, totalCount)
+
         };
     },
 
@@ -549,7 +514,7 @@ Ext.define('Ext.toolbar.Paging', {
     onLoadError : function(){
         this.setChildDisabled('#refresh', false);
     },
-
+    
     getInputItem: function(){
         return this.child('#inputItem');
     },
@@ -579,7 +544,7 @@ Ext.define('Ext.toolbar.Paging', {
     onPagingBlur : function(e){
         var inputItem = this.getInputItem(),
             curPage;
-
+            
         if (inputItem) {
             curPage = this.getPageData().currentPage;
             inputItem.setValue(curPage);
@@ -592,7 +557,7 @@ Ext.define('Ext.toolbar.Paging', {
     onPagingKeyDown : function(field, e){
         this.processKeyEvent(field, e);
     },
-
+    
     processKeyEvent: function(field, e) {
         var me = this,
             key = e.getKey(),
@@ -625,7 +590,7 @@ Ext.define('Ext.toolbar.Paging', {
                     field.setValue(pageNum);
                 }
             }
-        }
+        }    
     },
 
     /**
@@ -724,7 +689,7 @@ Ext.define('Ext.toolbar.Paging', {
         }
         return false;
     },
-
+    
     getStoreListeners: function() {
         return {
             beforeload: this.beforeLoad,

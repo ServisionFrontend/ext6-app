@@ -4,6 +4,7 @@
  *
  * @abstract
  */
+
 Ext.define('Ext.direct.JsonProvider', {
     extend: 'Ext.direct.Provider',
     alias:  'direct.jsonprovider',

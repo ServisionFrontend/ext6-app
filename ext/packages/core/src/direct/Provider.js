@@ -5,11 +5,11 @@
  *
  *     Provider
  *     |
- *     +---JsonProvider
+ *     +---{@link Ext.direct.JsonProvider JsonProvider}
  *         |
- *         +---PollingProvider
+ *         +---{@link Ext.direct.PollingProvider PollingProvider}
  *         |
- *         +---RemotingProvider
+ *         +---{@link Ext.direct.RemotingProvider RemotingProvider}
  *
  * @abstract
  */
@@ -64,20 +64,15 @@ Ext.define('Ext.direct.Provider', {
 
     /**
      * @event data
-     * Fires when the Provider receives data from the server-side. This event is fired
-     * for valid responses as well as for exceptions.
+     * Fires when the Provider receives data from the server-side
      *
-     * @param {Ext.direct.Provider} provider The {@link Ext.direct.Provider Provider} instance.
-     * @param {Ext.direct.Event} e The {@link Ext.direct.Event} that occurred.
+     * @param {Ext.direct.Provider} provider The {@link Ext.direct.Provider Provider}.
+     * @param {Ext.direct.Event} e The Ext.direct.Event type that occurred.
      */
 
     /**
      * @event exception
-     * Fires when the Provider receives an exception from the server-side. This event is *not*
-     * fired for valid responses.
-     *
-     * @param {Ext.direct.Provider} provider The {@link Ext.direct.Provider Provider} instance.
-     * @param {Ext.direct.Event} e The {@link Ext.direct.Event Exception event} that occured.
+     * Fires when the Provider receives an exception from the server-side
      */
     
     subscribers: 0,
@@ -124,8 +119,6 @@ Ext.define('Ext.direct.Provider', {
     },
     
     /**
-     * @method
-     *
      * Do connection setup. This is a template method.
      * @template
      * @protected
@@ -155,8 +148,6 @@ Ext.define('Ext.direct.Provider', {
     },
     
     /**
-     * @method
-     *
      * Do connection teardown. This is a template method.
      * @template
      * @protected
@@ -165,16 +156,12 @@ Ext.define('Ext.direct.Provider', {
     
     inheritableStatics: {
         /**
-         * @method
-         *
          * Check if the passed configuration object contains enough
          * information to construct a Provider.
          *
          * @param {Object} config
          *
          * @return {Boolean} `true` if config is sufficient, `false` otherwise.
-         * @static
-         * @inheritable
          */
         checkConfig: Ext.returnFalse
     },
