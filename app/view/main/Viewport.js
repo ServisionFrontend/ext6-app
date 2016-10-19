@@ -40,17 +40,27 @@ Ext.define('App.view.main.Viewport', {
 		reference: 'mainContainerWrap',
 		flex: 1,
 		items: [{
-			xtype: 'treelist',
-			reference: 'navigationTreeList',
-			itemId: 'navigationTreeList',
-			ui: 'navigation',
-			store: Ext.create('App.store.NavigationTree'),
+			region: 'west',
+			scrollable: 'y',
 			width: 250,
-			expanderFirst: false,
-			expanderOnly: false
+			reference: 'navigationWrap',
+			layout: {
+				type: 'vbox',
+				align: 'stretch'
+			},
+			cls: 'treelist-with-nav',
+			items: [{
+				xtype: 'treelist',
+				reference: 'navigationTreeList',
+				itemId: 'navigationTreeList',
+				ui: 'navigation',
+				store: Ext.create('App.store.NavigationTree'),
+				expanderFirst: false,
+				expanderOnly: false
+			}]
 		}, {
 			xtype: 'container',
-			flex: 1,
+			region: 'center',
 			reference: 'mainCardPanel',
 			cls: 'sencha-dash-right-main-container',
 			itemId: 'contentPanel',

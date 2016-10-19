@@ -6,7 +6,7 @@ Ext.define('App.store.NavigationTree', {
 	fields: [{
 		name: 'text'
 	}],
-
+	type: 'tree',
 	root: {
 		expanded: true,
 		children: [{
