@@ -5,13 +5,13 @@ Ext.define('App.view.account.userManage.Viewport', {
 		'App.view.account.userManage.Grid'
 	],
 	defaults: {
-		border: true
+		border: true,
+		margin: '10 10 5 10'
 	},
-	padding: '5 0 0 0',
 	items: [{
 		title: '查询区域',
 		width: '100%',
-		xtype: 'userquery',
+		xtype: 'userquery'
 	}, {
 		title: '列表区域',
 		xtype: 'usergrid'

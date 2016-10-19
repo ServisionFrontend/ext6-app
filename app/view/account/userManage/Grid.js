@@ -1,24 +1,9 @@
 Ext.define('App.view.account.userManage.Grid', {
 	extend: 'Ext.ux.component.grid.Grid',
 	alias: 'widget.usergrid',
+	store: 'App.store.account.UserManage',
 	rownumberer: true,
 	controlButtons: ["update", "resetpwd"],
-	tbar: [{
-		xtype: 'button',
-		text: '添加',
-		action: 'create'
-	}, '-', {
-		xtype: 'button',
-		text: '修改',
-		action: 'update',
-		disabled: true,
-		singleSelectEnable: true
-	}, '-', {
-		xtype: 'button',
-		text: '重置密码',
-		action: 'resetpwd',
-		disabled: true
-	}],
 	columns: [{
 		text: '用户名',
 		dataIndex: 'username',

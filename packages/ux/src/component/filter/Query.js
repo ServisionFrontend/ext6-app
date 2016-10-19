@@ -19,21 +19,25 @@
 	itemId: "query-form",
 	dockedItems: [{
 		xtype: 'toolbar',
-		ui: "footer",
 		dock: 'bottom',
 		layout: {
 			align: 'middle',
 			pack: 'center',
 			type: 'hbox'
 		},
+		defaults: {
+			width: 80
+		},
 		items: [{
 			xtype: 'button',
 			action: "query",
-			text: "查询"
+			text: "查询",
+			ui: 'green'
 		}, {
 			xtype: 'button',
 			action: "reset",
-			text: "重置"
+			text: "重置",
+			ui: 'blue'
 		}]
 	}],
 

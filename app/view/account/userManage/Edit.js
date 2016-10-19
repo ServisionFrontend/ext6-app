@@ -6,9 +6,6 @@ Ext.define('App.view.account.userManage.Edit', {
 	updateDisableItems: ['username'],
 	items: [{
 		items: [{
-			xtype: 'hiddenfield',
-			name: 'id'
-		}, {
 			fieldLabel: '用户名',
 			name: 'username'
 		}, {
@@ -28,50 +25,6 @@ Ext.define('App.view.account.userManage.Edit', {
 				name: '禁用',
 				code: false
 			}]
-		}, {
-			xtype: 'fieldset',
-			title: '权限分配',
-			items: [{
-				itemId: 'promise_m',
-				xtype: 'groupmanage'
-			}]
-		}, {
-			xtype: 'hiddenfield',
-			name: 'changeDirty'
 		}]
-	}],
-	listeners: {
-		afterrender: function() {
-			var me = this,
-				promiseG = me.down("[itemId=promise_m]"),
-				ckdlist = me.ckdlist;
-			promiseG.load(ckdlist);
-		}
-	},
-
-	setRecord: function() {
-		var me = this;
-		me.callParent(arguments);
-		me.ckdlist = arguments[0].get("permissionIds");
-	},
-
-	getParams: function() {
-		var me = this,
-			params = {},
-			promiseG = me.down("[itemId=promise_m]"),
-			enable = me.query("[name='enable']"),
-			items = me.getFormFields();
-
-		Ext.each(items, function(item) {
-			if (!item.isNotSubmit) {
-				var temp = item.getValue();
-				params[item.name] = temp;
-			}
-		});
-		Ext.apply(params, {
-			permissionIds: promiseG.codes
-		});
-
-		return params;
-	}
+	}]
 });

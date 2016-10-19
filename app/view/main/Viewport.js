@@ -25,7 +25,7 @@ Ext.define('App.view.main.Viewport', {
 			xtype: 'component',
 			reference: 'senchaLogo',
 			cls: 'sencha-logo',
-			html: '',
+			html: '<div class="main-logo"><img src="resources/images/logo.png">浩配主数据管理系统</div>',
 			width: 250
 		}, {
 			margin: '0 0 0 8',
@@ -85,7 +85,10 @@ Ext.define('App.view.main.Viewport', {
 				type: 'card',
 				anchor: '100%'
 			},
+<<<<<<< HEAD
 			// padding: 8,
+=======
+>>>>>>> 6805f168ec61360d2a57a6cf82ca0c5c7b52885c
 			items: [{
 				xtype: 'tabpanel',
 				id: "tabs",
@@ -93,7 +96,8 @@ Ext.define('App.view.main.Viewport', {
 					title: '首页',
 					layout: 'fit',
 					closeAction: "destroy"
-				}]
+				}],
+				plugins: Ext.create('Ext.ux.TabCloseMenu')
 			}]
 		}]
 	}]

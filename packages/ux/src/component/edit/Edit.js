@@ -18,7 +18,7 @@
 		autoScroll: true,
 		defaults: {
 			xtype: "textfield",
-			margin: '0 0 5 0',
+			margin: '0 0 10 0',
 			labelWidth: 70,
 			labelPad: 10,
 			allowBlank: false

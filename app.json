@@ -22,6 +22,7 @@
 	 */
 	"classpath": [
 		"app",
+		"packages",
 		"ext/packages/ux"
 	],
 
