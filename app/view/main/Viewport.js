@@ -42,8 +42,8 @@ Ext.define('App.view.main.Viewport', {
 		items: [{
 			region: 'west',
 			scrollable: 'y',
-			reference: 'navigationWrap',
 			width: 250,
+			reference: 'navigationWrap',
 			layout: {
 				type: 'vbox',
 				align: 'stretch'
