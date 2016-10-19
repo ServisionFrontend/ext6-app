@@ -30,13 +30,11 @@ Ext.define("Ext.ux.component.edit.Base", {
 		items: [{
 			xtype: 'button',
 			action: "save",
-			text: "保存",
-			iconCls: 'icon-save'
+			text: "保存"
 		}, {
 			xtype: 'button',
 			action: "cancel",
-			text: "取消",
-			iconCls: 'icon-cancel'
+			text: "取消"
 		}]
 	}],
 

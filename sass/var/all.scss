@@ -3,6 +3,11 @@
  * classic builds.
  */
 
+$panel-border-color : #dee6ed;
+$panel-header-background-color: #dee6ed;
+$panel-header-color: #6F787F;
+$panel-header-padding: 5px;
+
 $panel-navigation-background-color: #32404e;
 $panel-navigation-item-line-height: 64px;
 $panel-navigation-item-text-color: #ADB3B8;
@@ -11,7 +16,7 @@ $progress-bar-background-color: #458fd2;
 
 //Form and Toolbar Button UI colors
 
-$color-blue: #167abc;
+$color-blue: #35BAF6;
 $color-soft-cyan: #03b4d5;
 $color-soft-blue: #2eadf5;
 $color-soft-green: #9cc96b;

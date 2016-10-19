@@ -281,24 +281,24 @@
 @include extjs-button-small-ui(
     $ui: 'green',
     $background-color: $color-green,
-    $border-color:darken($color-green, 5%)
+    $border-color: $color-green
 );
 @include extjs-button-toolbar-small-ui(
     $ui: 'green',
     $background-color: $color-green,
-    $border-color:darken($color-green, 5%)
+    $border-color:$color-green
 );
 
 
 @include extjs-button-small-ui(
     $ui: 'blue',
     $background-color: $color-blue,
-    $border-color:darken($color-blue, 5%)
+    $border-color: $color-blue
 );
 @include extjs-button-toolbar-small-ui(
     $ui: 'blue',
     $background-color: $color-blue,
-    $border-color:darken($color-blue, 5%)
+    $border-color: $color-blue
 );
 
 @include extjs-button-small-ui(

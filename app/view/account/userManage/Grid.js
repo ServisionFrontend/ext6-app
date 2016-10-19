@@ -1,6 +1,7 @@
 Ext.define('App.view.account.userManage.Grid', {
 	extend: 'Ext.ux.component.grid.Grid',
 	alias: 'widget.usergrid',
+	store: 'App.store.account.UserManage',
 	rownumberer: true,
 	controlButtons: ["update", "resetpwd"],
 	tbar: [{

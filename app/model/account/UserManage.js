@@ -9,8 +9,6 @@ Ext.define('App.model.account.UserManage', {
 	}, {
 		name: 'modifiedBy'
 	}, {
-		name: 'id'
-	}, {
 		name: 'enable'
 	}, {
 		name: 'createdDate'

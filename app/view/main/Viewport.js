@@ -66,7 +66,8 @@ Ext.define('App.view.main.Viewport', {
 					title: '首页',
 					layout: 'fit',
 					closeAction: "destroy"
-				}]
+				}],
+				plugins: Ext.create('Ext.ux.TabCloseMenu')
 			}]
 		}]
 	}]

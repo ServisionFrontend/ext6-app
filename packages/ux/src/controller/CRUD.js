@@ -58,12 +58,16 @@
 		var me = this,
 			store = me.getGrid().getStore();
 
-		store.on("beforeload", function(that) {
+		store.on("beforeload", function(that, operation, eOpts) {
 			me.addStoreFilters(that);
+
+			store.fireEvent('beforerequest', that, operation, eOpts);
 		});
+
 		store.on("aftersuccess", function(operation) {
 			me.handlerSuccess(operation);
 		});
+
 		store.on("aftererror", function(operation, response) {
 			me.handlerError(operation, response);
 		});

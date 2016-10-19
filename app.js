@@ -1,5 +1,5 @@
-var extjsConfig = App.extjsConfig,
-	bootPage = extjsConfig.pages[extjsConfig.pageCode];
+var extjsConfig = App.extjsConfig;
+var bootPage = extjsConfig.pages[extjsConfig.pageCode];
 
 Ext.application({
 	name: 'App',
@@ -7,7 +7,8 @@ Ext.application({
 	extend: 'App.Application',
 
 	requires: [
-		'App.*'
+		'App.*',
+		'Ext.util.Common'
 	],
 
 	controllers: [bootPage.controller],
