@@ -25,7 +25,7 @@ Ext.define('App.view.main.Viewport', {
 			xtype: 'component',
 			reference: 'senchaLogo',
 			cls: 'sencha-logo',
-			html: '',
+			html: '<div class="main-logo"><img src="resources/images/logo.png">浩配主数据管理系统</div>',
 			width: 250
 		}, {
 			margin: '0 0 0 8',
@@ -68,7 +68,6 @@ Ext.define('App.view.main.Viewport', {
 				type: 'card',
 				anchor: '100%'
 			},
-			padding: 8,
 			items: [{
 				xtype: 'tabpanel',
 				id: "tabs",

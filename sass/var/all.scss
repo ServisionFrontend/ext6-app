@@ -1,21 +1,21 @@
-/*
- * This file defines variables used throughout the application for modern and
- * classic builds.
- */
-
+// panel
 $panel-border-color : #dee6ed;
 $panel-header-background-color: #dee6ed;
 $panel-header-color: #6F787F;
 $panel-header-padding: 5px;
 
+// window
+$window-header-color: #fff;
+
+
+// tree list
 $panel-navigation-background-color: #32404e;
-$panel-navigation-item-line-height: 64px;
+$panel-navigation-item-line-height: 54px;
 $panel-navigation-item-text-color: #ADB3B8;
 
 $progress-bar-background-color: #458fd2;
 
-//Form and Toolbar Button UI colors
-
+// button
 $color-blue: #35BAF6;
 $color-soft-cyan: #03b4d5;
 $color-soft-blue: #2eadf5;

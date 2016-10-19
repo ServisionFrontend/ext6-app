@@ -6,7 +6,7 @@ Ext.define('App.view.account.userManage.Viewport', {
 	],
 	defaults: {
 		border: true,
-		margin: '10 0 0 0'
+		margin: '10 10 5 10'
 	},
 	items: [{
 		title: '查询区域',

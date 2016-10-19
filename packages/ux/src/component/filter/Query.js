@@ -25,6 +25,9 @@
 			pack: 'center',
 			type: 'hbox'
 		},
+		defaults: {
+			width: 80
+		},
 		items: [{
 			xtype: 'button',
 			action: "query",

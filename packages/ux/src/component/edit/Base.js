@@ -11,16 +11,14 @@ Ext.define("Ext.ux.component.edit.Base", {
 	closeAction: 'destroy',
 	width: 450,
 	maxHeight: 500,
-	bodyStyle: {
-		background: '#fff'
-	},
 	bodyPadding: '10 10 5 10',
 	dockedItems: [{
 		xtype: 'toolbar',
 		dock: 'bottom',
-		ui: 'footer',
+		margin: "3 0 15 0",
 		defaults: {
-			margins: "0 10 0 10"
+			width: 80,
+			ui: 'blue'
 		},
 		layout: {
 			align: 'middle',
