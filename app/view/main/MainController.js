@@ -19,12 +19,8 @@ Ext.define('App.view.main.MainController', {
 			new_width = collapsing ? 64 : 250;
 
 		if (!collapsing) {
-			// If we are leaving micro mode (expanding), we do that first so that the
-			// text of the items in the navlist will be revealed by the animation.
 			navigationList.setMicro(false);
-
 			navigationWrap.setOverflowXY(false, true);
-
 		} else {
 			navigationWrap.scrollTo(0, 0);
 			navigationWrap.setOverflowXY(false, false);
@@ -38,24 +34,21 @@ Ext.define('App.view.main.MainController', {
 			}
 		});
 
+		// navigationWrap.width = new_width;
 		navigationWrap.width = new_width;
 
 		wrapContainer.updateLayout({
 			isRoot: true
 		});
 
-		// navigationList.el.addCls('nav-tree-animating');
-
 		if (collapsing) {
 			navigationWrap.on({
 				afterlayoutanimation: function() {
-					// navigationList.el.removeCls('nav-tree-animating');
+
 					navigationList.setMicro(true);
 				},
 				single: true
 			});
-
 		}
-
 	}
 });

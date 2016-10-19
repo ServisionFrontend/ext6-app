@@ -43,10 +43,12 @@ Ext.define('App.view.main.Viewport', {
 			region: 'west',
 			scrollable: 'y',
 			reference: 'navigationWrap',
-			layout: 'fit',
-			// border: true,
-			// style: "border:4px solid red;",
-			bodyStyle: 'background:#32404e;',
+			width: 250,
+			layout: {
+				type: 'vbox',
+				align: 'stretch'
+			},
+			cls: 'treelist-with-nav',
 			items: [{
 				xtype: 'treelist',
 				reference: 'navigationTreeList',
@@ -54,13 +56,12 @@ Ext.define('App.view.main.Viewport', {
 				ui: 'navigation',
 				store: Ext.create('App.store.NavigationTree'),
 				expanderFirst: false,
-				width: 250,
 				expanderOnly: false
 			}]
 		}, {
 			xtype: 'container',
 			region: 'center',
-			reference: 'mainCardPanel1',
+			reference: 'mainCardPanel',
 			cls: 'sencha-dash-right-main-container',
 			itemId: 'contentPanel',
 			layout: {

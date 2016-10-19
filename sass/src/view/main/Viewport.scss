@@ -308,3 +308,10 @@
     $background-color: transparent,
     $border-width: 0
 );
+
+.treelist-with-nav .#{$prefix}panel-body {
+    background-color: #32404e;
+}
+.sencha-dash-right-main-container{
+    z-index:0;
+}
