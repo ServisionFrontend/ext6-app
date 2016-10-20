@@ -36,12 +36,14 @@ Ext.define('App.view.main.MainController', {
 
 		// navigationWrap.width = new_width;
 		navigationWrap.width = new_width;
+		// navigationWrap.setWidth(new_width)
 
 		wrapContainer.updateLayout({
 			isRoot: true
 		});
 
 		if (collapsing) {
+			// navigationList.setMicro(true);
 			navigationWrap.on({
 				afterlayoutanimation: function() {
 
@@ -50,5 +52,27 @@ Ext.define('App.view.main.MainController', {
 				single: true
 			});
 		}
-	}
+	},
+
+	onToggleMicro: function(button, pressed) {
+		var treelist = this.lookupReference('treelist'),
+			navBtn = this.lookupReference('navBtn'),
+			wrapContainer = this.lookupReference('mainContainerWrap'),
+			ct = treelist.ownerCt;
+		pressed = treelist.getMicro();
+
+		if (!pressed) {
+			this.oldWidth = ct.width;
+			ct.setWidth(44);
+		} else {
+			ct.setWidth(this.oldWidth);
+		}
+		console.log(pressed);
+		treelist.setMicro(!pressed);
+
+		// wrapContainer.updateLayout({
+		// 	isRoot: true
+		// });
+
+	},
 });
