@@ -16,31 +16,27 @@
 	destroyKeys: ['code'],
 	tbar: [{
 		iconCls: 'x-fa fa-plus-square-o',
-		hrefTarget: '_self',
 		tooltip: '新增',
 		text: '新增',
 		action: 'create'
 	}, {
 		iconCls: 'x-fa fa-edit',
-		hrefTarget: '_self',
 		text: '编辑',
 		tooltip: '编辑',
 		action: 'add'
 	}, {
 		iconCls: 'x-fa fa-trash-o',
-		hrefTarget: '_self',
 		text: '删除',
 		tooltip: '删除',
-		action: 'add'
+		action: 'add',
+		disabled: true
 	}, {
 		iconCls: 'x-fa fa-file-excel-o',
-		hrefTarget: '_self',
 		text: '导入',
 		tooltip: '导入',
 		action: 'add'
 	}, {
 		iconCls: 'x-fa fa-file-excel-o',
-		hrefTarget: '_self',
 		text: '导出',
 		tooltip: '导出',
 		action: 'add'

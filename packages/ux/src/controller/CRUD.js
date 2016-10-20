@@ -342,7 +342,7 @@
 		} else {
 			grid.setLoading(false);
 		}
-		Ext.util.errorHandler(response);
+		Ext.util.Common.errorHandler(response);
 		store.rejectChanges();
 	},
 
