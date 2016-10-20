@@ -94,9 +94,6 @@ Ext.define('App.view.main.Viewport', {
 				type: 'card',
 				anchor: '100%'
 			},
-			<< << << < HEAD
-			// padding: 8,
-			=== === = >>> >>> > 6805 f168ec61360d2a57a6cf82ca0c5c7b52885c
 			items: [{
 				xtype: 'tabpanel',
 				id: "tabs",
