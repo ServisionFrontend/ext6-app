@@ -74,5 +74,5 @@ Ext.define('App.view.main.MainController', {
 		// 	isRoot: true
 		// });
 
-	},
+	}
 });
