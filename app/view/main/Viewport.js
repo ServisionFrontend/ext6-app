@@ -50,22 +50,6 @@ Ext.define('App.view.main.Viewport', {
 		reference: 'mainContainerWrap',
 		flex: 1,
 		items: [{
-			// region: 'west',
-			// width: 250,
-			// split: true,
-			// reference: 'treelistContainer',
-			// layout: {
-			// 	type: 'vbox',
-			// 	align: 'stretch'
-			// },
-			// split: true,
-			// border: false,
-			// scrollable: 'y',
-			// items: [{
-			// 		xtype: 'treelist',
-			// 		reference: 'treelist',
-			// 		store: Ext.create('App.store.NavigationTree')
-			// 	}]
 			region: 'west',
 			scrollable: 'y',
 			width: 250,

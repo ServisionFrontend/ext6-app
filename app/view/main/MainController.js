@@ -67,12 +67,6 @@ Ext.define('App.view.main.MainController', {
 		} else {
 			ct.setWidth(this.oldWidth);
 		}
-		console.log(pressed);
-		treelist.setMicro(!pressed);
-
-		// wrapContainer.updateLayout({
-		// 	isRoot: true
-		// });
-
-	},
+		treelist.setMicro(!pressed)
+	}
 });
