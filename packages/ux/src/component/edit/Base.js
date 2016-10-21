@@ -17,8 +17,7 @@ Ext.define("Ext.ux.component.edit.Base", {
 		dock: 'bottom',
 		margin: "3 0 15 0",
 		defaults: {
-			width: 80,
-			ui: 'blue'
+			width: 80
 		},
 		layout: {
 			align: 'middle',
@@ -28,7 +27,8 @@ Ext.define("Ext.ux.component.edit.Base", {
 		items: [{
 			xtype: 'button',
 			action: "save",
-			text: "保存"
+			text: "保存",
+			ui: 'blue'
 		}, {
 			xtype: 'button',
 			action: "cancel",

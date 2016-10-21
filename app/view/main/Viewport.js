@@ -32,8 +32,17 @@ Ext.define('App.view.main.Viewport', {
 			ui: 'header',
 			iconCls: 'x-fa fa-navicon',
 			id: 'main-navigation-btn',
-			enableToggle: true,
-			handler: 'onToggleNavigationSize' //onToggleNavigationSize//onToggleMicro
+			handler: 'onToggleNavigationSize'
+		}, '->', {
+			margin: '0 0 0 8',
+			ui: 'header',
+			iconCls: 'x-fa fa-key',
+			text: '修改密码'
+		}, {
+			margin: '0 0 0 8',
+			ui: 'header',
+			iconCls: 'x-fa fa-sign-out',
+			text: '退出'
 		}]
 	}, {
 		xtype: 'maincontainerwrap',
@@ -85,7 +94,6 @@ Ext.define('App.view.main.Viewport', {
 				type: 'card',
 				anchor: '100%'
 			},
-			padding: 8,
 			items: [{
 				xtype: 'tabpanel',
 				id: "tabs",

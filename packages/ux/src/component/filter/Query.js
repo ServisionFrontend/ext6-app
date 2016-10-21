@@ -32,12 +32,11 @@
 			xtype: 'button',
 			action: "query",
 			text: "查询",
-			ui: 'green'
+			ui: 'blue'
 		}, {
 			xtype: 'button',
 			action: "reset",
-			text: "重置",
-			ui: 'blue'
+			text: "重置"
 		}]
 	}],
 

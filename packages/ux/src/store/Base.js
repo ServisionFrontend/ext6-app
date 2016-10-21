@@ -17,7 +17,7 @@
 	buildProxy: function(config) {
 		var me = this;
 
-		config.proxy = Ext.create('Ext.data.proxy.Rest', {
+		config.proxy = Ext.create('Ext.ux.proxy.Rest', {
 			reader: {
 				method: 'get',
 				type: 'json',
@@ -32,56 +32,10 @@
 			noCache: true,
 			listeners: {
 				exception: function(that, response, operation, eOpts) {
-					Ext.util.Common.errorHandler(response, function() {
-						me.fireEvent("aftererror", operation, response);
-					});
+					me.fireEvent("aftererror", operation, response);
 				}
 			}
 		});
-	},
-
-	setProxyParams: function(operation) {
-		var me = this,
-			params;
-
-		if (operation.allowWrite()) {
-			params = request.proxy.extraJsonData;
-		} else {
-			params = me.proxy.extraFilters ? me.getReadParams(operation) : me.proxy.extraParams;
-		}
-
-		operation.setParams(params);
-	},
-
-	getReadParams: function(operation) {
-		var me = this;
-		var readParams = {
-			filters: me.proxy.extraFilters || [],
-			sorts: me.getSortParams(operation.sorters),
-			paging: {
-				page: operation.getPage(),
-				size: operation.getLimit()
-			}
-		};
-
-		return {
-			args: Ext.encode(readParams)
-		};
-	},
-
-	getSortParams: function(sorters) {
-		var me = this;
-		var sorts = [];
-		var items = me.getSorters().items;
-
-		Ext.each(items, function(item) {
-			sorts.push({
-				field: item.property,
-				asc: item.direction === 'ASC' ? true : false
-			});
-		});
-
-		return sorts;
 	},
 
 	listeners: {
@@ -89,12 +43,6 @@
 			var me = this;
 
 			me.fireEvent("aftersuccess", operation);
-		},
-
-		beforerequest: function(store, operation, eOpts) {
-			var me = this;
-
-			me.setProxyParams(operation);
 		}
 	}
 });
