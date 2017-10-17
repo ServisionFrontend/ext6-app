@@ -7,21 +7,6 @@
 
     <title>App</title>
 
-    <!-- app global config  -->
-    <script type="text/javascript">
-        var App = App || {};
-
-        App.globalConfig ={
-            path: '${path}',
-            resPrefix:'${resPrefix}',
-            restpath: '',
-            cdnPath:'',
-            referenceImageFolder: '',
-            nopicPath:'/style/images/',
-            nopicName:'no-img.png'
-        };
-    </script>
-
     <!-- app extjs config  -->
     <script type="text/javascript">
         var App = App || {};
@@ -39,7 +24,38 @@
                 }
             }
         };
+
+        App.globalConfig = {
+            path: './',
+            resPrefix:'${resPrefix}',
+            lang:'zh_CN',
+            restpath: '',
+            cdnPath:'',
+            userCode:'test',
+            referenceImageFolder: '',
+            nopicPath:'/style/images/',
+            nopicName:'no-img.png',
+            appPath:  './app',
+            uxPath: './packages/ux/src'
+        };
+
+
+         App.pageConfig = App.extjsConfig.pages[App.extjsConfig.pageCode];
     </script>
+
+    <script type="text/javascript">
+    var Ext = Ext || {};
+     // Ext.manifest = "bootstrap.json";
+
+    Ext.beforeLoad = function (tags) {
+
+        Ext.Boot.baseUrl = './';
+
+        Ext.Boot.Request.prototype.prependBaseUrl= true;
+
+    };
+
+</script>
 
     <!-- The line below must be kept intact for Sencha Cmd to build your application -->
     <script id="microloader" data-app="23b096bf-1724-4521-a726-2216b6cf9bca" type="text/javascript" src="bootstrap.js"></script>
